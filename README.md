@@ -1,3 +1,19 @@
+// 2 page website
+
+// build homepage UI that explains what it is and have a call to action (login)
+
+// check if domain name owned on login
+
+// (if domain owned)after login, display profile page and button to edit profile if needed
+
+// if multiple domains owned, can set profiles per domain
+
+// data should be on chain (links, etc)
+
+// write/read to domain name records
+
+// edit record if exists (getTokenAccounts)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
