@@ -17,8 +17,8 @@ import {
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Buffer } from 'buffer';
-import LoginPage from '../pages/LoginPage.tsx';
-import Header from '../app/Components/Header.js';
+import LoginPage from '../app/login-page/page.tsx';
+import Header from '../components/Header.tsx';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 window.Buffer = Buffer;
@@ -43,7 +43,7 @@ const Content = () => {
   const [domainsOwned, setDomainsOwned] = useState([]);
   return (
     <div className="w-screen h-screen flex justify-center">
-      <div className="w-3/4 h-screen flex flex-col items-center justify-center space-y-20">
+      <div className="w-3/4 h-screen flex flex-col items-center justify-center space-y-5">
         <LoginPage
           domainsOwned={domainsOwned}
           setDomainsOwned={setDomainsOwned}
