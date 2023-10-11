@@ -15,9 +15,10 @@ import {
   WalletDisconnectButton,
   WalletMultiButton,
 } from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl } from '@solana/web3.js';
+import { clusterApiUrl, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Buffer } from 'buffer';
-import LoginPage from '../app/Components/LoginPage.js';
+import LoginPage from '../pages/LoginPage.tsx';
+import Header from '../app/Components/Header.js';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 window.Buffer = Buffer;
@@ -39,9 +40,15 @@ export default function Home() {
 }
 
 const Content = () => {
+  const [domainsOwned, setDomainsOwned] = useState([]);
   return (
-    <div className="w-screen h-screen">
-      <LoginPage />
+    <div className="w-screen h-screen flex justify-center">
+      <div className="w-3/4 h-screen flex flex-col items-center justify-center space-y-20">
+        <LoginPage
+          domainsOwned={domainsOwned}
+          setDomainsOwned={setDomainsOwned}
+        />
+      </div>
     </div>
   );
 };
