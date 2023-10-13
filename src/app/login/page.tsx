@@ -1,42 +1,26 @@
 'use client';
-import { useEffect, useState } from 'react';
-import {
-  ConnectionProvider,
-  WalletProvider,
-  useWallet,
-  useConnection,
-} from '@solana/wallet-adapter-react';
-import {
-  WalletModalProvider,
-  WalletDisconnectButton,
-  WalletMultiButton,
-} from '@solana/wallet-adapter-react-ui';
-import { getAllDomains } from '@bonfida/spl-name-service';
-import { clusterApiUrl, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { TOKEN_PROGRAM_ID, AccountLayout } from '@solana/spl-token';
+import { useEffect, useContext } from 'react';
+import { useWallet, useConnection } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useDomainsForOwner } from '@bonfida/sns-react';
-import { Buffer } from 'buffer';
-import NotFoundModal from '../../components/NotFoundModal.tsx';
-import DomainSelectPage from '../domain-select/page.tsx';
-import Header from '../../components/Header.tsx';
+import NotFoundModal from '../../components/NotFoundModal';
+import Header from '../../components/Header';
+import { useRouter } from 'next/navigation';
+import DomainsOwnedContext from '../../context/domainsOwned';
+import '@solana/wallet-adapter-react-ui/styles.css';
 
-const LoginPage = ({ domainsOwned, setDomainsOwned }) => {
+const LoginPage = () => {
   const { connection } = useConnection();
   const { publicKey, connected } = useWallet();
   const { result } = useDomainsForOwner(connection, publicKey);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
+  const router = useRouter();
 
   useEffect(() => {
     if (result) {
       setDomainsOwned(result);
-      setLoggedIn(true);
     }
-  }, [result, publicKey?.toString(), loggedIn]);
-
-  if (connected && domainsOwned.length !== 0) {
-    return <DomainSelectPage loggedIn={loggedIn} domainsOwned={domainsOwned} />;
-    console.log(domainsOwned);
-  }
+  }, [result, setDomainsOwned]);
 
   return (
     <>
@@ -48,7 +32,7 @@ const LoginPage = ({ domainsOwned, setDomainsOwned }) => {
             <span className="block">on chain.</span>
           </h1>
           <div className=" flex items-center flex-col space-y-5">
-            {result && domainsOwned.length === 0 ? <NotFoundModal /> : null}
+            {/* {result && domainsOwned.length === 0 ? <NotFoundModal /> : null} */}
             <h1 className="text-[#CECED8] md:text-center font-azeret md:text-[24px] text-[16px]">
               Upload all of your platform links using SNS links and share easily
               with friends. Your .sol domain now holds the key to sharing your

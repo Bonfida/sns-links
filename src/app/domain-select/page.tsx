@@ -1,7 +1,11 @@
+'use client';
 import DomainSelectButton from '../../components/DomainSelectButton';
-import Header from '../../components/Header.tsx';
+import Header from '../../components/Header';
+import { useContext } from 'react';
+import DomainsOwnedContext from '../../context/domainsOwned';
 
-const DomainSelectPage = ({ domainsOwned }) => {
+const DomainSelectPage = () => {
+  const { domainsOwned } = useContext(DomainsOwnedContext);
   return (
     <>
       <Header />
