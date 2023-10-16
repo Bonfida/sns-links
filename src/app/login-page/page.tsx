@@ -2,7 +2,6 @@
 import { useEffect, useContext } from 'react';
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useDomainsForOwner } from '@bonfida/sns-react';
 import NotFoundModal from '../../components/NotFoundModal';
 import Header from '../../components/Header';
 import { useRouter } from 'next/navigation';
@@ -15,8 +14,6 @@ const LoginPage = () => {
   const { publicKey, connected } = useWallet();
   const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
   const router = useRouter();
-
-  // const { result } = useDomainsForOwner(connection, publicKey);
   const { domains } = useFetchDomains(connection, publicKey);
 
   useEffect(() => {
@@ -26,7 +23,7 @@ const LoginPage = () => {
   }, [domains]);
 
   useEffect(() => {
-    if (domainsOwned.length !== 0) {
+    if (connected && domainsOwned.length !== 0) {
       router.push('domain-select');
     }
   }, [domainsOwned.length]);

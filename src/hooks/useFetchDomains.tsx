@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getAllDomains, reverseLookupBatch } from '@bonfida/spl-name-service';
 
@@ -7,6 +7,7 @@ export function useFetchDomains(connection, owner) {
   const [domains, setDomains] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const mounted = useRef(true);
 
   useEffect(() => {
     const fetchDomains = async () => {
@@ -14,14 +15,16 @@ export function useFetchDomains(connection, owner) {
         setLoading(true);
         const serializedDomainArr = await getAllDomains(connection, owner);
         const names = await reverseLookupBatch(connection, serializedDomainArr);
-        setDomains(names);
+        if (mounted.current) {
+          setDomains(names);
+        }
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
       }
+      return () => (mounted.current = false);
     };
-
     if (connected) {
       fetchDomains();
     }
