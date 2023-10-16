@@ -7,6 +7,7 @@ import NotFoundModal from '../../components/NotFoundModal';
 import Header from '../../components/Header';
 import { useRouter } from 'next/navigation';
 import DomainsOwnedContext from '../../context/domainsOwned';
+import { useFetchDomains } from '@/hooks/useFetchDomains';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 const LoginPage = () => {
@@ -15,13 +16,14 @@ const LoginPage = () => {
   const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
   const router = useRouter();
 
-  const { result } = useDomainsForOwner(connection, publicKey);
+  // const { result } = useDomainsForOwner(connection, publicKey);
+  const { domains } = useFetchDomains(connection, publicKey);
 
   useEffect(() => {
-    if (result) {
-      setDomainsOwned(result);
+    if (domains) {
+      setDomainsOwned(domains);
     }
-  }, [result]);
+  }, [domains]);
 
   useEffect(() => {
     if (domainsOwned.length !== 0) {
@@ -38,7 +40,7 @@ const LoginPage = () => {
             <span className="block">on chain.</span>
           </h1>
           <div className=" flex items-center md:w-1/2 flex-col space-y-5">
-            {result && domainsOwned.length === 0 ? <NotFoundModal /> : null}
+            {domains && domainsOwned.length === 0 ? <NotFoundModal /> : null}
             <h1 className="text-[#CECED8] text-center font-azeret md:text-[24px] text-[16px]">
               Upload all of your platform links using SNS links and share easily
               with friends. Your .sol domain now holds the key to sharing your

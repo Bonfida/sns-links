@@ -27,9 +27,7 @@ const DomainSelectPage = () => {
         </h1>
         <ul className="space-y-10">
           {domainsOwned.map((domain) => {
-            return (
-              <DomainSelectButton domain={domain.domain} key={domain.domain} />
-            );
+            return <DomainSelectButton domain={domain} key={domain} />;
           })}
         </ul>
       </div>
