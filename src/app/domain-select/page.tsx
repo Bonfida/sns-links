@@ -16,18 +16,8 @@ const DomainSelectPage = () => {
   const { recordsPerDomain, setRecordsPerDomain } = useContext(
     RecordsPerDomainContext
   );
-  const sortedDomains = [...domainsOwned].sort();
   const router = useRouter();
   const { records, loading } = useFetchRecords(connection, domainsOwned[1]);
-
-  const groupedDomains = sortedDomains.reduce((acc, domain) => {
-    const initial = domain[0].toUpperCase();
-    if (!acc[initial]) {
-      acc[initial] = [];
-    }
-    acc[initial].push(domain);
-    return acc;
-  }, {});
 
   useEffect(() => {
     if (!connected || domainsOwned.length === 0) {
@@ -47,7 +37,7 @@ const DomainSelectPage = () => {
     <>
       <Header />
       {domainsOwned.length !== 0 ? (
-        <DomainDropdown groupedDomains={groupedDomains} />
+        <DomainDropdown domainsOwned={domainsOwned} />
       ) : null}
     </>
   );

@@ -1,4 +1,14 @@
-const DomainDropdown = ({ groupedDomains }) => {
+const DomainDropdown = ({ domainsOwned }) => {
+  const sortedDomains = [...domainsOwned].sort();
+
+  const groupedDomains = sortedDomains.reduce((acc, domain) => {
+    const initial = domain[0].toUpperCase();
+    if (!acc[initial]) {
+      acc[initial] = [];
+    }
+    acc[initial].push(domain);
+    return acc;
+  }, {});
   return (
     <div className="h-screen w-full flex items-center justify-start flex-col md:mt-0 mt-20 space-y-5">
       <h1 className="text-3xl font-bold text-white font-azeret md:mt-0 text-center">

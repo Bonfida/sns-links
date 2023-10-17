@@ -19,25 +19,16 @@ const LoginPage = () => {
   const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
   const router = useRouter();
   const { domains } = useFetchDomains(connection, publicKey);
-  const { testDomains } = useAllDomains(publicKey);
-
-  useEffect(() => {
-    if (connected) {
-      const allDomains = getAllDomains(connection, publicKey);
-    }
-  }, [connected]);
 
   useEffect(() => {
     if (domains) {
       setDomainsOwned(domains);
     }
-  }, [domains]);
-
-  useEffect(() => {
-    if (connected && domainsOwned.length !== 0) {
+    if (domainsOwned.length !== 0) {
       router.push("domain-select");
     }
-  }, [domainsOwned.length]);
+  }, [connected, domains]);
+
   return (
     <>
       <Header />
