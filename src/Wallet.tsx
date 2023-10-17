@@ -1,16 +1,17 @@
-'use client';
+"use client";
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
-} from '@solana/wallet-adapter-react';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
-import { Buffer } from 'buffer';
-import { DomainsOwnedProvider } from './context/domainsOwned';
-import '@solana/wallet-adapter-react-ui/styles.css';
+} from "@solana/wallet-adapter-react";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { Buffer } from "buffer";
+import { DomainsOwnedProvider } from "./context/domainsOwned";
+import "@solana/wallet-adapter-react-ui/styles.css";
+import { RecordsPerDomainProvider } from "./context/recordsPerDomain";
 
 window.Buffer = Buffer;
 
@@ -24,11 +25,13 @@ export const Wallet: FC<Props> = ({ children }) => {
 
   return (
     <DomainsOwnedProvider>
-      <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect>
-          <WalletModalProvider>{children}</WalletModalProvider>
-        </WalletProvider>
-      </ConnectionProvider>
+      <RecordsPerDomainProvider>
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletModalProvider>{children}</WalletModalProvider>
+          </WalletProvider>
+        </ConnectionProvider>
+      </RecordsPerDomainProvider>
     </DomainsOwnedProvider>
   );
 };

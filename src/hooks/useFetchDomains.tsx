@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { getAllDomains, reverseLookupBatch } from '@bonfida/spl-name-service';
+import { useState, useEffect, useRef } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { getAllDomains, reverseLookupBatch } from "@bonfida/spl-name-service";
 
-export function useFetchDomains(connection, owner) {
+export const useFetchDomains = (connection, owner) => {
   const { connected } = useWallet();
   const [domains, setDomains] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,4 +31,4 @@ export function useFetchDomains(connection, owner) {
   }, [owner, connected, connection]);
 
   return { domains, loading, error };
-}
+};

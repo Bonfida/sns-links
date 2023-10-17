@@ -1,13 +1,13 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Wallet } from '../Wallet';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Wallet } from "../Wallet";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'SNS Links',
-  description: 'All your web3 links under one roof',
+  title: "SNS Links",
+  description: "All your web3 links under one roof",
 };
 
 export default function RootLayout({
