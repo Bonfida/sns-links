@@ -24,10 +24,13 @@ const LoginPage = () => {
     if (domains) {
       setDomainsOwned(domains);
     }
-    if (domainsOwned.length !== 0) {
+  }, [domains]);
+
+  useEffect(() => {
+    if (connected && domainsOwned.length !== 0) {
       router.push("domain-select");
     }
-  }, [connected, domains]);
+  }, [domainsOwned.length]);
 
   return (
     <>

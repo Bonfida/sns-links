@@ -2,13 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Record, getRecords } from "@bonfida/spl-name-service";
 import { useAsync } from "react-async-hook";
+import { useQuery } from "react-query";
 
 export const useFetchRecords = (connection, domain) => {
   const { connected } = useWallet();
-  const [records, setRecords] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const mounted = useRef(true);
   const recordsToFetch = [
     "IPFS",
     "ARWV",
@@ -36,34 +33,37 @@ export const useFetchRecords = (connection, domain) => {
     "TXT",
     "background",
   ];
-  useEffect(() => {
-    const fetchRecords = async () => {
+
+  const {
+    data: records,
+    isLoading,
+    isError,
+  } = useQuery(
+    ["records", domain],
+    async () => {
       try {
-        setLoading(true);
         const fetchedRecords = await getRecords(
           connection,
           domain,
           recordsToFetch,
           true
         );
-        if (mounted.current) {
-          const responseObj = recordsToFetch.reduce((obj, key, index) => {
-            obj[key] = fetchedRecords[index];
-            return obj;
-          }, {});
-          console.log("responseObj", responseObj);
-          setRecords(responseObj);
-        }
+        return recordsToFetch.reduce((obj, key, index) => {
+          obj[key] = fetchedRecords[index];
+          return obj;
+        }, {});
       } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
+        throw err;
       }
-      return () => (mounted.current = false);
-    };
+    },
+    {
+      enabled: connected,
+    }
+  );
 
-    fetchRecords();
-  }, [domain, connected, connection]);
-
-  return { records, loading, error };
+  return {
+    records,
+    loading: isLoading,
+    error: isError ? "An error occurred while fetching records" : null,
+  };
 };
