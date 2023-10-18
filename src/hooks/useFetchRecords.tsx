@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Record, getRecords } from "@bonfida/spl-name-service";
-import { useAsync } from "react-async-hook";
+import { getRecords } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
 
 export const useFetchRecords = (connection, domain) => {
   const { connected } = useWallet();
+
   const recordsToFetch = [
     "IPFS",
     "ARWV",
@@ -35,7 +34,7 @@ export const useFetchRecords = (connection, domain) => {
   ];
 
   const {
-    data: records,
+    data: fetchedData,
     isLoading,
     isError,
   } = useQuery(
@@ -48,10 +47,20 @@ export const useFetchRecords = (connection, domain) => {
           recordsToFetch,
           true
         );
-        return recordsToFetch.reduce((obj, key, index) => {
-          obj[key] = fetchedRecords[index];
-          return obj;
-        }, {});
+
+        let picRecord;
+        const otherRecords = {};
+
+        fetchedRecords.forEach((value, index) => {
+          const key = recordsToFetch[index];
+          if (key === "pic") {
+            picRecord = value;
+          } else {
+            otherRecords[key] = value;
+          }
+        });
+
+        return { pic: picRecord, records: otherRecords };
       } catch (err) {
         throw err;
       }
@@ -62,7 +71,8 @@ export const useFetchRecords = (connection, domain) => {
   );
 
   return {
-    records,
+    records: fetchedData?.records,
+    pic: fetchedData?.pic,
     loading: isLoading,
     error: isError ? "An error occurred while fetching records" : null,
   };

@@ -13,6 +13,7 @@ import { DomainsOwnedProvider } from "./context/domainsOwned";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { RecordsPerDomainProvider } from "./context/recordsPerDomain";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { SelectedDomainProvider } from "./context/selectedDomain";
 
 window.Buffer = Buffer;
 
@@ -27,15 +28,17 @@ export const Wallet: FC<Props> = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <DomainsOwnedProvider>
-        <RecordsPerDomainProvider>
-          <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-              <WalletModalProvider>{children}</WalletModalProvider>
-            </WalletProvider>
-          </ConnectionProvider>
-        </RecordsPerDomainProvider>
-      </DomainsOwnedProvider>
+      <SelectedDomainProvider>
+        <DomainsOwnedProvider>
+          <RecordsPerDomainProvider>
+            <ConnectionProvider endpoint={endpoint}>
+              <WalletProvider wallets={wallets} autoConnect>
+                <WalletModalProvider>{children}</WalletModalProvider>
+              </WalletProvider>
+            </ConnectionProvider>
+          </RecordsPerDomainProvider>
+        </DomainsOwnedProvider>
+      </SelectedDomainProvider>
     </QueryClientProvider>
   );
 };

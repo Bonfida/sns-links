@@ -8,16 +8,19 @@ import RecordsPerDomainContext from "@/context/recordsPerDomain";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import DomainDropdown from "../components/DomainDropdown";
+import SelectedDomainContext from "@/context/selectedDomain";
+import RecordsTable from "../components/RecordsTable";
 
 const DomainSelectPage = () => {
   const { connected } = useWallet();
   const { connection } = useConnection();
   const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
-  const { recordsPerDomain, setRecordsPerDomain } = useContext(
+  const { recordsPerDomain, setRecordsPerDomain, setProfilePic } = useContext(
     RecordsPerDomainContext
   );
+  const { selectedDomain } = useContext(SelectedDomainContext);
   const router = useRouter();
-  const { records, loading } = useFetchRecords(connection, domainsOwned[1]);
+  const { records, pic, loading } = useFetchRecords(connection, selectedDomain);
 
   useEffect(() => {
     if (!connected || domainsOwned.length === 0) {
@@ -27,11 +30,11 @@ const DomainSelectPage = () => {
   }, [connected]);
 
   useEffect(() => {
-    if (!loading) {
-      console.log("records", records);
+    if (records && !loading) {
       setRecordsPerDomain(records);
+      setProfilePic(pic);
     }
-  }, [loading]);
+  }, [records, loading]);
 
   return (
     <>
@@ -39,6 +42,7 @@ const DomainSelectPage = () => {
       {domainsOwned.length !== 0 ? (
         <DomainDropdown domainsOwned={domainsOwned} />
       ) : null}
+      {selectedDomain.length !== 0 ? <RecordsTable /> : null}
     </>
   );
 };

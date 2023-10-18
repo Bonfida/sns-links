@@ -1,4 +1,17 @@
+import { useContext, useEffect } from "react";
+import SelectedDomainContext from "@/context/selectedDomain";
+
 const DomainDropdown = ({ domainsOwned }) => {
+  const { selectedDomain, setSelectedDomain } = useContext(
+    SelectedDomainContext
+  );
+
+  const handleDomainSelect = (e) => {
+    const domain = e.target.value.slice(0, -4);
+    console.log("domain", domain);
+    setSelectedDomain(domain);
+  };
+
   const sortedDomains = [...domainsOwned].sort();
 
   const groupedDomains = sortedDomains.reduce((acc, domain) => {
@@ -9,8 +22,13 @@ const DomainDropdown = ({ domainsOwned }) => {
     acc[initial].push(domain);
     return acc;
   }, {});
+
+  useEffect(() => {
+    console.log("selecte dom", selectedDomain);
+  }, []);
+
   return (
-    <div className="h-screen w-full flex items-center justify-start flex-col md:mt-0 mt-20 space-y-5">
+    <div className=" w-full flex items-center justify-start flex-col md:mt-0 mt-20 space-y-5">
       <h1 className="text-3xl font-bold text-white font-azeret md:mt-0 text-center">
         Which domain's links would you like to view?
       </h1>
@@ -20,6 +38,7 @@ const DomainDropdown = ({ domainsOwned }) => {
           <select
             className="select w-full rounded-lg text-lg p-4 h-14 focus:outline-none"
             defaultValue="Select a domain"
+            onChange={handleDomainSelect}
           >
             <option disabled value="Select a domain">
               Select a domain
