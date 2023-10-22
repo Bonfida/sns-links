@@ -10,14 +10,14 @@ import { useFetchRecords } from "@/hooks/useFetchRecords";
 import DomainDropdown from "../components/DomainDropdown";
 import SelectedDomainContext from "@/context/selectedDomain";
 import RecordsTable from "../components/RecordsTable";
+import LinkShareButton from "../components/LinkShareButton";
 
 const DomainSelectPage = () => {
   const { connected } = useWallet();
   const { connection } = useConnection();
   const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
-  const { recordsPerDomain, setRecordsPerDomain, setProfilePic } = useContext(
-    RecordsPerDomainContext
-  );
+  const { recordsPerDomain, setRecordsPerDomain, setProfilePic, profilePic } =
+    useContext(RecordsPerDomainContext);
   const { selectedDomain } = useContext(SelectedDomainContext);
   const router = useRouter();
   const { records, pic, loading } = useFetchRecords(connection, selectedDomain);
@@ -37,13 +37,29 @@ const DomainSelectPage = () => {
   }, [records, loading]);
 
   return (
-    <>
+    <div className="w-full">
       <Header />
-      {domainsOwned.length !== 0 ? (
-        <DomainDropdown domainsOwned={domainsOwned} />
-      ) : null}
-      {selectedDomain.length !== 0 ? <RecordsTable /> : null}
-    </>
+      <div className="">
+        {domainsOwned.length !== 0 ? (
+          <DomainDropdown domainsOwned={domainsOwned} />
+        ) : null}
+        <div className="">
+          {selectedDomain.length !== 0 ? (
+            <div className="flex flex-col justify-center items-center mt-10">
+              <LinkShareButton />
+              <div className="mt-5 flex flex-col justify-center items-center w-full">
+                {profilePic ? (
+                  <img src={profilePic} className="w-28 rounded-full" />
+                ) : (
+                  <img src="/smiley-face.png" className="w-28" />
+                )}
+                <RecordsTable />
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
   );
 };
 

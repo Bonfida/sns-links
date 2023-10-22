@@ -1,17 +1,12 @@
 "use client";
 import { useEffect, useContext } from "react";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useRouter } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import NotFoundModal from "../../components/NotFoundModal";
 import Header from "../../components/Header";
-import { useRouter } from "next/navigation";
 import DomainsOwnedContext from "../../context/domainsOwned";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
-import { useAllDomains } from "@/hooks/testingHook";
-import "@solana/wallet-adapter-react-ui/styles.css";
-import { getAllDomains, reverseLookupBatch } from "@bonfida/spl-name-service";
-import { useDomainsForOwner } from "@bonfida/sns-react";
-import { PublicKey } from "@solana/web3.js";
 
 const LoginPage = () => {
   const { connection } = useConnection();

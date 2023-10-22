@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { getAllDomains, reverseLookupBatch } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
