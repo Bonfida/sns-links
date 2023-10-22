@@ -1,3 +1,0 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-import { getDomainKey, NameRegistryState } from "@bonfida/spl-name-service";
-import { useQuery } from "react-query";
