@@ -8,7 +8,7 @@ const LinkShareButton = () => {
         <span className="p-4">localhost:3000/user/{selectedDomain}</span>
       </div>
       <button
-        className="rounded-lg border-white py-2 px-4 bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E]"
+        className="rounded-lg border-white py-2 px-4 bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] hover:translate-y-1 transition-all"
         onClick={() =>
           navigator.clipboard.writeText(`localhost:3000/user/${selectedDomain}`)
         }

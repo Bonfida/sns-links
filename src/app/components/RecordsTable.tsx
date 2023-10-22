@@ -18,11 +18,14 @@ const RecordsTable = () => {
               return (
                 <div
                   key={record}
-                  className="h-8 w-full items-center  flex flex-row border border-[#2A2A51] p-2"
+                  className="group h-8 w-full items-center space-x-2 flex flex-row border border-[#2A2A51] p-2"
                 >
                   <h1 className="text-white">
                     {record.charAt(0).toUpperCase() + record.slice(1)}
                   </h1>
+                  <button className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <img src="/edit-icon.svg" />
+                  </button>
                 </div>
               );
             })}

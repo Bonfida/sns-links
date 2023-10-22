@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 export const useFetchRecords = (connection, domain) => {
   const { connected } = useWallet();
-
+  const defaultPic = "/smiley-face.png";
   const recordsToFetch = [
     "IPFS",
     "ARWV",
@@ -72,7 +72,7 @@ export const useFetchRecords = (connection, domain) => {
 
   return {
     records: fetchedData?.records,
-    pic: fetchedData?.pic,
+    pic: fetchedData?.pic || defaultPic,
     loading: isLoading,
     error: isError ? "An error occurred while fetching records" : null,
   };

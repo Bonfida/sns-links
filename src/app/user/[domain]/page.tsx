@@ -15,11 +15,7 @@ const UserPage = ({ params }) => {
   return (
     <div className="flex w-screen h-full flex-col justify-start items-center mt-10">
       <div className="flex flex-col space-y-1">
-        {pic ? (
-          <img src={pic} className="w-28 rounded-full" />
-        ) : (
-          <img src="/smiley-face.png" className="w-28" />
-        )}
+        <img src={pic} className="w-28 rounded-full" />
         <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
       </div>
 

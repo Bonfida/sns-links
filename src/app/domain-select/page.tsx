@@ -48,11 +48,7 @@ const DomainSelectPage = () => {
             <div className="flex flex-col justify-center items-center mt-10">
               <LinkShareButton />
               <div className="mt-5 flex flex-col justify-center items-center w-full">
-                {profilePic ? (
-                  <img src={profilePic} className="w-28 rounded-full" />
-                ) : (
-                  <img src="/smiley-face.png" className="w-28" />
-                )}
+                <img src={profilePic} className="w-28 rounded-full" />
                 <RecordsTable />
               </div>
             </div>
