@@ -1,6 +1,5 @@
 "use client";
-import DomainSelectButton from "../../components/DomainSelectButton";
-import Header from "../../components/Header";
+import Header from "../components/Header";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DomainsOwnedContext from "../../context/domainsOwned";

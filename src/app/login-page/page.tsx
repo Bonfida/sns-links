@@ -3,8 +3,8 @@ import { useEffect, useContext } from "react";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import NotFoundModal from "../../components/NotFoundModal";
-import Header from "../../components/Header";
+import NotFoundModal from "../components/NotFoundModal";
+import Header from "../components/Header";
 import DomainsOwnedContext from "../../context/domainsOwned";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 
