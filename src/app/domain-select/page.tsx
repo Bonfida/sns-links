@@ -19,7 +19,7 @@ const DomainSelectPage = () => {
     useContext(RecordsPerDomainContext);
   const { selectedDomain } = useContext(SelectedDomainContext);
   const router = useRouter();
-  const { records, pic, loading } = useFetchRecords(connection, selectedDomain);
+  const { data, isLoading } = useFetchRecords(connection, selectedDomain);
 
   useEffect(() => {
     if (!connected || domainsOwned.length === 0) {
@@ -29,11 +29,11 @@ const DomainSelectPage = () => {
   }, [connected]);
 
   useEffect(() => {
-    if (records && !loading) {
-      setRecordsPerDomain(records);
-      setProfilePic(pic);
+    if (selectedDomain.length !== 0 && !isLoading) {
+      setRecordsPerDomain(data.records);
+      setProfilePic(data.pic);
     }
-  }, [records, loading]);
+  }, [selectedDomain.length, isLoading]);
 
   return (
     <div className="w-full">

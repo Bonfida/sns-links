@@ -1,9 +1,7 @@
-import { useWallet } from "@solana/wallet-adapter-react";
 import { getRecords } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
 
 export const useFetchRecords = (connection, domain) => {
-  const { connected } = useWallet();
   const defaultPic = "/smiley-face.png";
   const recordsToFetch = [
     "IPFS",
@@ -33,47 +31,27 @@ export const useFetchRecords = (connection, domain) => {
     "background",
   ];
 
-  const {
-    data: fetchedData,
-    isLoading,
-    isError,
-  } = useQuery(
-    ["records", domain],
-    async () => {
-      try {
-        const fetchedRecords = await getRecords(
-          connection,
-          domain,
-          recordsToFetch,
-          true
-        );
+  const fetchRecords = async () => {
+    const fetchedRecords = await getRecords(
+      connection,
+      domain,
+      recordsToFetch,
+      true
+    );
 
-        let picRecord;
-        const otherRecords = {};
+    let picRecord;
+    const otherRecords = {};
 
-        fetchedRecords.forEach((value, index) => {
-          const key = recordsToFetch[index];
-          if (key === "pic") {
-            picRecord = value;
-          } else {
-            otherRecords[key] = value;
-          }
-        });
-
-        return { pic: picRecord, records: otherRecords };
-      } catch (err) {
-        throw err;
+    fetchedRecords.forEach((value, index) => {
+      const key = recordsToFetch[index];
+      if (key === "pic") {
+        picRecord = value;
+      } else {
+        otherRecords[key] = value;
       }
-    },
-    {
-      enabled: connected,
-    }
-  );
-
-  return {
-    records: fetchedData?.records,
-    pic: fetchedData?.pic || defaultPic,
-    loading: isLoading,
-    error: isError ? "An error occurred while fetching records" : null,
+    });
+    return { pic: picRecord || defaultPic, records: otherRecords };
   };
+
+  return useQuery({ queryKey: ["records", domain], queryFn: fetchRecords });
 };

@@ -3,7 +3,7 @@ import SelectedDomainContext from "@/context/selectedDomain";
 const LinkShareButton = () => {
   const { selectedDomain } = useContext(SelectedDomainContext);
   return (
-    <div class="flex justify-center items-center space-x-2">
+    <div className="flex justify-center items-center space-x-2">
       <div className="h-10 w-full border border-dashed bg-white border-gray-600 rounded-lg flex justify-center items-center">
         <span className="p-4">localhost:3000/user/{selectedDomain}</span>
       </div>

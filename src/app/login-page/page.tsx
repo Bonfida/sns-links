@@ -13,13 +13,14 @@ const LoginPage = () => {
   const { publicKey, connected } = useWallet();
   const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
   const router = useRouter();
-  const { domains } = useFetchDomains(connection, publicKey);
+  const { data } = useFetchDomains(connection, publicKey);
 
   useEffect(() => {
-    if (domains) {
-      setDomainsOwned(domains);
+    if (data) {
+      console.log("domains", data);
+      setDomainsOwned(data);
     }
-  }, [domains]);
+  }, [data]);
 
   useEffect(() => {
     if (connected && domainsOwned.length !== 0) {
@@ -37,7 +38,7 @@ const LoginPage = () => {
             <span className="block">on chain.</span>
           </h1>
           <div className=" flex items-center md:w-1/2 flex-col space-y-5">
-            {publicKey && domains && domainsOwned.length === 0 ? (
+            {publicKey && data && domainsOwned.length === 0 ? (
               <NotFoundModal />
             ) : null}
             <h1 className="text-[#CECED8] text-center font-azeret md:text-[24px] text-[16px]">
