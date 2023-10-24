@@ -1,32 +1,23 @@
 "use client";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import NotFoundModal from "../components/NotFoundModal";
 import Header from "../components/Header";
-import DomainsOwnedContext from "../../context/domainsOwned";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 
 const LoginPage = () => {
   const { connection } = useConnection();
   const { publicKey, connected } = useWallet();
-  const { domainsOwned, setDomainsOwned } = useContext(DomainsOwnedContext);
   const router = useRouter();
-  const { data } = useFetchDomains(connection, publicKey);
+  const { data, isLoading } = useFetchDomains(connection, publicKey);
 
   useEffect(() => {
-    if (data) {
-      console.log("domains", data);
-      setDomainsOwned(data);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (connected && domainsOwned.length !== 0) {
+    if (connected && !isLoading && data.length !== 0) {
       router.push("domain-select");
     }
-  }, [domainsOwned.length]);
+  }, [!isLoading]);
 
   return (
     <>
@@ -38,9 +29,7 @@ const LoginPage = () => {
             <span className="block">on chain.</span>
           </h1>
           <div className=" flex items-center md:w-1/2 flex-col space-y-5">
-            {publicKey && data && domainsOwned.length === 0 ? (
-              <NotFoundModal />
-            ) : null}
+            {data && data.length === 0 ? <NotFoundModal /> : null}
             <h1 className="text-[#CECED8] text-center font-azeret md:text-[24px] text-[16px]">
               Upload all of your platform links using SNS links and share easily
               with friends. Your .sol domain now holds the key to sharing your

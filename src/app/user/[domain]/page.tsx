@@ -12,27 +12,31 @@ const UserPage = ({ params }) => {
   const domain = params.domain;
   const { connection } = useConnection();
   // const connection = new Connection(endpoint);
-  const { records, pic } = useFetchRecords(connection, domain);
+  const { data, isLoading } = useFetchRecords(connection, domain);
 
-  return (
-    <div className="flex w-screen h-full flex-col justify-start items-center mt-10">
-      <div className="flex flex-col items-center space-y-1">
-        <img src={pic} className="w-28 rounded-full" />
-        <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
-      </div>
+  if (!isLoading) {
+    return (
+      <div className="flex w-screen h-full flex-col justify-start items-center mt-10">
+        <div className="flex flex-col items-center space-y-1">
+          <img src={data.pic} className="w-28 rounded-full" />
+          <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
+        </div>
 
-      <div className="mt-10 flex flex-col space-y-3">
-        {records
-          ? Object.entries(records).map(([key, value]) => {
-              if (value !== undefined) {
-                return <LinkButton key={key} linkName={key} linkVal={value} />;
-              }
-              return null;
-            })
-          : null}
+        <div className="mt-10 flex flex-col space-y-3">
+          {data.records
+            ? Object.entries(data.records).map(([key, value]) => {
+                if (value !== undefined) {
+                  return (
+                    <LinkButton key={key} linkName={key} linkVal={value} />
+                  );
+                }
+                return null;
+              })
+            : null}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default UserPage;

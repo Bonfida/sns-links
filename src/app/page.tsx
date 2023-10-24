@@ -2,16 +2,19 @@
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
 import { useEffect, useContext } from "react";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import DomainsOwnedContext from "../context/domainsOwned";
+import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useRouter } from "next/navigation";
 
 export default function MyApp() {
   const { connected } = useWallet();
-  const { domainsOwned } = useContext(DomainsOwnedContext);
   const router = useRouter();
+  const { data: domainsData, isLoading: domainsLoading } = useFetchDomains(
+    connection,
+    publicKey
+  );
 
   useEffect(() => {
-    if (domainsOwned.length === 0) {
+    if (domainsData.length === 0) {
       router.push("login-page");
     }
   }, [connected]);

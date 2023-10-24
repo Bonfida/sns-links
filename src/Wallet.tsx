@@ -9,9 +9,7 @@ import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { Buffer } from "buffer";
-import { DomainsOwnedProvider } from "./context/domainsOwned";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { RecordsPerDomainProvider } from "./context/recordsPerDomain";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
 
@@ -29,15 +27,11 @@ export const Wallet: FC<Props> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <SelectedDomainProvider>
-        <DomainsOwnedProvider>
-          <RecordsPerDomainProvider>
-            <ConnectionProvider endpoint={endpoint}>
-              <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>{children}</WalletModalProvider>
-              </WalletProvider>
-            </ConnectionProvider>
-          </RecordsPerDomainProvider>
-        </DomainsOwnedProvider>
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletModalProvider>{children}</WalletModalProvider>
+          </WalletProvider>
+        </ConnectionProvider>
       </SelectedDomainProvider>
     </QueryClientProvider>
   );
