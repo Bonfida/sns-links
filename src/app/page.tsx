@@ -1,7 +1,7 @@
 "use client";
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
-import { useEffect, useContext } from "react";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useEffect } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useRouter } from "next/navigation";
 

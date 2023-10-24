@@ -1,17 +1,6 @@
 "use client";
-import {
-  ConnectionProvider,
-  WalletProvider,
-  useWallet,
-  useConnection,
-} from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
-import {
-  WalletModalProvider,
-  WalletDisconnectButton,
-  WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletDisconnectButton } from "@solana/wallet-adapter-react-ui";
 
 const Header = () => {
   const { connected } = useWallet();
