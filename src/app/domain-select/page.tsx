@@ -27,10 +27,8 @@ const DomainSelectPage = () => {
   useEffect(() => {
     if (!connected) {
       router.push("login-page");
-    } else if (connected && !domainsLoading) {
-      if (domainsData.length === 0) {
-        router.push("login-page");
-      }
+    } else if (connected && !domainsLoading && domainsData.length === 0) {
+      router.push("login-page");
     }
   }, [connected]);
 

@@ -7,7 +7,7 @@ const RecordsTable = ({ connection, domain }) => {
       <div className=" w-full flex flex-col justify-center items-center ">
         <div className="w-full flex justify-center mt-10">
           <div className="md:w-1/2 w-full h-full flex justify-center items-center">
-            <div className="w-full md:w-1/3 h-2/3 flex flex-col justify-start items-start border border-[#2A2A51] rounded-lg border-2 border-r-0">
+            <div className="w-full md:w-1/3 h-2/3 flex flex-col justify-start items-start border-[#2A2A51] rounded-lg border-2 border-r-0">
               {Object.keys(data.records).map((record) => {
                 return (
                   <div
@@ -24,7 +24,7 @@ const RecordsTable = ({ connection, domain }) => {
                 );
               })}
             </div>
-            <div className="w-full md:w-1/3 h-2/3 flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg border-2 border-l-0">
+            <div className="w-full md:w-1/3 h-2/3 flex flex-col justify-center items-center  border-[#2A2A51] rounded-lg border-2 border-l-0">
               {Object.values(data.records).map((recordVal, index) => {
                 return (
                   <div

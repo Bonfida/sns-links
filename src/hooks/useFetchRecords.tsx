@@ -1,36 +1,9 @@
 import { getRecords } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
+import { recordsToFetch } from "@/utils/recordsToFetch";
 
 export const useFetchRecords = (connection, domain) => {
   const defaultPic = "/smiley-face.png";
-  const recordsToFetch = [
-    "IPFS",
-    "ARWV",
-    "SOL",
-    "ETH",
-    "BTC",
-    "LTC",
-    "DOGE",
-    "email",
-    "url",
-    "discord",
-    "github",
-    "reddit",
-    "twitter",
-    "telegram",
-    "pic",
-    "SHDW",
-    "POINT",
-    "INJ",
-    "BNB",
-    "backpack",
-    "A",
-    "AAAA",
-    "CNAME",
-    "TXT",
-    "background",
-  ];
-
   const fetchRecords = async () => {
     const fetchedRecords = await getRecords(
       connection,

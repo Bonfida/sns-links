@@ -17,7 +17,7 @@ const LoginPage = () => {
     if (connected && !isLoading && data.length !== 0) {
       router.push("domain-select");
     }
-  }, [!isLoading]);
+  }, [!isLoading, connected]);
 
   return (
     <>
