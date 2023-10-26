@@ -19,9 +19,4 @@ export const recordsToFetch = [
   "INJ",
   "BNB",
   "backpack",
-  "A",
-  "AAAA",
-  "CNAME",
-  "TXT",
-  "background",
 ];

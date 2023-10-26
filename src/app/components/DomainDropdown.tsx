@@ -2,17 +2,15 @@ import { useContext, useEffect } from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
 
 const DomainDropdown = ({ domainsOwned }) => {
+  const sortedDomains = [...domainsOwned].sort();
   const { selectedDomain, setSelectedDomain } = useContext(
     SelectedDomainContext
   );
 
   const handleDomainSelect = (e) => {
     const domain = e.target.value.slice(0, -4);
-    console.log("domain", domain);
     setSelectedDomain(domain);
   };
-
-  const sortedDomains = [...domainsOwned].sort();
 
   const groupedDomains = sortedDomains.reduce((acc, domain) => {
     const initial = domain[0].toUpperCase();
@@ -22,10 +20,6 @@ const DomainDropdown = ({ domainsOwned }) => {
     acc[initial].push(domain);
     return acc;
   }, {});
-
-  useEffect(() => {
-    console.log("selecte dom", selectedDomain);
-  }, []);
 
   return (
     <div className=" w-full flex items-center justify-start flex-col md:mt-0 mt-20 space-y-5">
