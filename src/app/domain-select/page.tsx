@@ -7,7 +7,7 @@ import { useFetchRecords } from "@/hooks/useFetchRecords";
 import DomainDropdown from "../components/DomainDropdown";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
-import RecordsTable from "../components/RecordsTable";
+import RecordCard from "../components/RecordCard";
 import LinkShareButton from "../components/LinkShareButton";
 
 const DomainSelectPage = () => {
@@ -32,6 +32,7 @@ const DomainSelectPage = () => {
     }
   }, [connected]);
 
+  console.log("recordsData", recordsData);
   return (
     <div className="w-full">
       <Header />
@@ -45,7 +46,11 @@ const DomainSelectPage = () => {
               <LinkShareButton />
               <div className="mt-5 flex flex-col justify-center items-center w-full">
                 <img src={recordsData.pic} className="w-28 rounded-full" />
-                <RecordsTable connection={connection} domain={selectedDomain} />
+                <div className="w-3/4 flex flex-row flex-wrap space-x-2 justify-center mt-10">
+                  {Object.entries(recordsData.records).map((record) => {
+                    return <RecordCard record={record} />;
+                  })}
+                </div>
               </div>
             </div>
           ) : null}
