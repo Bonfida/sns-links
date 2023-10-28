@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
+import EditRecordModal from "./EditRecordModal";
 
 const RecordCard = ({ record }) => {
   const [editingRecord, setEditingRecord] = useState(false);
-  const [updatedRecordVal, setUpdatedRecordVal] = useState(null);
-  const [editingKey, setEditingKey] = useState(null);
 
-  const handleEdit = (key) => {
-    setEditingKey(key);
+  const handleEdit = () => {
     if (!editingRecord) {
       setEditingRecord(true);
     } else {
@@ -29,12 +26,7 @@ const RecordCard = ({ record }) => {
       </div>
       <div className="h-10 flex justify-center items-end">
         {editingRecord ? (
-          <input
-            onChange={(e) => {
-              setUpdatedRecordVal(e.target.value);
-            }}
-            className="text-white border-[#2A2A51] rounded p-1 text-center"
-          />
+          <EditRecordModal recordToUpdate={record} />
         ) : (
           <h1 className="text-white text-center">{record[1]}</h1>
         )}

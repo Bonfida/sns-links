@@ -16,10 +16,7 @@ export default function MyApp() {
   );
 
   useEffect(() => {
-    if (domainsData.length === 0) {
-      router.push("login-page");
-    }
-  }, [connected]);
-
+    router.push("login-page");
+  }, []);
   return null;
 }
