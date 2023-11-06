@@ -1,6 +1,6 @@
 import { getRecords } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
-import { recordsToFetch } from "@/utils/recordsToFetch";
+import { recordsToFetch } from "@/app/constants/recordsToFetch";
 
 export const useFetchRecords = (connection, domain) => {
   const defaultPic = "/smiley-face.png";

@@ -12,6 +12,7 @@ import { Buffer } from "buffer";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
+import { ToastContextProvider } from "@bonfida/components";
 
 window.Buffer = Buffer;
 
@@ -29,7 +30,9 @@ export const Wallet: FC<Props> = ({ children }) => {
       <SelectedDomainProvider>
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
-            <WalletModalProvider>{children}</WalletModalProvider>
+            <WalletModalProvider>
+              <ToastContextProvider>{children}</ToastContextProvider>
+            </WalletModalProvider>
           </WalletProvider>
         </ConnectionProvider>
       </SelectedDomainProvider>

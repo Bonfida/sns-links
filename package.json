@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bonfida/components": "^1.0.1",
     "@bonfida/sns-react": "^2.0.1",
     "@bonfida/spl-name-service": "^1.4.0",
     "@bonfida/utils": "^0.0.7",

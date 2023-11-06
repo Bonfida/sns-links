@@ -26,7 +26,10 @@ const RecordCard = ({ record }) => {
       </div>
       <div className="h-10 flex justify-center items-end">
         {editingRecord ? (
-          <EditRecordModal recordToUpdate={record} />
+          <EditRecordModal
+            recordToUpdate={record}
+            setEditingRecord={setEditingRecord}
+          />
         ) : (
           <h1 className="text-white text-center">{record[1]}</h1>
         )}
