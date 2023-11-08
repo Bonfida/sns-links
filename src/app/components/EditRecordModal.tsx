@@ -178,6 +178,7 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
 
       instructions.push(ix);
 
+      console.log("publicKey: ", publicKey);
       const { signature, success } = await makeTx(
         connection,
         publicKey,

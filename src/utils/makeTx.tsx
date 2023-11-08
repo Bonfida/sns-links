@@ -4,6 +4,7 @@ import {
   TransactionInstruction,
   Transaction,
   Signer,
+  sendAndConfirmTransaction,
 } from "@solana/web3.js";
 import { sleep } from "./sleep";
 import { retry } from "./retry";
@@ -36,11 +37,13 @@ export const makeTx = async (
       tx.sign(...signers);
     }
 
+    console.log("identify");
     const signedTx = await signTransaction(tx);
+    console.log("identify2");
 
     // Retrying
     sig = await retry(async () => {
-      sig = await sendRawTransaction(connection, signedTx, skipPreflight);
+      sig = await connection.sendRawTransaction(signedTx.serialize());
       await connection.confirmTransaction(sig, "processed");
       return sig;
     });
