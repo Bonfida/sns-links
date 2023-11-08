@@ -19,6 +19,7 @@ const DomainSelectPage = () => {
     connection,
     selectedDomain
   );
+
   const { data: domainsData, isLoading: domainsLoading } = useFetchDomains(
     connection,
     publicKey
@@ -32,7 +33,6 @@ const DomainSelectPage = () => {
     }
   }, [connected]);
 
-  console.log("recordsData", recordsData);
   return (
     <div className="w-full">
       <Header />
@@ -48,7 +48,7 @@ const DomainSelectPage = () => {
                 <img src={recordsData.pic} className="w-28 rounded-full" />
                 <div className="w-3/4 flex flex-row flex-wrap space-x-2 justify-center mt-10">
                   {Object.entries(recordsData.records).map((record) => {
-                    return <RecordCard record={record} />;
+                    return <RecordCard record={record} key={record} />;
                   })}
                 </div>
               </div>

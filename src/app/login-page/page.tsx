@@ -6,6 +6,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import NotFoundModal from "../components/NotFoundModal";
 import Header from "../components/Header";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
+import { getDomainKeySync, NameRegistryState } from "@bonfida/spl-name-service";
 
 const LoginPage = () => {
   const { connection } = useConnection();
@@ -29,7 +30,7 @@ const LoginPage = () => {
             <span className="block">on chain.</span>
           </h1>
           <div className=" flex items-center md:w-1/2 flex-col space-y-5">
-            {data && data.length === 0 ? <NotFoundModal /> : null}
+            {connected && data && data.length === 0 ? <NotFoundModal /> : null}
             <h1 className="text-[#CECED8] text-center font-azeret md:text-[24px] text-[16px]">
               Upload all of your platform links using SNS links and share easily
               with friends. Your .sol domain now holds the key to sharing your
