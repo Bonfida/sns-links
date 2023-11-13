@@ -29,7 +29,7 @@ const EditRecordModal = ({
   recordToUpdate,
   setEditingRecord,
 }: {
-  recordToUpdate: [string];
+  recordToUpdate: string;
   setEditingRecord: (isEditing: boolean) => void;
 }) => {
   const recordName = recordToUpdate[0];

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import EditRecordModal from "./EditRecordModal";
 
-const RecordCard = ({ record }) => {
+const RecordCard = ({ record }: { record: string }) => {
   const [editingRecord, setEditingRecord] = useState(false);
 
   const handleEdit = () => {
