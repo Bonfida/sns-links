@@ -1,4 +1,10 @@
-const LinkButton = ({ linkName, linkVal }) => {
+const LinkButton = ({
+  linkName,
+  linkVal,
+}: {
+  linkName: string;
+  linkVal: string;
+}) => {
   console.log("linkName", linkName, linkVal);
   return (
     <a href={`https://${linkName}.com/${linkVal}`} target="_blank">
