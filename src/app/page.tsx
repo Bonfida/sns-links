@@ -11,11 +11,7 @@ export default function MyApp() {
   const { connection } = useConnection();
   const router = useRouter();
 
-  // const { data: domainsData, isLoading: domainsLoading } = useFetchDomains(
-  //   connection,
-  //   publicKey
-  // );
-
+  console.log("connection", connection);
   useEffect(() => {
     router.push("login-page");
   }, []);

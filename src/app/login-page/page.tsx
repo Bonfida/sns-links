@@ -15,7 +15,7 @@ const LoginPage = () => {
   const { data, isLoading } = useFetchDomains(connection, publicKey);
 
   useEffect(() => {
-    if (connected && !isLoading && data.length !== 0) {
+    if (connected && !isLoading && data?.length !== 0) {
       router.push("domain-select");
     }
   }, [!isLoading, connected]);

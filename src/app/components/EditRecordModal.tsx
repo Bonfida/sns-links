@@ -13,13 +13,25 @@ import {
   createInstruction,
   NAME_PROGRAM_ID,
   Numberu32,
+  serializeSolRecord,
+  transferInstruction,
   getMessageToSign,
+  Signature,
+  UserSig,
 } from "@bonfida/spl-name-service";
 import { derive } from "../../utils/derive";
 import { formatRecordValue } from "@/utils/formatRecordValue";
 import { makeTx } from "@/utils/makeTx";
+import { sleep } from "../../utils/sleep";
+import { extractErrorMessage } from "@/utils/extractErrorMessage";
 
-const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
+const EditRecordModal = ({
+  recordToUpdate,
+  setEditingRecord,
+}: {
+  recordToUpdate: [string];
+  setEditingRecord: (isEditing: boolean) => void;
+}) => {
   const recordName = recordToUpdate[0];
   const [recordVal, setRecordVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -27,6 +39,7 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
   const { connection } = useConnection();
   const { publicKey, signTransaction, signMessage } = useWallet();
   const { toast } = useToastContext();
+  const [userSignature, setUserSignature] = useState<Signature | null>(null);
 
   const closeModal = () => {
     setIsModalVisible(false);
@@ -37,13 +50,23 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
     try {
       await updateRecord(recordName, selectedDomain, recordVal);
     } catch (error) {
-      console.error("Failed to update record:", error);
-      toast.error(`Failed to update record: ${error.message}`);
+      if (error instanceof Error) {
+        console.error("Failed to update record:", error);
+        toast.error(`Failed to update record: ${error.message}`);
+      } else {
+        console.error("An unknown error occurred:", error);
+        toast.error("Failed to update record: An unknown error occurred");
+      }
     }
   };
 
-  const updateRecord = async (recordName, domain, recordVal) => {
+  const updateRecord = async (
+    recordName: string,
+    domain: string,
+    recordVal: string
+  ) => {
     try {
+      if (!publicKey || !signTransaction || !signMessage) return;
       //format value for usernames that include "@"
       const formattedValue = formatRecordValue(
         recordVal,
@@ -64,8 +87,8 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
           connection,
           sub,
           space,
-          publicKey,
-          publicKey,
+          publicKey!,
+          publicKey!,
           lamports,
           undefined,
           parentKey
@@ -74,13 +97,18 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
       };
 
       const deletionInstruction = async () => {
-        deleteInstruction(NAME_PROGRAM_ID, recordKey, publicKey, publicKey);
+        return deleteInstruction(
+          NAME_PROGRAM_ID,
+          recordKey,
+          publicKey!,
+          publicKey!
+        );
       };
 
       if (formattedValue === "") {
         const { signature, success } = await makeTx(
           connection,
-          publicKey,
+          publicKey!,
           [await deletionInstruction()],
           signTransaction,
           toast
@@ -175,10 +203,8 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
         ser,
         publicKey
       );
-
       instructions.push(ix);
 
-      console.log("publicKey: ", publicKey);
       const { signature, success } = await makeTx(
         connection,
         publicKey,
@@ -198,9 +224,9 @@ const EditRecordModal = ({ recordToUpdate, setEditingRecord }) => {
       if (!signMessage) return;
 
       const messageBuffer = getMessageToSign(
-        formatRecordValue(value, record),
+        formatRecordValue(recordVal, recordName),
         domain,
-        record
+        recordName
       );
       const signed = await signMessage(messageBuffer);
       setUserSignature({

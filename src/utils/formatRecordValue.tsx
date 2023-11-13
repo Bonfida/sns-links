@@ -1,4 +1,4 @@
-export const formatRecordValue = (value, record) => {
+export const formatRecordValue = (value: string, record: string) => {
   const USERNAME_RECORDS = [
     "discord",
     "github",

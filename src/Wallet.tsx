@@ -1,5 +1,5 @@
 "use client";
-const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
+const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
 import React, { FC, useMemo } from "react";
 import {
   ConnectionProvider,

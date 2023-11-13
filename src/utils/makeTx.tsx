@@ -9,6 +9,7 @@ import {
 import { sleep } from "./sleep";
 import { retry } from "./retry";
 import { Toast } from "@bonfida/components";
+import { getConnection } from "./getConnection";
 
 export const makeTx = async (
   connection: Connection,
@@ -21,9 +22,9 @@ export const makeTx = async (
   skipPreflight = false
 ) => {
   let sig: string | undefined = undefined;
+
   try {
     toast.processing();
-
     const { blockhash } = await connection.getLatestBlockhash();
     const tx = transaction ? transaction : new Transaction();
 
@@ -37,9 +38,7 @@ export const makeTx = async (
       tx.sign(...signers);
     }
 
-    console.log("identify");
     const signedTx = await signTransaction(tx);
-    console.log("identify2");
 
     // Retrying
     sig = await retry(async () => {
@@ -52,8 +51,10 @@ export const makeTx = async (
     return { success: true, signature: sig };
   } catch (err) {
     console.log(err);
+
     if (err instanceof Error) {
       const message = err.message;
+
       if (message.includes("Transaction cancelled")) {
         toast.close();
       } else if (message.includes("not found")) {
@@ -69,12 +70,12 @@ export const makeTx = async (
           const result = await CONFIRMED_CONNECTION.getTransaction(sig, {
             maxSupportedTransactionVersion: 1,
           });
+
           if (!!result?.meta && !result.meta.err) {
             toast.success(sig);
             return { success: true, signature: sig };
           }
         }
-
         toast.error(
           "Solana network is congested, the validator was unable to confirm that your transaction was succesful. Please inspect the transaction on the explorer"
         );
