@@ -1,11 +1,18 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 
-const SelectedDomainContext = createContext({
+const SelectedDomainContext = createContext<{
+  selectedDomain: string;
+  setSelectedDomain: (domain: string) => void;
+}>({
   selectedDomain: "",
   setSelectedDomain: () => {},
 });
 
-export const SelectedDomainProvider = ({ children }) => {
+export const SelectedDomainProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [selectedDomain, setSelectedDomain] = useState("");
 
   return (
