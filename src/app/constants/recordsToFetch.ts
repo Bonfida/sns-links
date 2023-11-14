@@ -1,4 +1,6 @@
-export const recordsToFetch = [
+import { Record } from "@bonfida/spl-name-service";
+
+export const recordStrings = [
   "IPFS",
   "ARWV",
   "SOL",
@@ -19,4 +21,27 @@ export const recordsToFetch = [
   "INJ",
   "BNB",
   "backpack",
+];
+
+export const recordsToFetch = [
+  Record.IPFS,
+  Record.ARWV,
+  Record.SOL,
+  Record.ETH,
+  Record.BTC,
+  Record.LTC,
+  Record.DOGE,
+  Record.Email,
+  Record.Url,
+  Record.Discord,
+  Record.Github,
+  Record.Reddit,
+  Record.Twitter,
+  Record.Telegram,
+  Record.Pic,
+  Record.SHDW,
+  Record.POINT,
+  Record.Injective,
+  Record.BSC,
+  Record.Backpack,
 ];

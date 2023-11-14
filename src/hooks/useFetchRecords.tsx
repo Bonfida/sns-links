@@ -1,8 +1,9 @@
-import { getRecords } from "@bonfida/spl-name-service";
+import { getRecords, Record } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
-import { recordsToFetch } from "@/app/constants/recordsToFetch";
+import { recordsToFetch, recordStrings } from "@/app/constants/recordsToFetch";
+import { Connection } from "@solana/web3.js";
 
-export const useFetchRecords = (connection, domain) => {
+export const useFetchRecords = (connection: Connection, domain: string) => {
   const defaultPic = "/smiley-face.png";
   const fetchRecords = async () => {
     const fetchedRecords = await getRecords(
@@ -12,12 +13,12 @@ export const useFetchRecords = (connection, domain) => {
       true
     );
 
-    let picRecord;
-    const otherRecords = {};
+    let picRecord: string | undefined;
+    const otherRecords: { [key in Record]?: string } = {};
 
     fetchedRecords.forEach((value, index) => {
       const key = recordsToFetch[index];
-      if (key === "pic") {
+      if (key === Record.Pic) {
         picRecord = value;
       } else {
         otherRecords[key] = value;

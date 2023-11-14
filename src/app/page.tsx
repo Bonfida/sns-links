@@ -11,7 +11,6 @@ export default function MyApp() {
   const { connection } = useConnection();
   const router = useRouter();
 
-  console.log("connection", connection);
   useEffect(() => {
     router.push("login-page");
   }, []);
