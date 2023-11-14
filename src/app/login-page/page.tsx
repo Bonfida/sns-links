@@ -6,6 +6,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import NotFoundModal from "../components/NotFoundModal";
 import Header from "../components/Header";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
+import Footer from "../components/Footer";
 import { getDomainKeySync, NameRegistryState } from "@bonfida/spl-name-service";
 
 const LoginPage = () => {
@@ -23,7 +24,7 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-col items-center h-screen mt-20 md:mt-0">
+      <div className="flex flex-col items-center h-screen mt-20 md:mt-0 mb-10">
         <div className="flex flex-col items-center justify-center space-y-5">
           <h1 className="text-5xl md:text-8xl text-white text-center font-azeret font-bold ">
             <span className="block">Your links</span>
@@ -40,6 +41,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

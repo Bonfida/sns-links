@@ -9,6 +9,7 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import RecordsTable from "../components/RecordsTable";
 import LinkShareButton from "../components/LinkShareButton";
+import Footer from "../components/Footer";
 import { PublicKey } from "@solana/web3.js";
 
 const DomainSelectPage = () => {
@@ -36,27 +37,30 @@ const DomainSelectPage = () => {
   }, [connected]);
 
   return (
-    <div className="w-full">
+    <>
       <Header />
-      <div className="">
-        {!domainsLoading && domainsData?.length !== 0 ? (
-          <DomainDropdown domainsOwned={domainsData} />
-        ) : null}
+      <div className="w-full min-h-screen mb-10">
         <div className="">
-          {selectedDomain.length !== 0 && !recordsLoading ? (
-            <div className="flex flex-col justify-center items-center mt-10">
-              <LinkShareButton />
-              <div className="mt-5 flex flex-col justify-center items-center w-full">
-                <img src={recordsData?.pic} className="w-28 rounded-full" />
-                <div className="w-1/3 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl">
-                  <RecordsTable recordsData={recordsData} />
+          {!domainsLoading && domainsData?.length !== 0 ? (
+            <DomainDropdown domainsOwned={domainsData} />
+          ) : null}
+          <div className="">
+            {selectedDomain.length !== 0 && !recordsLoading ? (
+              <div className="flex flex-col justify-center items-center mt-10">
+                <LinkShareButton />
+                <div className="mt-5 flex flex-col justify-center items-center w-full">
+                  <img src={recordsData?.pic} className="w-28 rounded-full" />
+                  <div className="w-3/5 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl">
+                    <RecordsTable recordsData={recordsData} />
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
