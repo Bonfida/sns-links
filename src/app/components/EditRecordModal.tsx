@@ -26,13 +26,14 @@ import { sleep } from "../../utils/sleep";
 import { extractErrorMessage } from "@/utils/extractErrorMessage";
 
 const EditRecordModal = ({
-  recordToUpdate,
+  recordName,
   setEditingRecord,
 }: {
-  recordToUpdate: string;
+  recordName: string;
   setEditingRecord: (isEditing: boolean) => void;
 }) => {
-  const recordName = recordToUpdate[0];
+  // const recordName = recordToUpdate[0];
+  console.log("RecordName: ", recordName);
   const [recordVal, setRecordVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(true);
   const { selectedDomain } = useContext(SelectedDomainContext);

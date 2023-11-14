@@ -7,8 +7,9 @@ import { useFetchRecords } from "@/hooks/useFetchRecords";
 import DomainDropdown from "../components/DomainDropdown";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
-import RecordCard from "../components/RecordCard";
+import RecordsTable from "../components/RecordsTable";
 import LinkShareButton from "../components/LinkShareButton";
+import { PublicKey } from "@solana/web3.js";
 
 const DomainSelectPage = () => {
   const { connected, publicKey } = useWallet();
@@ -47,10 +48,8 @@ const DomainSelectPage = () => {
               <LinkShareButton />
               <div className="mt-5 flex flex-col justify-center items-center w-full">
                 <img src={recordsData?.pic} className="w-28 rounded-full" />
-                <div className="w-3/4 flex flex-row flex-wrap space-x-2 justify-center mt-10">
-                  {Object.entries(recordsData?.records || {}).map((record) => {
-                    return <RecordCard record={record} key={record[0]} />;
-                  })}
+                <div className="w-1/3 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl">
+                  <RecordsTable recordsData={recordsData} />
                 </div>
               </div>
             </div>
