@@ -50,7 +50,7 @@ const DomainSelectPage = () => {
                 <LinkShareButton />
                 <div className="mt-5 flex flex-col justify-center items-center w-full">
                   <img src={recordsData?.pic} className="w-28 rounded-full" />
-                  <div className="w-3/5 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl">
+                  <div className="w-3/5 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl p-10">
                     <RecordsTable recordsData={recordsData} />
                   </div>
                 </div>
