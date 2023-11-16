@@ -7,7 +7,12 @@ import NotFoundModal from "../components/NotFoundModal";
 import Header from "../components/Header";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import Footer from "../components/Footer";
-import { getDomainKeySync, NameRegistryState } from "@bonfida/spl-name-service";
+import {
+  getDomainKeySync,
+  NameRegistryState,
+  getRecordV2Key,
+  Record,
+} from "@bonfida/spl-name-service";
 
 const LoginPage = () => {
   const { connection } = useConnection();

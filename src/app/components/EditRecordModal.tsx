@@ -18,6 +18,7 @@ import {
   getMessageToSign,
   Signature,
   UserSig,
+  Record,
 } from "@bonfida/spl-name-service";
 import { derive } from "../../utils/derive";
 import { formatRecordValue } from "@/utils/formatRecordValue";
@@ -27,12 +28,11 @@ import { extractErrorMessage } from "@/utils/extractErrorMessage";
 
 const EditRecordModal = ({
   recordName,
-  setEditingRecord,
+  setIsEditingRecord,
 }: {
   recordName: string;
-  setEditingRecord: (isEditing: boolean) => void;
+  setIsEditingRecord: (isEditing: boolean) => void;
 }) => {
-  // const recordName = recordToUpdate[0];
   console.log("RecordName: ", recordName);
   const [recordVal, setRecordVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -44,7 +44,7 @@ const EditRecordModal = ({
 
   const closeModal = () => {
     setIsModalVisible(false);
-    setEditingRecord(false);
+    setIsEditingRecord(false);
   };
 
   const handleUpdateClick = async () => {
