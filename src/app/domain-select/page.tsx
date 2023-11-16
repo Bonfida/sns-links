@@ -39,8 +39,8 @@ const DomainSelectPage = () => {
   return (
     <>
       <Header />
-      <div className="w-full min-h-screen mb-10">
-        <div className="">
+      <div className="w-full min-h-screen mb-10 flex flex-col">
+        <div className="flex flex-col items-center justify-center">
           {!domainsLoading && domainsData?.length !== 0 ? (
             <DomainDropdown domainsOwned={domainsData} />
           ) : null}
@@ -49,8 +49,11 @@ const DomainSelectPage = () => {
               <div className="flex flex-col justify-center items-center mt-10">
                 <LinkShareButton />
                 <div className="mt-5 flex flex-col justify-center items-center w-full">
-                  <img src={recordsData?.pic} className="w-28 rounded-full" />
-                  <div className="w-3/5 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl p-10">
+                  <img
+                    src={recordsData?.pic}
+                    className="md:w-28 w-20 rounded-full"
+                  />
+                  <div className="w-screen md:w-3/5 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl p-10">
                     <RecordsTable recordsData={recordsData} />
                   </div>
                 </div>
