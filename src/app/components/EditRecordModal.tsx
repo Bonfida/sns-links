@@ -29,9 +29,11 @@ import { extractErrorMessage } from "@/utils/extractErrorMessage";
 const EditRecordModal = ({
   recordName,
   setIsEditingRecord,
+  setIsEditingPic,
 }: {
   recordName: string;
   setIsEditingRecord: (isEditing: boolean) => void;
+  setIsEditingPic: (isEditing: boolean) => void;
 }) => {
   console.log("RecordName: ", recordName);
   const [recordVal, setRecordVal] = useState("");
@@ -45,6 +47,7 @@ const EditRecordModal = ({
   const closeModal = () => {
     setIsModalVisible(false);
     setIsEditingRecord(false);
+    setIsEditingPic(false);
   };
 
   const handleUpdateClick = async () => {

@@ -11,6 +11,7 @@ import RecordsTable from "../components/RecordsTable";
 import LinkShareButton from "../components/LinkShareButton";
 import Footer from "../components/Footer";
 import { PublicKey } from "@solana/web3.js";
+import ProfilePic from "../components/ProfilePic";
 
 const DomainSelectPage = () => {
   const { connected, publicKey } = useWallet();
@@ -49,10 +50,7 @@ const DomainSelectPage = () => {
               <div className="flex flex-col justify-center items-center mt-10">
                 <LinkShareButton />
                 <div className="mt-5 flex flex-col justify-center items-center w-full">
-                  <img
-                    src={recordsData?.pic}
-                    className="md:w-28 w-20 rounded-full"
-                  />
+                  <ProfilePic />
                   <div className="w-screen md:w-3/5 flex flex-row space-x-2 justify-center mt-10 border-[1px] border-white border-opacity-20 rounded-xl p-10">
                     <RecordsTable recordsData={recordsData} />
                   </div>
