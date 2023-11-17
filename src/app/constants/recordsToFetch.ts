@@ -1,28 +1,5 @@
 import { Record } from "@bonfida/spl-name-service";
 
-export const recordStrings = [
-  "IPFS",
-  "ARWV",
-  "SOL",
-  "ETH",
-  "BTC",
-  "LTC",
-  "DOGE",
-  "email",
-  "url",
-  "discord",
-  "github",
-  "reddit",
-  "twitter",
-  "telegram",
-  "pic",
-  "SHDW",
-  "POINT",
-  "INJ",
-  "BNB",
-  "backpack",
-];
-
 export const recordsToFetch = [
   Record.IPFS,
   Record.ARWV,

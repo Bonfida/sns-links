@@ -16,11 +16,11 @@ type UserPageData = {
 };
 
 const UserPage = ({ params }: { params: UserPageParams }) => {
-  const router = useRouter();
   const domain = params.domain;
-  const { connection } = useConnection();
-  // const connection = new Connection(endpoint);
-  const { data, isLoading } = useFetchRecords(connection, domain) as {
+  const { data, isLoading } = useFetchRecords(
+    new Connection(endpoint!),
+    domain
+  ) as {
     data: UserPageData;
     isLoading: boolean;
   };

@@ -25,6 +25,15 @@ import { formatRecordValue } from "@/utils/formatRecordValue";
 import { makeTx } from "@/utils/makeTx";
 import { sleep } from "../../utils/sleep";
 import { extractErrorMessage } from "@/utils/extractErrorMessage";
+import { recordsToFetch } from "../constants/recordsToFetch";
+const USERNAME_RECORDS = [
+  Record.Discord,
+  Record.Github,
+  Record.Reddit,
+  Record.Twitter,
+  Record.Telegram,
+  Record.Backpack,
+];
 
 const EditRecordModal = ({
   recordName,
@@ -53,6 +62,20 @@ const EditRecordModal = ({
   const handleUpdateClick = async () => {
     try {
       await updateRecord(recordName, selectedDomain, recordVal);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Failed to update record:", error);
+        toast.error(`Failed to update record: ${error.message}`);
+      } else {
+        console.error("An unknown error occurred:", error);
+        toast.error("Failed to update record: An unknown error occurred");
+      }
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await updateRecord(recordName, selectedDomain, "");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Failed to update record:", error);
@@ -123,9 +146,37 @@ const EditRecordModal = ({
         return;
       }
 
+      // Checks for various records
+      if (recordName === Record.SOL && !isPubkey(formattedValue)) {
+        return toast.error("The record must be a valid wallet address");
+      }
+
+      if (
+        USERNAME_RECORDS.includes(recordName) &&
+        recordVal.startsWith("https://")
+      ) {
+        return toast.error("The record must contain your username not a link");
+      }
+
+      if (recordName === Record.Url) {
+        try {
+          new URL(formattedValue);
+        } catch (err) {
+          return toast.error("Invalid URL");
+        }
+      } else if (recordName === Record.IPFS) {
+        if (!formattedValue.startsWith("ipfs://")) {
+          return toast.error("Invalid IPFS record - Must start with ipfs://");
+        }
+      } else if (recordName === Record.ARWV) {
+        if (!formattedValue.startsWith("arw://")) {
+          return toast.error("Invalid Arweave record");
+        }
+      }
+
       let ser = new Buffer([]);
 
-      if (recordName.toLowerCase() === "sol") {
+      if (recordName === Record.SOL) {
         const toSign = Buffer.concat([
           new PublicKey(formattedValue).toBuffer(),
           recordKey.toBuffer(),
@@ -248,11 +299,11 @@ const EditRecordModal = ({
     <>
       {isModalVisible && (
         <div
-          className="fixed inset-0 bg-white bg-opacity-10 flex justify-center items-center"
+          className="fixed inset-0 bg-white bg-opacity-10 flex justify-center items-center "
           onClick={closeModal}
         >
           <div
-            className="bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg p-5"
+            className="bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg p-5 mt-10 md:mt-0"
             onClick={(e) => e.stopPropagation()}
           >
             <h1 className="font-azeret text-white text-xl">
@@ -268,18 +319,26 @@ const EditRecordModal = ({
                 setRecordVal(event.target.value);
               }}
             />
-            <div className="flex justify-between items-center w-full mt-10 space-x-4">
+            <div className="flex flex-col items-center justify-center w-full space-y-4">
+              <div className="flex justify-between items-center w-full mt-10 space-x-4">
+                <button
+                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
+                  onClick={handleUpdateClick}
+                >
+                  Update
+                </button>
+                <button
+                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
+                  onClick={handleDeleteClick}
+                >
+                  Delete
+                </button>
+              </div>
               <button
                 className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
                 onClick={closeModal}
               >
                 Cancel
-              </button>
-              <button
-                className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
-                onClick={handleUpdateClick}
-              >
-                Update
               </button>
             </div>
           </div>

@@ -30,6 +30,7 @@ const ProfilePic = () => {
           onClick={() => {
             handlePicEdit();
           }}
+          aria-label="Edit Profile Picture"
         >
           <img className="text-white" src="./camera.svg" />
         </button>

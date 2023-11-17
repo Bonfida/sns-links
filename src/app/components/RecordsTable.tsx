@@ -38,7 +38,7 @@ const RecordsTable = ({
                 <td className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-xs md:text-base text-start">
                   {recordName.charAt(0).toUpperCase() + recordName.slice(1)}
                 </td>
-                <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto md:text-base text-center">
+                <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto no-scrollbar md:text-base text-center">
                   {recordValue}
                 </td>
                 <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
