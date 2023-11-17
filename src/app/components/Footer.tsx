@@ -5,36 +5,42 @@ const Footer = () => {
         <a
           className="text-white text-xs md:text-base font-azeret"
           href="https://www.sns.id/listings"
+          target="_blank"
         >
           Browse Domains
         </a>
         <a
           className="text-white text-xs md:text-base font-azeret"
           href="https://www.sns.id/listings"
+          target="_blank"
         >
           Learn
         </a>
         <a
           className="text-white text-xs md:text-base font-azeret"
           href="https://sns.guide/"
+          target="_blank"
         >
           Developers
         </a>
         <a
           className="text-white text-xs md:text-base font-azeret"
           href="https://www.sns.id/community"
+          target="_blank"
         >
           Community
         </a>
         <a
           className="text-white text-xs md:text-base font-azeret"
           href="https://www.bonfida.org/blog"
+          target="_blank"
         >
           Blog
         </a>
         <a
           className="text-white text-xs md:text-base font-azeret"
           href="https://immunefi.com/bounty/bonfida/"
+          target="_blank"
         >
           Bug Bounty
         </a>

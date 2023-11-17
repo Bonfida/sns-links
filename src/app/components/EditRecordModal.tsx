@@ -256,7 +256,9 @@ const EditRecordModal = ({
             onClick={(e) => e.stopPropagation()}
           >
             <h1 className="font-azeret text-white text-xl">
-              Edit {recordName} record
+              {`Edit ${
+                recordName.charAt(0).toUpperCase() + recordName.slice(1)
+              } record`}
             </h1>
             <div className="bg-gradient-to-r from-transparent to-transparent via-[#7C7CFF] w-full h-[1px] my-5" />
             <input
