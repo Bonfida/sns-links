@@ -14,7 +14,9 @@ import ProfilePic from "../components/ProfilePic";
 const DomainSelectPage = () => {
   const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
-  const { selectedDomain } = useContext(SelectedDomainContext);
+  const { selectedDomain, setSelectedDomain } = useContext(
+    SelectedDomainContext
+  );
   const router = useRouter();
 
   const { data: domainsData, isLoading: domainsLoading } = useFetchDomains(
@@ -25,8 +27,10 @@ const DomainSelectPage = () => {
   useEffect(() => {
     if (!connected) {
       router.push("login-page");
+      setSelectedDomain("");
     } else if (connected && !domainsLoading && domainsData?.length === 0) {
       router.push("login-page");
+      setSelectedDomain("");
     }
   }, [connected]);
 
