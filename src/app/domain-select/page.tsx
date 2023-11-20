@@ -35,16 +35,8 @@ const DomainSelectPage = () => {
       <Header />
       <div className="w-full min-h-screen mb-10 flex flex-col">
         <div className="flex flex-col items-center justify-center">
-          <div className="">
-            <div className="flex flex-col justify-center items-center mt-10">
-              <LinkShareButton />
-              <div className="mt-5 flex flex-col justify-center items-center w-full">
-                <ProfilePic />
-                <div className="flex items-center justify-center">
-                  <RecordsTable />
-                </div>
-              </div>
-            </div>
+          <div className="flex flex-col items-center">
+            <RecordsTable />
           </div>
         </div>
       </div>

@@ -4,6 +4,8 @@ import DomainDropdown from "./DomainDropdown";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
+import ProfilePic from "./ProfilePic";
+import LinkShareButton from "./LinkShareButton";
 
 const RecordsTable = () => {
   const { connection } = useConnection();
@@ -29,9 +31,10 @@ const RecordsTable = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center mt-10 border-[1px] bg-[#191C30] bg-opacity-75 border-white border-opacity-20 rounded-xl p-10 w-1/3">
-        <div className="self-start w-full">
+      <div className="flex flex-col items-center border-[1px] bg-[#191C30] bg-opacity-90 border-white border-opacity-20 rounded-xl p-10 w-1/3">
+        <div className="justify-between flex-grow items-end w-full flex space-x-3">
           <DomainDropdown />
+          {selectedDomain && <LinkShareButton />}
         </div>
 
         <table className="w-full table-fixed text-white mt-4">

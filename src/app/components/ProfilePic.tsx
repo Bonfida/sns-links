@@ -19,7 +19,7 @@ const ProfilePic = () => {
   };
 
   return (
-    <div className="relative md:w-28 w-20 rounded-full overflow-hidden">
+    <div className="relative w-14 rounded-full overflow-hidden">
       <img
         src={recordsData?.pic}
         className="w-full h-full object-cover"
