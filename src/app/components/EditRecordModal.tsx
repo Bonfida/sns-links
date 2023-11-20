@@ -21,6 +21,7 @@ import {
   Record,
 } from "@bonfida/spl-name-service";
 import { derive } from "../../utils/derive";
+import { isPubkey } from "@/utils/isPubkey";
 import { formatRecordValue } from "@/utils/formatRecordValue";
 import { makeTx } from "@/utils/makeTx";
 import { sleep } from "../../utils/sleep";
@@ -146,7 +147,7 @@ const EditRecordModal = ({
         return;
       }
 
-      // Checks for various records
+      // Checks for various record types
       if (recordName === Record.SOL && !isPubkey(formattedValue)) {
         return toast.error("The record must be a valid wallet address");
       }
