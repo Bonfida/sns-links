@@ -31,8 +31,16 @@ const RecordsTable = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center border-[1px] bg-[#191C30] bg-opacity-90 border-white border-opacity-20 rounded-xl p-10 w-1/3">
-        <div className="justify-between flex-grow items-end w-full flex space-x-3">
+      <div className="flex flex-col items-center border-[1px] bg-[#191C30] bg-opacity-90 border-white border-opacity-20 rounded-xl space-y-2 p-10 w-1/3">
+        {selectedDomain ? (
+          <div className="flex justify-center items-center space-x-2 ">
+            <ProfilePic />
+            <h1 className="text-5xl text-white font-bold">
+              {selectedDomain}.sol
+            </h1>
+          </div>
+        ) : null}
+        <div className="justify-between flex-grow items-end w-full flex space-x-3 border rounded-lg border-white border-opacity-20 p-5">
           <DomainDropdown />
           {selectedDomain && <LinkShareButton />}
         </div>
@@ -64,7 +72,8 @@ const RecordsTable = () => {
                           handleEdit(recordName);
                         }}
                       >
-                        <img src="/edit-icon.svg" alt="Edit" />
+                        {/* <img src="/edit-icon.svg" alt="Edit" /> */}
+                        ...
                       </button>
                     </td>
                   </tr>

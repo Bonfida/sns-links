@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 
 const DomainDropdown = () => {
   const { publicKey } = useWallet();
@@ -12,11 +13,14 @@ const DomainDropdown = () => {
     connection,
     publicKey
   );
+  const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
+    useFetchTokenizedDomains(connection, publicKey);
 
   let groupedDomains = [];
 
   if (!domainsLoading) {
-    const sortedDomains = [...domainsOwned].sort();
+    const combinedArray = domainsOwned?.concat(tokenizedDomainsOwned);
+    const sortedDomains = [...combinedArray].sort();
     groupedDomains = sortedDomains.reduce(
       (acc: { [key: string]: string[] }, domain: string) => {
         const initial = domain[0].toUpperCase();

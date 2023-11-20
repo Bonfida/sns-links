@@ -7,24 +7,32 @@ import NotFoundModal from "../components/NotFoundModal";
 import Header from "../components/Header";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import Footer from "../components/Footer";
-import {
-  getDomainKeySync,
-  NameRegistryState,
-  getRecordV2Key,
-  Record,
-} from "@bonfida/spl-name-service";
+import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 
 const LoginPage = () => {
   const { connection } = useConnection();
   const { publicKey, connected } = useWallet();
   const router = useRouter();
-  const { data, isLoading } = useFetchDomains(connection, publicKey);
+  const { data: domainsOwned, isLoading: domainsLoading } = useFetchDomains(
+    connection,
+    publicKey
+  );
+  const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
+    useFetchTokenizedDomains(connection, publicKey);
 
   useEffect(() => {
-    if (connected && !isLoading && data?.length !== 0) {
-      router.push("domain-select");
+    if (connected && !domainsLoading && !tokenizedDomainsLoading) {
+      if (domainsOwned?.length !== 0 || tokenizedDomainsOwned?.length !== 0) {
+        router.push("domain-select");
+      }
     }
-  }, [!isLoading, connected]);
+  }, [
+    connected,
+    domainsLoading,
+    tokenizedDomainsLoading,
+    domainsOwned,
+    tokenizedDomainsOwned,
+  ]);
 
   return (
     <>
@@ -36,7 +44,10 @@ const LoginPage = () => {
             <span className="block">on chain.</span>
           </h1>
           <div className=" flex items-center md:w-1/2 flex-col space-y-5">
-            {connected && data && data.length === 0 ? <NotFoundModal /> : null}
+            {connected &&
+              ((!domainsLoading && domainsOwned?.length === 0) ||
+                (!tokenizedDomainsLoading &&
+                  tokenizedDomainsOwned?.length === 0)) && <NotFoundModal />}
             <h1 className="text-[#CECED8] text-center font-azeret md:text-[24px] text-[16px]">
               Upload all of your platform links using SNS links and share easily
               with friends. Your .sol domain now holds the key to sharing your

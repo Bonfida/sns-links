@@ -3,36 +3,44 @@ import Header from "../components/Header";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
+import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 import RecordsTable from "../components/RecordsTable";
-import LinkShareButton from "../components/LinkShareButton";
 import Footer from "../components/Footer";
-import ProfilePic from "../components/ProfilePic";
 
 const DomainSelectPage = () => {
+  const router = useRouter();
   const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
-  const { selectedDomain, setSelectedDomain } = useContext(
-    SelectedDomainContext
-  );
-  const router = useRouter();
-
+  const { setSelectedDomain } = useContext(SelectedDomainContext);
   const { data: domainsData, isLoading: domainsLoading } = useFetchDomains(
     connection,
     publicKey
   );
+  const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
+    useFetchTokenizedDomains(connection, publicKey);
 
   useEffect(() => {
     if (!connected) {
       router.push("login-page");
       setSelectedDomain("");
-    } else if (connected && !domainsLoading && domainsData?.length === 0) {
+    } else if (
+      !domainsLoading &&
+      !tokenizedDomainsLoading &&
+      domainsData?.length === 0 &&
+      tokenizedDomainsOwned?.length === 0
+    ) {
       router.push("login-page");
       setSelectedDomain("");
     }
-  }, [connected]);
+  }, [
+    connected,
+    domainsLoading,
+    tokenizedDomainsLoading,
+    domainsData,
+    tokenizedDomainsOwned,
+  ]);
 
   return (
     <>
