@@ -15,9 +15,9 @@ import {
   Numberu32,
   serializeSolRecord,
   transferInstruction,
-  getMessageToSign,
-  Signature,
-  UserSig,
+  // getMessageToSign,
+  // Signature,
+  // UserSig,
   Record,
 } from "@bonfida/spl-name-service";
 import { derive } from "../../utils/derive";
@@ -52,7 +52,7 @@ const EditRecordModal = ({
   const { connection } = useConnection();
   const { publicKey, signTransaction, signMessage } = useWallet();
   const { toast } = useToastContext();
-  const [userSignature, setUserSignature] = useState<Signature | null>(null);
+  // const [userSignature, setUserSignature] = useState<Signature | null>(null);
 
   const closeModal = () => {
     setIsModalVisible(false);

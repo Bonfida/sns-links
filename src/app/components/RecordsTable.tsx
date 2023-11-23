@@ -30,8 +30,10 @@ const RecordsTable = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center border-[1px] bg-[#191C30] bg-opacity-90 border-white border-opacity-20 rounded-xl space-y-2 p-10 md:w-1/2 w-full md:mt-10 mt-28">
+    <div className="flex flex-col items-center relative">
+      <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
+      <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
+      <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10 md:w-1/2 w-full md:mt-10 mt-28 max-w-[800px]">
         {selectedDomain ? (
           <div className="flex justify-center items-center space-x-2 w-full ">
             <ProfilePic />
@@ -41,11 +43,12 @@ const RecordsTable = () => {
           </div>
         ) : null}
         <div className="justify-between flex-grow items-end w-full flex space-x-3  p-5">
+          <div className="w-24 h-24 rounded-full bg-gradient-radial"></div>
           <DomainDropdown />
           {selectedDomain && <LinkShareButton />}
         </div>
 
-        <table className="w-full table-fixed text-white mt-4">
+        <table className="w-full table-fixed text-white mt-4 z-10">
           <thead className="">
             <tr>
               <th className="p-4 w-1/4 text-start rounded-tl-xl text-sm md:text-base bg-[#191C30] ">
@@ -92,7 +95,7 @@ const RecordsTable = () => {
           setIsEditingRecord={setIsEditingRecord}
         />
       )}
-    </>
+    </div>
   );
 };
 

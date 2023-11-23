@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 export const useFetchTokenizedDomains = (
   connection: Connection,
-  owner: PublicKey
+  owner: PublicKey | null
 ) => {
   const fetchTokenizedDomains = async () => {
     if (!owner) {

@@ -4,7 +4,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import NotFoundModal from "../components/NotFoundModal";
-import Header from "../components/Header";
+import Header from "../components/Topbar";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import Footer from "../components/Footer";
 import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
@@ -36,7 +36,6 @@ const LoginPage = () => {
 
   return (
     <>
-      <Header />
       <div className="flex flex-col items-center h-screen mt-20 md:mt-0 mb-10">
         <div className="flex flex-col items-center justify-center space-y-5">
           <h1 className="text-5xl md:text-8xl text-white text-center font-azeret font-bold ">
@@ -57,7 +56,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

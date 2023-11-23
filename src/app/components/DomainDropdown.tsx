@@ -42,7 +42,6 @@ const DomainDropdown = () => {
   return (
     <div className="flex items-center md:justify-start flex-col md:mt-0 mt-20 space-y-5 flex-grow">
       <div className="form-control w-full  relative mt-1 p-[2px]">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] rounded-xl p-2"></div>
         <div className="relative z-10 rounded-xl">
           <select
             className="select w-full rounded-xl text-sm md:p-2 p-2 h-4 focus:outline-none"

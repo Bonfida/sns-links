@@ -5,7 +5,6 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { Buffer } from "buffer";
@@ -14,7 +13,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
 import { ToastContextProvider } from "@bonfida/components";
 
-window.Buffer = Buffer;
+// window.Buffer = Buffer;
 
 type Props = {
   children?: React.ReactNode;
@@ -22,7 +21,6 @@ type Props = {
 const queryClient = new QueryClient();
 
 export const Wallet: FC<Props> = ({ children }) => {
-  const network = WalletAdapterNetwork.Mainnet;
   const wallets = useMemo(() => [new PhantomWalletAdapter()], [endpoint]);
 
   return (

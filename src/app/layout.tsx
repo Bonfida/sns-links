@@ -1,9 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Wallet } from "../Wallet";
-
-const inter = Inter({ subsets: ["latin"] });
+import Topbar from "./components/Topbar";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "SNS Links",
@@ -17,8 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#03001A]">
-        <Wallet>{children}</Wallet>
+      <body className="bg-gradient-to-t to-[#03001A] from-[#000a1a]">
+        <Wallet>
+          <Topbar />
+          {children}
+        </Wallet>
+        <Footer />
       </body>
     </html>
   );

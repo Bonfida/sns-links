@@ -2,7 +2,10 @@ import { getAllDomains, reverseLookupBatch } from "@bonfida/spl-name-service";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useQuery } from "react-query";
 
-export const useFetchDomains = (connection: Connection, owner: PublicKey) => {
+export const useFetchDomains = (
+  connection: Connection,
+  owner: PublicKey | null
+) => {
   const fetchDomains = async () => {
     if (!owner) {
       return [];
