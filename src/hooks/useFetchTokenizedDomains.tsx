@@ -1,8 +1,4 @@
-import {
-  getAllDomains,
-  reverseLookupBatch,
-  getTokenizedDomains,
-} from "@bonfida/spl-name-service";
+import { getTokenizedDomains } from "@bonfida/spl-name-service";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useQuery } from "react-query";
 
@@ -18,7 +14,6 @@ export const useFetchTokenizedDomains = (
       connection,
       owner
     );
-
     const domainArray = serializedTokenDomainArr.map(
       (tokenizedDomain) => tokenizedDomain.reverse
     );

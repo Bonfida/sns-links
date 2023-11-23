@@ -19,7 +19,7 @@ const RecordsTable = () => {
     selectedDomain
   );
 
-  const handleEdit = (recordName) => {
+  const handleEdit = (recordName: string) => {
     console.log("recordName", recordName);
     if (!isEditingRecord) {
       setIsEditingRecord(true);
@@ -31,16 +31,16 @@ const RecordsTable = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center border-[1px] bg-[#191C30] bg-opacity-90 border-white border-opacity-20 rounded-xl space-y-2 p-10 w-1/3">
+      <div className="flex flex-col items-center border-[1px] bg-[#191C30] bg-opacity-90 border-white border-opacity-20 rounded-xl space-y-2 p-10 md:w-1/2 w-full md:mt-10 mt-28">
         {selectedDomain ? (
-          <div className="flex justify-center items-center space-x-2 ">
+          <div className="flex justify-center items-center space-x-2 w-full ">
             <ProfilePic />
             <h1 className="text-5xl text-white font-bold">
               {selectedDomain}.sol
             </h1>
           </div>
         ) : null}
-        <div className="justify-between flex-grow items-end w-full flex space-x-3 border rounded-lg border-white border-opacity-20 p-5">
+        <div className="justify-between flex-grow items-end w-full flex space-x-3  p-5">
           <DomainDropdown />
           {selectedDomain && <LinkShareButton />}
         </div>
@@ -48,11 +48,13 @@ const RecordsTable = () => {
         <table className="w-full table-fixed text-white mt-4">
           <thead className="">
             <tr>
-              <th className="p-4 w-1/4 text-start rounded-tl-xl text-sm md:text-base">
+              <th className="p-4 w-1/4 text-start rounded-tl-xl text-sm md:text-base bg-[#191C30] ">
                 Record
               </th>
-              <th className="py-2 text-center text-sm md:text-base">Value</th>
-              <th className="p-4 w-1/4 text-center rounded-tr-xl"></th>
+              <th className="py-2 text-center text-sm md:text-base bg-[#191C30] ">
+                Value
+              </th>
+              <th className="p-4 w-1/4 text-center rounded-tr-xl bg-[#191C30] "></th>
             </tr>
           </thead>
           <tbody>
@@ -63,18 +65,19 @@ const RecordsTable = () => {
                     <td className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-xs md:text-base text-start">
                       {recordName.charAt(0).toUpperCase() + recordName.slice(1)}
                     </td>
-                    <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto no-scrollbar md:text-base text-center">
+                    <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto no-scrollbar md:text-base text-center font-semibold">
                       {recordValue}
                     </td>
                     <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
-                      <button
-                        onClick={() => {
-                          handleEdit(recordName);
-                        }}
-                      >
-                        {/* <img src="/edit-icon.svg" alt="Edit" /> */}
-                        ...
-                      </button>
+                      {selectedDomain && (
+                        <button
+                          onClick={() => {
+                            handleEdit(recordName);
+                          }}
+                        >
+                          ...
+                        </button>
+                      )}
                     </td>
                   </tr>
                 )
