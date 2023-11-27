@@ -300,14 +300,14 @@ const EditRecordModal = ({
     <>
       {isModalVisible && (
         <div
-          className="fixed inset-0 bg-white bg-opacity-10 flex justify-center items-center "
+          className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10 "
           onClick={closeModal}
         >
           <div
             className="bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg p-5 mt-10 md:mt-0"
             onClick={(e) => e.stopPropagation()}
           >
-            <h1 className="font-azeret text-white text-xl">
+            <h1 className="text-xl text-white font-azeret">
               {`Edit ${
                 recordName.charAt(0).toUpperCase() + recordName.slice(1)
               } record`}
@@ -321,7 +321,7 @@ const EditRecordModal = ({
               }}
             />
             <div className="flex flex-col items-center justify-center w-full space-y-4">
-              <div className="flex justify-between items-center w-full mt-10 space-x-4">
+              <div className="flex items-center justify-between w-full mt-10 space-x-4">
                 <button
                   className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
                   onClick={handleUpdateClick}

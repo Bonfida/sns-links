@@ -32,17 +32,18 @@ const LoginPage = () => {
     tokenizedDomainsLoading,
     domainsOwned,
     tokenizedDomainsOwned,
+    router,
   ]);
 
   return (
     <>
-      <div className="flex flex-col items-center h-screen mt-20 md:mt-0 mb-10">
+      <div className="flex flex-col items-center h-screen mt-20 mb-10 md:mt-0">
         <div className="flex flex-col items-center justify-center space-y-5">
-          <h1 className="text-5xl md:text-8xl text-white text-center font-azeret font-bold ">
+          <h1 className="text-5xl font-bold text-center text-white md:text-8xl font-azeret ">
             <span className="block">Your links</span>
             <span className="block">on chain.</span>
           </h1>
-          <div className=" flex items-center md:w-1/2 flex-col space-y-5">
+          <div className="flex flex-col items-center space-y-5  md:w-1/2">
             {connected &&
               ((!domainsLoading && domainsOwned?.length === 0) ||
                 (!tokenizedDomainsLoading &&

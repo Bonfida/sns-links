@@ -19,13 +19,13 @@ const ProfilePic = () => {
   };
 
   return (
-    <div className="relative w-24 rounded-full overflow-hidden">
+    <div className="relative w-24 overflow-hidden rounded-full">
       <img
         src={recordsData?.pic}
-        className="w-full h-full object-cover"
+        className="object-cover w-full h-full"
         alt="Profile"
       />
-      <div className="absolute bottom-0 left-0 w-full h-1/6 flex items-center justify-center bg-gray-700 bg-opacity-50">
+      <div className="absolute bottom-0 left-0 flex items-center justify-center w-full bg-gray-700 bg-opacity-50 h-1/6">
         <button
           onClick={() => {
             handlePicEdit();

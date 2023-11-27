@@ -30,25 +30,25 @@ const RecordsTable = () => {
   };
 
   return (
-    <div className="flex flex-col items-center relative">
+    <div className="relative flex flex-col items-center">
       <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
       <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
       <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10 md:w-1/2 w-full md:mt-10 mt-28 max-w-[800px]">
         {selectedDomain ? (
-          <div className="flex justify-center items-center space-x-2 w-full ">
+          <div className="flex items-center justify-center w-full space-x-2 ">
             <ProfilePic />
-            <h1 className="text-5xl text-white font-bold">
+            <h1 className="text-5xl font-bold text-white">
               {selectedDomain}.sol
             </h1>
           </div>
         ) : null}
-        <div className="justify-between flex-grow items-end w-full flex space-x-3  p-5">
+        <div className="flex items-end justify-between flex-grow w-full p-5 space-x-3">
           <div className="w-24 h-24 rounded-full bg-gradient-radial"></div>
           <DomainDropdown />
           {selectedDomain && <LinkShareButton />}
         </div>
 
-        <table className="w-full table-fixed text-white mt-4 z-10">
+        <table className="z-10 w-full mt-4 text-white table-fixed">
           <thead className="">
             <tr>
               <th className="p-4 w-1/4 text-start rounded-tl-xl text-sm md:text-base bg-[#191C30] ">
@@ -64,7 +64,7 @@ const RecordsTable = () => {
             {!recordsLoading &&
               Object.entries(recordsData.records).map(
                 ([recordName, recordValue]) => (
-                  <tr key={recordName} className="justify-center items-center">
+                  <tr key={recordName} className="items-center justify-center">
                     <td className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-xs md:text-base text-start">
                       {recordName.charAt(0).toUpperCase() + recordName.slice(1)}
                     </td>

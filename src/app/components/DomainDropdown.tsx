@@ -40,11 +40,11 @@ const DomainDropdown = () => {
   };
 
   return (
-    <div className="flex items-center md:justify-start flex-col md:mt-0 mt-20 space-y-5 flex-grow">
+    <div className="flex flex-col items-center flex-grow mt-20 space-y-5 md:justify-start md:mt-0">
       <div className="form-control w-full  relative mt-1 p-[2px]">
         <div className="relative z-10 rounded-xl">
           <select
-            className="select w-full rounded-xl text-sm md:p-2 p-2 h-4 focus:outline-none"
+            className="w-full h-4 p-2 text-sm select rounded-xl md:p-2 focus:outline-none"
             defaultValue="Select a domain"
             onChange={handleDomainSelect}
           >
