@@ -10,8 +10,8 @@ import Link from "next/link";
 const Topbar = () => {
   const { connected } = useWallet();
   return (
-    <div className="w-full md:h-20 h-14 flex items-center justify-center ">
-      <div className="md:h-20 h-14 flex md:flex-row flex-col items-center md:justify-between md:w-3/4 w-full space-y-3 md:space-y-0 mt-2">
+    <div className="flex items-center justify-center w-full md:h-20 h-14 ">
+      <div className="flex flex-col items-center w-full mt-2 space-y-3 md:h-20 h-14 md:flex-row md:justify-between md:w-3/4 md:space-y-0">
         <Link href="/" className="flex flex-row items-center pr-9">
           <Image
             width={80}
@@ -20,7 +20,7 @@ const Topbar = () => {
             className="p-5"
             alt=""
           />
-          <span className="text-white md:text-2xl text-lg font-bold">
+          <span className="text-lg font-bold text-white md:text-2xl">
             SNS Links
           </span>
         </Link>

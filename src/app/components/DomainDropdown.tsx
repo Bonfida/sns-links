@@ -16,11 +16,23 @@ const DomainDropdown = () => {
   const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
     useFetchTokenizedDomains(connection, publicKey);
 
-  let groupedDomains = [];
+  let groupedDomains: { [key: string]: string[] };
 
-  if (!domainsLoading) {
-    const combinedArray = domainsOwned?.concat(tokenizedDomainsOwned);
-    const sortedDomains = [...combinedArray].sort();
+  if (!domainsLoading && domainsOwned && domainsOwned.length > 0) {
+    let sortedDomains: string[];
+
+    if (
+      !tokenizedDomainsLoading &&
+      tokenizedDomainsOwned &&
+      tokenizedDomainsOwned.length > 0
+    ) {
+      let combinedArray = domainsOwned.concat(tokenizedDomainsOwned);
+      sortedDomains = combinedArray.sort();
+    } else {
+      // Ensuring domainsOwned is an array before spreading
+      sortedDomains = domainsOwned ? [...domainsOwned].sort() : [];
+    }
+
     groupedDomains = sortedDomains.reduce(
       (acc: { [key: string]: string[] }, domain: string) => {
         const initial = domain[0].toUpperCase();

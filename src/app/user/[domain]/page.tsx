@@ -15,7 +15,7 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
   const { data, isLoading } = useFetchRecords(connection, domain);
 
   return (
-    <div className="flex w-screen h-screen flex-col justify-start items-center mt-10">
+    <div className="flex flex-col items-center justify-start w-screen h-screen mt-10">
       <div className="flex flex-col items-center space-y-1">
         {isLoading ? (
           <GenericLoading className="w-[100px] h-[100px] rounded-full" />
@@ -25,7 +25,7 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
             width={50}
             height={50}
             src={data?.pic ?? "/default-profile.svg"}
-            className="w-28 rounded-full"
+            className="rounded-full w-28"
           />
         )}
         <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
@@ -43,7 +43,7 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
             ))}
         </div>
       ) : (
-        <div className="mt-10 flex flex-col space-y-3">
+        <div className="flex flex-col mt-10 space-y-3">
           {data?.records
             ? Object.entries(data.records).map(([key, value]) => {
                 if (value !== undefined) {

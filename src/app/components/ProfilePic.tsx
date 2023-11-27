@@ -4,6 +4,7 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import EditRecordModal from "./EditRecordModal";
 import { Record } from "@bonfida/spl-name-service";
+import Image from "next/image";
 
 const ProfilePic = () => {
   const { connection } = useConnection();

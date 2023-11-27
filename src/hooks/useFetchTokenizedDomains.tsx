@@ -1,27 +1,28 @@
 import { getTokenizedDomains } from "@bonfida/spl-name-service";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { useQuery } from "react-query";
+import { useQuery, UseQueryResult } from "react-query";
 
 export const useFetchTokenizedDomains = (
   connection: Connection,
   owner: PublicKey | null
-) => {
-  const fetchTokenizedDomains = async () => {
+): UseQueryResult<string[], unknown> => {
+  const fetchTokenizedDomains = async (): Promise<string[]> => {
     if (!owner) {
       return [];
     }
+
     const serializedTokenDomainArr = await getTokenizedDomains(
       connection,
       owner
     );
-    const domainArray = serializedTokenDomainArr.map(
-      (tokenizedDomain) => tokenizedDomain.reverse
+    const domainArray: string[] = serializedTokenDomainArr.map(
+      (tokenizedDomain) => tokenizedDomain.reverse!
     );
 
     return domainArray;
   };
 
-  return useQuery({
+  return useQuery<string[], unknown>({
     queryKey: ["tokenizedDomains", owner],
     queryFn: fetchTokenizedDomains,
   });
