@@ -16,7 +16,7 @@ const DomainDropdown = () => {
   const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
     useFetchTokenizedDomains(connection, publicKey);
 
-  let groupedDomains: { [key: string]: string[] };
+  let groupedDomains: { [key: string]: string[] } = {};
 
   if (!domainsLoading && domainsOwned && domainsOwned.length > 0) {
     let sortedDomains: string[];

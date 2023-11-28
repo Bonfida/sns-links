@@ -9,8 +9,8 @@ import LinkShareButton from "./LinkShareButton";
 
 const RecordsTable = () => {
   const { connection } = useConnection();
-  const [isEditingRecord, setIsEditingRecord] = useState(false);
-  const [editingRecordName, setEditingRecordName] = useState(null);
+  const [isEditingRecord, setIsEditingRecord] = useState<boolean>(false);
+  const [editingRecordName, setEditingRecordName] = useState<string>("");
 
   const { selectedDomain } = useContext(SelectedDomainContext);
 
@@ -19,11 +19,15 @@ const RecordsTable = () => {
     selectedDomain
   );
 
+  const capitalizeFirstLetter = (string: string): string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const handleEdit = (recordName: string) => {
     console.log("recordName", recordName);
     if (!isEditingRecord) {
       setIsEditingRecord(true);
-      setEditingRecordName(recordName);
+      setEditingRecordName(capitalizeFirstLetter(recordName));
     } else {
       setIsEditingRecord(false);
     }

@@ -52,6 +52,7 @@ const EditRecordModal = ({
   const { connection } = useConnection();
   const { publicKey, signTransaction, signMessage } = useWallet();
   const { toast } = useToastContext();
+  recordName = Record.recordName;
   // const [userSignature, setUserSignature] = useState<Signature | null>(null);
 
   const closeModal = () => {
@@ -104,7 +105,7 @@ const EditRecordModal = ({
       const instructions = [];
       const sub = Buffer.from([1]).toString() + recordName;
       const { pubkey: parentKey } = await derive(domain);
-      const recordKey = getRecordKeySync(domain, recordName);
+      const recordKey = getRecordKeySync(domain, Record.recordName);
 
       const creationInstruction = async () => {
         const lamports = await connection.getMinimumBalanceForRentExemption(
