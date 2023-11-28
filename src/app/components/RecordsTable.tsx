@@ -6,11 +6,15 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
 import ProfilePic from "./ProfilePic";
 import LinkShareButton from "./LinkShareButton";
+import { Record } from "@bonfida/spl-name-service";
 
 const RecordsTable = () => {
   const { connection } = useConnection();
   const [isEditingRecord, setIsEditingRecord] = useState<boolean>(false);
-  const [editingRecordName, setEditingRecordName] = useState<string>("");
+  const [isEditingPic, setIsEditingPic] = useState(false);
+  const [editingRecordName, setEditingRecordName] = useState<Record>(
+    "" as Record
+  );
 
   const { selectedDomain } = useContext(SelectedDomainContext);
 
@@ -19,15 +23,11 @@ const RecordsTable = () => {
     selectedDomain
   );
 
-  const capitalizeFirstLetter = (string: string): string => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  const handleEdit = (recordName: string) => {
+  const handleEdit = (recordName: Record) => {
     console.log("recordName", recordName);
     if (!isEditingRecord) {
       setIsEditingRecord(true);
-      setEditingRecordName(capitalizeFirstLetter(recordName));
+      setEditingRecordName(recordName);
     } else {
       setIsEditingRecord(false);
     }
@@ -65,30 +65,35 @@ const RecordsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {!recordsLoading &&
-              Object.entries(recordsData.records).map(
-                ([recordName, recordValue]) => (
-                  <tr key={recordName} className="items-center justify-center">
-                    <td className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-xs md:text-base text-start">
-                      {recordName.charAt(0).toUpperCase() + recordName.slice(1)}
-                    </td>
-                    <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto no-scrollbar md:text-base text-center font-semibold">
-                      {recordValue}
-                    </td>
-                    <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
-                      {selectedDomain && (
-                        <button
-                          onClick={() => {
-                            handleEdit(recordName);
-                          }}
-                        >
-                          ...
-                        </button>
-                      )}
-                    </td>
-                  </tr>
+            {!recordsLoading && recordsData
+              ? Object.entries(recordsData.records).map(
+                  ([recordName, recordValue]) => (
+                    <tr
+                      key={recordName}
+                      className="items-center justify-center"
+                    >
+                      <td className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-xs md:text-base text-start">
+                        {recordName.charAt(0).toUpperCase() +
+                          recordName.slice(1)}
+                      </td>
+                      <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto no-scrollbar md:text-base text-center font-semibold">
+                        {recordValue}
+                      </td>
+                      <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
+                        {selectedDomain && (
+                          <button
+                            onClick={() => {
+                              handleEdit(recordName as Record);
+                            }}
+                          >
+                            ...
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  )
                 )
-              )}
+              : null}
           </tbody>
         </table>
       </div>
@@ -96,6 +101,7 @@ const RecordsTable = () => {
       {isEditingRecord && (
         <EditRecordModal
           recordName={editingRecordName}
+          setIsEditingPic={setIsEditingPic}
           setIsEditingRecord={setIsEditingRecord}
         />
       )}

@@ -9,6 +9,7 @@ import Image from "next/image";
 const ProfilePic = () => {
   const { connection } = useConnection();
   const { selectedDomain } = useContext(SelectedDomainContext);
+  const [editingRecord, setIsEditingRecord] = useState(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
@@ -39,6 +40,7 @@ const ProfilePic = () => {
       {isEditingPic && (
         <EditRecordModal
           recordName={Record.Pic}
+          setIsEditingRecord={setIsEditingRecord}
           setIsEditingPic={setIsEditingPic}
         />
       )}

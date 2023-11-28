@@ -41,7 +41,7 @@ const EditRecordModal = ({
   setIsEditingRecord,
   setIsEditingPic,
 }: {
-  recordName: string;
+  recordName: Record;
   setIsEditingRecord: (isEditing: boolean) => void;
   setIsEditingPic: (isEditing: boolean) => void;
 }) => {
@@ -52,7 +52,7 @@ const EditRecordModal = ({
   const { connection } = useConnection();
   const { publicKey, signTransaction, signMessage } = useWallet();
   const { toast } = useToastContext();
-  recordName = Record.recordName;
+
   // const [userSignature, setUserSignature] = useState<Signature | null>(null);
 
   const closeModal = () => {
@@ -61,7 +61,11 @@ const EditRecordModal = ({
     setIsEditingPic(false);
   };
 
-  const handleUpdateClick = async () => {
+  const handleUpdateClick = async (
+    recordName: Record,
+    selectedDomain: string,
+    recordVal: string
+  ) => {
     try {
       await updateRecord(recordName, selectedDomain, recordVal);
     } catch (error) {
@@ -75,7 +79,10 @@ const EditRecordModal = ({
     }
   };
 
-  const handleDeleteClick = async () => {
+  const handleDeleteClick = async (
+    recordName: Record,
+    selectedDomain: string
+  ) => {
     try {
       await updateRecord(recordName, selectedDomain, "");
     } catch (error) {
@@ -90,7 +97,7 @@ const EditRecordModal = ({
   };
 
   const updateRecord = async (
-    recordName: string,
+    recordName: Record,
     domain: string,
     recordVal: string
   ) => {
@@ -105,7 +112,7 @@ const EditRecordModal = ({
       const instructions = [];
       const sub = Buffer.from([1]).toString() + recordName;
       const { pubkey: parentKey } = await derive(domain);
-      const recordKey = getRecordKeySync(domain, Record.recordName);
+      const recordKey = getRecordKeySync(domain, recordName);
 
       const creationInstruction = async () => {
         const lamports = await connection.getMinimumBalanceForRentExemption(
@@ -256,7 +263,7 @@ const EditRecordModal = ({
       const ix = updateInstruction(
         NAME_PROGRAM_ID,
         recordKey,
-        new Numberu32(0),
+        new Numberu32(),
         ser,
         publicKey
       );
@@ -276,26 +283,26 @@ const EditRecordModal = ({
     }
   };
 
-  const createSignature = async () => {
-    try {
-      if (!signMessage) return;
+  // const createSignature = async (domain: string) => {
+  //   try {
+  //     if (!signMessage) return;
 
-      const messageBuffer = getMessageToSign(
-        formatRecordValue(recordVal, recordName),
-        domain,
-        recordName
-      );
-      const signed = await signMessage(messageBuffer);
-      setUserSignature({
-        signatureType: UserSig.Solana,
-        signature: signed as Buffer,
-      });
-    } catch (err) {
-      toast.error(extractErrorMessage(err));
-    } finally {
-      console.log("complete!");
-    }
-  };
+  //     const messageBuffer = getMessageToSign(
+  //       formatRecordValue(recordVal, recordName),
+  //       domain,
+  //       recordName
+  //     );
+  //     const signed = await signMessage(messageBuffer);
+  //     setUserSignature({
+  //       signatureType: UserSig.Solana,
+  //       signature: signed as Buffer,
+  //     });
+  //   } catch (err) {
+  //     toast.error(extractErrorMessage(err));
+  //   } finally {
+  //     console.log("complete!");
+  //   }
+  // };
 
   return (
     <>
@@ -325,13 +332,17 @@ const EditRecordModal = ({
               <div className="flex items-center justify-between w-full mt-10 space-x-4">
                 <button
                   className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
-                  onClick={handleUpdateClick}
+                  onClick={() => {
+                    handleUpdateClick(recordName, selectedDomain, recordVal);
+                  }}
                 >
                   Update
                 </button>
                 <button
                   className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
-                  onClick={handleDeleteClick}
+                  onClick={() => {
+                    handleDeleteClick(recordName, selectedDomain);
+                  }}
                 >
                   Delete
                 </button>

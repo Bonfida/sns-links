@@ -21,6 +21,12 @@ const DomainSelectPage = () => {
   const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
     useFetchTokenizedDomains(connection, publicKey);
 
+  useEffect(() => {
+    if (!connected) {
+      router.push("/");
+    }
+  }, [connected, router]);
+
   return (
     <>
       <div className="w-full min-h-screen">

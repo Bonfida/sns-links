@@ -14,7 +14,7 @@ export default function MyApp() {
     } else {
       router.push("/");
     }
-  }, [connected]);
+  }, [connected, router]);
 
   return (
     <section className="flex justify-center w-full min-h-screen py-12 md:py-24 lg:py-32 xl:py-48">
