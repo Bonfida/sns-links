@@ -39,19 +39,19 @@ const Topbar = () => {
         </Link>
         <NavigationMenu.Root className="flex items-center justify-center space-x-4">
           <NavigationMenu.Link
-            className="text-xl font-semibold text-white "
+            className="text-2xl font-semibold text-white "
             href="/profile"
           >
             Profile
           </NavigationMenu.Link>
           <NavigationMenu.Link
-            className="text-xl font-semibold text-white"
+            className="text-2xl font-semibold text-white"
             href="https://github.com/radix-ui"
           >
             Links
           </NavigationMenu.Link>
           <NavigationMenu.Link
-            className="text-xl font-semibold text-white hover:cursor-pointer"
+            className="text-2xl font-semibold text-white hover:cursor-pointer"
             onClick={handleClick}
           >
             Purchase

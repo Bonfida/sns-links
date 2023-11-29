@@ -37,7 +37,9 @@ const DomainSelectPage = () => {
         <>
           {domains?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
-              <ProfileOverview />
+              <div className="w-3/4">
+                <ProfileOverview />
+              </div>
               <div className="flex flex-wrap items-center justify-center w-3/4 space-x-5 overflow-y-auto">
                 {domains?.map((domain) => (
                   <DomainCard domain={domain} key={domain} />
