@@ -8,14 +8,6 @@ export default function MyApp() {
   const { connection } = useConnection();
   const { connected } = useWallet();
 
-  useEffect(() => {
-    if (connected) {
-      router.push("profile");
-    } else {
-      router.push("/");
-    }
-  }, [connected, router]);
-
   return (
     <section className="flex justify-center w-full min-h-screen py-12 md:py-24 lg:py-32 xl:py-48">
       <div className="container px-4 md:px-6">
