@@ -29,10 +29,7 @@ const Topbar = () => {
           </span>
         </Link>
         <NavigationMenu.Root className="flex items-center justify-center space-x-4">
-          <NavigationMenu.Link
-            className="text-xl text-white"
-            href="https://github.com/radix-ui"
-          >
+          <NavigationMenu.Link className="text-xl text-white" href="/profile">
             Profile
           </NavigationMenu.Link>
           <NavigationMenu.Link
