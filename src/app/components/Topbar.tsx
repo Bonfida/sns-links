@@ -1,5 +1,6 @@
 "use client";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useState } from "react";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import {
   WalletDisconnectButton,
   WalletMultiButton,
@@ -9,11 +10,19 @@ import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { CaretDownIcon } from "@radix-ui/react-icons";
+import Widget from "@bonfida/sns-widget";
 
 const Topbar = () => {
   const { connected } = useWallet();
+  const { connection } = useConnection();
+  const [isBuyingDomain, setIsBuyingDomain] = useState(false);
+
+  const handleClick = () => {
+    setIsBuyingDomain(true);
+  };
   return (
     <div className="flex items-center justify-center w-full md:h-20 h-14">
+      {isBuyingDomain && <Widget connection={connection} isDark={true} />}
       <div className="flex items-center justify-between w-full md:w-3/4 md:h-20 h-14">
         {/* <div className="flex items-center space-x-10"> */}
         <Link href="/" className="flex items-center justify-center">
@@ -29,18 +38,21 @@ const Topbar = () => {
           </span>
         </Link>
         <NavigationMenu.Root className="flex items-center justify-center space-x-4">
-          <NavigationMenu.Link className="text-xl text-white" href="/profile">
+          <NavigationMenu.Link
+            className="text-xl font-semibold text-white"
+            href="/profile"
+          >
             Profile
           </NavigationMenu.Link>
           <NavigationMenu.Link
-            className="text-xl text-white"
+            className="text-xl font-semibold text-white"
             href="https://github.com/radix-ui"
           >
             Links
           </NavigationMenu.Link>
           <NavigationMenu.Link
-            className="text-xl text-white"
-            href="https://github.com/radix-ui"
+            className="text-xl font-semibold text-white"
+            onClick={handleClick}
           >
             Purchase
           </NavigationMenu.Link>
