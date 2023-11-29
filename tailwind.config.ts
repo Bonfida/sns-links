@@ -17,6 +17,9 @@ const config: Config = {
       fontFamily: {
         azeret: ["Azeret Mono", "monospace"],
       },
+      animation: {
+        "spin-speed": "spin 0.7s linear infinite",
+      },
     },
   },
   plugins: [],

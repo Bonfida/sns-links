@@ -39,7 +39,7 @@ const Topbar = () => {
         </Link>
         <NavigationMenu.Root className="flex items-center justify-center space-x-4">
           <NavigationMenu.Link
-            className="text-xl font-semibold text-white"
+            className="text-xl font-semibold text-white "
             href="/profile"
           >
             Profile
@@ -51,7 +51,7 @@ const Topbar = () => {
             Links
           </NavigationMenu.Link>
           <NavigationMenu.Link
-            className="text-xl font-semibold text-white"
+            className="text-xl font-semibold text-white hover:cursor-pointer"
             onClick={handleClick}
           >
             Purchase

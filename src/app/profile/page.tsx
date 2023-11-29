@@ -6,8 +6,10 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 import NotFoundModal from "../components/NotFoundModal";
-import DomainCard from "../components/RecordCard";
+import DomainCard from "../components/DomainCard";
 import ProfileOverview from "../components/ProfileOverview";
+import NotConnectedModal from "../components/NotConnectedModal";
+import Loading from "../components/Loading";
 
 const DomainSelectPage = () => {
   const router = useRouter();
@@ -25,21 +27,27 @@ const DomainSelectPage = () => {
 
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">
-      {connected ? (
-        domains?.length !== 0 ? (
-          <div className="flex flex-col items-center justify-center">
-            <ProfileOverview />
-            <div className="flex flex-wrap items-center justify-center w-3/4 space-x-5 overflow-y-auto">
-              {domains?.map((domain) => {
-                return <DomainCard domain={domain} key={domain} />;
-              })}
+      {/* Show NotConnectedModal if not connected */}
+      {!connected && <NotConnectedModal />}
+
+      {connected && (domainsLoading || tokenizedDomainsLoading) && <Loading />}
+
+      {/* Show content if connected and loading is finished */}
+      {connected && !domainsLoading && !tokenizedDomainsLoading && (
+        <>
+          {domains?.length !== 0 ? (
+            <div className="flex flex-col items-center justify-center">
+              <ProfileOverview />
+              <div className="flex flex-wrap items-center justify-center w-3/4 space-x-5 overflow-y-auto">
+                {domains?.map((domain) => (
+                  <DomainCard domain={domain} key={domain} />
+                ))}
+              </div>
             </div>
-          </div>
-        ) : (
-          <NotFoundModal />
-        )
-      ) : (
-        <h2>AYO BUY SOME DOMAINS!!</h2>
+          ) : (
+            <NotFoundModal />
+          )}
+        </>
       )}
     </div>
   );
