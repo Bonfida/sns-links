@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Widget from "@bonfida/sns-widget";
 import "@bonfida/sns-widget/style.css";
+import { useConnection } from "@solana/wallet-adapter-react";
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
 
 const NotFoundModal = () => {
+  const { connection } = useConnection();
   const [isPurchasing, setIsPurchasing] = useState(false);
   const handlePurchaseClick = () => {
     setIsPurchasing(true);
@@ -23,7 +25,7 @@ const NotFoundModal = () => {
           Purchase domain
         </button>
       </div>
-      {/* {isPurchasing && <Widget endpoint={endpoint!} />} */}
+      {isPurchasing && <Widget connection={connection} />}
     </>
   );
 };

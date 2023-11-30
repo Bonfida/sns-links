@@ -11,7 +11,7 @@ import ProfileOverview from "../components/ProfileOverview";
 import NotConnectedModal from "../components/NotConnectedModal";
 import Loading from "../components/Loading";
 
-const DomainSelectPage = () => {
+const ProfilePage = () => {
   const router = useRouter();
   const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
@@ -27,12 +27,8 @@ const DomainSelectPage = () => {
 
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">
-      {/* Show NotConnectedModal if not connected */}
       {!connected && <NotConnectedModal />}
-
       {connected && (domainsLoading || tokenizedDomainsLoading) && <Loading />}
-
-      {/* Show content if connected and loading is finished */}
       {connected && !domainsLoading && !tokenizedDomainsLoading && (
         <>
           {domains?.length !== 0 ? (
@@ -40,7 +36,7 @@ const DomainSelectPage = () => {
               <div className="w-3/4">
                 <ProfileOverview />
               </div>
-              <div className="flex flex-wrap items-center justify-center w-3/4 space-x-5 overflow-y-auto">
+              <div className="flex flex-wrap items-center justify-center w-3/4 ">
                 {domains?.map((domain) => (
                   <DomainCard domain={domain} key={domain} />
                 ))}
@@ -55,4 +51,4 @@ const DomainSelectPage = () => {
   );
 };
 
-export default DomainSelectPage;
+export default ProfilePage;

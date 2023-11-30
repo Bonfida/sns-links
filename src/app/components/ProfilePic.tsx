@@ -22,8 +22,10 @@ const ProfilePic = () => {
 
   return (
     <div className="relative w-24 overflow-hidden rounded-full">
-      <img
-        src={recordsData?.pic}
+      <Image
+        width={25}
+        height={25}
+        src={recordsData?.pic || "/default-profile.svg"}
         className="object-cover w-full h-full"
         alt="Profile"
       />
@@ -34,7 +36,13 @@ const ProfilePic = () => {
           }}
           aria-label="Edit Profile Picture"
         >
-          <img className="text-white" src="./camera.svg" />
+          <Image
+            width={10}
+            height={10}
+            className="text-white"
+            alt="pic edit icon"
+            src="/camera.svg"
+          />
         </button>
       </div>
       {isEditingPic && (
