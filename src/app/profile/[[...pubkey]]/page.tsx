@@ -1,15 +1,15 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
-import NotFoundModal from "../components/NotFoundModal";
-import DomainCard from "../components/DomainCard";
-import ProfileOverview from "../components/ProfileOverview";
-import NotConnectedModal from "../components/NotConnectedModal";
-import Loading from "../components/Loading";
+import NotFoundModal from "../../components/NotFoundModal";
+import DomainCard from "../../components/DomainCard";
+import ProfileOverview from "../../components/ProfileOverview";
+import NotConnectedModal from "../../components/NotConnectedModal";
+import Loading from "../../components/Loading";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -24,6 +24,14 @@ const ProfilePage = () => {
     useFetchTokenizedDomains(connection, publicKey);
 
   const domains = domainsData?.concat(tokenizedDomainsOwned!);
+
+  useEffect(() => {
+    if (!publicKey) {
+      router.push(`/profile`);
+    } else {
+      router.push(`/profile/${publicKey}`);
+    }
+  }, [publicKey]);
 
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">

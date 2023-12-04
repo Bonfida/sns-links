@@ -11,18 +11,28 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import Widget from "@bonfida/sns-widget";
+import { useRouter } from "next/navigation";
+import PurchaseModal from "./PurchaseModal";
 
 const Topbar = () => {
-  const { connected } = useWallet();
+  const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
+  const router = useRouter();
   const [isBuyingDomain, setIsBuyingDomain] = useState(false);
 
-  const handleClick = () => {
-    setIsBuyingDomain(true);
+  const handlePurchaseClick = () => {
+    router.push(`/purchase`);
+  };
+
+  const handleProfileClick = () => {
+    if (publicKey) {
+      router.push(`/profile/${publicKey}`);
+    } else {
+      router.push(`/profile`);
+    }
   };
   return (
     <div className="flex items-center justify-center w-full md:h-20 h-14">
-      {isBuyingDomain && <Widget connection={connection} isDark={true} />}
       <div className="flex items-center justify-between w-full md:w-3/4 md:h-20 h-14">
         {/* <div className="flex items-center space-x-10"> */}
         <Link href="/" className="flex items-center justify-center">
@@ -39,20 +49,20 @@ const Topbar = () => {
         </Link>
         <NavigationMenu.Root className="flex items-center justify-center space-x-4">
           <NavigationMenu.Link
-            className="text-2xl font-semibold text-white "
-            href="/profile"
+            className="text-xl text-white hover:cursor-pointer font-azeret"
+            onClick={handleProfileClick}
           >
             Profile
           </NavigationMenu.Link>
-          <NavigationMenu.Link
+          {/* <NavigationMenu.Link
             className="text-2xl font-semibold text-white"
             href="https://github.com/radix-ui"
           >
             Links
-          </NavigationMenu.Link>
+          </NavigationMenu.Link> */}
           <NavigationMenu.Link
-            className="text-2xl font-semibold text-white hover:cursor-pointer"
-            onClick={handleClick}
+            className="text-xl text-white hover:cursor-pointer font-azeret"
+            onClick={handlePurchaseClick}
           >
             Purchase
           </NavigationMenu.Link>

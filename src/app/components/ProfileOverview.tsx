@@ -7,7 +7,7 @@ const ProfileOverview = () => {
   const abbreviatedPubkey = abbreviatePubkey(publicKey);
   return (
     <div className="flex self-start mb-10">
-      <h1 className="text-4xl font-semibold text-white">{abbreviatedPubkey}</h1>
+      <h1 className="text-5xl font-semibold text-white">{abbreviatedPubkey}</h1>
     </div>
   );
 };

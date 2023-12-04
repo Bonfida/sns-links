@@ -21,4 +21,5 @@ export const recordsToFetch = [
   Record.Injective,
   Record.BSC,
   Record.Backpack,
+  Record.TXT,
 ];

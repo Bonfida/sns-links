@@ -7,6 +7,8 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import ProfilePic from "./ProfilePic";
 import LinkShareButton from "./LinkShareButton";
 import { Record } from "@bonfida/spl-name-service";
+import { useFetchOwner } from "@/hooks/useFetchOwner";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const RecordsTable = () => {
   const { connection } = useConnection();
@@ -15,12 +17,26 @@ const RecordsTable = () => {
   const [editingRecordName, setEditingRecordName] = useState<Record>(
     "" as Record
   );
+  const { publicKey } = useWallet();
 
   const { selectedDomain } = useContext(SelectedDomainContext);
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
     selectedDomain
+  );
+
+  const { data: owner } = useFetchOwner(connection, selectedDomain);
+  const isOwner = owner === publicKey?.toBase58();
+  console.log(
+    "selectedDomain",
+    selectedDomain,
+    "data",
+    owner,
+    "publicKey",
+    publicKey,
+    "58",
+    publicKey?.toBase58()
   );
 
   const handleEdit = (recordName: Record) => {
@@ -80,7 +96,7 @@ const RecordsTable = () => {
                         {recordValue}
                       </td>
                       <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
-                        {selectedDomain && (
+                        {selectedDomain && isOwner && (
                           <button
                             onClick={() => {
                               handleEdit(recordName as Record);
