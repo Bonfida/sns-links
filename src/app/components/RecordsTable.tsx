@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import EditRecordModal from "./EditRecordModal";
 import DomainDropdown from "./DomainDropdown";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
@@ -10,33 +10,26 @@ import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
 
-const RecordsTable = () => {
+const RecordsTable = ({ domain }: { domain: string | null }) => {
   const { connection } = useConnection();
   const [isEditingRecord, setIsEditingRecord] = useState<boolean>(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
   const [editingRecordName, setEditingRecordName] = useState<Record>(
     "" as Record
   );
-  const { publicKey } = useWallet();
-
+  const [isOwner, setIsOwner] = useState(false);
+  const { publicKey, connected } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
+  const currentDomain = selectedDomain || domain;
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
     selectedDomain
   );
 
-  const { data: owner } = useFetchOwner(connection, selectedDomain);
-  const isOwner = owner === publicKey?.toBase58();
-  console.log(
-    "selectedDomain",
-    selectedDomain,
-    "data",
-    owner,
-    "publicKey",
-    publicKey,
-    "58",
-    publicKey?.toBase58()
+  const { data: owner, isLoading: ownerLoading } = useFetchOwner(
+    connection,
+    selectedDomain
   );
 
   const handleEdit = (recordName: Record) => {
@@ -48,6 +41,15 @@ const RecordsTable = () => {
       setIsEditingRecord(false);
     }
   };
+
+  useEffect(() => {
+    if (!connected) {
+      setIsOwner(false);
+    } else if (connected && publicKey?.toBase58() === owner) {
+      setIsOwner(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connected, publicKey]);
 
   return (
     <div className="relative flex flex-col items-center">
@@ -96,7 +98,7 @@ const RecordsTable = () => {
                         {recordValue}
                       </td>
                       <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
-                        {selectedDomain && isOwner && (
+                        {isOwner && !ownerLoading && (
                           <button
                             onClick={() => {
                               handleEdit(recordName as Record);

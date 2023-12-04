@@ -31,6 +31,7 @@ const ProfilePage = () => {
     } else {
       router.push(`/profile/${publicKey}`);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey]);
 
   return (

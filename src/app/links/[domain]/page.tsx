@@ -10,11 +10,11 @@ type DomainLinksPageParams = {
 
 const DomainLinksPage = ({ params }: { params: DomainLinksPageParams }) => {
   const { connection } = useConnection();
-  const domain = params.domain;
+  const domain: string | null = params.domain || null;
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full mt-10">
-      <RecordsTable />
+      <RecordsTable domain={domain} />
     </div>
   );
 };
