@@ -4,7 +4,7 @@ export const isTokenized = async (
   domain: string,
   connection: Connection,
   publicKey: PublicKey
-) => {
+): Promise<boolean> => {
   if (!domain || !connection || !publicKey) {
     throw new Error("Missing argument");
   }

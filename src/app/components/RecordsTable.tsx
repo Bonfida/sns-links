@@ -9,8 +9,9 @@ import LinkShareButton from "./LinkShareButton";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { isTokenized } from "../../utils/isTokenized";
+import { isTokenized } from "../../utils/tokenizer/isTokenized";
 import UnwrapModal from "./UnwrapModal";
+import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 
 const RecordsTable = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
@@ -55,7 +56,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     if (!connected) {
       setIsOwner(false);
     }
-    if (connected && owner === publicKey?.toBase58()) {
+    if (connected && checkIsOwner(owner, publicKey)) {
       setIsOwner(true);
     }
   }, [connected, publicKey, owner]);
@@ -67,7 +68,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
       <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 max-w-[800px]">
         {selectedDomain || domain ? (
           <div className="flex items-center justify-center w-full space-x-2 ">
-            <ProfilePic />
+            <ProfilePic domain={domain} />
             <h1 className="text-5xl font-bold text-white">
               {selectedDomain || domain}.sol
             </h1>
