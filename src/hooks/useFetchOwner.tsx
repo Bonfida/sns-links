@@ -13,11 +13,10 @@ export const useFetchOwner = (
     }
     const { registry, nftOwner } = await NameRegistryState.retrieve(
       connection,
-      new PublicKey(pubkey)
+      pubkey
     );
 
     let owner: string = registry.owner.toBase58();
-
     if (nftOwner) {
       owner = nftOwner.toBase58();
     }

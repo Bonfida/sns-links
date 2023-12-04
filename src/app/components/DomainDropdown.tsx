@@ -3,11 +3,13 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
+import { useRouter } from "next/navigation";
 
 const DomainDropdown = () => {
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const { setSelectedDomain } = useContext(SelectedDomainContext);
+  const router = useRouter();
 
   const { data: domainsOwned, isLoading: domainsLoading } = useFetchDomains(
     connection,
@@ -49,6 +51,7 @@ const DomainDropdown = () => {
   const handleDomainSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const domain = e.target.value.slice(0, -4);
     setSelectedDomain(domain);
+    router.push(`${domain}`);
   };
 
   return (

@@ -1,8 +1,7 @@
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { abbreviatePubkey } from "@/utils/abbreviatePubkey";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 
 const ProfileOverview = () => {
-  const { connection } = useConnection();
   const { publicKey } = useWallet();
   const abbreviatedPubkey = abbreviatePubkey(publicKey);
   return (

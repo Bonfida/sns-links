@@ -6,10 +6,12 @@ import SelectedDomainContext from "@/context/selectedDomain";
 
 const DomainCard = ({ domain }: { domain: string }) => {
   const router = useRouter();
+
   const { setSelectedDomain } = useContext(SelectedDomainContext);
 
   const handleClick = () => {
     setSelectedDomain(domain);
+
     router.push(`/links/${domain}`);
   };
 

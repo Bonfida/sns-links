@@ -17,10 +17,11 @@ const PurchaseModal = () => {
         <h1 className="text-center text-white font-azeret">
           Click below to get started!
         </h1>
-        {/* <Widget
+        <Widget
           connection={connection}
-          rootWrapperClassNames="absolute flex justify-center items-center"
-        /> */}
+          isDark={true}
+          rootWrapperClassNames=""
+        />
         {/* <button
           className="px-3 py-2 text-white bg-blue-600 rounded-lg font-azeret"
           onClick={handlePurchaseClick}

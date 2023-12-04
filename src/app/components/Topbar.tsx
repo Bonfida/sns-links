@@ -32,10 +32,10 @@ const Topbar = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center w-full md:h-20 h-14">
+    <div className="flex items-center justify-center w-screen md:h-20 h-14">
       <div className="flex items-center justify-between w-full md:w-3/4 md:h-20 h-14">
         {/* <div className="flex items-center space-x-10"> */}
-        <Link href="/" className="flex items-center justify-center">
+        <Link href="/" className="flex items-center justify-center w-1/4">
           <Image
             width={80}
             height={80}
@@ -47,7 +47,7 @@ const Topbar = () => {
             SNS Links
           </span>
         </Link>
-        <NavigationMenu.Root className="flex items-center justify-center space-x-4">
+        <NavigationMenu.Root className="flex justify-center w-1/2 space-x-5">
           <NavigationMenu.Link
             className="text-xl text-white hover:cursor-pointer font-azeret"
             onClick={handleProfileClick}
@@ -69,7 +69,7 @@ const Topbar = () => {
         </NavigationMenu.Root>
         {/* </div> */}
 
-        <div>
+        <div className="w-1/4">
           {connected ? <WalletDisconnectButton /> : <WalletMultiButton />}
         </div>
       </div>

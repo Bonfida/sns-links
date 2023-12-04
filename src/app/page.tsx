@@ -30,43 +30,55 @@ export default function MyApp() {
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconInbox className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Profile</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">Profile</p>
+                  <h2 className="text-xl font-bold text-white">Brand</h2>
+                  <p className="text-zinc-200 dark:text-zinc-100">
+                    Your on chain identity
+                  </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconIntegration className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">TODO</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">TODO</p>
+                  <h2 className="text-xl font-bold text-white">Share</h2>
+                  <p className="text-zinc-200 dark:text-zinc-100">
+                    Share all your links with ease
+                  </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconCustomization className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">TODO</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">TODO</p>
+                  <h2 className="text-xl font-bold text-white">Verify</h2>
+                  <p className="text-zinc-200 dark:text-zinc-100">
+                    Peace of mind with verified links
+                  </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconSearch className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">TODO</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">TODO</p>
+                  <h2 className="text-xl font-bold text-white">Standout</h2>
+                  <p className="text-zinc-200 dark:text-zinc-100">
+                    Set up a profile that stands out
+                  </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconSecurity className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">TODO</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">TODO</p>
+                  <h2 className="text-xl font-bold text-white">Integrate</h2>
+                  <p className="text-zinc-200 dark:text-zinc-100">
+                    Something something
+                  </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconCollaboration className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">TODO</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">TODO</p>
+                  <h2 className="text-xl font-bold text-white">OPOS</h2>
+                  <p className="text-zinc-200 dark:text-zinc-100">
+                    Made easy thanks to Solana
+                  </p>
                 </div>
               </div>
             </div>

@@ -9,8 +9,10 @@ import LinkShareButton from "./LinkShareButton";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { isTokenized } from "../../utils/isTokenized";
+import UnwrapModal from "./UnwrapModal";
 
-const RecordsTable = ({ domain }: { domain: string | null }) => {
+const RecordsTable = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
   const [isEditingRecord, setIsEditingRecord] = useState<boolean>(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
@@ -21,6 +23,7 @@ const RecordsTable = ({ domain }: { domain: string | null }) => {
   const { publicKey, connected } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
+  const [isToken, setIsToken] = useState(false);
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
@@ -29,14 +32,20 @@ const RecordsTable = ({ domain }: { domain: string | null }) => {
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
-    selectedDomain
+    selectedDomain || domain
   );
 
-  const handleEdit = (recordName: Record) => {
-    console.log("recordName", recordName);
+  const handleEdit = async (recordName: Record) => {
+    const isToken = await isTokenized(currentDomain!, connection, publicKey!);
+    console.log("isToken", isToken);
+
     if (!isEditingRecord) {
       setIsEditingRecord(true);
-      setEditingRecordName(recordName);
+      if (isToken) {
+        setIsToken(true);
+      } else {
+        setEditingRecordName(recordName);
+      }
     } else {
       setIsEditingRecord(false);
     }
@@ -45,31 +54,32 @@ const RecordsTable = ({ domain }: { domain: string | null }) => {
   useEffect(() => {
     if (!connected) {
       setIsOwner(false);
-    } else if (connected && publicKey?.toBase58() === owner) {
+    }
+    if (connected && owner === publicKey?.toBase58()) {
       setIsOwner(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connected, publicKey]);
+  }, [connected, publicKey, owner]);
 
   return (
     <div className="relative flex flex-col items-center">
       <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
       <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
       <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 max-w-[800px]">
-        {selectedDomain ? (
+        {selectedDomain || domain ? (
           <div className="flex items-center justify-center w-full space-x-2 ">
             <ProfilePic />
             <h1 className="text-5xl font-bold text-white">
-              {selectedDomain}.sol
+              {selectedDomain || domain}.sol
             </h1>
           </div>
         ) : null}
-        <div className="flex items-end justify-between flex-grow w-full p-5 space-x-3">
-          {/* <div className="w-24 h-24 rounded-full bg-gradient-radial"></div> */}
-          <DomainDropdown />
-          {selectedDomain && <LinkShareButton />}
-        </div>
-
+        {isOwner && (
+          <div className="flex items-end justify-between flex-grow w-full p-5 space-x-3">
+            {/* <div className="w-24 h-24 rounded-full bg-gradient-radial"></div> */}
+            <DomainDropdown />
+            {selectedDomain && <LinkShareButton />}
+          </div>
+        )}
         <table className="z-10 w-full mt-4 text-white table-fixed">
           <thead className="">
             <tr>
@@ -116,13 +126,16 @@ const RecordsTable = ({ domain }: { domain: string | null }) => {
         </table>
       </div>
 
-      {isEditingRecord && (
-        <EditRecordModal
-          recordName={editingRecordName}
-          setIsEditingPic={setIsEditingPic}
-          setIsEditingRecord={setIsEditingRecord}
-        />
-      )}
+      {isEditingRecord &&
+        (isToken ? (
+          <UnwrapModal domain={currentDomain!} />
+        ) : (
+          <EditRecordModal
+            recordName={editingRecordName}
+            setIsEditingPic={setIsEditingPic}
+            setIsEditingRecord={setIsEditingRecord}
+          />
+        ))}
     </div>
   );
 };
