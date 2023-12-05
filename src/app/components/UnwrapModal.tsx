@@ -51,6 +51,10 @@ const UnwrapModal = ({ domain }: { domain: string }) => {
               Your domain is tokenized! Unwrap and try again to add a link!
             </h2>
             <div className="bg-gradient-to-r from-transparent to-transparent via-[#7C7CFF] w-full h-[1px] my-5" />
+            <span>
+              Tokenized domains can be sold on your favorite NFT marketplace.
+              Easily rewrap your domain on sns.id
+            </span>
             <div className="flex flex-col items-center justify-center w-full space-y-4">
               <div className="flex items-center justify-between w-full mt-10 space-x-4">
                 <button
