@@ -1,31 +1,56 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
-import { useConnection } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { updateRecord } from "@/utils/update-record/update-record";
+import { useToastContext } from "@bonfida/components";
+import { Record } from "@bonfida/spl-name-service";
 
 const Bio = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
+  const { toast } = useToastContext();
+  const { publicKey, signTransaction, signMessage } = useWallet();
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
     domain
   );
-  const [isEditable, setIsEditable] = useState(false);
-  const [bioText, setBioText] = useState(recordsData?.bio || "Add a bio...");
+
+  const [editMode, setEditMode] = useState(false);
+  const [bioText, setBioText] = useState("");
+  const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => {
+    if (!recordsLoading && recordsData?.bio) {
+      setBioText(recordsData?.bio);
+    } else {
+      setBioText("Add a bio...");
+    }
+  }, [recordsData]);
 
   const toggleEdit = () => {
-    setIsEditable(!isEditable);
+    setEditMode(!editMode);
+    if (editMode) {
+      handleSubmit();
+    }
   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // Add your submission logic here
-    // If in edit mode, toggle off the edit mode after submission
-    if (isEditable) {
-      toggleEdit();
+  function handleSubmit() {
+    if (editMode) {
+      updateRecord(
+        connection,
+        Record.TXT,
+        domain,
+        bioText,
+        publicKey,
+        signTransaction!,
+        signMessage!,
+        toast
+      );
+      setRefresh(true);
     }
   }
 
   return (
-    <form method="post" onSubmit={handleSubmit} className="flex flex-col mt-8">
+    <form method="post" className="flex flex-col mt-8">
       <textarea
         name="postContent"
         value={bioText}
@@ -33,11 +58,11 @@ const Bio = ({ domain }: { domain: string }) => {
         rows={4}
         cols={45}
         className="text-white rounded-xl bg-inherit"
-        readOnly={!isEditable}
+        readOnly={!editMode}
       />
       <div className="flex justify-end mt-2">
         <button className="flex self-center" type="button" onClick={toggleEdit}>
-          {isEditable ? "Save" : "Edit"}
+          {editMode ? "Save" : "Edit"}
         </button>
       </div>
     </form>
