@@ -54,7 +54,7 @@ const UnwrapModal = ({ domain }: { domain: string }) => {
             <div className="flex flex-col items-center justify-center w-full space-y-4">
               <div className="flex items-center justify-between w-full mt-10 space-x-4">
                 <button
-                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret bg[#7C7CFF]"
+                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret bg-[#7C7CFF]"
                   onClick={handleUnwrapClick}
                 >
                   Unwrap
