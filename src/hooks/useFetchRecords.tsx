@@ -26,7 +26,7 @@ export const useFetchRecords = (connection: Connection, domain: string) => {
         otherRecords[key] = value;
       }
     });
-    return { pic: picRecord, records: otherRecords };
+    return { pic: picRecord, records: otherRecords, bio };
   };
 
   return useQuery({ queryKey: ["records", domain], queryFn: fetchRecords });

@@ -12,6 +12,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { isTokenized } from "../../utils/tokenizer/isTokenized";
 import UnwrapModal from "./UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
+import Bio from "../components/Bio";
 
 const RecordsTable = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
@@ -67,12 +68,17 @@ const RecordsTable = ({ domain }: { domain: string }) => {
       <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
       <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 max-w-[800px]">
         {selectedDomain || domain ? (
-          <div className="flex items-center justify-center w-full space-x-2 ">
-            <ProfilePic domain={domain} />
-            <h1 className="text-5xl font-bold text-white">
-              {selectedDomain || domain}.sol
-            </h1>
-          </div>
+          <>
+            <div className="flex items-center justify-around">
+              <div className="flex flex-col items-center justify-center w-1/4 p-5">
+                <ProfilePic domain={domain} />
+                <h1 className="text-3xl font-bold text-white">
+                  {selectedDomain || domain}.sol
+                </h1>
+              </div>
+              <Bio domain={selectedDomain || domain} />
+            </div>
+          </>
         ) : null}
         {isOwner && (
           <div className="flex items-end justify-between flex-grow w-full p-5 space-x-3">
