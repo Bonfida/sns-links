@@ -4,12 +4,19 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { updateRecord } from "@/utils/update-record/update-record";
 import { useToastContext } from "@bonfida/components";
 import { Record } from "@bonfida/spl-name-service";
+import { checkIsOwner } from "@/utils/owner/checkIsOwner";
+import { useFetchOwner } from "@/hooks/useFetchOwner";
 
 const Bio = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
   const { toast } = useToastContext();
-  const { publicKey, signTransaction, signMessage } = useWallet();
+  const { publicKey, signTransaction, signMessage, connected } = useWallet();
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
+    connection,
+    domain
+  );
+
+  const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
     domain
   );
@@ -60,11 +67,17 @@ const Bio = ({ domain }: { domain: string }) => {
         className="text-white rounded-xl bg-inherit"
         readOnly={!editMode}
       />
-      <div className="flex justify-end mt-2">
-        <button className="flex self-center" type="button" onClick={toggleEdit}>
-          {editMode ? "Save" : "Edit"}
-        </button>
-      </div>
+      {connected && checkIsOwner(owner, publicKey) && (
+        <div className="flex justify-end mt-2">
+          <button
+            className="flex self-center"
+            type="button"
+            onClick={toggleEdit}
+          >
+            {editMode ? "Save" : "Edit"}
+          </button>
+        </div>
+      )}
     </form>
   );
 };
