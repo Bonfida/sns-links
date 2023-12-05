@@ -5,7 +5,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 import { useRouter } from "next/navigation";
 
-const DomainDropdown = () => {
+const DomainDropdown = ({ currentDomain }: { currentDomain: string }) => {
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const { setSelectedDomain } = useContext(SelectedDomainContext);
@@ -64,7 +64,7 @@ const DomainDropdown = () => {
             onChange={handleDomainSelect}
           >
             <option disabled value="Select a domain">
-              Select a domain
+              {currentDomain}.sol
             </option>
             {!domainsLoading && groupedDomains
               ? Object.keys(groupedDomains).map((initial) => (

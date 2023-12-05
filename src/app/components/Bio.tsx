@@ -50,7 +50,7 @@ const Bio = ({ domain }: { domain: string }) => {
   }
 
   return (
-    <form method="post" className="flex flex-col mt-8">
+    <form method="post" className="flex flex-col mt-6">
       <textarea
         name="postContent"
         value={bioText}

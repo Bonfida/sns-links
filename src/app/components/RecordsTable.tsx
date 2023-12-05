@@ -83,8 +83,8 @@ const RecordsTable = ({ domain }: { domain: string }) => {
         {isOwner && (
           <div className="flex items-end justify-between flex-grow w-full p-5 space-x-3">
             {/* <div className="w-24 h-24 rounded-full bg-gradient-radial"></div> */}
-            <DomainDropdown />
-            {selectedDomain && <LinkShareButton />}
+            <DomainDropdown currentDomain={domain} />
+            <LinkShareButton domain={domain} />
           </div>
         )}
         <table className="z-10 w-full mt-4 text-white table-fixed">

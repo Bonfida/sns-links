@@ -1,21 +1,23 @@
 import { useContext, useState, useEffect } from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
-const LinkShareButton = () => {
+const LinkShareButton = ({ domain }: { domain: string }) => {
   const { selectedDomain } = useContext(SelectedDomainContext);
   const [errorMessage, setErrorMessage] = useState("");
+
   useEffect(() => {
-    // Clear the error message if a domain is selected
-    if (selectedDomain) {
+    if (selectedDomain || domain) {
       setErrorMessage("");
     }
-  }, [selectedDomain]);
+  }, [selectedDomain, domain]);
 
   const handleShareClick = () => {
-    if (!selectedDomain) {
+    if (!selectedDomain || !domain) {
       setErrorMessage("No domain selected. Please select a domain to share.");
       return;
     }
-    navigator.clipboard.writeText(`localhost:3000/user/${selectedDomain}`);
+    navigator.clipboard.writeText(
+      `localhost:3000/user/${selectedDomain || domain}`
+    );
   };
 
   return (
