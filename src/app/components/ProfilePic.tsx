@@ -28,7 +28,6 @@ const ProfilePic = ({ domain }: { domain: string }) => {
     setIsEditingPic(true);
   };
 
-  console.log("check is owner", checkIsOwner(owner, publicKey));
   return (
     <div className="relative w-24 overflow-hidden rounded-full">
       <Image
