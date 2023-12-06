@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import {
   WalletDisconnectButton,
@@ -18,6 +18,7 @@ const Topbar = () => {
   const { connection } = useConnection();
   const router = useRouter();
   const [isBuyingDomain, setIsBuyingDomain] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const handlePurchaseClick = () => {
     router.push(`/purchase`);
@@ -30,6 +31,15 @@ const Topbar = () => {
       router.push(`/profile`);
     }
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div className="flex items-center justify-center w-screen md:h-20 h-14">
       <div className="flex items-center justify-between w-full md:w-3/4 md:h-20 h-14">
@@ -69,7 +79,11 @@ const Topbar = () => {
         {/* </div> */}
 
         <div className="w-1/4">
-          {connected ? <WalletDisconnectButton /> : <WalletMultiButton />}
+          {connected && publicKey ? (
+            <WalletDisconnectButton />
+          ) : (
+            <WalletMultiButton />
+          )}
         </div>
       </div>
     </div>
