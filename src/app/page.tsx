@@ -67,9 +67,7 @@ export default function MyApp() {
                     <IconSecurity className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
                   <h2 className="text-xl font-bold text-white">Integrate</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">
-                    Something something
-                  </p>
+                  <p className="text-zinc-200 dark:text-zinc-100">BINGBONG</p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">

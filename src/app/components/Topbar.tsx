@@ -10,7 +10,6 @@ import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import Widget from "@bonfida/sns-widget";
 import { useRouter } from "next/navigation";
 import PurchaseModal from "./PurchaseModal";
 
@@ -60,12 +59,12 @@ const Topbar = () => {
           >
             Links
           </NavigationMenu.Link> */}
-          <NavigationMenu.Link
+          {/* <NavigationMenu.Link
             className="text-xl text-white hover:cursor-pointer font-azeret"
             onClick={handlePurchaseClick}
           >
             Purchase
-          </NavigationMenu.Link>
+          </NavigationMenu.Link> */}
         </NavigationMenu.Root>
         {/* </div> */}
 
