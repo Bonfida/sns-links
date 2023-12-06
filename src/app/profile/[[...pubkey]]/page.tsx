@@ -24,6 +24,7 @@ const ProfilePage = () => {
     useFetchTokenizedDomains(connection, publicKey);
 
   const domains = domainsData?.concat(tokenizedDomainsOwned!);
+  const sortedDomains = domains?.sort();
 
   useEffect(() => {
     if (!publicKey) {
@@ -40,13 +41,13 @@ const ProfilePage = () => {
       {connected && (domainsLoading || tokenizedDomainsLoading) && <Loading />}
       {connected && !domainsLoading && !tokenizedDomainsLoading && (
         <>
-          {domains?.length !== 0 ? (
+          {sortedDomains?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
               <div className="w-3/4">
                 <ProfileOverview />
               </div>
               <div className="flex flex-wrap items-center justify-center w-3/4 ">
-                {domains?.map((domain) => (
+                {sortedDomains?.map((domain) => (
                   <DomainCard domain={domain} key={domain} />
                 ))}
               </div>

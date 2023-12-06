@@ -21,6 +21,7 @@ type Props = {
 const queryClient = new QueryClient();
 
 export const Wallet: FC<Props> = ({ children }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const wallets = useMemo(() => [new PhantomWalletAdapter()], [endpoint]);
 
   return (
