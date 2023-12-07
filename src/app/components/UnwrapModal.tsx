@@ -6,7 +6,6 @@ const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
 import { unwrap } from "@/utils/tokenizer/unwrap";
 import { useToastContext } from "@bonfida/components";
 import { makeTx } from "@/utils/makeTx";
-import { signAndSendInstructions } from "@bonfida/utils";
 
 const UnwrapModal = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();

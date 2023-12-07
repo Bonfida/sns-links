@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
-import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 import NotFoundModal from "../../components/NotFoundModal";
 import DomainCard from "../../components/DomainCard";
 import ProfileOverview from "../../components/ProfileOverview";
@@ -16,15 +15,10 @@ const ProfilePage = () => {
   const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
   const { setSelectedDomain } = useContext(SelectedDomainContext);
-  const { data: domainsData, isLoading: domainsLoading } = useFetchDomains(
+  const { data: domainsOwned, isLoading: domainsLoading } = useFetchDomains(
     connection,
     publicKey
   );
-  const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
-    useFetchTokenizedDomains(connection, publicKey);
-
-  const domains = domainsData?.concat(tokenizedDomainsOwned!);
-  const sortedDomains = domains?.sort();
 
   useEffect(() => {
     if (!publicKey) {
@@ -38,16 +32,16 @@ const ProfilePage = () => {
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">
       {!connected && <NotConnectedModal />}
-      {connected && (domainsLoading || tokenizedDomainsLoading) && <Loading />}
-      {connected && !domainsLoading && !tokenizedDomainsLoading && (
+      {connected && domainsLoading && <Loading />}
+      {connected && !domainsLoading && (
         <>
-          {sortedDomains?.length !== 0 ? (
+          {domainsOwned?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
               <div className="w-3/4">
                 <ProfileOverview />
               </div>
               <div className="flex flex-wrap items-center justify-center w-3/4 ">
-                {sortedDomains?.map((domain) => (
+                {domainsOwned?.map((domain) => (
                   <DomainCard domain={domain} key={domain} />
                 ))}
               </div>

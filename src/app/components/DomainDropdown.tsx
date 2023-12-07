@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { useFetchTokenizedDomains } from "@/hooks/useFetchTokenizedDomains";
 import { useRouter } from "next/navigation";
 
 const DomainDropdown = ({ currentDomain }: { currentDomain: string }) => {
@@ -15,27 +14,11 @@ const DomainDropdown = ({ currentDomain }: { currentDomain: string }) => {
     connection,
     publicKey
   );
-  const { data: tokenizedDomainsOwned, isLoading: tokenizedDomainsLoading } =
-    useFetchTokenizedDomains(connection, publicKey);
 
   let groupedDomains: { [key: string]: string[] } = {};
 
   if (!domainsLoading && domainsOwned && domainsOwned.length > 0) {
-    let sortedDomains: string[];
-
-    if (
-      !tokenizedDomainsLoading &&
-      tokenizedDomainsOwned &&
-      tokenizedDomainsOwned.length > 0
-    ) {
-      let combinedArray = domainsOwned.concat(tokenizedDomainsOwned);
-      sortedDomains = combinedArray.sort();
-    } else {
-      // Ensuring domainsOwned is an array before spreading
-      sortedDomains = domainsOwned ? [...domainsOwned].sort() : [];
-    }
-
-    groupedDomains = sortedDomains.reduce(
+    groupedDomains = domainsOwned.reduce(
       (acc: { [key: string]: string[] }, domain: string) => {
         const initial = domain[0].toUpperCase();
         if (!acc[initial]) {
