@@ -32,6 +32,7 @@ const Topbar = () => {
     }
   };
 
+  // fixes hydration issue caused by SSR of the WalletButton(s)
   useEffect(() => {
     setIsMounted(true);
   }, []);

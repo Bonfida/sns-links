@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Wallet } from "../Wallet";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
+import Widget from "@bonfida/sns-widget";
+import "@bonfida/sns-widget/style.css";
 
 export const metadata: Metadata = {
   title: "SNS Links",
@@ -19,6 +21,7 @@ export default function RootLayout({
       <body className="bg-gradient-to-t to-[#03001A] from-[#000a1a]">
         <Wallet>
           <Topbar />
+          <Widget endpoint={process.env.NEXT_PUBLIC_ENDPOINT!} />
           {children}
         </Wallet>
         <Footer />
