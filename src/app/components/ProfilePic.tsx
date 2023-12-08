@@ -31,8 +31,8 @@ const ProfilePic = ({ domain }: { domain: string }) => {
   return (
     <div className="relative w-24 overflow-hidden rounded-full">
       <Image
-        width={25}
-        height={25}
+        width={100}
+        height={100}
         src={recordsData?.pic || "/default-profile.svg"}
         className="object-cover w-full h-full"
         alt="Profile"

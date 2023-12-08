@@ -69,10 +69,10 @@ const RecordsTable = ({ domain }: { domain: string }) => {
       <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 max-w-[800px]">
         {selectedDomain || domain ? (
           <>
-            <div className="flex items-center justify-around">
-              <div className="flex flex-col items-center justify-center w-1/4 p-5">
+            <div className="flex flex-col items-center justify-around">
+              <div className="flex items-center justify-center w-full space-x-5 ">
                 <ProfilePic domain={domain} />
-                <h1 className="text-3xl font-bold text-white">
+                <h1 className="text-5xl font-bold text-white">
                   {selectedDomain || domain}.sol
                 </h1>
               </div>

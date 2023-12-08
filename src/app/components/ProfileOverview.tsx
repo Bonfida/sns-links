@@ -14,8 +14,8 @@ const ProfileOverview = () => {
     <div className="flex self-start justify-start items-center space-x-5 ">
       <Image
         src="/default-profile.svg"
-        width={80}
-        height={80}
+        width={100}
+        height={100}
         alt="default pic"
       />
       {!favoriteLoading && favoriteDomain ? (
