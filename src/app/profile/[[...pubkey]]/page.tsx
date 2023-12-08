@@ -40,7 +40,9 @@ const ProfilePage = () => {
             <div className="flex flex-col items-center justify-center">
               <div className="w-3/4">
                 <ProfileOverview />
-                <DomainTable />
+                <div className="">
+                  <DomainTable />
+                </div>
               </div>
             </div>
           ) : (
