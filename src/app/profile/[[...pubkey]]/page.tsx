@@ -9,6 +9,7 @@ import DomainCard from "../../components/DomainCard";
 import ProfileOverview from "../../components/ProfileOverview";
 import NotConnectedModal from "../../components/NotConnectedModal";
 import Loading from "../../components/Loading";
+import DomainTable from "@/app/components/DomainTable";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -39,11 +40,7 @@ const ProfilePage = () => {
             <div className="flex flex-col items-center justify-center">
               <div className="w-3/4">
                 <ProfileOverview />
-              </div>
-              <div className="flex flex-wrap items-center justify-center w-3/4 ">
-                {domainsOwned?.map((domain) => (
-                  <DomainCard domain={domain} key={domain} />
-                ))}
+                <DomainTable />
               </div>
             </div>
           ) : (
