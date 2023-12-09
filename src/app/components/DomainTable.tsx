@@ -1,4 +1,5 @@
-import { useContext } from "react";
+"use client";
+import { useContext, useState, useMemo, Dispatch, SetStateAction } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -6,6 +7,8 @@ import {
   getSortedRowModel,
   createColumnHelper,
   flexRender,
+  getFilteredRowModel,
+  ColumnHelper,
 } from "@tanstack/react-table";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -21,6 +24,7 @@ const DomainTable = () => {
     publicKey
   );
   const router = useRouter();
+  const [search, setSearch] = useState<string>("");
 
   const { setSelectedDomain, selectedDomain } = useContext(
     SelectedDomainContext
@@ -33,37 +37,48 @@ const DomainTable = () => {
     router.push(`/links/${domain}`);
   };
 
-  const columnHelper = createColumnHelper();
+  const columnHelper: ColumnHelper<unknown> = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row, {
       id: "domain",
       header: "Domain",
-      cell: (info) => info.getValue(),
-    }),
-
-    columnHelper.display({
-      id: "actions",
-      header: "View Links",
-      cell: (props) => (
-        <button
-          className="py-1 px-2 bg-blue-600 rounded-xl"
-          onClick={() => {
-            let domain = props.row.getValue("domain");
-            handleClick(domain);
-          }}
-        >
-          View
-        </button>
+      cell: (info) => (
+        <div className="flex flex-col items-center justify-center">
+          <span>{info.getValue() as string}.sol</span>
+          <button
+            onClick={() => handleClick(info.getValue())}
+            className="text-slate-600 mt-2"
+          >
+            View
+          </button>
+        </div>
       ),
     }),
   ];
 
+  const globalFilterFn = (row: any, columnId: any, filterValue: any) => {
+    return row.original.domain
+      .toLowerCase()
+      .includes(filterValue.toLowerCase());
+  };
+  const filterFns = useMemo(
+    () => ({
+      global: globalFilterFn,
+    }),
+    []
+  );
+
   const table = useReactTable({
     data: domainsOwned!,
     columns,
+    filterFns,
+    state: {
+      globalFilter: search,
+    },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   //ToDo update styling, add search and filter
@@ -74,14 +89,15 @@ const DomainTable = () => {
       {domainsLoading ? (
         <Loading />
       ) : (
-        <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 max-w-[800px]">
+        <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 w-[800px]">
+          <Filter search={search} setSearch={setSearch} />
           <table className="z-10 w-full mt-4 text-white items-center justify-center table-fixed">
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
                     <th
-                      className="p-4 w-1/4 text-center rounded-tl-xl rounded-tr-xl text-sm md:text-base bg-[#191C30] "
+                      className="p-4 w-1/4 text-center rounded-tl-xl align-middle rounded-xl text-sm md:text-base bg-[#191C30] "
                       colSpan={header.colSpan}
                       key={header.id}
                     >
@@ -119,3 +135,23 @@ const DomainTable = () => {
 };
 
 export default DomainTable;
+
+const Filter = ({
+  search,
+  setSearch,
+}: {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}) => {
+  return (
+    <div>
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search Domains"
+        className="search-input bg-inherit rounded-xl"
+      />
+    </div>
+  );
+};
