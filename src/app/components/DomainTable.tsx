@@ -66,6 +66,7 @@ const DomainTable = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  //ToDo update styling, add search and filter
   return (
     <div className="relative flex flex-col items-center">
       <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
