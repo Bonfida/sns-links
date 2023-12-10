@@ -11,8 +11,8 @@ export default function MyApp() {
 
   return (
     <section className="flex justify-center w-full min-h-screen py-12 ">
-      <div className="container px-4 md:px-6">
-        <div className="grid items-center gap-6">
+      <div className="container px-4 md:px-6 ">
+        <div className="grid items-center gap-6 ">
           <div className="flex flex-col justify-center space-y-8 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter text-transparent sm:text-5xl xl:text-6xl/none bg-clip-text bg-gradient-to-r from-white to-gray-500">

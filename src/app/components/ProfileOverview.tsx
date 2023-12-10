@@ -2,6 +2,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import Image from "next/image";
 import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
+import Skeleton from "react-loading-skeleton";
 
 const ProfileOverview = () => {
   const { publicKey } = useWallet();
@@ -18,18 +19,20 @@ const ProfileOverview = () => {
         height={100}
         alt="default pic"
       />
-      {!favoriteLoading && favoriteDomain ? (
-        <div className="flex flex-col">
+
+      {!favoriteLoading &&
+        (favoriteDomain ? (
+          <div className="flex flex-col">
+            <h1 className="text-5xl font-semibold text-white">
+              {favoriteDomain}.sol
+            </h1>
+            <h2 className="text-2xl text-slate-400">{abbreviatedPubkey}</h2>
+          </div>
+        ) : (
           <h1 className="text-5xl font-semibold text-white">
-            {favoriteDomain}.sol
+            {abbreviatedPubkey}
           </h1>
-          <h2 className="text-2xl text-slate-400">{abbreviatedPubkey}</h2>
-        </div>
-      ) : (
-        <h1 className="text-5xl font-semibold text-white">
-          {abbreviatedPubkey}
-        </h1>
-      )}
+        ))}
     </div>
   );
 };

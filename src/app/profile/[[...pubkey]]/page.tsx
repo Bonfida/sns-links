@@ -10,6 +10,9 @@ import ProfileOverview from "../../components/ProfileOverview";
 import NotConnectedModal from "../../components/NotConnectedModal";
 import Loading from "../../components/Loading";
 import DomainTable from "@/app/components/DomainTable";
+import Skeleton from "react-loading-skeleton";
+import DomainTableSkeleton from "@/app/components/Skeleton/DomainTableSkeleton";
+import ProfileOverviewSkeleton from "@/app/components/Skeleton/ProfileOverviewSkeleton";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -33,12 +36,23 @@ const ProfilePage = () => {
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">
       {!connected && <NotConnectedModal />}
-      {connected && domainsLoading && <Loading />}
+      {connected && domainsLoading && (
+        <>
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-full">
+              <ProfileOverviewSkeleton />
+              <div className="">
+                <DomainTableSkeleton />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       {connected && !domainsLoading && (
         <>
           {domainsOwned?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
-              <div className="w-3/4">
+              <div className="w-full">
                 <ProfileOverview />
                 <div className="">
                   <DomainTable />
