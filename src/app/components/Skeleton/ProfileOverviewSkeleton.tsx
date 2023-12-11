@@ -1,5 +1,5 @@
 import Skeleton from "react-loading-skeleton";
-
+import "react-loading-skeleton/dist/skeleton.css";
 const ProfileOverviewSkeleton = () => {
   return (
     <div className="flex self-start justify-start items-center space-x-5 rounded-full">

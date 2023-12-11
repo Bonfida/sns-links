@@ -6,6 +6,7 @@ const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
 import { unwrap } from "@/utils/tokenizer/unwrap";
 import { useToastContext } from "@bonfida/components";
 import { makeTx } from "@/utils/makeTx";
+import { Toast } from "@bonfida/components";
 
 const UnwrapModal = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
@@ -18,6 +19,7 @@ const UnwrapModal = ({ domain }: { domain: string }) => {
 
   const handleUnwrapClick = async () => {
     try {
+      closeModal();
       const ix = await unwrap(connection, domain, publicKey!);
 
       const { success, signature } = await makeTx(
@@ -28,8 +30,9 @@ const UnwrapModal = ({ domain }: { domain: string }) => {
         toast
       );
 
-      closeModal();
-      toast.success("Unwrapped successfully!");
+      if (success) {
+        toast.success("Unwrapped successfully!");
+      }
     } catch (error) {
       console.log("error", error);
     }

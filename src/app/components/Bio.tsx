@@ -1,20 +1,28 @@
 import { useState, useEffect } from "react";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { updateRecord } from "@/utils/update-record/update-record";
 import { useToastContext } from "@bonfida/components";
 import { Record } from "@bonfida/spl-name-service";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
+import { useDomainsInfo } from "@/hooks/useDomainsInfo";
+import { updateBio } from "../../utils/update-record/update-bio";
 
 const Bio = ({ domain }: { domain: string }) => {
+  const { data: domainInfo, keys } = useDomainsInfo([domain]);
+  const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
   const { connection } = useConnection();
   const { toast } = useToastContext();
-  const { publicKey, signTransaction, signMessage, connected } = useWallet();
-  const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
-    connection,
-    domain
-  );
+  const { publicKey, signAllTransactions, signMessage, connected } =
+    useWallet();
+
+  const content =
+    domainKey &&
+    domainInfo
+      ?.get(domainKey.toBase58())
+      ?.data?.toString()
+      .trimStart()
+      .trimEnd();
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
@@ -27,10 +35,10 @@ const Bio = ({ domain }: { domain: string }) => {
   const bioPlaceholder = !connected ? "My bio..." : "Add a bio...";
 
   useEffect(() => {
-    if (!recordsLoading && recordsData?.bio) {
-      setBioText(recordsData?.bio);
+    if (content) {
+      setBioText(content);
     }
-  }, [recordsData]);
+  }, [domainInfo]);
 
   const toggleEdit = () => {
     setEditMode(!editMode);
@@ -39,21 +47,21 @@ const Bio = ({ domain }: { domain: string }) => {
     }
   };
 
-  function handleSubmit() {
+  console.log("bioText", bioText);
+
+  const handleSubmit = () => {
     if (editMode) {
-      updateRecord(
+      updateBio(
         connection,
-        Record.TXT,
+        publicKey!,
         domain,
         bioText,
-        publicKey,
-        signTransaction!,
-        signMessage!,
+        signAllTransactions!,
         toast
       );
       setRefresh(true);
     }
-  }
+  };
 
   return (
     <form method="post" className="flex flex-col mt-6">

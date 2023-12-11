@@ -13,20 +13,17 @@ export const useFetchRecords = (connection: Connection, domain: string) => {
     );
 
     let picRecord: string | undefined;
-    let bio: string | undefined;
     const otherRecords: { [key in Record]?: string } = {};
 
     fetchedRecords.forEach((value, index) => {
       const key = recordsToFetch[index];
       if (key === Record.Pic) {
         picRecord = value;
-      } else if (key === Record.TXT) {
-        bio = value;
       } else {
         otherRecords[key] = value;
       }
     });
-    return { pic: picRecord, records: otherRecords, bio };
+    return { pic: picRecord, records: otherRecords };
   };
 
   return useQuery({ queryKey: ["records", domain], queryFn: fetchRecords });

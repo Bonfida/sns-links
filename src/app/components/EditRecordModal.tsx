@@ -93,11 +93,11 @@ const EditRecordModal = ({
             className="bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg p-5 mt-10 md:mt-0"
             onClick={(e) => e.stopPropagation()}
           >
-            <h1 className="text-xl text-white font-azeret">
+            <h2 className="text-xl text-white font-azeret">
               {`Edit ${
                 recordName.charAt(0).toUpperCase() + recordName.slice(1)
               } record`}
-            </h1>
+            </h2>
             <div className="bg-gradient-to-r from-transparent to-transparent via-[#7C7CFF] w-full h-[1px] my-5" />
             <input
               className="bg-[#03001A] text-white h-[64px] w-full text-center border border-[#2A2A51] rounded-lg"

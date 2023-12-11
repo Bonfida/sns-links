@@ -14,9 +14,9 @@ const PurchaseModal = () => {
   return (
     <>
       <div className="bg-bds-dark-blues-DB900 items-center justify-center rounded-[24px] border-[1px] border-bds-dark-blues-DB600 max-w-[400px] flex flex-col px-10 py-10 space-y-5">
-        <h1 className="text-center text-white font-azeret">
+        <h2 className="text-center text-white font-azeret">
           Click below to get started!
-        </h1>
+        </h2>
         <Widget
           connection={connection}
           isDark={true}
