@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center w-full p-4">
-      <div className="flex items-center justify-center space-x-4">
+    <footer className="flex flex-col md:items-center items-start justify-center w-screen p-4 pt-10">
+      <div className="flex md:flex-row flex-col items-center justify-center space-x-4 flex-wrap">
         <a
           className="text-xs text-white md:text-base"
           href="https://www.sns.id/listings"

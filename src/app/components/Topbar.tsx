@@ -42,48 +42,35 @@ const Topbar = () => {
   }
 
   return (
-    <div className="flex items-center justify-center w-screen md:h-20 h-14">
-      <div className="flex items-center justify-between w-full md:w-3/4 md:h-20 h-14">
-        {/* <div className="flex items-center space-x-10"> */}
-        <Link href="/" className="flex items-center justify-center w-1/4">
+    <div className="flex items-center justify-center w-screen md:h-20 h-14 py-20 md:py-10 ">
+      <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-3/4 md:h-20 h-14">
+        <Link href="/" className="flex items-center justify-center md:w-1/4">
           <Image
             width={80}
             height={80}
             src="/white-logo.svg"
-            className="p-5"
+            className="p-2"
             alt="SNS Links Logo"
           />
-          <span className="text-lg font-bold text-white md:text-2xl">
+
+          <span className="text-xl font-bold text-white md:text-2xl md:inline-block hidden">
             SNS Links
           </span>
         </Link>
-        <NavigationMenu.Root className="flex justify-center w-1/2 pr-6 font-semibold">
+        <NavigationMenu.Root className="flex justify-center md:w-1/2 font-semibold w-full">
           <NavigationMenu.Link
-            className="text-xl text-white hover:cursor-pointer font-azeret"
+            className="md:text-xl text-2xl text-white hover:cursor-pointer font-azeret"
             onClick={handleProfileClick}
           >
             Profile
           </NavigationMenu.Link>
-          {/* <NavigationMenu.Link
-            className="text-2xl font-semibold text-white"
-            href="https://github.com/radix-ui"
-          >
-            Links
-          </NavigationMenu.Link> */}
-          {/* <NavigationMenu.Link
-            className="text-xl text-white hover:cursor-pointer font-azeret"
-            onClick={handlePurchaseClick}
-          >
-            Purchase
-          </NavigationMenu.Link> */}
         </NavigationMenu.Root>
-        {/* </div> */}
 
-        <div className="w-1/4">
+        <div className="md:w-1/4  ">
           {connected && publicKey ? (
-            <WalletDisconnectButton />
+            <WalletDisconnectButton className="wallet-button" />
           ) : (
-            <WalletMultiButton />
+            <WalletMultiButton className="wallet-button" />
           )}
         </div>
       </div>

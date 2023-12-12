@@ -12,7 +12,7 @@ const ProfileOverview = () => {
     useFetchFavoriteDomain(connection, publicKey!);
 
   return (
-    <div className="flex self-start justify-start items-center space-x-5 ">
+    <div className="flex self-start justify-start items-center space-x-5">
       <Image
         src="/default-profile.svg"
         width={100}
@@ -23,13 +23,15 @@ const ProfileOverview = () => {
       {!favoriteLoading &&
         (favoriteDomain ? (
           <div className="flex flex-col">
-            <h1 className="text-5xl font-semibold text-white">
+            <h1 className="md:text-5xl text-3xl font-semibold text-white">
               {favoriteDomain}.sol
             </h1>
-            <h2 className="text-2xl text-slate-400">{abbreviatedPubkey}</h2>
+            <h2 className="md:text-2xl text-xl text-slate-400">
+              {abbreviatedPubkey}
+            </h2>
           </div>
         ) : (
-          <h1 className="text-5xl font-semibold text-white">
+          <h1 className="md:text-5xl text-3xl font-semibold text-white">
             {abbreviatedPubkey}
           </h1>
         ))}

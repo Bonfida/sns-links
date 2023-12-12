@@ -38,7 +38,7 @@ const DomainDropdown = ({ currentDomain }: { currentDomain: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-center flex-grow mt-20 space-y-5 md:justify-start md:mt-0">
+    <div className="flex flex-col items-center flex-grow mt-5 space-y-5 md:justify-start md:mt-0">
       <div className="form-control w-full  relative mt-1 p-[2px]">
         <div className="relative z-10 rounded-xl">
           <select

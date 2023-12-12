@@ -63,15 +63,15 @@ const RecordsTable = ({ domain }: { domain: string }) => {
 
   return (
     <div className="relative flex flex-col items-center">
-      <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
-      <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
-      <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 max-w-[800px]">
+      <div className="md:w-[200px] md:h-[200px] w-[0px] h-[0px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
+      <div className="md:w-[200px] md:h-[200px] w-[0px] h-[0px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
+      <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10 mt-10 md:w-[800px] sm:w-[550px] w-[350px]">
         {selectedDomain || domain ? (
           <>
             <div className="flex flex-col items-center justify-around">
               <div className="flex items-center justify-center w-full space-x-5 ">
                 <ProfilePic domain={domain} />
-                <h1 className="text-5xl font-bold text-white">
+                <h1 className="md:text-5xl text-3xl font-bold text-white">
                   {selectedDomain || domain}.sol
                 </h1>
               </div>
@@ -80,8 +80,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
           </>
         ) : null}
         {isOwner && (
-          <div className="flex items-end justify-between flex-grow w-full p-5 space-x-3">
-            {/* <div className="w-24 h-24 rounded-full bg-gradient-radial"></div> */}
+          <div className="flex items-end justify-between flex-grow w-full md:p-5 space-x-3">
             <DomainDropdown currentDomain={domain} />
             <LinkShareButton domain={domain} />
           </div>

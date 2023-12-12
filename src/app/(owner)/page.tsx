@@ -10,15 +10,15 @@ export default function MyApp() {
   const { connected, publicKey } = useWallet();
 
   return (
-    <section className="flex justify-center w-full min-h-screen py-12 ">
+    <section className="flex justify-center w-screen min-h-screen md:py-12 py-24">
       <div className="container px-4 md:px-6 ">
-        <div className="grid items-center gap-6 ">
+        <div className="md:grid flex justify-center items-center gap-6 w-full ">
           <div className="flex flex-col justify-center space-y-8 text-center">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter text-transparent sm:text-5xl xl:text-6xl/none bg-clip-text bg-gradient-to-r from-white to-gray-500">
+              <h1 className=" font-bold tracking-tighter text-transparent text-5xl xl:text-6xl/none bg-clip-text bg-gradient-to-r from-white to-gray-500">
                 Your links on chain.
               </h1>
-              <p className="max-w-[600px] text-zinc-200 md:text-xl dark:text-zinc-100 mx-auto">
+              <p className="max-w-[600px] text-zinc-200 md:text-xl sm:tex-lg text-sm dark:text-zinc-100 mx-auto">
                 Upload all of your platform links using SNS links and share
                 easily with friends. Your .sol domain now holds the key to
                 sharing your brand accross the web.
@@ -30,8 +30,10 @@ export default function MyApp() {
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconInbox className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Brand</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">
+                  <h2 className="md:text-xl text-lg font-bold text-white">
+                    Brand
+                  </h2>
+                  <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
                     Your on chain identity
                   </p>
                 </div>
@@ -39,8 +41,10 @@ export default function MyApp() {
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconIntegration className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Share</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">
+                  <h2 className="md:text-xl text-lg font-bold text-white">
+                    Share
+                  </h2>
+                  <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
                     Share all your links with ease
                   </p>
                 </div>
@@ -48,8 +52,10 @@ export default function MyApp() {
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconCustomization className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Verify</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">
+                  <h2 className="md:text-xl text-lg font-bold text-white">
+                    Verify
+                  </h2>
+                  <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
                     Peace of mind with verified links
                   </p>
                 </div>
@@ -57,8 +63,10 @@ export default function MyApp() {
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconSearch className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Standout</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">
+                  <h2 className="md:text-xl text-lg font-bold text-white">
+                    Standout
+                  </h2>
+                  <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
                     Set up a profile that stands out
                   </p>
                 </div>
@@ -66,15 +74,21 @@ export default function MyApp() {
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconSecurity className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Integrate</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">BINGBONG</p>
+                  <h2 className="md:text-xl text-lg font-bold text-white">
+                    Integrate
+                  </h2>
+                  <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
+                    BINGBONG
+                  </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">
                   <div className="p-2 bg-black bg-opacity-50 rounded-full">
                     <IconCollaboration className="w-6 h-6 mb-2 text-white opacity-75" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">OPOS</h2>
-                  <p className="text-zinc-200 dark:text-zinc-100">
+                  <h2 className="md:text-xl text-lg font-bold text-white">
+                    OPOS
+                  </h2>
+                  <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
                     Made easy thanks to Solana
                   </p>
                 </div>

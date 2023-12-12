@@ -83,13 +83,13 @@ const DomainTable = () => {
 
   //ToDo update styling, add search and filter
   return (
-    <div className="relative flex flex-col items-center">
-      <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
-      <div className="w-[200px] h-[200px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
+    <div className="relative flex flex-col items-center ">
+      <div className="md:w-[200px] md:h-[200px] w-[75px] h-[75px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
+      <div className="md:w-[200px] md:h-[200px] w-[75px] h-[75px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
       {domainsLoading ? (
         <Loading />
       ) : (
-        <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  md:mt-10 mt-28 w-[800px]">
+        <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  mt-10 md:w-[800px] sm:w-[500px] w-[350px]">
           <Filter search={search} setSearch={setSearch} />
           <table className="z-10 w-full mt-4 text-white items-center justify-center table-fixed">
             <thead>
@@ -97,7 +97,7 @@ const DomainTable = () => {
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
                     <th
-                      className="p-4 w-1/4 text-center rounded-tl-xl align-middle rounded-xl text-sm md:text-base bg-[#191C30] "
+                      className="p-4 w-1/4 text-center rounded-tl-xl align-middle rounded-xl text-lg md:text-base bg-[#191C30] "
                       colSpan={header.colSpan}
                       key={header.id}
                     >
@@ -116,7 +116,7 @@ const DomainTable = () => {
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-xs md:text-base text-center font-semibold"
+                      className="justify-center border-b-[1px] border-white border-opacity-20 items-center p-4 text-sm md:text-base text-center font-semibold"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

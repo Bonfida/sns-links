@@ -62,7 +62,10 @@ const Bio = ({ domain }: { domain: string }) => {
   };
 
   return (
-    <form method="post" className="flex flex-col mt-6">
+    <form
+      method="post"
+      className="flex flex-col md:w-[420px] w-[300px] mt-6 overflow-y-auto no-scrollbar "
+    >
       <textarea
         name="postContent"
         placeholder={bioPlaceholder}
