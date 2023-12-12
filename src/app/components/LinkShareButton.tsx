@@ -30,7 +30,7 @@ const LinkShareButton = ({ domain }: { domain: string }) => {
       >
         <Image
           src="/share-link/share.svg"
-          height={40}
+          height={48}
           width={40}
           alt={"share link"}
           className=""
