@@ -12,20 +12,26 @@ const LinkShareButton = ({ domain }: { domain: string }) => {
   }, [selectedDomain, domain]);
 
   const handleShareClick = () => {
-    if (!selectedDomain || !domain) {
+    if (!selectedDomain && !domain) {
       setErrorMessage("No domain selected. Please select a domain to share.");
       return;
     }
-    navigator.clipboard.writeText(
-      `localhost:3000/user/${selectedDomain || domain}`
-    );
+
+    navigator.clipboard
+      .writeText(`localhost:3000/user/${selectedDomain || domain}`)
+      .then(() => {
+        console.log("Link copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy link: ", err);
+        setErrorMessage("Failed to copy link.");
+      });
   };
 
   return (
     <>
       <button
-        // className="rounded-lg border-white md:py-4 md:px-4 py-2 px-2 bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] active:translate-y-1 transition-all text-sm text-[#03001A]"
-
+        className=" active:translate-y-1 transition-all"
         onClick={handleShareClick}
       >
         <Image

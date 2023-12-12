@@ -1,9 +1,11 @@
 "use client";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { useFetchRecords } from "../../../hooks/useFetchRecords";
+import { useFetchRecords } from "../../../../hooks/useFetchRecords";
 import LinkButton from "@/app/components/LinkButton";
 import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
+import Footer from "@/app/components/Footer";
+import { useEffect, useState } from "react";
 
 type UserPageParams = {
   domain: string;
@@ -13,9 +15,18 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
   const { connection } = useConnection();
   const domain = params.domain;
   const { data, isLoading } = useFetchRecords(connection, domain);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <div className="flex flex-col items-center justify-start w-screen h-screen mt-10">
+    <div className="flex flex-col items-center justify-start w-screen h-screen ]">
       <div className="flex flex-col items-center space-y-1">
         {isLoading ? (
           <GenericLoading className="w-[100px] h-[100px] rounded-full" />
