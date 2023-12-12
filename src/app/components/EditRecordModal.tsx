@@ -14,7 +14,6 @@ const EditRecordModal = ({
   setIsEditingRecord: (isEditing: boolean) => void;
   setIsEditingPic: (isEditing: boolean) => void;
 }) => {
-  console.log("RecordName: ", recordName);
   const [recordVal, setRecordVal] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(true);
   const { selectedDomain } = useContext(SelectedDomainContext);

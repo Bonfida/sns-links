@@ -17,15 +17,9 @@ const LinkShareButton = ({ domain }: { domain: string }) => {
       return;
     }
 
-    navigator.clipboard
-      .writeText(`localhost:3000/user/${selectedDomain || domain}`)
-      .then(() => {
-        console.log("Link copied to clipboard!");
-      })
-      .catch((err) => {
-        console.error("Failed to copy link: ", err);
-        setErrorMessage("Failed to copy link.");
-      });
+    navigator.clipboard.writeText(
+      `localhost:3000/user/${selectedDomain || domain}`
+    );
   };
 
   return (

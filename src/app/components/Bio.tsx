@@ -47,8 +47,6 @@ const Bio = ({ domain }: { domain: string }) => {
     }
   };
 
-  console.log("bioText", bioText);
-
   const handleSubmit = () => {
     if (editMode) {
       updateBio(

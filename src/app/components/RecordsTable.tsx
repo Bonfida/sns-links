@@ -39,7 +39,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
 
   const handleEdit = async (recordName: Record) => {
     const isToken = await isTokenized(currentDomain!, connection, publicKey!);
-    console.log("isToken", isToken);
 
     if (!isEditingRecord) {
       setIsEditingRecord(true);
