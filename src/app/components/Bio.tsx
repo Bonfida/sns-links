@@ -99,9 +99,7 @@ const Bio = ({ domain }: { domain: string }) => {
           )}
         </div>
       )}
-      {bioEditMode && isToken && (
-        <UnwrapModal domain={domain} setEditMode={setBioEditMode} />
-      )}
+      {bioEditMode && isToken && <UnwrapModal domain={domain} />}
     </form>
   );
 };

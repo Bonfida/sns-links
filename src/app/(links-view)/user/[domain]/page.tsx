@@ -6,6 +6,7 @@ import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
 import Footer from "@/app/components/Footer";
 import { useEffect, useState } from "react";
+import NoLinksFoundModal from "@/app/components/NoLinksFoundModal";
 
 type UserPageParams = {
   domain: string;
@@ -14,8 +15,15 @@ type UserPageParams = {
 const UserPage = ({ params }: { params: UserPageParams }) => {
   const { connection } = useConnection();
   const domain = params.domain;
-  const { data, isLoading } = useFetchRecords(connection, domain);
+  const { data: recordsData, isLoading } = useFetchRecords(connection, domain);
   const [isMounted, setIsMounted] = useState(false);
+  let recordsExist;
+
+  if (!isLoading) {
+    recordsExist = Object.values(recordsData!.records).every(
+      (el) => el !== undefined
+    );
+  }
 
   useEffect(() => {
     setIsMounted(true);
@@ -35,7 +43,7 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
             alt=""
             width={50}
             height={50}
-            src={data?.pic ?? "/default-profile.svg"}
+            src={recordsData?.pic ?? "/default-profile.svg"}
             className="rounded-full w-28"
           />
         )}
@@ -55,14 +63,16 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
         </div>
       ) : (
         <div className="flex flex-col mt-10 space-y-3">
-          {data?.records
-            ? Object.entries(data.records).map(([key, value]) => {
-                if (value !== undefined) {
-                  return <LinkButton key={key} name={key} value={value} />;
-                }
-                return null;
-              })
-            : null}
+          {recordsExist ? (
+            Object.entries(recordsData!.records).map(([key, value]) => {
+              if (value !== undefined) {
+                return <LinkButton key={key} name={key} value={value} />;
+              }
+              return null;
+            })
+          ) : (
+            <NoLinksFoundModal />
+          )}
         </div>
       )}
     </div>
