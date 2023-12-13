@@ -1,14 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { useFetchDomains } from "@/hooks/useFetchDomains";
 
 export default function MyApp() {
-  const router = useRouter();
-  const { connection } = useConnection();
-  const { connected, publicKey } = useWallet();
-
   return (
     <section className="flex justify-center w-screen min-h-screen md:py-12 py-24">
       <div className="container px-4 md:px-6 ">

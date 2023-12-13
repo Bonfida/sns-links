@@ -57,7 +57,7 @@ const Topbar = () => {
             SNS Links
           </span>
         </Link>
-        <NavigationMenu.Root className="flex justify-center md:w-1/2 font-semibold w-full">
+        <NavigationMenu.Root className="flex justify-center md:w-1/2 font-semibold w-full flex-1">
           <NavigationMenu.Link
             className="md:text-xl text-2xl text-white hover:cursor-pointer font-azeret"
             onClick={handleProfileClick}

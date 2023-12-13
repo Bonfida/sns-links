@@ -8,13 +8,20 @@ import { useToastContext } from "@bonfida/components";
 import { makeTx } from "@/utils/makeTx";
 import { Toast } from "@bonfida/components";
 
-const UnwrapModal = ({ domain }: { domain: string }) => {
+const UnwrapModal = ({
+  domain,
+  setEditMode,
+}: {
+  domain: string;
+  setEditMode: (editMode: boolean) => void;
+}) => {
   const { connection } = useConnection();
   const { publicKey, signTransaction } = useWallet();
   const { toast } = useToastContext();
   const [isModalVisible, setIsModalVisible] = useState(true);
   const closeModal = () => {
     setIsModalVisible(false);
+    setEditMode(false);
   };
 
   const handleUnwrapClick = async () => {
