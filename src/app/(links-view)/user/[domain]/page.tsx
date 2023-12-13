@@ -20,9 +20,10 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
   let recordsExist;
 
   if (!isLoading) {
-    recordsExist = Object.values(recordsData!.records).every(
+    recordsExist = Object.values(recordsData!.records).some(
       (el) => el !== undefined
     );
+    console.log("recordsExist", recordsExist, "recordsData", recordsData);
   }
 
   useEffect(() => {
