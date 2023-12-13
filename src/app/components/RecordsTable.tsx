@@ -29,7 +29,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
-    selectedDomain
+    selectedDomain || domain
   );
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
@@ -139,6 +139,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             recordName={editingRecordName}
             setIsEditingPic={setIsEditingPic}
             setIsEditingRecord={setIsEditingRecord}
+            domain={domain}
           />
         ))}
     </div>

@@ -8,20 +8,13 @@ import { useToastContext } from "@bonfida/components";
 import { makeTx } from "@/utils/makeTx";
 import { Toast } from "@bonfida/components";
 
-const UnwrapModal = ({
-  domain,
-  setEditMode,
-}: {
-  domain: string;
-  setEditMode: (editMode: boolean) => void;
-}) => {
+const UnwrapModal = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
   const { publicKey, signTransaction } = useWallet();
   const { toast } = useToastContext();
   const [isModalVisible, setIsModalVisible] = useState(true);
   const closeModal = () => {
     setIsModalVisible(false);
-    setEditMode(false);
   };
 
   const handleUnwrapClick = async () => {
@@ -67,13 +60,13 @@ const UnwrapModal = ({
             <div className="flex flex-col items-center justify-center w-full space-y-4">
               <div className="flex items-center justify-between w-full mt-10 space-x-4">
                 <button
-                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret bg-[#7C7CFF]"
+                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white bg-[#7C7CFF]"
                   onClick={handleUnwrapClick}
                 >
                   Unwrap
                 </button>
                 <button
-                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
+                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white"
                   onClick={closeModal}
                 >
                   Cancel

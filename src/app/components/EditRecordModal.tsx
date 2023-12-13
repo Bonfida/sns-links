@@ -4,13 +4,16 @@ import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
 import { updateRecord } from "../../utils/update-record/update-record";
+import { isTokenized } from "../../utils/tokenizer/isTokenized";
 
 const EditRecordModal = ({
   recordName,
+  domain,
   setIsEditingRecord,
   setIsEditingPic,
 }: {
   recordName: Record;
+  domain: string;
   setIsEditingRecord: (isEditing: boolean) => void;
   setIsEditingPic: (isEditing: boolean) => void;
 }) => {
@@ -36,7 +39,7 @@ const EditRecordModal = ({
       await updateRecord(
         connection,
         recordName,
-        selectedDomain,
+        selectedDomain || domain,
         recordVal,
         publicKey,
         signTransaction!,
@@ -63,7 +66,7 @@ const EditRecordModal = ({
       await updateRecord(
         connection,
         recordName,
-        selectedDomain,
+        selectedDomain || domain,
         "",
         publicKey,
         signTransaction!,
@@ -108,7 +111,7 @@ const EditRecordModal = ({
             <div className="flex flex-col items-center justify-center w-full space-y-4">
               <div className="flex items-center justify-between w-full mt-10 space-x-4">
                 <button
-                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
+                  className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white bg-[#7C7CFF]"
                   onClick={() => {
                     handleUpdateClick(recordName, selectedDomain, recordVal);
                   }}
