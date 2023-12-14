@@ -8,6 +8,7 @@ import Footer from "@/app/components/Footer";
 import { useEffect, useState } from "react";
 import NoLinksFoundModal from "@/app/components/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
+import CreateYourOwnButton from "@/app/components/CreateYourOwn";
 
 type UserPageParams = {
   domain: string;
@@ -87,6 +88,9 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
           )}
         </div>
       )}
+      {/* Spacer to push the button to the bottom */}
+      <div className="flex-grow"></div>
+      <CreateYourOwnButton />
     </div>
   );
 };
