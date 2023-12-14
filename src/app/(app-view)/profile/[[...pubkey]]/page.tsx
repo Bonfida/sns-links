@@ -60,7 +60,7 @@ const ProfilePage = () => {
                 <ProfileOverview
                   favoriteDomain={favoriteDomain}
                   favoriteLoading={favoriteLoading}
-                  publicKey={publicKey}
+                  publicKey={publicKey!}
                 />
                 <div className="">
                   <DomainTable />

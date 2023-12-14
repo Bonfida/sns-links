@@ -3,8 +3,17 @@ import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import Image from "next/image";
 import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import Skeleton from "react-loading-skeleton";
+import { PublicKey } from "@solana/web3.js";
 
-const ProfileOverview = ({ favoriteDomain, favoriteLoading, publicKey }) => {
+const ProfileOverview = ({
+  favoriteDomain,
+  favoriteLoading,
+  publicKey,
+}: {
+  favoriteDomain: string | undefined;
+  favoriteLoading?: boolean;
+  publicKey: PublicKey;
+}) => {
   const abbreviatedPubkey = abbreviatePubkey(publicKey);
   return (
     <div className="flex self-start justify-start items-center space-x-5">

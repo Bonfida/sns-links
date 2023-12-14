@@ -61,6 +61,7 @@ export const updateBio = async (
         publicKey,
         pubkey,
         publicKey,
+        //@ts-ignore
         new Numberu32(buffer.length)
       );
       transactions.push(new Transaction().add(ix));
@@ -70,6 +71,7 @@ export const updateBio = async (
       const ix = updateInstruction(
         NAME_PROGRAM_ID,
         pubkey,
+        //@ts-ignore
         new Numberu32(i * max_buf),
         buffer.slice(max_buf * i, max_buf * (1 + i)),
         publicKey
