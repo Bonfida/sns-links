@@ -14,7 +14,15 @@ import UnwrapModal from "./UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import Bio from "../components/Bio";
 
-const RecordsTable = ({ domain }: { domain: string }) => {
+const RecordsTable = ({
+  domain,
+  recordsData,
+  recordsLoading,
+}: {
+  domain: string;
+  recordsData: any;
+  recordsLoading: boolean;
+}) => {
   const { connection } = useConnection();
   const [isEditingRecord, setIsEditingRecord] = useState<boolean>(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
@@ -27,10 +35,10 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   const currentDomain = selectedDomain || domain;
   const [isToken, setIsToken] = useState(false);
 
-  const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
-    connection,
-    selectedDomain || domain
-  );
+  // const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
+  //   connection,
+  //   selectedDomain || domain
+  // );
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
