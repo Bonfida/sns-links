@@ -4,13 +4,8 @@ import Image from "next/image";
 import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import Skeleton from "react-loading-skeleton";
 
-const ProfileOverview = () => {
-  const { publicKey } = useWallet();
-  const { connection } = useConnection();
+const ProfileOverview = ({ favoriteDomain, favoriteLoading, publicKey }) => {
   const abbreviatedPubkey = abbreviatePubkey(publicKey);
-  const { data: favoriteDomain, isLoading: favoriteLoading } =
-    useFetchFavoriteDomain(connection, publicKey!);
-
   return (
     <div className="flex self-start justify-start items-center space-x-5">
       <Image
@@ -20,21 +15,20 @@ const ProfileOverview = () => {
         alt="default pic"
       />
 
-      {!favoriteLoading &&
-        (favoriteDomain ? (
-          <div className="flex flex-col">
-            <h1 className="md:text-5xl text-3xl font-semibold text-white">
-              {favoriteDomain}.sol
-            </h1>
-            <h2 className="md:text-2xl text-xl text-slate-400">
-              {abbreviatedPubkey}
-            </h2>
-          </div>
-        ) : (
+      {favoriteDomain ? (
+        <div className="flex flex-col">
           <h1 className="md:text-5xl text-3xl font-semibold text-white">
-            {abbreviatedPubkey}
+            {favoriteDomain}.sol
           </h1>
-        ))}
+          <h2 className="md:text-2xl text-xl text-slate-400">
+            {abbreviatedPubkey}
+          </h2>
+        </div>
+      ) : (
+        <h1 className="md:text-5xl text-3xl font-semibold text-white">
+          {abbreviatedPubkey}
+        </h1>
+      )}
     </div>
   );
 };

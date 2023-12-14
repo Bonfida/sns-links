@@ -61,6 +61,7 @@ const ProfilePic = ({ domain }: { domain: string }) => {
           recordName={Record.Pic}
           setIsEditingRecord={setIsEditingRecord}
           setIsEditingPic={setIsEditingPic}
+          domain={domain}
         />
       )}
     </div>

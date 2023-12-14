@@ -13,6 +13,7 @@ import { isTokenized } from "../../utils/tokenizer/isTokenized";
 import UnwrapModal from "./UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import Bio from "../components/Bio";
+import { RecordsData } from "../types/RecordsData";
 
 const RecordsTable = ({
   domain,
@@ -20,7 +21,7 @@ const RecordsTable = ({
   recordsLoading,
 }: {
   domain: string;
-  recordsData: any;
+  recordsData: RecordsData | undefined;
   recordsLoading: boolean;
 }) => {
   const { connection } = useConnection();
@@ -34,11 +35,6 @@ const RecordsTable = ({
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
   const [isToken, setIsToken] = useState(false);
-
-  // const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
-  //   connection,
-  //   selectedDomain || domain
-  // );
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
@@ -118,7 +114,7 @@ const RecordsTable = ({
                           recordName.slice(1)}
                       </td>
                       <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 py-2 text-xs overflow-x-auto no-scrollbar md:text-base text-center font-semibold">
-                        {recordValue}
+                        {recordValue as string}
                       </td>
                       <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
                         {isOwner && !ownerLoading && (

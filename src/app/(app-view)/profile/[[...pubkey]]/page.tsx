@@ -13,6 +13,7 @@ import DomainTable from "@/app/components/DomainTable";
 import Skeleton from "react-loading-skeleton";
 import DomainTableSkeleton from "@/app/components/Skeleton/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "@/app/components/Skeleton/ProfileOverviewSkeleton";
+import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -23,6 +24,8 @@ const ProfilePage = () => {
     connection,
     publicKey
   );
+  const { data: favoriteDomain, isLoading: favoriteLoading } =
+    useFetchFavoriteDomain(connection, publicKey!);
 
   useEffect(() => {
     if (!publicKey) {
@@ -36,7 +39,8 @@ const ProfilePage = () => {
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">
       {!connected && <NotConnectedModal />}
-      {connected && domainsLoading && (
+      {/* favorite takes longer to fetch, base skeleton conditional on this */}
+      {connected && favoriteLoading && (
         <>
           <div className="flex flex-col items-center justify-center">
             <div className="w-full">
@@ -48,12 +52,16 @@ const ProfilePage = () => {
           </div>
         </>
       )}
-      {connected && !domainsLoading && (
+      {connected && !favoriteLoading && (
         <>
           {domainsOwned?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
               <div className="w-full">
-                <ProfileOverview />
+                <ProfileOverview
+                  favoriteDomain={favoriteDomain}
+                  favoriteLoading={favoriteLoading}
+                  publicKey={publicKey}
+                />
                 <div className="">
                   <DomainTable />
                 </div>
