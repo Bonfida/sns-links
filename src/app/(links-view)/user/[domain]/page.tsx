@@ -7,6 +7,7 @@ import { GenericLoading } from "@bonfida/components";
 import Footer from "@/app/components/Footer";
 import { useEffect, useState } from "react";
 import NoLinksFoundModal from "@/app/components/NoLinksFoundModal";
+import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 
 type UserPageParams = {
   domain: string;
@@ -17,13 +18,22 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
   const domain = params.domain;
   const { data: recordsData, isLoading } = useFetchRecords(connection, domain);
   const [isMounted, setIsMounted] = useState(false);
+  const { data: domainInfo, keys } = useDomainsInfo([domain]);
+  const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
   let recordsExist;
+
+  const content =
+    domainKey &&
+    domainInfo
+      ?.get(domainKey.toBase58())
+      ?.data?.toString()
+      .trimStart()
+      .trimEnd();
 
   if (!isLoading) {
     recordsExist = Object.values(recordsData!.records).some(
       (el) => el !== undefined
     );
-    console.log("recordsExist", recordsExist, "recordsData", recordsData);
   }
 
   useEffect(() => {
@@ -35,7 +45,7 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-start w-screen h-screen ]">
+    <div className="flex flex-col items-center justify-start w-screen h-screen p-10">
       <div className="flex flex-col items-center space-y-1">
         {isLoading ? (
           <GenericLoading className="w-[100px] h-[100px] rounded-full" />
@@ -49,6 +59,7 @@ const UserPage = ({ params }: { params: UserPageParams }) => {
           />
         )}
         <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
+        <span>{content}</span>
       </div>
 
       {isLoading ? (

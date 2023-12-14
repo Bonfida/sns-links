@@ -18,6 +18,10 @@ const Bio = ({ domain }: { domain: string }) => {
   const [isToken, setIsToken] = useState(false);
   const { publicKey, signAllTransactions, signMessage, connected } =
     useWallet();
+  const [bioEditMode, setBioEditMode] = useState(false);
+  const [bioText, setBioText] = useState("");
+  const [refresh, setRefresh] = useState(false);
+  const bioPlaceholder = !connected ? "My bio..." : "Add a bio...";
 
   const content =
     domainKey &&
@@ -32,11 +36,6 @@ const Bio = ({ domain }: { domain: string }) => {
     domain
   );
 
-  const [bioEditMode, setBioEditMode] = useState(false);
-  const [bioText, setBioText] = useState("");
-  const [refresh, setRefresh] = useState(false);
-  const bioPlaceholder = !connected ? "My bio..." : "Add a bio...";
-
   useEffect(() => {
     if (content) {
       setBioText(content);
@@ -46,7 +45,7 @@ const Bio = ({ domain }: { domain: string }) => {
   const toggleEdit = async () => {
     const isToken = await isTokenized(domain!, connection, publicKey!);
     if (!bioEditMode) {
-      setBioEditMode(true); // Enable edit mode if it's not already enabled
+      setBioEditMode(true);
     }
     if (isToken) {
       setIsToken(true);
