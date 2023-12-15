@@ -1,7 +1,6 @@
 "use client";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import EditRecordModal from "./EditRecordModal";
 import SelectedDomainContext from "@/context/selectedDomain";
 
 const DomainCard = ({ domain }: { domain: string }) => {

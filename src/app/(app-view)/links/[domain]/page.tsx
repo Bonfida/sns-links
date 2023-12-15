@@ -1,10 +1,8 @@
 "use client";
 import RecordsTable from "@/app/components/RecordsTable";
-import LinkButton from "@/app/components/LinkButton";
-import Image from "next/image";
 import RecordsTableSkeleton from "@/app/components/Skeleton/RecordsTableSkeleton";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useConnection } from "@solana/wallet-adapter-react";
 
 type DomainLinksPageParams = {
   domain: string;

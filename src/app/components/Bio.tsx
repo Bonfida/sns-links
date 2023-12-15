@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { updateRecord } from "@/utils/update-record/update-record";
 import { useToastContext } from "@bonfida/components";
-import { Record } from "@bonfida/spl-name-service";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";

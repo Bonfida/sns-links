@@ -1,4 +1,4 @@
-import { Connection, PublicKey } from "@solana/web3.js";
+import { Connection } from "@solana/web3.js";
 import { useQuery, UseQueryResult } from "react-query";
 import { NameRegistryState, getDomainKeySync } from "@bonfida/spl-name-service";
 

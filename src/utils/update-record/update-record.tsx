@@ -5,7 +5,6 @@ import {
   deleteInstruction,
   NameRegistryState,
   getRecordKeySync,
-  createInstruction,
   NAME_PROGRAM_ID,
   Numberu32,
   serializeSolRecord,

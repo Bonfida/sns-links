@@ -1,6 +1,4 @@
 import {
-  updateNameRegistryData,
-  createNameRegistry,
   NameRegistryState,
   getDomainKeySync,
   reallocInstruction,
@@ -14,11 +12,7 @@ import {
   Connection,
   PublicKey,
 } from "@solana/web3.js";
-import { formatRecordValue } from "@/utils/formatRecordValue";
-import { derive } from "../derive";
-import { makeTx } from "@/utils/makeTx";
 import { Toast } from "@bonfida/components";
-import { isPubkey } from "@/utils/isPubkey";
 import { sleep } from "../sleep";
 import { sendRawTransaction } from "../../utils/send-raw-transaction/send-raw-transaction";
 

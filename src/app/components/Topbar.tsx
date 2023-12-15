@@ -8,10 +8,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
-import classNames from "classnames";
-import { CaretDownIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
-import PurchaseModal from "./PurchaseModal";
 
 const Topbar = () => {
   const { connected, publicKey } = useWallet();

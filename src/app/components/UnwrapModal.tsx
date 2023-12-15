@@ -1,12 +1,11 @@
 "use client";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "@bonfida/sns-widget/style.css";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
 import { unwrap } from "@/utils/tokenizer/unwrap";
 import { useToastContext } from "@bonfida/components";
 import { makeTx } from "@/utils/makeTx";
-import { Toast } from "@bonfida/components";
 
 const UnwrapModal = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();

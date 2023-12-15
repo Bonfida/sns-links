@@ -1,8 +1,5 @@
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import Image from "next/image";
-import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
-import Skeleton from "react-loading-skeleton";
 import { PublicKey } from "@solana/web3.js";
 
 const ProfileOverview = ({

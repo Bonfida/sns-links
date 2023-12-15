@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import EditRecordModal from "./EditRecordModal";
 import DomainDropdown from "./DomainDropdown";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
 import ProfilePic from "./ProfilePic";

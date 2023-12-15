@@ -4,7 +4,6 @@ import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
 import { updateRecord } from "../../utils/update-record/update-record";
-import { isTokenized } from "../../utils/tokenizer/isTokenized";
 
 const EditRecordModal = ({
   recordName,
