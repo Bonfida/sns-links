@@ -91,9 +91,15 @@ const EditRecordModal = ({
           onClick={closeModal}
         >
           <div
-            className="bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg p-5 mt-10 md:mt-0"
+            className="relative bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-lg p-5 mt-10 md:mt-0"
             onClick={(e) => e.stopPropagation()}
           >
+            <button
+              className="absolute top-1 right-3 text-slate-600 text-2xl leading-none"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
             <h2 className="text-xl text-white font-azeret">
               {`Edit ${
                 recordName.charAt(0).toUpperCase() + recordName.slice(1)
@@ -126,12 +132,6 @@ const EditRecordModal = ({
                   Delete
                 </button>
               </div>
-              <button
-                className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white font-azeret"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
             </div>
           </div>
         </div>
