@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import {
   WalletDisconnectButton,
   WalletMultiButton,
@@ -12,14 +12,8 @@ import { useRouter } from "next/navigation";
 
 const Topbar = () => {
   const { connected, publicKey } = useWallet();
-  const { connection } = useConnection();
   const router = useRouter();
-  const [isBuyingDomain, setIsBuyingDomain] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-
-  const handlePurchaseClick = () => {
-    router.push(`/purchase`);
-  };
 
   const handleProfileClick = () => {
     if (publicKey) {
@@ -41,29 +35,35 @@ const Topbar = () => {
   return (
     <div className="flex items-center justify-center w-screen md:h-20 h-14 py-20 md:py-10 ">
       <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-3/4 md:h-20 h-14">
-        <Link href="/" className="flex items-center justify-center md:w-1/4">
+        <Link href="/" className="flex items-center justify-center w-1/4">
           <Image
             width={80}
             height={80}
             src="/white-logo.svg"
-            className="p-2"
+            className="p-5"
             alt="SNS Links Logo"
           />
 
-          <span className="text-xl font-bold text-white md:text-2xl md:inline-block hidden">
+          <span className="text-xl items-center font-bold text-white md:text-2xl md:inline-block hidden">
             SNS Links
           </span>
         </Link>
-        <NavigationMenu.Root className="flex justify-center md:w-1/2 font-semibold w-full flex-1">
+        <NavigationMenu.Root className="flex justify-center items-center font-semibold  w-full flex-1">
           <NavigationMenu.Link
-            className="md:text-xl text-2xl text-white hover:cursor-pointer font-azeret"
+            className="flex items-center justify-center md:text-xl text-2xl text-white hover:cursor-pointer"
             onClick={handleProfileClick}
           >
-            Profile
+            <Image
+              src="/user.svg"
+              width={40}
+              height={40}
+              alt="Profile"
+              className="ml-1"
+            />
           </NavigationMenu.Link>
         </NavigationMenu.Root>
 
-        <div className="md:w-1/4  ">
+        <div className="w-1/4 flex justify-center">
           {connected && publicKey ? (
             <WalletDisconnectButton className="wallet-button" />
           ) : (

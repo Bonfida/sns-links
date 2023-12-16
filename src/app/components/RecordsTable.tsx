@@ -73,7 +73,7 @@ const RecordsTable = ({
             <div className="flex flex-col items-center justify-around">
               <div className="flex items-center justify-center w-full">
                 <ProfilePic domain={domain} />
-                <h1 className="md:text-5xl text-3xl font-bold text-white ml-5">
+                <h1 className="md:text-5xl text-3xl font-bold text-white ml-5 mr-1">
                   {selectedDomain || domain}.sol
                 </h1>
                 {/* WIP on new button placement */}
