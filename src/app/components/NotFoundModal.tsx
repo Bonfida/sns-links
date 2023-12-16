@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Widget from "@bonfida/sns-widget";
 import "@bonfida/sns-widget/style.css";

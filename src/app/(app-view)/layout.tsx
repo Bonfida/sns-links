@@ -7,7 +7,11 @@ import Widget from "@bonfida/sns-widget";
 import "@bonfida/sns-widget/style.css";
 
 export const metadata: Metadata = {
-  title: "SNS Links",
+  title: {
+    default: "SNS Links",
+    //@ts-ignore
+    template: "%s | SNS Links",
+  },
   description: "All your web3 links under one roof",
 };
 
