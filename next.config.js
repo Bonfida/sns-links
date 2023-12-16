@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ["pbs.twimg.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+      },
+    ],
   },
 };
 

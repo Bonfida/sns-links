@@ -15,10 +15,10 @@ export const recordsToFetch = [
   Record.Reddit,
   Record.Twitter,
   Record.Telegram,
-  Record.Pic,
   Record.SHDW,
   Record.POINT,
   Record.Injective,
   Record.BSC,
+  Record.Pic,
   Record.Backpack,
 ];

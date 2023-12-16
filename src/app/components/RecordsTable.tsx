@@ -33,6 +33,7 @@ const RecordsTable = ({
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
   const [isToken, setIsToken] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
@@ -62,6 +63,11 @@ const RecordsTable = ({
       setIsOwner(true);
     }
   }, [connected, publicKey, owner]);
+
+  console.log("refresh", refresh);
+  useEffect(() => {
+    setRefresh(false);
+  }, [refresh]);
 
   return (
     <div className="relative flex flex-col items-center">
@@ -140,6 +146,7 @@ const RecordsTable = ({
             setIsEditingPic={setIsEditingPic}
             setIsEditingRecord={setIsEditingRecord}
             domain={domain}
+            setRefresh={setRefresh}
           />
         ))}
     </div>
