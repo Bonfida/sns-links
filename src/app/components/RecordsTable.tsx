@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import EditRecordModal from "./EditRecordModal";
-import DomainDropdown from "./DomainDropdown";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
 import ProfilePic from "./ProfilePic";
@@ -72,22 +71,20 @@ const RecordsTable = ({
         {selectedDomain || domain ? (
           <>
             <div className="flex flex-col items-center justify-around">
-              <div className="flex items-center justify-center w-full space-x-5 ">
+              <div className="flex items-center justify-center w-full">
                 <ProfilePic domain={domain} />
-                <h1 className="md:text-5xl text-3xl font-bold text-white">
+                <h1 className="md:text-5xl text-3xl font-bold text-white ml-5">
                   {selectedDomain || domain}.sol
                 </h1>
+                {/* WIP on new button placement */}
+                <div className="self-center mt-5">
+                  {isOwner && <LinkShareButton domain={domain} />}
+                </div>
               </div>
               <Bio domain={selectedDomain || domain} />
             </div>
           </>
         ) : null}
-        {isOwner && (
-          <div className="flex items-end justify-between flex-grow w-full md:p-5 space-x-3">
-            <DomainDropdown currentDomain={domain} />
-            <LinkShareButton domain={domain} />
-          </div>
-        )}
         <table className="z-10 w-full mt-4 text-white table-fixed">
           <thead className="">
             <tr>

@@ -4,7 +4,6 @@ import { useFetchRecords } from "../../../hooks/useFetchRecords";
 import LinkButton from "@/app/components/LinkButton";
 import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
-import Footer from "@/app/components/Footer";
 import { useEffect, useState } from "react";
 import NoLinksFoundModal from "@/app/components/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
