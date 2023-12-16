@@ -55,10 +55,10 @@ const Topbar = () => {
           >
             <Image
               src="/user.svg"
-              width={40}
-              height={40}
+              width={37}
+              height={37}
               alt="Profile"
-              className="ml-1"
+              className=""
             />
           </NavigationMenu.Link>
         </NavigationMenu.Root>
