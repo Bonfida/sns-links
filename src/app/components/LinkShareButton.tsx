@@ -4,7 +4,6 @@ import Image from "next/image";
 
 const LinkShareButton = ({ domain }: { domain: string }) => {
   const { selectedDomain } = useContext(SelectedDomainContext);
-  const [errorMessage, setErrorMessage] = useState("");
   const [showCopyConfirmation, setShowCopyConfirmation] = useState(false);
 
   const handleShareClick = () => {
@@ -29,7 +28,7 @@ const LinkShareButton = ({ domain }: { domain: string }) => {
           alt={"share link"}
         />
         {showCopyConfirmation && (
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-4 py-2 bg-[#03001A] text-white rounded-md whitespace-nowrap text-xs">
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-[#03001A] text-white rounded-md whitespace-nowrap text-xs">
             Link copied!
           </div>
         )}
