@@ -7,10 +7,9 @@ import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import { updateBio } from "../../utils/update-record/update-bio";
 import { isTokenized } from "../../utils/tokenizer/isTokenized";
 import UnwrapModal from "./UnwrapModal";
+import { useFetchBio } from "@/hooks/useFetchBio";
 
 const Bio = ({ domain }: { domain: string }) => {
-  const { data: domainInfo, keys } = useDomainsInfo([domain]);
-  const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
   const { connection } = useConnection();
   const { toast } = useToastContext();
   const [isToken, setIsToken] = useState(false);
@@ -21,24 +20,18 @@ const Bio = ({ domain }: { domain: string }) => {
   const [refresh, setRefresh] = useState(false);
   const bioPlaceholder = !connected ? "My bio..." : "Add a bio...";
 
-  const content =
-    domainKey &&
-    domainInfo
-      ?.get(domainKey.toBase58())
-      ?.data?.toString()
-      .trimStart()
-      .trimEnd();
-
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
     domain
   );
 
+  const { data: bio, isLoading: bioLoading } = useFetchBio(domain);
+
   useEffect(() => {
-    if (content) {
-      setBioText(content);
+    if (!bioLoading && bio?.length !== 0) {
+      setBioText(bio!);
     }
-  }, [domainInfo]);
+  }, [bio]);
 
   const toggleEdit = async () => {
     const isToken = await isTokenized(domain!, connection, publicKey!);
