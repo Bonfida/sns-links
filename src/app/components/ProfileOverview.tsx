@@ -11,7 +11,7 @@ const ProfileOverview = ({
   favoriteLoading?: boolean;
   publicKey: PublicKey;
 }) => {
-  const abbreviatedPubkey = abbreviatePubkey(publicKey);
+  const abbreviatedPubkey = abbreviatePubkey(publicKey, 5);
   return (
     <div className="flex self-start justify-start items-center space-x-5">
       <Image

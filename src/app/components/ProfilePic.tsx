@@ -14,7 +14,7 @@ const ProfilePic = ({
   customWidth,
   hideEdit,
 }: {
-  domain: string;
+  domain?: string | undefined;
   customHeight?: number;
   customWidth?: number;
   hideEdit?: Boolean;
@@ -24,14 +24,15 @@ const ProfilePic = ({
   const { selectedDomain } = useContext(SelectedDomainContext);
   const [editingRecord, setIsEditingRecord] = useState(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
+
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
-    domain
+    domain!
   );
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
-    domain
+    domain!
   );
 
   const handlePicEdit = () => {
@@ -45,7 +46,9 @@ const ProfilePic = ({
       } overflow-hidden rounded-full`}
     >
       <Image
-        layout="fill"
+        layout="responsive"
+        width={200}
+        height={200}
         objectFit="cover"
         src={recordsData?.pic || "/default-profile.svg"}
         className=""
@@ -75,7 +78,7 @@ const ProfilePic = ({
           recordName={Record.Pic}
           setIsEditingRecord={setIsEditingRecord}
           setIsEditingPic={setIsEditingPic}
-          domain={domain}
+          domain={domain!}
         />
       )}
     </div>

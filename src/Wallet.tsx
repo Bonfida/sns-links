@@ -11,7 +11,7 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
 import { ToastContextProvider } from "@bonfida/components";
-
+import { ModalContextProvider } from "./context/modalContext";
 type Props = {
   children?: React.ReactNode;
 };
@@ -27,7 +27,9 @@ export const Wallet: FC<Props> = ({ children }) => {
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
             <WalletModalProvider>
-              <ToastContextProvider>{children}</ToastContextProvider>
+              <ModalContextProvider>
+                <ToastContextProvider>{children}</ToastContextProvider>
+              </ModalContextProvider>
             </WalletModalProvider>
           </WalletProvider>
         </ConnectionProvider>

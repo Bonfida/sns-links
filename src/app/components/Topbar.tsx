@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useRouter } from "next/navigation";
+import { WalletConnect } from "./wallet/wallet-connect";
 
 const Topbar = () => {
   const { connected, publicKey } = useWallet();
@@ -55,8 +56,8 @@ const Topbar = () => {
           >
             <Image
               src="/user.svg"
-              width={37}
-              height={37}
+              width={45}
+              height={45}
               alt="Profile"
               className=""
             />
@@ -64,11 +65,7 @@ const Topbar = () => {
         </NavigationMenu.Root>
 
         <div className="w-1/4 flex justify-center">
-          {connected && publicKey ? (
-            <WalletDisconnectButton className="wallet-button" />
-          ) : (
-            <WalletMultiButton className="wallet-button" />
-          )}
+          <WalletConnect />
         </div>
       </div>
     </div>
