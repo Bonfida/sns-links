@@ -8,7 +8,17 @@ import Image from "next/image";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 
-const ProfilePic = ({ domain }: { domain: string }) => {
+const ProfilePic = ({
+  domain,
+  customHeight,
+  customWidth,
+  hideEdit,
+}: {
+  domain: string;
+  customHeight?: number;
+  customWidth?: number;
+  hideEdit?: Boolean;
+}) => {
   const { connection } = useConnection();
   const { publicKey, connected } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
@@ -16,12 +26,12 @@ const ProfilePic = ({ domain }: { domain: string }) => {
   const [isEditingPic, setIsEditingPic] = useState(false);
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
-    selectedDomain || domain
+    domain
   );
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
-    selectedDomain || domain
+    domain
   );
 
   const handlePicEdit = () => {
@@ -29,15 +39,19 @@ const ProfilePic = ({ domain }: { domain: string }) => {
   };
 
   return (
-    <div className="relative w-24 overflow-hidden rounded-full">
+    <div
+      className={`relative w-${customWidth || 24} h-${
+        customHeight || 24
+      } overflow-hidden rounded-full`}
+    >
       <Image
-        width={100}
-        height={100}
+        layout="fill"
+        objectFit="cover"
         src={recordsData?.pic || "/default-profile.svg"}
-        className="object-cover w-full h-full"
+        className=""
         alt="Profile"
       />
-      {connected && checkIsOwner(owner, publicKey) && (
+      {connected && checkIsOwner(owner, publicKey) && hideEdit !== true && (
         <div className="absolute bottom-0 left-0 flex items-center justify-center w-full bg-gray-700 bg-opacity-50 h-1/6">
           <button
             onClick={() => {

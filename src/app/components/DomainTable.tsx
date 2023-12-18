@@ -15,6 +15,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import SelectedDomainContext from "@/context/selectedDomain";
 import Loading from "./Loading";
+import ProfilePic from "./ProfilePic";
 
 const DomainTable = () => {
   const { connected, publicKey } = useWallet();
@@ -31,6 +32,7 @@ const DomainTable = () => {
   );
 
   const handleClick = (domain: any) => {
+    console.log("domain", domain);
     setSelectedDomain(domain);
     console.log("domain in table", domain);
 
@@ -43,11 +45,25 @@ const DomainTable = () => {
       id: "domain",
       header: "Domain",
       cell: (info) => (
-        <div className="flex flex-col items-center justify-center">
-          <span>{info.getValue() as string}.sol</span>
+        <div className="flex items-center">
+          <ProfilePic
+            domain={info.getValue() as string}
+            customWidth={16}
+            customHeight={16}
+            hideEdit={true}
+          />
+          <span className="ml-2 text-xl">{info.getValue() as string}.sol</span>
+        </div>
+      ),
+    }),
+    columnHelper.display({
+      id: "view",
+      header: "",
+      cell: (info) => (
+        <div className="flex justify-end">
           <button
-            onClick={() => handleClick(info.getValue())}
-            className="text-slate-600 mt-2"
+            onClick={() => handleClick(info.row.original)}
+            className="text-slate-600"
           >
             View
           </button>
@@ -89,27 +105,9 @@ const DomainTable = () => {
       {domainsLoading ? (
         <Loading />
       ) : (
-        <div className="border-[1px] bg-white/10 backdrop-blur-sm border-white/20 rounded-xl space-y-2 p-10  mt-10 md:w-[800px] sm:w-[500px] w-[350px]">
+        <div className=" rounded-xl space-y-2 p-10  mt-10 md:w-[800px] sm:w-[500px] w-[350px]">
           <Filter search={search} setSearch={setSearch} />
-          <table className="z-10 w-full mt-4 text-white items-center justify-center table-fixed">
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      className="p-4 w-1/4 text-center rounded-tl-xl align-middle rounded-xl text-lg md:text-base bg-[#191C30] "
-                      colSpan={header.colSpan}
-                      key={header.id}
-                    >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
+          <table className="z-10 w-full mt-4 text-white items-center justify-center table-fixed overflow-y-auto">
             <tbody>
               {table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="items-center justify-center">
@@ -144,7 +142,7 @@ const Filter = ({
   setSearch: Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <div>
+    <div className="flex justify-center w-full">
       <input
         type="text"
         value={search}
