@@ -18,6 +18,7 @@ const EditRecordPopover = ({
   publicKey,
   signMessage,
   signTransaction,
+  recordValue,
 }: {
   setIsEditingRecord: (isEditing: boolean) => void;
   isEditingRecord: boolean;
@@ -29,6 +30,7 @@ const EditRecordPopover = ({
   publicKey: PublicKey;
   signTransaction: (transaction: Transaction) => Promise<Transaction>;
   signMessage: (message: Uint8Array) => Promise<Uint8Array>;
+  recordValue: string;
 }) => {
   const closeRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToastContext();
@@ -98,12 +100,14 @@ const EditRecordPopover = ({
             >
               Edit
             </button>
-            <button
-              onClick={handleDeleteClick}
-              className="py-2 px-.5 bg-red-600 rounded-xl text-slate-200"
-            >
-              Delete
-            </button>
+            {recordValue && (
+              <button
+                onClick={handleDeleteClick}
+                className="py-2 px-.5 bg-red-600 rounded-xl text-slate-200"
+              >
+                Delete
+              </button>
+            )}
           </div>
           <Popover.Close
             className="rounded-full h-[25px] w-[25px] inline-flex items-center justify-center text-violet11 absolute top-[5px] right-[5px] hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 outline-none cursor-default"

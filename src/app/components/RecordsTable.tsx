@@ -126,6 +126,7 @@ const RecordsTable = ({
                             publicKey={publicKey!}
                             signMessage={signMessage!}
                             signTransaction={signTransaction!}
+                            recordValue={recordValue}
                           />
                         )}
                       </td>
