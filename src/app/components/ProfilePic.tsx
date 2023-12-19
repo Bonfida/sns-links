@@ -21,7 +21,6 @@ const ProfilePic = ({
 }) => {
   const { connection } = useConnection();
   const { publicKey, connected } = useWallet();
-  const { selectedDomain } = useContext(SelectedDomainContext);
   const [editingRecord, setIsEditingRecord] = useState(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
 
@@ -40,18 +39,12 @@ const ProfilePic = ({
   };
 
   return (
-    <div
-      className={`relative w-${customWidth || 24} h-${
-        customHeight || 24
-      } overflow-hidden rounded-full`}
-    >
+    <div className="relative overflow-hidden rounded-full">
       <Image
-        layout="responsive"
-        width={200}
-        height={200}
-        objectFit="cover"
+        width={customWidth || 100}
+        height={customHeight || 100}
         src={recordsData?.pic || "/default-profile.svg"}
-        className=""
+        className="object-fit rounded-full"
         alt="Profile"
       />
       {connected && checkIsOwner(owner, publicKey) && hideEdit !== true && (

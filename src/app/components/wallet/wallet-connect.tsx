@@ -25,7 +25,6 @@ export const WalletConnect = ({ width }: { width?: string }) => {
     connection,
     publicKey!
   );
-  const [validCustomPic, setValicCustomPic] = useSafeState(false);
   const router = useRouter();
 
   const previous = usePrevious(visible);
@@ -61,8 +60,8 @@ export const WalletConnect = ({ width }: { width?: string }) => {
               <ProfilePic
                 domain={favoriteDomain}
                 hideEdit={true}
-                customHeight={6}
-                customWidth={6}
+                customHeight={24}
+                customWidth={24}
               />
 
               <span

@@ -20,7 +20,7 @@ const config: Config = {
         azeret: ["Azeret", ...defaultTheme.fontFamily.sans],
       },
       animation: {
-        "spin-speed": "spin 0.7s linear infinite",
+        "spin-speed": "spin 2s linear infinite",
       },
     },
   },

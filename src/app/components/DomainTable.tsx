@@ -48,8 +48,8 @@ const DomainTable = () => {
         <div className="flex items-center">
           <ProfilePic
             domain={info.getValue() as string}
-            customWidth={16}
-            customHeight={16}
+            customWidth={72}
+            customHeight={72}
             hideEdit={true}
           />
           <span className="ml-2 text-xl">{info.getValue() as string}.sol</span>
