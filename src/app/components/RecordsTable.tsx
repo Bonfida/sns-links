@@ -12,6 +12,7 @@ import UnwrapModal from "./UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import Bio from "../components/Bio";
 import { RecordsData } from "../types/RecordsData";
+import EditRecordPopover from "./EditRecordPopover";
 
 const RecordsTable = ({
   domain,
@@ -29,7 +30,7 @@ const RecordsTable = ({
     "" as Record
   );
   const [isOwner, setIsOwner] = useState(false);
-  const { publicKey, connected } = useWallet();
+  const { publicKey, connected, signMessage, signTransaction } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
   const [isToken, setIsToken] = useState(false);
@@ -114,13 +115,18 @@ const RecordsTable = ({
                       </td>
                       <td className="justify-center items-center border-b-[1px] border-white border-opacity-20 px-4 text-xs md:text-base text-end">
                         {isOwner && !ownerLoading && (
-                          <button
-                            onClick={() => {
-                              handleEdit(recordName as Record);
-                            }}
-                          >
-                            ...
-                          </button>
+                          <EditRecordPopover
+                            setIsEditingRecord={setIsEditingRecord}
+                            isEditingRecord={isEditingRecord}
+                            setIsToken={setIsToken}
+                            setEditingRecordName={setEditingRecordName}
+                            recordName={recordName}
+                            domain={domain}
+                            connection={connection}
+                            publicKey={publicKey!}
+                            signMessage={signMessage!}
+                            signTransaction={signTransaction!}
+                          />
                         )}
                       </td>
                     </tr>
