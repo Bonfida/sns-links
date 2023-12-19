@@ -71,7 +71,9 @@ const Bio = ({ domain }: { domain: string }) => {
         onChange={(e) => setBioText(e.target.value)}
         rows={3}
         cols={45}
-        className="text-white rounded-xl bg-inherit"
+        className={` rounded-xl bg-inherit ${
+          bioEditMode ? "bg-slate-200 text-[#03001A]" : "bg-inherit text-white"
+        }`}
         readOnly={!bioEditMode}
         maxLength={250}
       />
