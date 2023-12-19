@@ -33,14 +33,12 @@ const ProfilePageComponent = () => {
     } else {
       router.push(`/profile/${publicKey}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey]);
 
   return (
     <div className="flex items-start justify-center w-full min-h-screen mt-10">
       {!connected && <NotConnectedModal />}
-      {/* favorite takes longer to fetch, base skeleton conditional on this */}
-      {connected && favoriteLoading && (
+      {connected && (favoriteLoading || domainsLoading) && (
         <>
           <div className="flex flex-col items-center justify-center">
             <div className="w-full">
@@ -52,7 +50,7 @@ const ProfilePageComponent = () => {
           </div>
         </>
       )}
-      {connected && !favoriteLoading && (
+      {connected && !favoriteLoading && !domainsLoading && (
         <>
           {domainsOwned?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
