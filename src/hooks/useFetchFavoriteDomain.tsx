@@ -7,10 +7,11 @@ export const useFetchFavoriteDomain = (
   owner: PublicKey
 ): UseQueryResult<string> => {
   const fetchFavorite = async (): Promise<string> => {
-    const { reverse } = await getFavoriteDomain(connection, owner);
-    if (!owner) {
+    if (!owner || !connection) {
       return "";
     }
+    const { reverse } = await getFavoriteDomain(connection, owner);
+
     return reverse;
   };
 

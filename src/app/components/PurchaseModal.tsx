@@ -22,12 +22,6 @@ const PurchaseModal = () => {
           isDark={true}
           rootWrapperClassNames=""
         />
-        {/* <button
-          className="px-3 py-2 text-white bg-blue-600 rounded-lg font-azeret"
-          onClick={handlePurchaseClick}
-        >
-          Purchase domain
-        </button> */}
       </div>
     </>
   );

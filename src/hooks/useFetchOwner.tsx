@@ -7,10 +7,11 @@ export const useFetchOwner = (
   domain: string
 ): UseQueryResult<string> => {
   const fetchOwner = async (): Promise<string> => {
-    const { pubkey } = getDomainKeySync(domain);
-    if (!pubkey) {
+    if (!connection || !domain) {
       return "";
     }
+    const { pubkey } = getDomainKeySync(domain);
+
     const { registry, nftOwner } = await NameRegistryState.retrieve(
       connection,
       pubkey

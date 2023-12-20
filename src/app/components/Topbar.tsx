@@ -24,15 +24,6 @@ const Topbar = () => {
     }
   };
 
-  // fixes hydration issue caused by SSR of the WalletButton(s)
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
   return (
     <div className="flex items-center justify-center w-screen md:h-20 h-14 py-20 md:py-10 ">
       <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-3/4 md:h-20 h-14">
