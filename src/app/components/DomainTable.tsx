@@ -103,7 +103,7 @@ const DomainTable = () => {
       <div className="md:w-[200px] md:h-[200px] w-[75px] h-[75px] rounded-full bg-gradient-to-r -top-[50px] -right-[100px] absolute from-indigo-500 blur-lg z-0" />
       <div className="md:w-[200px] md:h-[200px] w-[75px] h-[75px] rounded-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% -bottom-[50px] -left-[100px] z-0 absolute  blur-lg" />
       {!domainsLoading && (
-        <div className=" rounded-xl space-y-2 p-10  mt-10 md:w-[800px] w-[450px] ">
+        <div className=" rounded-xl space-y-2 p-10 md:w-[800px] w-[450px] ">
           <Filter search={search} setSearch={setSearch} />
           <table className="z-10 w-full mt-4 text-white items-center justify-center table-fixed overflow-y-auto">
             <tbody>

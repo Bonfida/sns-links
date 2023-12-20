@@ -11,6 +11,7 @@ import DomainTable from "@/app/components/DomainTable";
 import DomainTableSkeleton from "@/app/components/Skeleton/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "@/app/components/Skeleton/ProfileOverviewSkeleton";
 import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
+import { useFetchRecords } from "@/hooks/useFetchRecords";
 
 export const metadata = {
   title: "Profile Page",
