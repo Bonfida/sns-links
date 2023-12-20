@@ -2,7 +2,7 @@ import { PublicKey } from "@solana/web3.js";
 export const abbreviatePubkey = (
   publicKey: PublicKey | null,
   sliceLength: number
-) => {
+): string => {
   if (publicKey) {
     const pubKeyString = publicKey.toBase58();
 
@@ -12,4 +12,5 @@ export const abbreviatePubkey = (
       pubKeyString?.slice(-sliceLength)
     );
   }
+  return "";
 };
