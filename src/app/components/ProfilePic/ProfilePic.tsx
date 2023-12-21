@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
-import EditRecordModal from "./EditRecordModal";
+import EditRecordModal from "../Modals/EditRecordModal";
 import { Record } from "@bonfida/spl-name-service";
 import Image from "next/image";
 import { useFetchOwner } from "@/hooks/useFetchOwner";

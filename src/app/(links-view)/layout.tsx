@@ -1,7 +1,7 @@
 "use client";
 import "../globals.css";
 import { Wallet } from "@/Wallet";
-import Footer from "../components/Footer";
+import Footer from "../components/Navigation/Footer";
 export default function RootLayout({
   children,
 }: {

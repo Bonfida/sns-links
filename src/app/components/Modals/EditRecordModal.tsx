@@ -3,7 +3,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
-import { updateRecord } from "../../utils/update-record/update-record";
+import { updateRecord } from "../../../utils/update-record/update-record";
 
 const EditRecordModal = ({
   recordName,

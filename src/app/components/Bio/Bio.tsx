@@ -4,9 +4,9 @@ import { useToastContext } from "@bonfida/components";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
-import { updateBio } from "../../utils/update-record/update-bio";
-import { isTokenized } from "../../utils/tokenizer/isTokenized";
-import UnwrapModal from "./UnwrapModal";
+import { updateBio } from "../../../utils/update-record/update-bio";
+import { isTokenized } from "../../../utils/tokenizer/isTokenized";
+import UnwrapModal from "../Modals/UnwrapModal";
 import { useFetchBio } from "@/hooks/useFetchBio";
 
 const Bio = ({ domain }: { domain: string }) => {

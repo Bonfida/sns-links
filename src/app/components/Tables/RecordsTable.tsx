@@ -1,18 +1,18 @@
 import { useState, useContext, useEffect } from "react";
-import EditRecordModal from "./EditRecordModal";
+import EditRecordModal from "../Modals/EditRecordModal";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
-import ProfilePic from "./ProfilePic";
-import LinkShareButton from "./LinkShareButton";
+import ProfilePic from "../ProfilePic/ProfilePic";
+import LinkShareButton from "../Buttons/LinkShareButton";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { isTokenized } from "../../utils/tokenizer/isTokenized";
-import UnwrapModal from "./UnwrapModal";
+import { isTokenized } from "../../../utils/tokenizer/isTokenized";
+import UnwrapModal from "../Modals/UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
-import Bio from "../components/Bio";
-import { RecordsData } from "../types/RecordsData";
-import EditRecordPopover from "./EditRecordPopover";
+import Bio from "../Bio/Bio";
+import { RecordsData } from "../../types/RecordsData";
+import EditRecordPopover from "../EditRecordPopover";
 
 const RecordsTable = ({
   domain,

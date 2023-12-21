@@ -2,7 +2,7 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import { useRouter } from "next/navigation";
-import ProfilePic from "../ProfilePic";
+import ProfilePic from "../ProfilePic/ProfilePic";
 import { twMerge } from "tailwind-merge";
 import { useSafeState, usePrevious } from "ahooks";
 import axios from "axios";

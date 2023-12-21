@@ -1,8 +1,8 @@
 import "../globals.css";
 import type { Metadata } from "next";
 import { Wallet } from "../../Wallet";
-import Topbar from "../components/Topbar";
-import Footer from "../components/Footer";
+import Topbar from "../components/Navigation/Topbar";
+import Footer from "../components/Navigation/Footer";
 import Widget from "@bonfida/sns-widget";
 import "@bonfida/sns-widget/style.css";
 

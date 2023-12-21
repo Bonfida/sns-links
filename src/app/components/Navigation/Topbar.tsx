@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useRouter } from "next/navigation";
-import { WalletConnect } from "./wallet/wallet-connect";
+import { WalletConnect } from "../wallet/wallet-connect";
 
 const Topbar = () => {
   const { connected, publicKey } = useWallet();
