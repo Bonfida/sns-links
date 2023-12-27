@@ -72,9 +72,11 @@ const Bio = ({ domain }: { domain: string }) => {
         rows={3}
         cols={45}
         className={` rounded-xl bg-inherit ${
-          bioEditMode ? "bg-slate-200 text-[#03001A]" : "bg-inherit text-white"
+          bioEditMode && !isToken
+            ? "bg-slate-200 text-[#03001A]"
+            : "bg-inherit text-white"
         }`}
-        readOnly={!bioEditMode}
+        readOnly={!isToken ? !bioEditMode : bioEditMode}
         maxLength={250}
       />
       {connected && checkIsOwner(owner, publicKey) && (
@@ -86,7 +88,7 @@ const Bio = ({ domain }: { domain: string }) => {
               type="button"
               onClick={toggleEdit}
             >
-              {bioEditMode ? "Save" : "Edit"}
+              {bioEditMode && !isToken ? "Save" : "Edit"}
             </button>
           )}
         </div>
