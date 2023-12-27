@@ -1,6 +1,6 @@
 "use client";
 import RecordsTable from "@/app/components/Tables/RecordsTable";
-import RecordsTableSkeleton from "@/app/components/Skeleton/RecordsTableSkeleton";
+import RecordsTableSkeleton from "../Skeletons/RecordsTableSkeleton";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection } from "@solana/wallet-adapter-react";
 

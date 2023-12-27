@@ -5,11 +5,11 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import NotFoundModal from "../Modals/NoLinksFoundModal";
-import ProfileOverview from "../ProfileOverview";
-import NotConnectedModal from "../NotConnectedModal";
+import ProfileOverview from "../ProfileOverview/ProfileOverview";
+import NotConnectedModal from "../Modals/NotConnectedModal";
 import DomainTable from "@/app/components/Tables/DomainTable";
-import DomainTableSkeleton from "@/app/components/Skeleton/DomainTableSkeleton";
-import ProfileOverviewSkeleton from "@/app/components/Skeleton/ProfileOverviewSkeleton";
+import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
+import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
 import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 

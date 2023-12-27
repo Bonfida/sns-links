@@ -12,7 +12,7 @@ import UnwrapModal from "../Modals/UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import Bio from "../Bio/Bio";
 import { RecordsData } from "../../types/RecordsData";
-import EditRecordPopover from "../EditRecordPopover";
+import EditRecordPopover from "../Popovers/EditRecordPopover";
 
 const RecordsTable = ({
   domain,

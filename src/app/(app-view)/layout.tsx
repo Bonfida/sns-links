@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: {
     default: "SNS Links",
     //@ts-ignore
-    template: "%s | SNS Links",
+    template: `%s | SNS Links`,
   },
   description: "All your web3 links under one roof",
 };

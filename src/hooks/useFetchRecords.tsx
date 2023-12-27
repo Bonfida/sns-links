@@ -26,7 +26,7 @@ export const useFetchRecords = (
       recordsToFetch,
       { deserialize: true }
     );
-
+    console.log("fetchedV2", fetchedV2Records);
     let picRecord: string | undefined;
     const otherRecords: { [key in Record]?: string } = {};
     const v2RecordsObj: { [key in Record]?: string } = recordsToFetch.reduce(

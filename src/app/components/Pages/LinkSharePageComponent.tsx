@@ -9,6 +9,8 @@ import NoLinksFoundModal from "@/app/components/Modals/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
+import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
+import { Record } from "@bonfida/sns-records";
 
 const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
   const { connection } = useConnection();
@@ -31,14 +33,6 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
     recordsExist = Object.values(recordsData!.records).some(
       (el) => el !== undefined
     );
-  }
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
   }
 
   return (
@@ -75,7 +69,16 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
           {recordsExist ? (
             Object.entries(recordsData!.records).map(([key, value]) => {
               if (value !== undefined) {
-                return <LinkButton key={key} name={key} value={value} />;
+                console.log("key", key);
+                return (
+                  <LinkButton
+                    key={key}
+                    name={key}
+                    value={value}
+                    domain={domain}
+                    connection={connection}
+                  />
+                );
               }
               return null;
             })

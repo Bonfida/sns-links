@@ -14,7 +14,7 @@ import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import SelectedDomainContext from "@/context/selectedDomain";
-import Loading from "../Loading";
+import Loading from "../Loading/Loading";
 import ProfilePic from "../ProfilePic/ProfilePic";
 
 const DomainTable = () => {
