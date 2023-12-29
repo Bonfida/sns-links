@@ -1,7 +1,6 @@
 import { Record } from "@bonfida/spl-name-service";
 
 export const recordsToFetch = [
-  Record.IPFS,
   Record.ARWV,
   Record.SOL,
   Record.ETH,

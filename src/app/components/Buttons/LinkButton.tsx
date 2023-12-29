@@ -9,6 +9,7 @@ import { Connection } from "@solana/web3.js";
 import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
 import Image from "next/image";
 import Badge from "../Badges/Tooltip";
+import { handleLink, copyItems } from "@/utils/links/handle-click";
 
 const LinkButton = ({
   name,
@@ -28,10 +29,11 @@ const LinkButton = ({
     name as Record
   );
   const handleShareClick = () => {
-    navigator.clipboard.writeText(`${value}`).then(() => {
+    if (copyItems.includes(name)) {
       setShowCopyConfirmation(true);
       setTimeout(() => setShowCopyConfirmation(false), 10000);
-    });
+    }
+    handleLink(name, value);
   };
 
   return (
@@ -56,7 +58,7 @@ const LinkButton = ({
         )}
       </div>
       {showCopyConfirmation && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-[#03001A] text-white rounded-md whitespace-nowrap text-xs">
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-[#03001A] text-white rounded-md whitespace-nowrap text-xs z-100">
           Link copied!
         </div>
       )}
