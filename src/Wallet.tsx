@@ -5,24 +5,20 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import { Buffer } from "buffer";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
 import { ToastContextProvider } from "@bonfida/components";
-
-window.Buffer = Buffer;
-
+import { ModalContextProvider } from "./context/modalContext";
 type Props = {
   children?: React.ReactNode;
 };
 const queryClient = new QueryClient();
 
 export const Wallet: FC<Props> = ({ children }) => {
-  const network = WalletAdapterNetwork.Mainnet;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const wallets = useMemo(() => [new PhantomWalletAdapter()], [endpoint]);
 
   return (
@@ -31,7 +27,9 @@ export const Wallet: FC<Props> = ({ children }) => {
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
             <WalletModalProvider>
-              <ToastContextProvider>{children}</ToastContextProvider>
+              <ModalContextProvider>
+                <ToastContextProvider>{children}</ToastContextProvider>
+              </ModalContextProvider>
             </WalletModalProvider>
           </WalletProvider>
         </ConnectionProvider>

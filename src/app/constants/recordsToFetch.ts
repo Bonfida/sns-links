@@ -1,7 +1,6 @@
 import { Record } from "@bonfida/spl-name-service";
 
 export const recordsToFetch = [
-  Record.IPFS,
   Record.ARWV,
   Record.SOL,
   Record.ETH,
@@ -15,10 +14,10 @@ export const recordsToFetch = [
   Record.Reddit,
   Record.Twitter,
   Record.Telegram,
-  Record.Pic,
   Record.SHDW,
   Record.POINT,
   Record.Injective,
   Record.BSC,
+  Record.Pic,
   Record.Backpack,
 ];

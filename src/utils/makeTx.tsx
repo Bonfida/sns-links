@@ -4,7 +4,6 @@ import {
   TransactionInstruction,
   Transaction,
   Signer,
-  sendAndConfirmTransaction,
 } from "@solana/web3.js";
 import { sleep } from "./sleep";
 import { retry } from "./retry";
