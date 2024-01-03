@@ -1,10 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  WalletDisconnectButton,
-  WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
 import Image from "next/image";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
@@ -12,9 +8,8 @@ import { useRouter } from "next/navigation";
 import { WalletConnect } from "../Wallet/wallet-connect";
 
 const Topbar = () => {
-  const { connected, publicKey } = useWallet();
+  const { publicKey } = useWallet();
   const router = useRouter();
-  const [isMounted, setIsMounted] = useState(false);
 
   const handleProfileClick = () => {
     if (publicKey) {

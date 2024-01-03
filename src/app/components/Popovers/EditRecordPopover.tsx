@@ -6,6 +6,7 @@ import { isTokenized } from "@/utils/tokenizer/isTokenized";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { updateRecord } from "@/utils/update-record/update-record";
 import { useToastContext } from "@bonfida/components";
+import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 
 const EditRecordPopover = ({
   setIsEditingRecord,

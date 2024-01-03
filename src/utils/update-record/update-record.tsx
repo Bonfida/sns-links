@@ -30,7 +30,9 @@ export const updateRecord = async (
   publicKey: PublicKey | null,
   signTransaction: (transaction: Transaction) => Promise<Transaction>,
   signMessage: (message: Uint8Array) => Promise<Uint8Array>,
-  toast: Toast
+  toast: Toast,
+  isRoaSupported?: boolean,
+  sendRoaRequest?: (domain: string, record: Record) => Promise<void>
 ) => {
   if (!publicKey || !signTransaction || !signMessage) return;
   try {
@@ -38,8 +40,6 @@ export const updateRecord = async (
     const recordKey = getRecordV2Key(domain, recordName);
     const exist = await checkAccountExists(connection, recordKey);
     const formattedValue = formatRecordValue(recordVal, recordName);
-    const { isRoaSupported, sendRoaRequest } =
-      useRecordsV2Guardians(recordName);
 
     if (formattedValue === "") {
       if (!exist) return;
@@ -132,7 +132,7 @@ export const updateRecord = async (
      * If eligible to RoA send server request
      */
     if (isRoaSupported) {
-      await sendRoaRequest(domain, recordName);
+      await sendRoaRequest!(domain, recordName);
     }
   } catch (err) {
     console.error(err);

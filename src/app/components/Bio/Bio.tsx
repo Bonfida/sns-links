@@ -31,7 +31,7 @@ const Bio = ({ domain }: { domain: string }) => {
     if (!bioLoading && bio?.length !== 0) {
       setBioText(bio!);
     }
-  }, [bio]);
+  }, [bio, bioLoading]);
 
   const toggleEdit = async () => {
     const isToken = await isTokenized(domain!, connection, publicKey!);

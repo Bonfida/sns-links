@@ -1,7 +1,11 @@
 import axios from "axios";
 import { Record } from "@bonfida/spl-name-service";
 
-export const SUPPORTED_GUARDIANS = Object.freeze([Record.Backpack, Record.Url]);
+export const SUPPORTED_GUARDIANS = Object.freeze([
+  Record.ETH,
+  Record.SOL,
+  Record.Url,
+]);
 
 export const sendRoaRequest = async (domain: string, record: Record) => {
   try {

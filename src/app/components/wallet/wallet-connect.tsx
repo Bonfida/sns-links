@@ -33,7 +33,7 @@ export const WalletConnect = ({ width }: { width?: string }) => {
     if (previous && visibleContext) {
       setVisibleContext(false);
     }
-  }, [visible]);
+  }, [visible, setVisibleContext, visibleContext, previous]);
 
   let [referenceElement, setReferenceElement] = useState<HTMLButtonElement>();
   let [popperElement, setPopperElement] = useState<HTMLDivElement>();

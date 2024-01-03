@@ -4,6 +4,7 @@ import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
 import { updateRecord } from "../../../utils/update-record/update-record";
+import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 
 const EditRecordModal = ({
   recordName,
@@ -22,6 +23,9 @@ const EditRecordModal = ({
   const { connection } = useConnection();
   const { publicKey, signTransaction, signMessage } = useWallet();
   const { toast } = useToastContext();
+  const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(recordName);
+
+  console.log("isRoaSupported", isRoaSupported, "recordName", recordName);
 
   const closeModal = () => {
     setIsModalVisible(false);
@@ -43,7 +47,9 @@ const EditRecordModal = ({
         publicKey,
         signTransaction!,
         signMessage!,
-        toast
+        toast,
+        isRoaSupported,
+        sendRoaRequest
       );
       closeModal();
     } catch (error) {
