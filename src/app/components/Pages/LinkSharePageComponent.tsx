@@ -69,7 +69,6 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
           {recordsExist ? (
             Object.entries(recordsData!.records).map(([key, value]) => {
               if (value !== undefined) {
-                console.log("key", key);
                 return (
                   <LinkButton
                     key={key}

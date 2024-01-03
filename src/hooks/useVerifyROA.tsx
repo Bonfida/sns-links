@@ -16,7 +16,6 @@ export const useFetchVerifyROA = (
   name: Record
 ): UseQueryResult<boolean | undefined> => {
   const fetchROA = async (): Promise<boolean | undefined> => {
-    console.log("name", name);
     if (!connection || !domain) {
       return undefined;
     }
@@ -30,7 +29,6 @@ export const useFetchVerifyROA = (
         domain,
         retrievedRecord.getContent()
       );
-      console.log("ROA", ROA);
       return ROA;
     } catch (error) {
       return undefined;

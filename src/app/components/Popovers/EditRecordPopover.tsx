@@ -52,7 +52,6 @@ const EditRecordPopover = ({
   };
 
   const handleDeleteClick = async () => {
-    console.log("recordName, domain", recordName, domain);
     try {
       await updateRecord(
         connection,

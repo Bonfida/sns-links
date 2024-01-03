@@ -16,7 +16,6 @@ export const copyItems = [
 ];
 
 export const handleLink = (linkName: string, linkValue: string) => {
-  console.log("linkName", linkName);
   if (copyItems.includes(linkName)) {
     navigator.clipboard.writeText(`${linkValue}`);
   } else if (linkName === "twitter" || linkName === "github") {

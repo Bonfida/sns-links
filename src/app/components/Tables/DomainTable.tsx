@@ -32,9 +32,7 @@ const DomainTable = () => {
   );
 
   const handleClick = (domain: any) => {
-    console.log("domain", domain);
     setSelectedDomain(domain);
-    console.log("domain in table", domain);
 
     router.push(`/links/${domain}`);
   };
