@@ -26,7 +26,7 @@ const ProfileOverview = ({
       {favoriteDomain ? (
         <>
           <Image
-            src={recordsData?.pic!}
+            src={recordsData?.pic! || "/default-profile.svg"}
             width={100}
             height={100}
             alt="default pic"
