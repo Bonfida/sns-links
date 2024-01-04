@@ -70,7 +70,7 @@ export default function MyApp() {
                     Integrate
                   </h2>
                   <p className="text-zinc-200 dark:text-zinc-100 text-sm md:text-base">
-                    BINGBONG
+                    Easily integrate link sharing
                   </p>
                 </div>
                 <div className="flex flex-col items-center p-4 space-y-2 border-gray-800 rounded-lg">

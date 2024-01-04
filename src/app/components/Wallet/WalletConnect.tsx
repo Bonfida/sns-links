@@ -4,15 +4,12 @@ import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import { useRouter } from "next/navigation";
 import ProfilePic from "../ProfilePic/ProfilePic";
 import { twMerge } from "tailwind-merge";
-import { useSafeState, usePrevious } from "ahooks";
-import axios from "axios";
+import { usePrevious } from "ahooks";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useState, useEffect } from "react";
 import { useFetchFavoriteDomain } from "../../../hooks/useFetchFavoriteDomain";
-import { Toggle } from "@bonfida/components";
 import { PublicKey } from "@solana/web3.js";
-import Image from "next/image";
 import { useModalContext } from "../../../hooks/useModalContext";
 
 export const WalletConnect = ({ width }: { width?: string }) => {

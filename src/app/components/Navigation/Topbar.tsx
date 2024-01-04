@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useRouter } from "next/navigation";
-import { WalletConnect } from "../Wallet/wallet-connect";
+import { WalletConnect } from "../Wallet/WalletConnect";
 
 const Topbar = () => {
   const { publicKey } = useWallet();
