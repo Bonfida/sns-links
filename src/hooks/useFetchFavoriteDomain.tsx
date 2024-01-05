@@ -10,9 +10,14 @@ export const useFetchFavoriteDomain = (
     if (!owner || !connection) {
       return "";
     }
-    const { reverse } = await getFavoriteDomain(connection, owner);
+    const favoriteDomain = await getFavoriteDomain(connection, owner);
+    console.log("fave", favoriteDomain);
 
-    return reverse;
+    if (!favoriteDomain.stale) {
+      return favoriteDomain.reverse;
+    } else {
+      return "";
+    }
   };
 
   return useQuery<string>({
