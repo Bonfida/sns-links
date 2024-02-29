@@ -7,7 +7,7 @@ import { useFetchDomains } from "@/hooks/useFetchDomains";
 import NotFoundModal from "../Modals/NoLinksFoundModal";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import NotConnectedModal from "../Modals/NotConnectedModal";
-import DomainTable from "@/app/components/Tables/DomainTable";
+import DomainList from "@/app/components/DomainList/DomainList";
 import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
 import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
@@ -55,14 +55,14 @@ const ProfilePageComponent = () => {
         <>
           {domainsOwned?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
-              <div className="w-full">
+              <div className="">
                 <ProfileOverview
                   favoriteDomain={favoriteDomain}
                   favoriteLoading={favoriteLoading}
                   publicKey={publicKey!}
                 />
                 <div className="">
-                  <DomainTable />
+                  <DomainList />
                 </div>
               </div>
             </div>
