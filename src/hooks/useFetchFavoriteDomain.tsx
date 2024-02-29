@@ -11,8 +11,7 @@ export const useFetchFavoriteDomain = (
       return "";
     }
     const favoriteDomain = await getFavoriteDomain(connection, owner);
-    console.log("fave", favoriteDomain);
-
+    console.log("favor", favoriteDomain);
     if (!favoriteDomain.stale) {
       return favoriteDomain.reverse;
     } else {

@@ -2,24 +2,24 @@ import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import Image from "next/image";
 import { PublicKey } from "@solana/web3.js";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
-import { useConnection } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
 
-const ProfileOverview = ({
-  favoriteDomain,
-  favoriteLoading,
-  publicKey,
-}: {
-  favoriteDomain: string | undefined;
-  favoriteLoading?: boolean;
-  publicKey: PublicKey;
-}) => {
-  const abbreviatedPubkey = abbreviatePubkey(publicKey, 5);
+const ProfileOverview = () => {
   const { connection } = useConnection();
+  const { publicKey } = useWallet();
+  const abbreviatedPubkey = abbreviatePubkey(publicKey, 5);
+  const { data: favoriteDomain, isLoading: favoriteLoading } =
+    useFetchFavoriteDomain(connection, publicKey!);
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
     favoriteDomain || undefined
   );
+
+  if (!favoriteLoading) {
+    console.log("favoriteDomain", favoriteDomain);
+  }
 
   return (
     <div className="flex justify-start self-start items-center space-x-5">
