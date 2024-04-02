@@ -8,23 +8,31 @@ import { usePrevious } from "ahooks";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useState, useEffect } from "react";
-import { useFetchFavoriteDomain } from "../../../hooks/useFetchFavoriteDomain";
 import { PublicKey } from "@solana/web3.js";
 import { useModalContext } from "../../../hooks/useModalContext";
+import { useFavoriteDomain } from "@bonfida/sns-react";
+import { getFavoriteDomain } from "@bonfida/spl-name-service";
 
 export const WalletConnect = ({ width }: { width?: string }) => {
+  //Connection and Wallet
+  const { connected, publicKey, connecting, disconnect } = useWallet();
+  const { connection } = useConnection();
+
+  // Domain
+
+  // Router
+  const router = useRouter();
+
+  // Visibility
   const { setVisible, visible } = useWalletModal();
   const { setVisible: setVisibleContext, visible: visibleContext } =
     useModalContext();
-  const { connected, publicKey, connecting, disconnect } = useWallet();
-  const { connection } = useConnection();
-  const { data: favoriteDomain } = useFetchFavoriteDomain(
-    connection,
-    publicKey!
-  );
-  const router = useRouter();
-
   const previous = usePrevious(visible);
+  let [referenceElement, setReferenceElement] = useState<HTMLButtonElement>();
+  let [popperElement, setPopperElement] = useState<HTMLDivElement>();
+  let { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: "top-start",
+  });
 
   useEffect(() => {
     if (previous && visibleContext) {
@@ -32,16 +40,9 @@ export const WalletConnect = ({ width }: { width?: string }) => {
     }
   }, [visible, setVisibleContext, visibleContext, previous]);
 
-  let [referenceElement, setReferenceElement] = useState<HTMLButtonElement>();
-  let [popperElement, setPopperElement] = useState<HTMLDivElement>();
-  let { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: "top-start",
-  });
-
   if (connected && publicKey) {
     return (
       <Popover>
-        {/* Button */}
         <Popover.Button
           // @ts-ignore
           ref={setReferenceElement}
