@@ -20,6 +20,7 @@ export const makeTx = async (
   signers?: Signer[],
   skipPreflight = false
 ) => {
+  console.log("maketxfire");
   let sig: string | undefined = undefined;
 
   try {

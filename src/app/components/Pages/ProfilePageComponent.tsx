@@ -10,8 +10,8 @@ import NotConnectedModal from "../Modals/NotConnectedModal";
 import DomainList from "@/app/components/DomainList/DomainList";
 import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
-import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
+import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 
 export const metadata = {
   title: "Profile Page",
@@ -25,8 +25,9 @@ const ProfilePageComponent = () => {
     connection,
     publicKey
   );
-  const { data: favoriteDomain, isLoading: favoriteLoading } =
-    useFetchFavoriteDomain(connection, publicKey!);
+  const { data: favoriteDomain, loading: favoriteLoading } = useFavouriteDomain(
+    publicKey?.toBase58()!
+  );
 
   useEffect(() => {
     if (!publicKey) {
@@ -56,11 +57,7 @@ const ProfilePageComponent = () => {
           {domainsOwned?.length !== 0 ? (
             <div className="flex flex-col items-center justify-center">
               <div className="">
-                <ProfileOverview
-                  favoriteDomain={favoriteDomain}
-                  favoriteLoading={favoriteLoading}
-                  publicKey={publicKey!}
-                />
+                <ProfileOverview />
                 <div className="">
                   <DomainList />
                 </div>

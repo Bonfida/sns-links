@@ -3,14 +3,16 @@ import Image from "next/image";
 import { PublicKey } from "@solana/web3.js";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { useFetchFavoriteDomain } from "@/hooks/useFetchFavoriteDomain";
+import { useFavoriteDomain } from "@bonfida/sns-react";
+import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 
 const ProfileOverview = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
   const abbreviatedPubkey = abbreviatePubkey(publicKey, 5);
-  const { data: favoriteDomain, isLoading: favoriteLoading } =
-    useFetchFavoriteDomain(connection, publicKey!);
+  const { data: favoriteDomain, loading: favoriteLoading } = useFavouriteDomain(
+    publicKey?.toBase58()
+  );
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
