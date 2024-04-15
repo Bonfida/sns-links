@@ -1,33 +1,31 @@
+"use client";
 import Image from "next/image";
+import { WalletConnect } from "../Wallet/WalletConnect";
 
 const Home = () => {
   return (
-    <div className="w-full flex mt-10">
-      <div className="w-1/2 px-4 md:px-6 ">
-        <div className="flex flex-col justify-center space-y-8 text-center">
-          <h1 className="font-bold tracking-tighter text-transparent text-5xl xl:text-8xl/none bg-clip-text bg-gradient-to-r from-white to-gray-500">
-            Your links on chain.
-          </h1>
-          <p className="max-w-[600px] text-zinc-200 md:text-xl sm:tex-lg text-sm dark:text-zinc-100 mx-auto">
+    <div className="flex w-[1224px]">
+      <div className="w-1/2 space-y-10">
+        <div className="w-[600px]">
+          <span className="font-azeret font-semibold text-[104px] text-[#F8EFF9] leading-none">
+            Your Brand On Chain
+          </span>
+          <p className="font-medium text-base font-azeret text-[#F8EFF9] w-[505px]">
             Upload all of your platform links using SNS links and share easily
             with friends. Your .sol domain now holds the key to sharing your
-            brand accross the web.
+            brand across the web.
           </p>
-          <div className=" justify-center flex">
-            <button className="bg-gradient-to-r from-white to-gray-500 px-3 py-3 rounded-xl text-black mt-5">
-              Get started
-            </button>
-          </div>
         </div>
+        <WalletConnect />
       </div>
-      <div className="w-1/2 flex justify-center">
-        <Image
-          width={400}
-          height={600}
-          className="rounded-xl border-[2px] border-white border-opacity-20"
-          src={"/preview/Preview.png"}
-          alt="app preview"
-        />
+      <div className="">
+        {/* <Image
+          width={1440}
+          height={1040}
+          alt="preview"
+          src="/preview/product-shot.svg"
+          className=""
+        /> */}
       </div>
     </div>
   );

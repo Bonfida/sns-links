@@ -10,8 +10,7 @@ import { usePopper } from "react-popper";
 import { useState, useEffect } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { useModalContext } from "../../../hooks/useModalContext";
-import { useFavoriteDomain } from "@bonfida/sns-react";
-import { getFavoriteDomain } from "@bonfida/spl-name-service";
+import { useDomainsForOwner, useFavoriteDomain } from "@bonfida/sns-react";
 
 export const WalletConnect = ({ width }: { width?: string }) => {
   //Connection and Wallet
@@ -19,6 +18,21 @@ export const WalletConnect = ({ width }: { width?: string }) => {
   const { connection } = useConnection();
 
   // Domain
+  const { result: userDomainList, loading: isuserDomainListLoading } =
+    useDomainsForOwner(connection, publicKey);
+
+  const { result: favoriteDomain, loading: isFaovriteDomainLoading } =
+    useFavoriteDomain(connection, publicKey);
+
+  const loading = isuserDomainListLoading || isFaovriteDomainLoading;
+
+  const favOrFirst = favoriteDomain
+    ? favoriteDomain.domain
+    : userDomainList?.[0]?.domain;
+
+  const displayedUser = favOrFirst
+    ? favOrFirst
+    : abbreviatePubkey(publicKey, 4);
 
   // Router
   const router = useRouter();
@@ -56,7 +70,7 @@ export const WalletConnect = ({ width }: { width?: string }) => {
           >
             <div className="bg-[#13122b] h-full w-full rounded-[14px] px-4 flex items-center justify-center lg:justify-start space-x-2">
               <ProfilePic
-                domain={favoriteDomain}
+                domain={favoriteDomain?.domain || ""}
                 hideEdit={true}
                 customHeight={24}
                 customWidth={24}
@@ -65,9 +79,7 @@ export const WalletConnect = ({ width }: { width?: string }) => {
               <span
                 className={twMerge("font-bold text-white font-azeret w-fit")}
               >
-                {favoriteDomain
-                  ? formatFav(favoriteDomain!, publicKey)
-                  : abbreviatePubkey(publicKey, 4)}
+                {displayedUser}
               </span>
             </div>
           </div>

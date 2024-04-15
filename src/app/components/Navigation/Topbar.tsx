@@ -20,14 +20,14 @@ const Topbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center w-screen md:h-20 h-14 py-20 md:py-10 ">
-      <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-3/4 md:h-20 h-14">
-        <Link href="/" className="flex items-center justify-center w-1/4">
+    <div className="flex items-center justify-center w-screen md:h-[72px] h-14 pt-3">
+      <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-[1224px] md:h-12 h-10">
+        <Link href="/" className="flex items-center justify-center gap-4">
           <Image
             width={80}
             height={80}
             src="/white-logo.svg"
-            className="p-5"
+            className="w-5 h-6"
             alt="SNS Links Logo"
           />
 
@@ -35,22 +35,8 @@ const Topbar = () => {
             SNS Links
           </span>
         </Link>
-        <NavigationMenu.Root className="flex justify-center items-center font-semibold  w-full flex-1">
-          <NavigationMenu.Link
-            className="flex items-center justify-center md:text-xl text-2xl text-white hover:cursor-pointer"
-            onClick={handleProfileClick}
-          >
-            <Image
-              src="/user.svg"
-              width={45}
-              height={45}
-              alt="Profile"
-              className=""
-            />
-          </NavigationMenu.Link>
-        </NavigationMenu.Root>
 
-        <div className="w-1/4 flex justify-center">
+        <div className="flex justify-center">
           <WalletConnect />
         </div>
       </div>
