@@ -21,12 +21,11 @@ const DomainListButton = ({ domain }: { domain: string }) => {
   );
   const { toast } = useToastContext();
   const [selectedFavorite, setSelectedFavorite] = useState(false);
-  const { mutate: mutateFavoriteDomain } = useFavouriteDomain(
-    publicKey?.toBase58(),
-    {
+  const { mutate: mutateFavoriteDomain, data: favoriteDomain } =
+    useFavouriteDomain(publicKey?.toBase58(), {
       manual: true,
-    }
-  );
+    });
+  const isFavorite = domain === favoriteDomain;
 
   const handleEditClick = () => {
     setSelectedDomain(domain);
@@ -36,11 +35,9 @@ const DomainListButton = ({ domain }: { domain: string }) => {
 
   const handleFavoriteUpdate = async () => {
     setSelectedFavorite(true);
-    console.log("publicKey", publicKey, signTransaction, domain);
     if (!publicKey || !signTransaction || !domain) return;
 
     try {
-      console.log("lol");
       const { pubkey } = await derive(domain);
       const ix = await registerFavourite(pubkey, publicKey!, NAME_OFFERS_ID);
       const { signature, success } = await makeTx(
@@ -73,13 +70,25 @@ const DomainListButton = ({ domain }: { domain: string }) => {
         </button>
         <span className="text-white text-lg">{domain}.sol</span>
       </div>
+      <div className="flex gap-2 justify-center items-center">
+        {isFavorite && <PrimaryTag />}
+        <button
+          className="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t-[1px] border-white/[20%]"
+          onClick={handleEditClick}
+        >
+          <Image src="/pen.svg" alt="edit records" width={24} height={24} />
+        </button>
+      </div>
+    </div>
+  );
+};
 
-      <button
-        className="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t-[1px] border-white/[20%]"
-        onClick={handleEditClick}
-      >
-        <Image src="/pen.svg" alt="edit records" width={24} height={24} />
-      </button>
+export const PrimaryTag = () => {
+  return (
+    <div className=" py-2 px-4 border border-white/[24] rounded-[14px] flex items-center justify-center">
+      <span className="font-semibold text-[14px] font-azeret text-white">
+        primary
+      </span>
     </div>
   );
 };

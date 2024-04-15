@@ -1,9 +1,7 @@
 import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
 import Image from "next/image";
-import { PublicKey } from "@solana/web3.js";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { useFavoriteDomain } from "@bonfida/sns-react";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 
 const ProfileOverview = () => {
@@ -19,24 +17,20 @@ const ProfileOverview = () => {
     favoriteDomain || undefined
   );
 
-  if (!favoriteLoading) {
-    console.log("favoriteDomain", favoriteDomain);
-  }
-
   return (
-    <div className="flex justify-start self-start items-center space-x-5">
+    <div className="flex justify-start self-start items-center space-x-5 w-[600px]">
       {favoriteDomain ? (
         <>
           <Image
             src={recordsData?.pic! || "/default-profile.svg"}
-            width={100}
-            height={100}
+            width={120}
+            height={120}
             alt="default pic"
             className="rounded-full"
           />
 
           <div className="flex flex-col">
-            <h1 className="md:text-5xl text-3xl font-semibold text-white">
+            <h1 className="md:text-4xl text-3xl font-semibold text-white">
               {favoriteDomain}.sol
             </h1>
             <h2 className="md:text-2xl text-xl text-slate-400">
