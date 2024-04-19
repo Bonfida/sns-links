@@ -24,7 +24,7 @@ export const RecordListItem = ({
           </button> */}
           <ButtonModal
             closeIconClass="right-5 top-[20px] w-[240px] h-[240px] sm:w-[48px] sm:h-[48px] rounded-[8px] sm:rounded-[16px] z-200 "
-            buttonClass="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t-[1px] border-white/[20%]"
+            buttonClass="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t border-t-[#FFFFFF33]"
             buttonText={
               <Image src="/pen.svg" alt="edit records" width={24} height={24} />
             }

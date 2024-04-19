@@ -58,7 +58,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
     }
   };
   return (
-    <div className="flex justify-between w-full bg-white/[7%] border-t-[1px] border-white/[24%] rounded-[24px] p-2">
+    <div className="flex justify-between w-full bg-white/[7%] border-t border-white/[24%] rounded-[24px] p-2">
       <div className="space-x-2 flex justify-center items-center">
         <button className="ml-2" onClick={handleFavoriteUpdate}>
           <Image
@@ -73,7 +73,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       <div className="flex gap-2 justify-center items-center">
         {isFavorite && <PrimaryTag />}
         <button
-          className="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t-[1px] border-white/[20%]"
+          className="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t border-t-[#FFFFFF33]"
           onClick={handleEditClick}
         >
           <Image src="/pen.svg" alt="edit records" width={24} height={24} />

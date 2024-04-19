@@ -30,7 +30,7 @@ const Home = () => {
         /> */}
         </div>
       </div>
-      <div className="w-screen">
+      <div className="w-screen mt-10">
         <HomePageCarousel />
       </div>
     </div>
