@@ -81,7 +81,7 @@ const EditRecordModal = ({
         <div className="flex flex-col items-center justify-center w-full space-y-4">
           <div className="flex items-center justify-between w-full mt-6 space-x-1.5">
             <button
-              className="w-[268px] h-[47px] rounded-[24px]  border-t text-white bg-[#7C7CFF]  border-t-[#FFFFFF33]"
+              className="w-[268px] h-[47px] rounded-[24px]  border-t text-white bg-[#7C7CFF]  border-t-[#FFFFFF33] active:border-t-0"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -93,7 +93,7 @@ const EditRecordModal = ({
               Update
             </button>
             <button
-              className="w-[268px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33]"
+              className="w-[268px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33] active:border-t-0"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
