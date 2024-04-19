@@ -1,7 +1,7 @@
 "use client";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import DomainListButton from "../Buttons/DomainListButton";
+import { DomainListItem } from "../Buttons/DomainListButton";
 
 const DomainList = () => {
   const { publicKey } = useWallet();
@@ -16,7 +16,7 @@ const DomainList = () => {
       {!domainsLoading && (
         <div className=" md:w-[800px] w-[450px] space-y-3">
           {domainsOwned?.map((domain) => {
-            return <DomainListButton domain={domain} key={domain} />;
+            return <DomainListItem domain={domain} key={domain} />;
           })}
         </div>
       )}

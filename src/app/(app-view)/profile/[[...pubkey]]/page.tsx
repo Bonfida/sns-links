@@ -1,4 +1,4 @@
-import ProfilePageComponent from "../../../components/Pages/ProfilePageComponent";
+import ProfilePageComponent from "../../../components/Pages/ProfilePage";
 
 export const metadata = {
   title: "Profile",

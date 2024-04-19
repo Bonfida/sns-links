@@ -12,7 +12,7 @@ import { registerFavourite } from "@bonfida/name-offers";
 import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
 import { makeTx } from "@/utils/makeTx";
 
-const DomainListButton = ({ domain }: { domain: string }) => {
+export const DomainListItem = ({ domain }: { domain: string }) => {
   const { publicKey, signTransaction } = useWallet();
   const { connection } = useConnection();
   const router = useRouter();
@@ -92,5 +92,3 @@ export const PrimaryTag = () => {
     </div>
   );
 };
-
-export default DomainListButton;

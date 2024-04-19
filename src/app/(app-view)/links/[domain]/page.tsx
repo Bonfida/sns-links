@@ -1,4 +1,4 @@
-import DomainLinksPageComponent from "@/app/components/Pages/DomainLinksPageComponent";
+import DomainLinksPageComponent from "@/app/components/Pages/RecordsListPage";
 
 export const metadata = {
   title: "Share Links",

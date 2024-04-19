@@ -62,7 +62,7 @@ const Bio = ({ domain }: { domain: string }) => {
   return (
     <form
       method="post"
-      className="flex flex-col md:w-[420px] w-[300px] mt-6 overflow-y-auto no-scrollbar "
+      className="flex flex-col  mt-6 overflow-y-auto no-scrollbar "
     >
       <textarea
         name="postContent"
@@ -74,7 +74,7 @@ const Bio = ({ domain }: { domain: string }) => {
         className={` rounded-xl bg-inherit ${
           bioEditMode && !isToken
             ? "bg-slate-200 text-[#03001A]"
-            : "bg-inherit text-white"
+            : "bg-inherit text-white "
         }`}
         readOnly={!isToken ? !bioEditMode : bioEditMode}
         maxLength={250}

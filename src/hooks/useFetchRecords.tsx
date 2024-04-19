@@ -7,15 +7,13 @@ import { useQuery } from "react-query";
 import { recordsToFetch } from "@/app/constants/recordsToFetch";
 import { Connection } from "@solana/web3.js";
 
-interface FetchRecordsResult {
-  pic: string | undefined;
-  records: { [key in Record]?: string };
-}
 export const useFetchRecords = (
   connection: Connection,
   domain: string | undefined
 ) => {
-  const fetchRecords = async (): Promise<FetchRecordsResult | undefined> => {
+  const fetchRecords = async (): Promise<
+    { record: string; content?: string }[] | undefined
+  > => {
     if (!domain) {
       return;
     }
@@ -26,29 +24,24 @@ export const useFetchRecords = (
       recordsToFetch,
       { deserialize: true }
     );
-    let picRecord: string | undefined;
-    const otherRecords: { [key in Record]?: string } = {};
-    const v2RecordsObj: { [key in Record]?: string } = recordsToFetch.reduce(
-      (obj, record) => {
-        if (record !== Record.Pic) {
-          obj[record] = undefined;
-        }
-        return obj;
-      },
-      {} as { [key in Record]?: string }
-    );
 
-    fetchedV2Records.forEach((value) => {
-      if (value?.record === Record.Pic) {
-        picRecord = value.deserializedContent;
-      }
+    const v2RecordsArray: { record: string; content?: string }[] =
+      recordsToFetch.reduce((arr, record) => {
+        const fetchedRecord = fetchedV2Records.find(
+          (f) => f?.record === record
+        );
 
-      if (value?.record && v2RecordsObj.hasOwnProperty(value.record)) {
-        v2RecordsObj[value.record] = value.deserializedContent;
-      }
-    });
+        arr.push({
+          record: record,
+          content: fetchedRecord
+            ? fetchedRecord.deserializedContent
+            : undefined,
+        });
 
-    return { pic: picRecord, records: v2RecordsObj };
+        return arr;
+      }, [] as { record: string; content?: string }[]);
+
+    return v2RecordsArray;
   };
 
   return useQuery({ queryKey: ["records", domain], queryFn: fetchRecords });

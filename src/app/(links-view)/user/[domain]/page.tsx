@@ -1,4 +1,4 @@
-import LinkSharePageComponent from "@/app/components/Pages/LinkSharePageComponent";
+import LinkSharePageComponent from "@/app/components/Pages/LinkSharePage";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
 
 export const metadata = {
