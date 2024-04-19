@@ -25,7 +25,6 @@ const EditRecordModal = ({
     recordName as Record
   );
 
-  console.log("modal called");
   const handleUpdateClick = async (
     recordName: Record,
     selectedDomain: string,
@@ -58,26 +57,31 @@ const EditRecordModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10 ">
       <div
-        className="relative bg-[#03001A] sm:min-w-[880px] h-fit flex flex-col justify-center items-center border border-[#2A2A51] rounded-xl p-5 mt-10 md:mt-0"
+        className="relative bg-[#03001A] w-[660px] h-fit flex flex-col justify-center items-center border border-[#FFFFFF3D]/25 rounded-xl p-5 mt-10 md:mt-0"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl text-white font-azeret">
-          {`Edit ${
-            recordName.charAt(0).toUpperCase() + recordName.slice(1)
-          } record`}
-        </h2>
-        <div className="bg-gradient-to-r from-transparent to-transparent via-[#7C7CFF] w-full h-[1px] my-5" />
+        <div className="w-full flex justify-start">
+          <h2 className="text-sm text-[#F8EFF9CC] font-azeret font-semibold">
+            {recordName.charAt(0).toUpperCase() + recordName.slice(1)}
+          </h2>
+        </div>
         <input
-          className="bg-[#03001A] text-white h-[64px] w-full text-center border border-[#2A2A51] rounded-lg"
+          className="bg-[#FFFFFF12] text-white h-[113px] w-[552px] text-center border border-[#FFFFFF3D] rounded-lg"
           placeholder="Enter new record"
           onChange={(event) => {
             setRecordVal(event.target.value);
           }}
         />
+        <div className="w-full justify-start">
+          <button className="flex font-semibold text-sm text-[#7C7CFF]">
+            PASTE
+          </button>
+        </div>
+
         <div className="flex flex-col items-center justify-center w-full space-y-4">
-          <div className="flex items-center justify-center w-full mt-10 space-x-4">
+          <div className="flex items-center justify-between w-full mt-6 space-x-1.5">
             <button
-              className="w-1/2 h-[64px] rounded-[24px] border-opacity-20 border-white border-[1px] text-white bg-[#7C7CFF]"
+              className="w-[268px] h-[47px] rounded-[24px]  border-t text-white bg-[#7C7CFF]  border-t-[#FFFFFF33]"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -87,6 +91,18 @@ const EditRecordModal = ({
               }}
             >
               Update
+            </button>
+            <button
+              className="w-[268px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33]"
+              onClick={() => {
+                handleUpdateClick(
+                  recordName as Record,
+                  selectedDomain,
+                  recordVal
+                );
+              }}
+            >
+              Cancel
             </button>
           </div>
         </div>
