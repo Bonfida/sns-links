@@ -2,8 +2,11 @@
 import Image from "next/image";
 import { WalletConnect } from "../Wallet/WalletConnect";
 import { HomePageCarousel } from "../Carousel/HomePageCarousel";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { GoToProfileButton } from "../Buttons/GoToProfileButton";
 
 const Home = () => {
+  const { connected } = useWallet();
   return (
     <div className="flex-col flex gap-3 w-[1224px]">
       <div className="flex w-[1224px]">
@@ -18,7 +21,11 @@ const Home = () => {
               brand across the web.
             </p>
           </div>
-          <WalletConnect />
+          {connected ? (
+            <GoToProfileButton />
+          ) : (
+            <WalletConnect green={true} width={258} />
+          )}
         </div>
         <div className="">
           {/* <Image

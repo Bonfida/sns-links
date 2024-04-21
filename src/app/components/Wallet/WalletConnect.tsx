@@ -15,10 +15,10 @@ import Image from "next/image";
 
 export const WalletConnect = ({
   width,
-  style,
+  green,
 }: {
-  width?: string;
-  style: "navy" | "green";
+  width?: number;
+  green?: boolean;
 }) => {
   //Connection and Wallet
   const { connected, publicKey, connecting, disconnect } = useWallet();
@@ -69,10 +69,8 @@ export const WalletConnect = ({
           ref={setReferenceElement}
         >
           <div
-            className={twMerge(
-              " bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33]",
-              width ? width : "w-[196px]"
-            )}
+            style={{ width: width ? `${width}px` : "196px" }}
+            className=" bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33]"
           >
             <ProfilePic
               domain={favoriteDomain?.domain || ""}
@@ -127,9 +125,12 @@ export const WalletConnect = ({
 
   return (
     <button
+      style={{ width: width ? `${width}px` : "196px" }}
       className={twMerge(
-        " bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33]",
-        width ? width : "w-[196px]"
+        " h-12 rounded-2xl px-4 flex items-center justify-center space-x-2",
+        green
+          ? "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E]"
+          : " bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] border-t border-t-[#FFFFFF33]"
       )}
       onClick={() => {
         setVisible(true);
@@ -137,9 +138,23 @@ export const WalletConnect = ({
       type="button"
     >
       <div className="flex items-center justify-center gap-2">
-        <Image width={19} height={17} alt="wallet" src="/wallet.svg" />
-        <span className="font-bold font-azeret text-base w-fit text-white normal-case">
-          {connecting ? "Connecting..." : "Connect wallet"}
+        <Image
+          width={19}
+          height={17}
+          alt="wallet"
+          src={green ? "/wallet-blue.svg" : "/wallet-white.svg"}
+        />
+        <span
+          className={twMerge(
+            "font-bold font-azeret text-base w-fit text-white normal-case",
+            green ? "text-[#03021A]" : "text-white"
+          )}
+        >
+          {connecting
+            ? "Connecting..."
+            : green
+            ? "Login with your wallet"
+            : "Connect wallet"}
         </span>
       </div>
     </button>
