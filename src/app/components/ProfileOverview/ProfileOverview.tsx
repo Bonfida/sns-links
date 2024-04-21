@@ -23,7 +23,7 @@ const ProfileOverview = () => {
   });
 
   return (
-    <div className="flex justify-start items-center space-x-5 w-[600px]">
+    <div className="flex justify-start items-center space-x-5 w-full">
       {favoriteDomain ? (
         <>
           <Image

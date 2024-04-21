@@ -2,15 +2,12 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
-import NotFoundModal from "../Modals/NoLinksFoundModal";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import NotConnectedModal from "../Modals/NotConnectedModal";
 import DomainList from "@/app/components/DomainList/DomainList";
 import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { NotFoundNotice } from "../Modals/NotFoundNotice";
 
@@ -39,7 +36,7 @@ const ProfilePageComponent = () => {
   }, [publicKey]);
 
   return (
-    <div className="flex items-start justify-center w-full min-h-screen mt-10">
+    <div className="flex w-full min-h-screen mt-10 justify-center">
       {!connected && <NotConnectedModal />}
       {connected && (favoriteLoading || domainsLoading) && (
         <>
@@ -54,11 +51,15 @@ const ProfilePageComponent = () => {
         </>
       )}
       {connected && !favoriteLoading && !domainsLoading && (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col">
           {domainsOwned?.length !== 0 ? (
             <>
-              <ProfileOverview />
-              <DomainList />
+              <div className="flex items-start">
+                <ProfileOverview />
+              </div>
+              <div className="flex items-center">
+                <DomainList />
+              </div>
             </>
           ) : (
             <div>

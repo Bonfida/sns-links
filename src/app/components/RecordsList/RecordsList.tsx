@@ -99,7 +99,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   return (
     <div className="w-full overflow-auto">
       <div className=" flex flex-col items-center ">
-        <div className=" md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
+        <div className="md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
           <button onClick={navigateBack} className="flex gap-2">
             <Image src="/back.svg" width={18} height={15} alt="back" />
             <span className="font-azeret text-base font-bold text-white">
@@ -122,7 +122,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-3 w-full justify- items-center">
-                <span>contact</span>
+                <span>CONTACT</span>
                 {!recordsLoading &&
                   recordData
                     ?.filter((record) =>
@@ -135,7 +135,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                         domain={currentDomain}
                       />
                     ))}
-                <span>socials</span>
+                <span>SOCIALS</span>
                 {!recordsLoading &&
                   recordData
                     ?.filter((record) =>
@@ -148,7 +148,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                         domain={currentDomain}
                       />
                     ))}
-                <span>wallets</span>
+                <span>WALLETS</span>
                 {!recordsLoading &&
                   recordData
                     ?.filter((record) =>
