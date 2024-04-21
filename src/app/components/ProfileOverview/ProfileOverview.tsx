@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
+import { Record } from "@bonfida/spl-name-service";
 
 const ProfileOverview = () => {
   const { connection } = useConnection();
@@ -17,12 +18,16 @@ const ProfileOverview = () => {
     favoriteDomain || undefined
   );
 
+  const picRecord = recordsData?.find((record) => {
+    return record.record === Record.Pic;
+  });
+
   return (
-    <div className="flex justify-start self-start items-center space-x-5 w-[600px]">
+    <div className="flex justify-start items-center space-x-5 w-[600px]">
       {favoriteDomain ? (
         <>
           <Image
-            src={recordsData?.pic! || "/default-profile.svg"}
+            src={picRecord?.content || "/default-profile.svg"}
             width={120}
             height={120}
             alt="default pic"

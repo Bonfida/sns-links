@@ -12,6 +12,7 @@ import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
+import { NotFoundNotice } from "../Modals/NotFoundNotice";
 
 export const metadata = {
   title: "Profile Page",
@@ -53,20 +54,18 @@ const ProfilePageComponent = () => {
         </>
       )}
       {connected && !favoriteLoading && !domainsLoading && (
-        <>
+        <div className="flex flex-col items-center justify-center">
           {domainsOwned?.length !== 0 ? (
-            <div className="flex flex-col items-center justify-center">
-              <div className="">
-                <ProfileOverview />
-                <div className="">
-                  <DomainList />
-                </div>
-              </div>
-            </div>
+            <>
+              <ProfileOverview />
+              <DomainList />
+            </>
           ) : (
-            <NotFoundModal />
+            <div>
+              <NotFoundNotice />
+            </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
