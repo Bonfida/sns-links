@@ -1,6 +1,6 @@
 import "../globals.css";
 import type { Metadata } from "next";
-import { Wallet } from "../../Wallet";
+import { Providers } from "../../Providers";
 import Topbar from "../components/Navigation/Topbar";
 import Footer from "../components/Navigation/Footer";
 import Widget from "@bonfida/sns-widget";
@@ -23,11 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gradient-to-t to-[#03001A] from-[#000a1a]">
-        <Wallet>
+        <Providers>
           <Topbar />
           <Widget endpoint={process.env.NEXT_PUBLIC_ENDPOINT!} />
           {children}
-        </Wallet>
+        </Providers>
         <Footer />
       </body>
     </html>

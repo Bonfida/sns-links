@@ -1,6 +1,6 @@
 "use client";
 import "../globals.css";
-import { Wallet } from "@/Wallet";
+import { Providers } from "@/Providers";
 import Footer from "../components/Navigation/Footer";
 export default function RootLayout({
   children,
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gradient-to-t to-[#176cf4] from-[#000a1a]">
-        <Wallet>{children}</Wallet>
+        <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>

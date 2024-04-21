@@ -11,8 +11,15 @@ import { useState, useEffect } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { useModalContext } from "../../../hooks/useModalContext";
 import { useDomainsForOwner, useFavoriteDomain } from "@bonfida/sns-react";
+import Image from "next/image";
 
-export const WalletConnect = ({ width }: { width?: string }) => {
+export const WalletConnect = ({
+  width,
+  style,
+}: {
+  width?: string;
+  style: "navy" | "green";
+}) => {
   //Connection and Wallet
   const { connected, publicKey, connecting, disconnect } = useWallet();
   const { connection } = useConnection();
@@ -63,25 +70,20 @@ export const WalletConnect = ({ width }: { width?: string }) => {
         >
           <div
             className={twMerge(
-              "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] p-[1.5px] rounded-[16px] h-[52px]",
-              width ? width : "w-[182px]",
-              "hover:shadow-wallet-connect"
+              " bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33]",
+              width ? width : "w-[196px]"
             )}
           >
-            <div className="bg-[#13122b] h-full w-full rounded-[14px] px-4 flex items-center justify-center lg:justify-start space-x-2">
-              <ProfilePic
-                domain={favoriteDomain?.domain || ""}
-                hideEdit={true}
-                customHeight={24}
-                customWidth={24}
-              />
+            <ProfilePic
+              domain={favoriteDomain?.domain || ""}
+              hideEdit={true}
+              customHeight={24}
+              customWidth={24}
+            />
 
-              <span
-                className={twMerge("font-bold text-white font-azeret w-fit")}
-              >
-                {displayedUser}
-              </span>
-            </div>
+            <span className={twMerge("font-bold text-white font-azeret w-fit")}>
+              {displayedUser}
+            </span>
           </div>
         </Popover.Button>
 
@@ -124,25 +126,23 @@ export const WalletConnect = ({ width }: { width?: string }) => {
   }
 
   return (
-    <div
+    <button
       className={twMerge(
-        "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] p-[2px] rounded-[16px] h-[52px]",
-        width ? width : "w-[182px]",
-        "relative z-30"
+        " bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33]",
+        width ? width : "w-[196px]"
       )}
+      onClick={() => {
+        setVisible(true);
+      }}
+      type="button"
     >
-      <button
-        className="bg-[#13122b] h-full w-full rounded-[14px] px-4 flex items-center justify-center space-x-2"
-        onClick={() => {
-          setVisible(true);
-        }}
-        type="button"
-      >
-        <span className="font-bold font-azeret text-[16px] w-fit text-white normal-case">
+      <div className="flex items-center justify-center gap-2">
+        <Image width={19} height={17} alt="wallet" src="/wallet.svg" />
+        <span className="font-bold font-azeret text-base w-fit text-white normal-case">
           {connecting ? "Connecting..." : "Connect wallet"}
         </span>
-      </button>
-    </div>
+      </div>
+    </button>
   );
 };
 
