@@ -10,28 +10,51 @@ import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
 
-const contactRecords = [Record.Email, Record.Telegram];
+const contactRecords = [
+  {
+    record: Record.Email,
+    interactionType: "newTab",
+    urlPrefix: "mailto:",
+  },
+  {
+    record: Record.Telegram,
+    interactionType: "newTab",
+    urlPrefix: "https://t.me/",
+  },
+];
 
 const walletRecords = [
-  Record.ARWV,
-  Record.SOL,
-  Record.ETH,
-  Record.BTC,
-  Record.LTC,
-  Record.DOGE,
-  Record.SHDW,
-  Record.POINT,
-  Record.Injective,
-  Record.BSC,
+  { record: Record.ARWV },
+  { record: Record.SOL },
+  { record: Record.ETH },
+  { record: Record.BTC },
+  { record: Record.LTC },
+  { record: Record.DOGE },
+  { record: Record.SHDW },
+  { record: Record.POINT },
+  { record: Record.Injective },
+  { record: Record.BSC },
 ];
 
 const socialRecords = [
-  Record.Url,
-  Record.Discord,
-  Record.Github,
-  Record.Reddit,
-  Record.Twitter,
-  Record.Backpack,
+  { record: Record.Url, interactionType: "newTab", urlPrefix: "" }, // No prefix needed since full http/https link required during input
+  { record: Record.Discord, interactionType: "copy" },
+  {
+    record: Record.Github,
+    interactionType: "newTab",
+    urlPrefix: "https://github.com/",
+  },
+  {
+    record: Record.Reddit,
+    interactionType: "newTab",
+    urlPrefix: "https://www.reddit.com/user/",
+  },
+  {
+    record: Record.Twitter,
+    interactionType: "newTab",
+    urlPrefix: "https://twitter.com/",
+  },
+  { record: Record.Backpack, interactionType: "copy" },
 ];
 
 import { Record } from "@bonfida/spl-name-service";
@@ -45,8 +68,23 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
   const [isMounted, setIsMounted] = useState(false);
   const { data: domainInfo, keys } = useDomainsInfo([domain]);
   const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
-  let recordsExist;
+  const userSocialRecords = recordsData?.filter(
+    (record) =>
+      socialRecords.some((social) => social.record === record.record) &&
+      record.content !== undefined
+  );
+  const userContactRecords = recordsData?.filter(
+    (record) =>
+      contactRecords.some((contact) => contact.record === record.record) &&
+      record.content !== undefined
+  );
+  const userWalletRecords = recordsData?.filter(
+    (record) =>
+      walletRecords.some((wallet) => wallet.record === record.record) &&
+      record.content !== undefined
+  );
 
+  console.log("userContact", userContactRecords);
   const content =
     domainKey &&
     domainInfo
@@ -59,10 +97,6 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
     return record.record === Record.Pic;
   });
 
-  if (!recordsLoading) {
-    recordsExist = recordsData?.some((el) => el.content !== undefined);
-  }
-
   return (
     <div className="flex flex-col items-center justify-start w-screen h-screen p-10 overflow-auto">
       <div className="flex flex-col items-center space-y-1">
@@ -71,14 +105,14 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
         ) : (
           <Image
             alt="Profile picture"
-            width={200} // Fixed width for better control, adjust as needed
-            height={200} // Fixed height for better control, adjust as needed
+            width={200}
+            height={200}
             src={picRecord?.content ?? "/default-profile.svg"}
             className="rounded-full"
           />
         )}
         <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
-        <span>{content}</span> {/* Ensure 'content' is defined or handled */}
+        <span>{content}</span>
       </div>
 
       {recordsLoading ? (
@@ -94,45 +128,70 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
         <div className="flex flex-col mt-10 space-y-3">
           <div className="flex justify-center items-center flex-col">
             <div className="flex flex-col gap-3 w-full justify-center items-center">
-              <span>Contact</span>
-              {recordsData
-                ?.filter((record) =>
-                  contactRecords.includes(record.record as Record)
-                )
-                .map((record) => (
-                  <LinkButton
-                    key={record.record}
-                    name={record.record}
-                    value={record.content || ""}
-                    domain={domain}
-                  />
-                ))}
-              <span>Socials</span>
-              {recordsData
-                ?.filter((record) =>
-                  socialRecords.includes(record.record as Record)
-                )
-                .map((record) => (
-                  <LinkButton
-                    key={record.record}
-                    name={record.record}
-                    value={record.content || ""}
-                    domain={domain}
-                  />
-                ))}
-              <span>Wallets</span>
-              {recordsData
-                ?.filter((record) =>
-                  walletRecords.includes(record.record as Record)
-                )
-                .map((record) => (
-                  <LinkButton
-                    key={record.record}
-                    name={record.record}
-                    value={record.content || ""}
-                    domain={domain}
-                  />
-                ))}
+              {!!userContactRecords?.length && (
+                <>
+                  <span>Contact</span>
+                  {userContactRecords.map((record) => {
+                    const contactRecord = contactRecords.find(
+                      (contact) => contact.record === record.record
+                    );
+                    const finalUrl =
+                      contactRecord?.urlPrefix + (record.content || "");
+                    return (
+                      <LinkButton
+                        key={record.record}
+                        name={record.record}
+                        value={record.content}
+                        domain={domain}
+                        interactionType={contactRecord?.interactionType}
+                        link={finalUrl}
+                      />
+                    );
+                  })}
+                </>
+              )}
+
+              {!!userSocialRecords?.length && (
+                <>
+                  <span>Socials</span>
+                  {userSocialRecords.map((record) => {
+                    const socialRecord = socialRecords.find(
+                      (social) => social.record === record.record
+                    );
+                    if (!socialRecord || socialRecord.urlPrefix === undefined)
+                      return null;
+
+                    const finalUrl =
+                      socialRecord.urlPrefix + (record.content || "");
+
+                    return (
+                      <LinkButton
+                        key={record.record}
+                        name={record.record}
+                        value={finalUrl}
+                        domain={domain}
+                        interactionType={socialRecord.interactionType}
+                        link={finalUrl}
+                      />
+                    );
+                  })}
+                </>
+              )}
+              {!!userWalletRecords?.length && (
+                <>
+                  <span>Wallets</span>
+                  {userWalletRecords.map((record) => {
+                    return (
+                      <LinkButton
+                        key={record.record}
+                        name={record.record}
+                        value={record.content}
+                        domain={domain}
+                      />
+                    );
+                  })}
+                </>
+              )}
             </div>
           </div>
         </div>
