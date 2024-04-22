@@ -19,6 +19,7 @@ const Bio = ({ domain }: { domain: string }) => {
   const [bioText, setBioText] = useState("");
   const [refresh, setRefresh] = useState(false);
   const bioPlaceholder = !connected ? "My bio..." : "Add a bio...";
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
@@ -93,7 +94,9 @@ const Bio = ({ domain }: { domain: string }) => {
           )}
         </div>
       )}
-      {bioEditMode && isToken && <UnwrapModal domain={domain} />}
+      {bioEditMode && isToken && (
+        <UnwrapModal domain={domain} close={() => setModalVisible(false)} />
+      )}
     </form>
   );
 };

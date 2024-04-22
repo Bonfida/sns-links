@@ -1,18 +1,11 @@
 import { derive } from "../utils/derive";
 import { NameRegistryState } from "@bonfida/spl-name-service";
-import { deserializeUnchecked } from "borsh";
 import { useAsyncEffect, useSafeState } from "ahooks";
 import { useMultipleAccountInfoWs } from "./useMultipleAccountInfoWs";
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 
 const callBack = (info: AccountInfo<Buffer>) => {
-  const reg = deserializeUnchecked(
-    NameRegistryState.schema,
-    NameRegistryState,
-    info.data
-  );
-  reg.data = info.data?.slice(NameRegistryState.HEADER_LEN);
-  return reg;
+  return NameRegistryState.deserialize(info.data);
 };
 
 export const useDomainsInfo = (domains: string[] | undefined | null) => {

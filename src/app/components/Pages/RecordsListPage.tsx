@@ -1,9 +1,5 @@
 "use client";
 import RecordsList from "@/app/components/RecordsList/RecordsList";
-import RecordsTableSkeleton from "../Skeletons/RecordsTableSkeleton";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
-import { useConnection } from "@solana/wallet-adapter-react";
-
 type DomainLinksPageParams = {
   domain: string;
 };
