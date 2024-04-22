@@ -55,7 +55,7 @@ const HomePageCarouseltem = ({
   image: string;
 }) => {
   return (
-    <div className="flex flex-col justify-center items-start w-[240px] border border-[#FFFFFF3D] p-5 gap-3 rounded-2xl">
+    <div className="flex flex-col justify-center items-start w-[240px] border border-[#FFFFFF3D] p-5 gap-3 rounded-2xl bg-[#03021A]">
       <Image src={image} width={56.34} height={64} alt="" />
       <span className="text-2xl text-[#F8EFF9] font-semibold">{title}</span>
       <p className="text-base text-[#F8EFF9] font-medium">{description}</p>
