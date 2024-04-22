@@ -41,7 +41,7 @@ const LinkButton = ({
   };
 
   return (
-    <div className="h-[65px] flex bg-white/[7%] border-t-[1px] border-white/[24%] rounded-[24px] w-[450px]">
+    <div className="h-[65px] flex bg-white/[7%] border-t-[1px] border-white/[24%] rounded-[24px] sm:w-[450px] w-[351px]">
       <div className="flex justify-between items-center w-full py-2 px-5">
         <div className="flex justify-between items-center">
           <span className="text-white text-lg w-7">

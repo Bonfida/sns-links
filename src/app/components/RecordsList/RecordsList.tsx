@@ -1,23 +1,16 @@
 import { useState, useContext, useEffect } from "react";
-import EditRecordModal from "../Modals/EditRecordModal";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
 import ProfilePic from "../ProfilePic/ProfilePic";
-import LinkShareButton from "../Buttons/LinkShareButton";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { isTokenized } from "../../../utils/tokenizer/isTokenized";
-import UnwrapModal from "../Modals/UnwrapModal";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import Bio from "../Bio/Bio";
-import { RecordsData } from "../../types/RecordsData";
-import EditRecordPopover from "../Popovers/EditRecordPopover";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { RecordListItem } from "./RecordListItem";
-import { SpinnerFida } from "@bonfida/components";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -45,16 +38,10 @@ const socialRecords = [
 
 const RecordsTable = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
-  const [isEditingRecord, setIsEditingRecord] = useState<boolean>(false);
-  const [isEditingPic, setIsEditingPic] = useState(false);
-  const [editingRecordName, setEditingRecordName] = useState<Record>(
-    "" as Record
-  );
   const [isOwner, setIsOwner] = useState(false);
   const { publicKey, connected, signMessage, signTransaction } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
-  const [isToken, setIsToken] = useState(false);
 
   const router = useRouter();
 
@@ -67,21 +54,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     connection,
     domain
   );
-
-  const handleEdit = async (recordName: Record) => {
-    const isToken = await isTokenized(currentDomain!, connection, publicKey!);
-
-    if (!isEditingRecord) {
-      setIsEditingRecord(true);
-      if (isToken) {
-        setIsToken(true);
-      } else {
-        setEditingRecordName(recordName);
-      }
-    } else {
-      setIsEditingRecord(false);
-    }
-  };
 
   const navigateBack = () => {
     router.push(`/profile/${publicKey}`);
@@ -110,14 +82,26 @@ const RecordsTable = ({ domain }: { domain: string }) => {
 
         <div className="space-y-2 mt-10 md:w-[600px] sm:w-[550px] w-[350px] ">
           <div className="flex flex-col justify-around">
-            <div className="flex items-center justify-start w-full">
+            <div className="flex items-center justify-start w-full gap-4">
               <ProfilePic domain={domain} />
-              <h1 className="md:text-5xl text-3xl font-bold text-white ml-5 mr-1">
+              <h1 className="md:text-5xl text-3xl font-bold text-white">
                 {currentDomain}.sol
               </h1>
-              <div className="self-center mt-5">
-                {isOwner && <LinkShareButton domain={currentDomain} />}
-              </div>
+              {isOwner && (
+                <a
+                  href={`http://localhost:3000/user/${domain}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/link-out.svg"
+                    height={30}
+                    width={30}
+                    alt=""
+                    className="w-18 h-18 sm:w-30 sm:h-30"
+                  />
+                </a>
+              )}
             </div>
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">

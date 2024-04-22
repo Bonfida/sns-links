@@ -84,7 +84,6 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
       record.content !== undefined
   );
 
-  console.log("userContact", userContactRecords);
   const content =
     domainKey &&
     domainInfo
@@ -99,20 +98,28 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
 
   return (
     <div className="flex flex-col items-center justify-start w-screen h-screen p-10 overflow-auto">
-      <div className="flex flex-col items-center space-y-1">
-        {recordsLoading ? (
-          <GenericLoading className="w-24 h-24 rounded-full" />
-        ) : (
-          <Image
-            alt="Profile picture"
-            width={200}
-            height={200}
-            src={picRecord?.content ?? "/default-profile.svg"}
-            className="rounded-full"
-          />
-        )}
-        <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
-        <span>{content}</span>
+      <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col">
+          {recordsLoading ? (
+            <GenericLoading className="w-24 h-24 rounded-full" />
+          ) : (
+            <Image
+              alt="Profile picture"
+              width={120}
+              height={120}
+              src={picRecord?.content ?? "/default-profile.svg"}
+              className="rounded-full"
+            />
+          )}
+        </div>
+
+        <h1 className="font-bold text-white font-azeret text-2xl">
+          {domain}.sol
+        </h1>
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-sm sm:text-base text-[#F8EFF9CC]">Bio</span>
+          <span className="text-base sm:text-lg text-[#E8DCEF]">{content}</span>
+        </div>
       </div>
 
       {recordsLoading ? (
