@@ -20,8 +20,8 @@ const Topbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center w-screen md:h-[72px] h-14 pt-3">
-      <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-[1224px] md:h-12 h-10">
+    <div className="flex items-center justify-center w-screen md:h-[72px] h-14 pt-3 ">
+      <div className="flex md:flex-row flex-col items-center md:justify-between justify-center w-full md:w-[1224px] md:h-12 h-10 z-50">
         <Link href="/" className="flex items-center justify-center gap-4">
           <Image
             width={80}
