@@ -97,7 +97,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   }, [connected, publicKey, owner]);
 
   return (
-    <div className="w-full overflow-auto">
+    <div className="w-full">
       <div className=" flex flex-col items-center ">
         <div className="md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
           <button onClick={navigateBack} className="flex gap-2">
