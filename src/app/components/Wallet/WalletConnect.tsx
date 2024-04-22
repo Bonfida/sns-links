@@ -68,18 +68,24 @@ export const WalletConnect = ({
           // @ts-ignore
           ref={setReferenceElement}
         >
-          <div
-            style={{ width: width ? `${width}px` : "196px" }}
-            className=" bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33]"
-          >
-            <ProfilePic
-              domain={favoriteDomain?.domain || ""}
-              hideEdit={true}
-              customHeight={24}
-              customWidth={24}
-            />
-
-            <span className={twMerge("font-bold text-white font-azeret w-fit")}>
+          <div className="bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
+            <div className="sm:inline-block hidden">
+              <ProfilePic
+                domain={favoriteDomain?.domain || ""}
+                hideEdit={true}
+                customHeight={24}
+                customWidth={24}
+              />
+            </div>
+            <div className="sm:hidden inline-block">
+              <Image
+                width={24}
+                height={24}
+                alt="wallet"
+                src="/wallet-white.svg"
+              />
+            </div>
+            <span className="font-bold text-white font-azeret w-fit sm:inline-block hidden">
               {displayedUser}
             </span>
           </div>
