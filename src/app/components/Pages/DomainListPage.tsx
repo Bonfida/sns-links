@@ -9,7 +9,7 @@ import DomainList from "@/app/components/DomainList/DomainList";
 import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
-import { NotFoundNotice } from "../Modals/NotFoundNotice";
+import { NoDomainsFound } from "../Notices/NoDomainsFound";
 
 export const metadata = {
   title: "Profile Page",
@@ -64,7 +64,7 @@ export const DomainListPage = () => {
             </>
           ) : (
             <div>
-              <NotFoundNotice />
+              <NoDomainsFound />
             </div>
           )}
         </div>

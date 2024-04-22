@@ -23,7 +23,7 @@ const ProfileOverview = () => {
   });
 
   return (
-    <div className="flex flex-col sm:flex-row justify-start items-center space-x-5 w-full">
+    <div className="flex flex-col sm:flex-row justify-start items-center sm:space-x-5 w-full">
       {favoriteDomain ? (
         <>
           <Image
@@ -35,12 +35,12 @@ const ProfileOverview = () => {
           />
 
           <div className="flex flex-col items-center sm:items-start">
-            <h1 className="md:text-4xl text-2xl font-semibold text-white font-azeret">
+            <span className="md:text-4xl text-2xl font-semibold text-white font-azeret">
               {favoriteDomain}.sol
-            </h1>
-            <h2 className="md:text-2xl text-base text-white font-azeret">
+            </span>
+            <span className="md:text-2xl text-base text-white font-azeret">
               {abbreviatedPubkey}
-            </h2>
+            </span>
           </div>
         </>
       ) : (
@@ -50,11 +50,11 @@ const ProfileOverview = () => {
             width={100}
             height={100}
             alt="default pic"
-            className="rounded-full"
+            className="rounded-full sm:w-[120px] sm:h-[120px] w-[56px] h-[56px]"
           />
-          <h1 className="md:text-5xl text-3xl font-semibold text-white">
+          <span className="md:text-2xl text-base text-white font-azeret">
             {abbreviatedPubkey}
-          </h1>
+          </span>
         </>
       )}
     </div>
