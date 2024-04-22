@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-t to-[#176cf4] from-[#000a1a]">
+      <body className="bg-gradient-to-t to-[#03001A] from-[#000a1a]">
         <Providers>{children}</Providers>
         <Footer />
       </body>

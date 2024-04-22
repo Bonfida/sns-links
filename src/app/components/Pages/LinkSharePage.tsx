@@ -4,18 +4,44 @@ import { useFetchRecords } from "../../../hooks/useFetchRecords";
 import LinkButton from "@/app/components/Buttons/LinkButton";
 import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NoLinksFoundModal from "@/app/components/Modals/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
-import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
-import { Record } from "@bonfida/sns-records";
 
+const contactRecords = [Record.Email, Record.Telegram];
+
+const walletRecords = [
+  Record.ARWV,
+  Record.SOL,
+  Record.ETH,
+  Record.BTC,
+  Record.LTC,
+  Record.DOGE,
+  Record.SHDW,
+  Record.POINT,
+  Record.Injective,
+  Record.BSC,
+];
+
+const socialRecords = [
+  Record.Url,
+  Record.Discord,
+  Record.Github,
+  Record.Reddit,
+  Record.Twitter,
+  Record.Backpack,
+];
+
+import { Record } from "@bonfida/spl-name-service";
 const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
   const { connection } = useConnection();
   const domain = params.domain;
-  const { data: recordsData, isLoading } = useFetchRecords(connection, domain);
+  const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
+    connection,
+    domain
+  );
   const [isMounted, setIsMounted] = useState(false);
   const { data: domainInfo, keys } = useDomainsInfo([domain]);
   const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
@@ -29,65 +55,89 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
       .trimStart()
       .trimEnd();
 
-  if (!isLoading) {
-    recordsExist = Object.values(recordsData!.records).some(
-      (el) => el !== undefined
-    );
+  const picRecord = recordsData?.find((record) => {
+    return record.record === Record.Pic;
+  });
+
+  if (!recordsLoading) {
+    recordsExist = recordsData?.some((el) => el.content !== undefined);
   }
 
   return (
-    <div className="flex flex-col items-center justify-start w-screen h-screen p-10">
+    <div className="flex flex-col items-center justify-start w-screen h-screen p-10 overflow-auto">
       <div className="flex flex-col items-center space-y-1">
-        {isLoading ? (
-          <GenericLoading className="w-[100px] h-[100px] rounded-full" />
+        {recordsLoading ? (
+          <GenericLoading className="w-24 h-24 rounded-full" />
         ) : (
           <Image
-            alt=""
-            width={50}
-            height={50}
-            src={recordsData?.pic ?? "/default-profile.svg"}
-            className="rounded-full w-28"
+            alt="Profile picture"
+            width={200} // Fixed width for better control, adjust as needed
+            height={200} // Fixed height for better control, adjust as needed
+            src={picRecord?.content ?? "/default-profile.svg"}
+            className="rounded-full"
           />
         )}
         <h1 className="font-bold text-white font-azeret">{domain}.sol</h1>
-        <span>{content}</span>
+        <span>{content}</span> {/* Ensure 'content' is defined or handled */}
       </div>
 
-      {isLoading ? (
+      {recordsLoading ? (
         <div className="mt-10">
-          {Array(10)
-            .fill(null)
-            .map((_, idx) => (
-              <GenericLoading
-                className="w-[288px] h-[50px] rounded-md my-2"
-                key={`loading-record-${idx}`}
-              />
-            ))}
+          {Array.from({ length: 10 }).map((_, idx) => (
+            <GenericLoading
+              className="w-72 h-12 rounded-md my-2"
+              key={`loading-record-${idx}`}
+            />
+          ))}
         </div>
       ) : (
         <div className="flex flex-col mt-10 space-y-3">
-          {recordsExist ? (
-            Object.entries(recordsData!.records).map(([key, value]) => {
-              if (value !== undefined) {
-                return (
+          <div className="flex justify-center items-center flex-col">
+            <div className="flex flex-col gap-3 w-full justify-center items-center">
+              <span>Contact</span>
+              {recordsData
+                ?.filter((record) =>
+                  contactRecords.includes(record.record as Record)
+                )
+                .map((record) => (
                   <LinkButton
-                    key={key}
-                    name={key}
-                    value={value}
+                    key={record.record}
+                    name={record.record}
+                    value={record.content || ""}
                     domain={domain}
-                    connection={connection}
                   />
-                );
-              }
-              return null;
-            })
-          ) : (
-            <NoLinksFoundModal />
-          )}
+                ))}
+              <span>Socials</span>
+              {recordsData
+                ?.filter((record) =>
+                  socialRecords.includes(record.record as Record)
+                )
+                .map((record) => (
+                  <LinkButton
+                    key={record.record}
+                    name={record.record}
+                    value={record.content || ""}
+                    domain={domain}
+                  />
+                ))}
+              <span>Wallets</span>
+              {recordsData
+                ?.filter((record) =>
+                  walletRecords.includes(record.record as Record)
+                )
+                .map((record) => (
+                  <LinkButton
+                    key={record.record}
+                    name={record.record}
+                    value={record.content || ""}
+                    domain={domain}
+                  />
+                ))}
+            </div>
+          </div>
         </div>
       )}
-      {/* Spacer to push the button to the bottom */}
-      <div className="flex-grow"></div>
+      <div className="flex-grow mt-10"></div>
       <CreateYourOwnButton />
     </div>
   );
