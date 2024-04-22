@@ -36,10 +36,10 @@ const DomainList = () => {
         placeholder="Search domains..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-4 w-1/4 px-4 py-2 border rounded-lg bg-[#FFFFFF12] text-white border-[#FFFFFF3D]"
+        className="mb-4 sm:w-1/4 w-1/2 px-4 py-2 border rounded-lg bg-[#FFFFFF12] text-white border-[#FFFFFF3D]"
       />
       {!domainsLoading && (
-        <div className=" md:w-[800px] w-[450px] space-y-3">
+        <div className=" md:w-[800px] sm:w-[450px] w-screen px-3 sm:px-0 space-y-3">
           {filteredDomains?.map((domain) => {
             return <DomainListItem domain={domain} key={domain} />;
           })}

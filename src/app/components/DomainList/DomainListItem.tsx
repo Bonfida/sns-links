@@ -67,7 +67,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
             height={24}
           />
         </button>
-        <span className="text-white text-lg">{domain}.sol</span>
+        <span className="text-white sm:text-lg text-base">{domain}.sol</span>
       </div>
       <div className="flex gap-2 justify-center items-center">
         {isFavorite && <PrimaryTag />}

@@ -43,20 +43,18 @@ const LinkButton = ({
   return (
     <div className="h-[65px] flex bg-white/[7%] border-t-[1px] border-white/[24%] rounded-[24px] w-[450px]">
       <div className="flex justify-between items-center w-full py-2 px-5">
-        <div className="space-x-2 flex justify-center items-center">
-          <span className="text-white text-lg">
+        <div className="flex justify-between items-center">
+          <span className="text-white text-lg w-7">
             {name.charAt(0).toUpperCase() + name.slice(1)}
           </span>
+          {ROA && (
+            <Badge
+              tooltipContent="Ownership is verified"
+              imgSrc="/verifications/verified-badge.svg"
+            />
+          )}
         </div>
-        {ROA ? (
-          <Badge
-            tooltipContent="Ownership is verified"
-            imgSrc="/verifications/verified-badge.svg"
-            sizeClass=""
-          />
-        ) : (
-          <div className="w-10"></div>
-        )}
+
         {interactionType === "newTab" && link ? (
           <a href={link} target="_blank" rel="noopener noreferrer">
             <Image src="/link-out.svg" width={18} height={18} alt="copy" />
