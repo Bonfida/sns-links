@@ -1,4 +1,4 @@
-import ProfilePageComponent from "../../../components/Pages/ProfilePage";
+import { DomainListPage } from "@/app/components/Pages/DomainListPage";
 
 export const metadata = {
   title: "Profile",
@@ -8,7 +8,7 @@ export const metadata = {
 const ProfilePage = () => {
   return (
     <div>
-      <ProfilePageComponent />
+      <DomainListPage />
     </div>
   );
 };
