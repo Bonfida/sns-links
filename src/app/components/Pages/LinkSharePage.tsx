@@ -5,7 +5,7 @@ import LinkButton from "@/app/components/Buttons/LinkButton";
 import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
 import { useState } from "react";
-import NoLinksFoundModal from "@/app/components/Modals/NoLinksFoundModal";
+import { NoLinksFoundNotice } from "../Notices/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
