@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@bonfida/components": "^1.0.1",
+    "@bonfida/components": "^1.1.3",
     "@bonfida/hooks": "0.2.1",
     "@bonfida/name-offers": "^0.2.2",
     "@bonfida/name-tokenizer": "0.0.12",
@@ -42,7 +42,7 @@
     "react-loading-skeleton": "^3.3.1",
     "react-popper": "^2.3.0",
     "react-query": "^3.39.3",
-    "tailwind-merge": "^1.14.0"
+    "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "^20",
