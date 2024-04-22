@@ -56,7 +56,7 @@ const EditRecordModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10 ">
       <div
-        className="relative bg-[#03001A] w-[660px] h-fit flex flex-col justify-center items-center border border-[#FFFFFF3D]/25 rounded-xl p-5 mt-10 md:mt-0"
+        className="relative bg-[#03001A] h-fit flex flex-col justify-center items-center border border-[#FFFFFF3D]/25 rounded-xl p-5 mt-10 md:mt-0"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full flex justify-start">
@@ -65,7 +65,7 @@ const EditRecordModal = ({
           </h2>
         </div>
         <input
-          className="bg-[#FFFFFF12] text-white h-[113px] w-[552px] text-center border border-[#FFFFFF3D] rounded-lg"
+          className="bg-[#FFFFFF12] text-white h-[113px] sm:w-[552px] w-[331px] text-center border border-[#FFFFFF3D] rounded-lg"
           placeholder="Enter new record"
           onChange={(event) => {
             setRecordVal(event.target.value);
@@ -78,9 +78,9 @@ const EditRecordModal = ({
         </div>
 
         <div className="flex flex-col items-center justify-center w-full space-y-4">
-          <div className="flex items-center justify-between w-full mt-6 space-x-1.5">
+          <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
-              className="w-[268px] h-[47px] rounded-[24px]  border-t text-[#03021A] bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] border-t-[#FFFFFF33] active:border-t-0"
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-[#03021A] bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] border-t-[#FFFFFF33] active:border-t-0 font-bold"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -92,7 +92,7 @@ const EditRecordModal = ({
               Update
             </button>
             <button
-              className="w-[268px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33] active:border-t-0"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33] active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}

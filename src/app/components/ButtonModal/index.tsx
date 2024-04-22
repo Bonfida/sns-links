@@ -156,7 +156,7 @@ export const ButtonModal = ({
       />
       {visible && (
         <div
-          className="modal z-modal modal-bottom md:modal-middle backdrop-blur-sm bg-white/10"
+          className="modal z-modal modal-middle backdrop-blur-sm bg-white/10"
           style={{ margin: 0 }}
         >
           <div
