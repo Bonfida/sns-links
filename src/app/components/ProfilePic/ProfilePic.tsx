@@ -1,13 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import SelectedDomainContext from "@/context/selectedDomain";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
-import EditRecordModal from "../Modals/EditRecordModal";
 import { Record } from "@bonfida/spl-name-service";
 import Image from "next/image";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { ButtonModal } from "../ButtonModal";
+import { EditPicModal } from "../Modals/EditPicModal";
 
 const ProfilePic = ({
   domain,
@@ -63,7 +62,7 @@ const ProfilePic = ({
             setVisible={setModalVisible}
             modalClass="bg-[#03001A] w-full sm:min-w-[520px] h-fit overflow-y-visible"
           >
-            <EditRecordModal
+            <EditPicModal
               recordName="pic"
               domain={domain}
               close={() => setModalVisible(false)}

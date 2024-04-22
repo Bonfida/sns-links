@@ -1,4 +1,3 @@
-import { Record } from "@bonfida/sns-records";
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
 import { useState } from "react";
