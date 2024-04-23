@@ -54,25 +54,25 @@ export const EditPicModal = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10 ">
+    <div className="fixed inset-0 flex items-center justify-center">
       <div
-        className="relative bg-[#03001A] h-fit flex flex-col justify-center items-center border border-[#FFFFFF3D]/25 rounded-xl p-5 mt-10 md:mt-0"
+        className="relative bg-modal-bg h-fit flex flex-col justify-center items-center border border-modal-border rounded-xl p-5 mt-10 md:mt-0"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full flex justify-start">
-          <span className="text-sm text-[#F8EFF9CC] font-azeret font-semibold">
+          <span className="text-sm text-modal-text font-azeret font-semibold">
             Image URL
           </span>
         </div>
         <input
-          className="bg-[#FFFFFF12] text-white h-[39px] sm:w-[552px] w-[331px] text-center border border-[#FFFFFF3D] rounded-lg"
+          className="bg-modal-input-bg text-modal-text h-[39px] sm:w-[552px] w-[331px] text-center border border-modal-border rounded-lg"
           placeholder="ex:https://imgur.com/..."
           onChange={(event) => {
             setRecordVal(event.target.value);
           }}
         />
         <div className="w-full justify-start">
-          <button className="flex font-semibold text-sm text-[#7C7CFF]">
+          <button className="flex font-semibold text-sm text-link">
             PASTE
           </button>
         </div>
@@ -80,7 +80,8 @@ export const EditPicModal = ({
         <div className="flex flex-col items-center justify-center w-full space-y-4">
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-[#03021A] bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] border-t-[#FFFFFF33] active:border-t-0 font-bold"
+              style={{ backgroundImage: "var(--action-button-bg)" }}
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px] border-t text-action-button-text border-t-action-button-border active:border-t-0 font-bold"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -92,7 +93,7 @@ export const EditPicModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33] active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-modal-bg  border-t-modal-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}

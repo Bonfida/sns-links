@@ -11,7 +11,7 @@ type DomainLinksPageParams = {
 
 const DomainLinksPage = ({ params }: { params: DomainLinksPageParams }) => {
   return (
-    <div>
+    <div className="bg-gradient-to-t to-[#03001A] from-[#000a1a] w-screen h-screen">
       <DomainLinksPageComponent params={params} />
     </div>
   );

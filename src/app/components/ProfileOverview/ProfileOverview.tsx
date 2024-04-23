@@ -35,10 +35,10 @@ const ProfileOverview = () => {
           />
 
           <div className="flex flex-col items-center sm:items-start">
-            <span className="md:text-4xl text-2xl font-semibold text-white font-azeret">
+            <span className="md:text-4xl text-2xl font-semibold text-profile-overview-text font-azeret">
               {favoriteDomain}.sol
             </span>
-            <span className="md:text-2xl text-base text-white font-azeret">
+            <span className="md:text-2xl text-base text-profile-overview-text font-azeret">
               {abbreviatedPubkey}
             </span>
           </div>
@@ -52,7 +52,7 @@ const ProfileOverview = () => {
             alt="default pic"
             className="rounded-full sm:w-[120px] sm:h-[120px] w-[56px] h-[56px]"
           />
-          <span className="md:text-2xl text-base text-white font-azeret">
+          <span className="md:text-2xl text-base text-profile-overview-text font-azeret">
             {abbreviatedPubkey}
           </span>
         </>

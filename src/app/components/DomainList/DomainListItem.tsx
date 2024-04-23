@@ -57,7 +57,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
     }
   };
   return (
-    <div className="flex justify-between w-full bg-white/[7%] border-t border-white/[24%] rounded-[24px] p-2">
+    <div className="flex justify-between w-full bg-list-item-bg border-t border-list-item-border rounded-[24px] p-2">
       <div className="space-x-2 flex justify-center items-center">
         <button className="ml-2" onClick={handleFavoriteUpdate}>
           <Image
@@ -67,12 +67,14 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
             height={24}
           />
         </button>
-        <span className="text-white sm:text-lg text-base">{domain}.sol</span>
+        <span className="text-list-item-text sm:text-lg text-base">
+          {domain}.sol
+        </span>
       </div>
       <div className="flex gap-2 justify-center items-center">
         {isFavorite && <PrimaryTag />}
         <button
-          className="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t border-t-[#FFFFFF33] active:border-t-0"
+          className="text-white text-sm w-[50px] px-1 py-3 bg-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
           onClick={handleEditClick}
         >
           <Image src="/pen.svg" alt="edit records" width={24} height={24} />
@@ -84,9 +86,9 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
 
 export const PrimaryTag = () => {
   return (
-    <div className=" py-2 px-4 border border-white/[24] rounded-[14px] flex items-center justify-center">
-      <span className="font-semibold text-[14px] font-azeret text-white">
-        primary
+    <div className=" py-2 px-4 border border-primary-tag-border rounded-[14px] flex items-center justify-center">
+      <span className="font-semibold text-[14px] font-azeret text-primary-tag-text">
+        PRIMARY
       </span>
     </div>
   );

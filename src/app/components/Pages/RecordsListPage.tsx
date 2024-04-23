@@ -12,7 +12,7 @@ const DomainLinksPageComponent = ({
   const domain: string = params.domain;
 
   return (
-    <div className="flex flex-col items-center justify-start w-screen h-screen mt-10 overflow-auto">
+    <div className="flex flex-col items-center justify-start w-screen h-screen overflow-auto">
       <RecordsList domain={domain} />
     </div>
   );

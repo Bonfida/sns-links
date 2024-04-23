@@ -7,7 +7,7 @@ export const metadata = {
 
 const ProfilePage = () => {
   return (
-    <div>
+    <div className="bg-gradient-to-t to-[#03001A] from-[#000a1a] w-screen h-screen">
       <DomainListPage />
     </div>
   );

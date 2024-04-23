@@ -12,10 +12,10 @@ const Home = () => {
       <div className="flex w-[1224px]">
         <div className="sm:w-1/2 space-y-10 z-50 w-full">
           <div className="sm:w-[600px] w-[351px]">
-            <span className="font-azeret font-semibold sm:text-[104px] text-[64px] text-[#F8EFF9] leading-none">
+            <span className="font-azeret font-semibold sm:text-[104px] text-[64px] text-hero-section-text leading-none">
               Your Brand On Chain
             </span>
-            <p className="font-medium text-base font-azeret text-[#F8EFF9] sm:w-[505px] w-full">
+            <p className="font-medium text-base font-azeret text-hero-section-text sm:w-[505px] w-full">
               Upload all of your platform links using SNS links and share easily
               with friends. Your .sol domain now holds the key to sharing your
               brand across the web.

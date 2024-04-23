@@ -342,3 +342,43 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+.dark {
+  --bg-main: #03021a;
+  --topbar-border: #ffffff24;
+  --topbar-text: #f8eff9;
+  --action-button-bg: linear-gradient(to right, #00f0ff, #cbff5e);
+  --action-button-text: #03021a;
+  --action-button-border: #ffffff33;
+  --focus-button: linear-gradient(to right, #a5fbac, #d7fd75);
+  --list-item-bg: rgba(255, 255, 255, 0.07);
+  --list-item-border: #ffffff3d;
+  --list-item-text: #f8eff9;
+  --primary-tag-text: #a5fbac;
+  --primary-tag-border: #ffffff3d;
+  --search-input-bg: #ffffff12;
+  --search-input-text: #f8eff9;
+  --search-input-border: #ffffff3d;
+  --link: #a5fbac;
+  --record-heading: #f8eff9;
+  --record-value: rgba(248, 239, 249, 0.5);
+  --edit-button-top-border: #ffffff33;
+  --edit-button-bg: #03021a;
+  --wallet-connect-bg: #03021a;
+  --wallet-connect-text: #f8eff9;
+  --wallet-connect-top-border: #ffffff33;
+  --wallet-connect-popout-bg: #13122b;
+  --wallet-connect-popout-border: #2a2a51;
+  --profile-overview-text: #f8eff9;
+  --hero-section-text: #f8eff9;
+  --carousel-item-bg: #03021a;
+  --carousel-item-text: #f8eff9;
+  --generic-text: #f8eff9;
+  --carousel-border: #ffffff3d;
+  --modal-bg: #03021a;
+  --modal-border: #ffffff3d;
+  --modal-input-bg: #ffffff12;
+  --modal-text: #f8eff9;
+  --record-group-heading-text: #f8eff9;
+  --footer-bg: #000a1a;
+}

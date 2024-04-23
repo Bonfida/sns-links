@@ -7,7 +7,7 @@ import { WalletConnect } from "../Wallet/WalletConnect";
 
 const Topbar = () => {
   return (
-    <div className="flex items-center justify-center w-screen md:h-[72px] h-[64px] pt-3 border-b border-b-[#FFFFFF24] sm:border-0">
+    <div className="bg-bg-main flex items-center justify-center w-screen md:h-[72px] h-[64px] pt-3 border-b border-b-topbar-border sm:border-0">
       <div className="flex items-center justify-between w-full md:w-[1224px] z-50 px-3 sm:px-0">
         <Link
           href="/"
@@ -21,7 +21,7 @@ const Topbar = () => {
             alt="SNS Links Logo"
           />
 
-          <span className="text-base items-center font-bold text-white sm:text-2xl">
+          <span className="text-base items-center font-bold text-topbar-text sm:text-2xl">
             SNS Links
           </span>
         </Link>

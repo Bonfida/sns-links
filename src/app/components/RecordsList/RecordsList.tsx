@@ -72,9 +72,9 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     <div className="w-full">
       <div className=" flex flex-col items-center ">
         <div className="md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
-          <button onClick={navigateBack} className="flex gap-2">
-            <Image src="/back.svg" width={18} height={15} alt="back" />
-            <span className="font-azeret text-base font-bold text-white">
+          <button onClick={navigateBack} className="flex gap-2 items-center">
+            <Image src="/back-green.svg" width={18} height={15} alt="back" />
+            <span className="font-azeret text-base font-bold text-link">
               Back
             </span>
           </button>
@@ -84,7 +84,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
           <div className="flex flex-col justify-around">
             <div className="flex items-center justify-start w-full gap-4">
               <ProfilePic domain={domain} />
-              <h1 className="md:text-5xl text-3xl font-bold text-white">
+              <h1 className="md:text-5xl text-3xl font-bold text-profile-overview-text">
                 {currentDomain}.sol
               </h1>
               {isOwner && (
@@ -106,7 +106,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-3 w-full justify- items-center">
-                <span>CONTACT</span>
+                <span className="text-text-heading">CONTACT</span>
                 {!recordsLoading &&
                   recordData
                     ?.filter((record) =>
@@ -119,7 +119,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                         domain={currentDomain}
                       />
                     ))}
-                <span>SOCIALS</span>
+                <span className="text-text-heading">SOCIALS</span>
                 {!recordsLoading &&
                   recordData
                     ?.filter((record) =>
@@ -132,7 +132,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                         domain={currentDomain}
                       />
                     ))}
-                <span>WALLETS</span>
+                <span className="text-text-heading">WALLETS</span>
                 {!recordsLoading &&
                   recordData
                     ?.filter((record) =>

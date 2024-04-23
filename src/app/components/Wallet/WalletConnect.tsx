@@ -99,8 +99,8 @@ export const WalletConnect = ({
           {...attributes.popper}
           className="absolute w-full md:w-[200px] z-50"
         >
-          <div className="bg-[#13122B] rounded-[24px] border-[1px] border-[#2A2A51] p-[8px] md:mt-2 mb-2 md:mb-0">
-            <div className="flex flex-col pl-[20px] space-y-2 text-white font-azeret font-medium text-[16px] my-2">
+          <div className="bg-wallet-connect-popout-bg rounded-[24px] border-[1px] border-[#2A2A51] p-[8px] md:mt-2 mb-2 md:mb-0">
+            <div className="flex flex-col pl-[20px] space-y-2 text-link font-azeret font-medium text-[16px] my-2">
               <button
                 onClick={() =>
                   router.push(`/profile/pubkey=${publicKey.toBase58()}`)

@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
 import Badge from "../Badges/Tooltip";
@@ -41,7 +40,7 @@ const LinkButton = ({
   };
 
   return (
-    <div className="h-[65px] flex bg-white/[7%] border-t-[1px] border-white/[24%] rounded-[24px] sm:w-[450px] w-[351px]">
+    <div className="h-[65px] flex bg-list-item-bg border-t-[1px] border-list-item-border rounded-[24px] sm:w-[450px] w-[351px]">
       <div className="flex justify-between items-center w-full py-2 px-5">
         <div className="flex justify-between items-center">
           <span className="text-white text-lg w-7">
@@ -68,7 +67,7 @@ const LinkButton = ({
           >
             <Image src="/copy.svg" width={18} height={18} alt="copy" />
             {showCopyConfirmation && (
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-[#03001A]/75 text-white rounded-md whitespace-nowrap text-xs z-100">
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-modal-bg text-white rounded-md whitespace-nowrap text-xs z-100">
                 Link copied!
               </div>
             )}

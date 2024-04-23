@@ -40,7 +40,7 @@ const UnwrapModal = ({
 
   return (
     <div className="flex flex-col justify-start items-start">
-      <span className="text-2xl text-white font-azeret font-semibold">
+      <span className="text-2xl text-modal-text font-azeret font-semibold">
         Tokenized Domain
       </span>
       <div className="space-y-4">
@@ -58,7 +58,8 @@ const UnwrapModal = ({
         <div className="flex flex-col items-center justify-center w-full space-y-4">
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-[#03021A] bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E] border-t-[#FFFFFF33] active:border-t-0 font-bold"
+              style={{ backgroundImage: "var(--action-button-bg)" }}
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-action-button-text border-t-modal-border active:border-t-0 font-bold"
               onClick={() => {
                 handleUnwrap();
               }}
@@ -66,7 +67,7 @@ const UnwrapModal = ({
               Unwrap
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-white bg-[#03021A]  border-t-[#FFFFFF33] active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-modal-bg  border-t-modal-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}
