@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { WalletConnect } from "../Wallet/WalletConnect";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 
 const Topbar = () => {
   return (
@@ -26,7 +27,8 @@ const Topbar = () => {
           </span>
         </Link>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-2">
+          <ThemeToggle />
           <WalletConnect />
         </div>
       </div>

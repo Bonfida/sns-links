@@ -11,6 +11,9 @@ const config: Config = {
   presets: [require("./node_modules/@bonfida/components/tailwind.config.js")],
   theme: {
     extend: {
+      boxShadow: {
+        "theme-select": "0px 0px 8px 1px var(--theme-select-shadow)",
+      },
       colors: {
         "bg-main": "var(--bg-main)",
         "footer-bg": "var(--footer-bg)",
@@ -49,6 +52,9 @@ const config: Config = {
         "modal-input-bg": "var(--modal-input-bg)",
         "modal-text": "var(--modal-text)",
         "record-group-heading-text": "var(--record-group-heading-text)",
+        "top-border-highlight": "var(--top-border-highlight)",
+        "glass-bg": "var(--glass-bg)",
+        "primary-bg": "var(--primary-bg)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
