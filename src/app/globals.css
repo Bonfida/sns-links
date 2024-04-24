@@ -386,3 +386,47 @@ body {
   --primary-bg: #03021a;
   --theme-select-shadow: #d7fd75;
 }
+
+.light {
+  --bg-main: #f8eff9;
+  --topbar-border: #f8eff9;
+  --topbar-text: #03021a;
+  --action-button-bg: linear-gradient(to right, #00f0ff, #cbff5e);
+  --action-button-text: #03021a;
+  --action-button-border: #ffffff33;
+  --focus-button: linear-gradient(to right, #6963e0, #8d43e0);
+  --list-item-bg: #0000000a;
+  --list-item-border: #ffffff3d;
+  --list-item-text: #03021a;
+  --primary-tag-text: #6963e0;
+  --primary-tag-border: #00000012;
+  --search-input-bg: #0000000a;
+  --search-input-text: #03021a;
+  --search-input-border: #00000012;
+  --link: #6963e0;
+  --record-heading: #03021a;
+  --record-value: rgba(248, 239, 249, 0.5);
+  --edit-button-top-border: #ffffff33;
+  --edit-button-bg: #6963e0;
+  --wallet-connect-bg: #6963e0;
+  --wallet-connect-text: #f8eff9;
+  --wallet-connect-top-border: #ffffff33;
+  --wallet-connect-popout-bg: #13122b;
+  --wallet-connect-popout-border: #2a2a51;
+  --profile-overview-text: #f8eff9;
+  --hero-section-text: #03021a;
+  --carousel-item-bg: #e8dcef;
+  --carousel-item-text: #03021a;
+  --generic-text: #f8eff9;
+  --carousel-border: #ffffff3d;
+  --modal-bg: #03021a;
+  --modal-border: #ffffff3d;
+  --modal-input-bg: #0000000a;
+  --modal-text: #f8eff9;
+  --record-group-heading-text: #f8eff9;
+  --footer-bg: #000a1a;
+  --top-border-highlight: #ffffff33;
+  --glass-bg: #0000000a;
+  --primary-bg: #f8eff9;
+  --theme-select-shadow: #6963e0;
+}

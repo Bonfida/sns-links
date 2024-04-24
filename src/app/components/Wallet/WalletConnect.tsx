@@ -68,7 +68,8 @@ export const WalletConnect = ({
           // @ts-ignore
           ref={setReferenceElement}
         >
-          <div className="bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
+          {/* bg-gradient-to-b from-[#E8DCEF29] */}
+          <div className="bg-wallet-connect-bg h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
             <div className="sm:inline-block hidden">
               <ProfilePic
                 domain={favoriteDomain?.domain || ""}
@@ -136,7 +137,7 @@ export const WalletConnect = ({
         " h-12 rounded-2xl px-4 flex items-center justify-center space-x-2",
         green
           ? "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E]"
-          : " bg-gradient-to-b from-[#E8DCEF29] to-[#E8DCEF00] border-t border-t-[#FFFFFF33]"
+          : " bg-wallet-connect-bg border-t border-t-[#FFFFFF33]"
       )}
       onClick={() => {
         setVisible(true);
