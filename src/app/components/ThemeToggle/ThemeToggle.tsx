@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -23,12 +24,17 @@ export const ThemeToggle = () => {
     <div className="relative w-20 h-10 border-t border-t-top-border-highlight bg-glass-bg rounded-[40px]">
       <button
         className={twMerge(
-          "absolute rounded-full h-[38px] w-[38px] bg-primary-bg border-t border-t-top-border-highlight shadow-theme-select transition-all duration-300 ease-in-out",
+          "absolute rounded-full h-[38px] w-[38px] bg-primary-bg border-t border-t-top-border-highlight shadow-theme-select transition-all duration-300 ease-in-out flex justify-center items-center",
           theme === "light" ? "left-0" : "right-0"
         )}
         onClick={handleThemeToggle}
       >
-        yo
+        <Image
+          src={theme === "dark" ? "/dark-mode.svg" : "/light-mode.svg"}
+          height={24}
+          width={24}
+          alt="theme-select"
+        />
       </button>
     </div>
   );

@@ -37,7 +37,7 @@ export const DomainListPage = () => {
   }, [publicKey]);
 
   return (
-    <div className="flex w-full min-h-screen mt-10 justify-center">
+    <div className="flex w-full min-h-screen justify-center">
       {!connected && <NotConnectedModal />}
       {connected && (favoriteLoading || domainsLoading) && (
         <>
