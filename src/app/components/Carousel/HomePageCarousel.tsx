@@ -1,34 +1,44 @@
+import ThemeContext from "@/context/theme";
 import Image from "next/image";
+import { useContext } from "react";
 
 const carouselItemDescriptions = [
   {
     title: "Brand",
     description: "Your on chain identity",
-    image: "/bonfida-green.svg",
+    darkImage: "/bonfida-green.svg",
+    lightImage: "/bonfida-purple.svg",
   },
   {
     title: "Share",
     description: "Share all your links with ease",
-    image: "/share-green.svg",
+    darkImage: "/share-green.svg",
+    lightImage: "/share-purple.svg",
   },
   {
     title: "Verify",
     description: "Peace of mind with verified links",
-    image: "/shield-green.svg",
+    darkImage: "/shield-green.svg",
+    lightImage: "/shield-purple.svg",
   },
   {
     title: "Standout",
     description: "Standout from the crowd",
-    image: "/megaphone-green.svg",
+    darkImage: "/megaphone-green.svg",
+    lightImage: "/megaphone-purple.svg",
   },
   {
     title: "Integrate",
     description: "Easily integrate link share",
-    image: "/connect-green.svg",
+    darkImage: "/connect-green.svg",
+    lightImage: "/connect-purple.svg",
   },
 ];
 
 export const HomePageCarousel = () => {
+  const { theme } = useContext(ThemeContext);
+
+  console.log("themein", theme);
   return (
     <div className="flex gap-3">
       {carouselItemDescriptions.map((item) => {
@@ -36,7 +46,7 @@ export const HomePageCarousel = () => {
           <HomePageCarouseltem
             title={item.title}
             description={item.description}
-            image={item.image}
+            image={theme === "dark" ? item.darkImage : item.lightImage}
             key={item.title}
           />
         );
@@ -54,6 +64,7 @@ const HomePageCarouseltem = ({
   description: string;
   image: string;
 }) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <div className="flex flex-col justify-center items-start w-[235px] border border-carousel-border p-5 gap-3 rounded-2xl bg-carousel-item-bg">
       <Image src={image} width={56.34} height={64} alt="" />

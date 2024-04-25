@@ -1,14 +1,10 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import ThemeContext from "@/context/theme";
 
 export const ThemeToggle = () => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light")
-  );
+  const { theme, setTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     localStorage.setItem("theme", theme);

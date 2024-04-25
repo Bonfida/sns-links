@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
 import { ToastContextProvider } from "@bonfida/components";
 import { ModalContextProvider } from "./context/modalContext";
+import { ThemeContextProvider } from "./context/theme";
 type Props = {
   children?: React.ReactNode;
 };
@@ -24,15 +25,17 @@ export const Providers: FC<Props> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <SelectedDomainProvider>
-        <ConnectionProvider endpoint={endpoint}>
-          <WalletProvider wallets={wallets} autoConnect>
-            <WalletModalProvider>
-              <ModalContextProvider>
-                <ToastContextProvider>{children}</ToastContextProvider>
-              </ModalContextProvider>
-            </WalletModalProvider>
-          </WalletProvider>
-        </ConnectionProvider>
+        <ThemeContextProvider>
+          <ConnectionProvider endpoint={endpoint}>
+            <WalletProvider wallets={wallets} autoConnect>
+              <WalletModalProvider>
+                <ModalContextProvider>
+                  <ToastContextProvider>{children}</ToastContextProvider>
+                </ModalContextProvider>
+              </WalletModalProvider>
+            </WalletProvider>
+          </ConnectionProvider>
+        </ThemeContextProvider>
       </SelectedDomainProvider>
     </QueryClientProvider>
   );
