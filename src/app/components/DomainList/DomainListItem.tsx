@@ -69,28 +69,43 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
     }
   };
   return (
-    <div className="flex justify-between w-full bg-list-item-bg border-t border-list-item-border rounded-[24px] p-2">
-      <div className="space-x-2 flex justify-center items-center">
-        <button className="ml-2" onClick={handleFavoriteUpdate}>
-          <Image
-            src={selectedFavorite || isFavorite ? favoriteStarIcon : starIcon}
-            alt="favorite"
-            width={24}
-            height={24}
-          />
-        </button>
-        <span className="text-list-item-text sm:text-lg text-base">
-          {domain}.sol
-        </span>
-      </div>
-      <div className="flex gap-2 justify-center items-center">
-        {isFavorite && <PrimaryTag />}
-        <button
-          className="text-white text-sm w-[50px] px-1 py-3 bg-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
-          onClick={handleEditClick}
-        >
-          <Image src="/pen/pen.svg" alt="edit records" width={24} height={24} />
-        </button>
+    <div
+      style={{
+        backgroundImage: isFavorite ? "var(--focus-button-border)" : "none",
+      }}
+      className="flex justify-between w-full rounded-[24px] p-[1px]"
+    >
+      <div
+        className="flex justify-between w-full bg-list-item-bg border-t border-list-item-border rounded-[24px] p-2 cursor-pointer"
+        onClick={handleEditClick}
+      >
+        <div className="space-x-2 flex justify-center items-center">
+          <button className="ml-2" onClick={handleFavoriteUpdate}>
+            <Image
+              src={selectedFavorite || isFavorite ? favoriteStarIcon : starIcon}
+              alt="favorite"
+              width={24}
+              height={24}
+            />
+          </button>
+          <span className="text-list-item-text sm:text-lg text-base">
+            {domain}.sol
+          </span>
+        </div>
+        <div className="flex gap-2 justify-center items-center">
+          {isFavorite && <PrimaryTag />}
+          <button
+            className="text-white text-sm w-[50px] px-1 py-3 bg-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
+            onClick={handleEditClick}
+          >
+            <Image
+              src="/pen/pen.svg"
+              alt="edit records"
+              width={24}
+              height={24}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -98,7 +113,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
 
 export const PrimaryTag = () => {
   return (
-    <div className=" py-2 px-4 border border-primary-tag-border rounded-[14px] flex items-center justify-center">
+    <div className=" py-2 px-4 border border-primary-tag-border rounded-[14px] flex items-center justify-center bg-primary-bg">
       <span className="font-semibold text-[14px] font-azeret text-primary-tag-text">
         PRIMARY
       </span>

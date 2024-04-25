@@ -350,8 +350,8 @@ body {
   --action-button-bg: linear-gradient(to right, #00f0ff, #cbff5e);
   --action-button-text: #03021a;
   --action-button-border: #ffffff33;
-  --focus-button: linear-gradient(to right, #a5fbac, #d7fd75);
-  --list-item-bg: rgba(255, 255, 255, 0.07);
+  --focus-button-border: linear-gradient(to right, #a5fbac, #d7fd75);
+  --list-item-bg: #15142b;
   --list-item-border: #ffffff3d;
   --list-item-text: #f8eff9;
   --primary-tag-text: #a5fbac;
@@ -394,8 +394,8 @@ body {
   --action-button-bg: linear-gradient(to right, #00f0ff, #cbff5e);
   --action-button-text: #03021a;
   --action-button-border: #ffffff33;
-  --focus-button: linear-gradient(to right, #6963e0, #8d43e0);
-  --list-item-bg: #0000000a;
+  --focus-button-border: linear-gradient(to right, #6963e0, #8d43e0);
+  --list-item-bg: #ede6ef;
   --list-item-border: #00000012;
   --list-item-text: #03021a;
   --primary-tag-text: #6963e0;
