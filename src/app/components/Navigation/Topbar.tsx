@@ -15,7 +15,7 @@ const Topbar = () => {
           <Image
             width={80}
             height={80}
-            src="/white-logo.svg"
+            src="/bonfida/bonfida-white.svg"
             className="w-5 h-6"
             alt="SNS Links Logo"
           />

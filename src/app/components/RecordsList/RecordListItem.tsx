@@ -24,7 +24,12 @@ export const RecordListItem = ({
           <ButtonModal
             buttonClass="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t border-t-[#FFFFFF33] active:border-t-0"
             buttonText={
-              <Image src="/pen.svg" alt="edit records" width={24} height={24} />
+              <Image
+                src="/pen/pen.svg"
+                alt="edit records"
+                width={24}
+                height={24}
+              />
             }
             modalClass="bg-[#03001A] w-full sm:min-w-[520px] h-fit overflow-y-visible border border-[#FFFFFF3D]"
             visible={isModalVisible}

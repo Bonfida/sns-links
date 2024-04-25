@@ -15,7 +15,12 @@ export const NoDomainsFound = () => {
         <a href="https://www.sns.id/" target="_blank">
           <button className="px-3 py-2 font-bold text-base bg-action-button-bg rounded-lg font-azeret text-action-button-text">
             <div className="flex gap-2 items-center">
-              <Image src="/sns-global.svg" height={32} width={32} alt="" />
+              <Image
+                src="/bonfida/sns-global.svg"
+                height={32}
+                width={32}
+                alt=""
+              />
               <span> Purchase domain</span>
             </div>
           </button>

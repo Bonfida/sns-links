@@ -42,7 +42,7 @@ const ProfilePic = ({
       <Image
         width={customWidth || 100}
         height={customHeight || 100}
-        src={picRecord?.content || "/default-profile.svg"}
+        src={picRecord?.content || "/user/default-profile.svg"}
         className="object-fit rounded-full"
         alt="Profile"
       />
@@ -55,7 +55,7 @@ const ProfilePic = ({
                 height={10}
                 className="text-white"
                 alt="pic edit icon"
-                src="/camera.svg"
+                src="/camera/camera.svg"
               />
             }
             visible={isModalVisible}

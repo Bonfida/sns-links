@@ -107,7 +107,7 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
               alt="Profile picture"
               width={120}
               height={120}
-              src={picRecord?.content ?? "/default-profile.svg"}
+              src={picRecord?.content ?? "/user/default-profile.svg"}
               className="rounded-full"
             />
           )}

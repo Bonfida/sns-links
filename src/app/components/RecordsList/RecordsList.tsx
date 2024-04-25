@@ -73,7 +73,12 @@ const RecordsTable = ({ domain }: { domain: string }) => {
       <div className=" flex flex-col items-center ">
         <div className="md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
           <button onClick={navigateBack} className="flex gap-2 items-center">
-            <Image src="/back-green.svg" width={18} height={15} alt="back" />
+            <Image
+              src="/back/back-green.svg"
+              width={18}
+              height={15}
+              alt="back"
+            />
             <span className="font-azeret text-base font-bold text-link">
               Back
             </span>
@@ -94,7 +99,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/link-out.svg"
+                    src="/link-outlink-out.svg"
                     height={30}
                     width={30}
                     alt=""

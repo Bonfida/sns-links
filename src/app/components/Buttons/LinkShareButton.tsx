@@ -21,7 +21,12 @@ const LinkShareButton = ({ domain }: { domain: string }) => {
         className="active:translate-y-1 transition-all relative"
         onClick={handleShareClick}
       >
-        <Image src="/link-out.svg" height={40} width={40} alt={"share link"} />
+        <Image
+          src="/link-out/link-out.svg"
+          height={40}
+          width={40}
+          alt={"share link"}
+        />
         {showCopyConfirmation && (
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-modal-bg text-generic-text rounded-md whitespace-nowrap text-xs">
             Link copied!

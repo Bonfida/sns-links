@@ -27,7 +27,7 @@ const ProfileOverview = () => {
       {favoriteDomain ? (
         <>
           <Image
-            src={picRecord?.content || "/default-profile.svg"}
+            src={picRecord?.content || "/user/default-profile.svg"}
             width={120}
             height={120}
             alt="default pic"
@@ -46,7 +46,7 @@ const ProfileOverview = () => {
       ) : (
         <>
           <Image
-            src="/default-profile.svg"
+            src="/user/default-profile.svg"
             width={100}
             height={100}
             alt="default pic"

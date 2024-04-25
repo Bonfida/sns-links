@@ -61,7 +61,11 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       <div className="space-x-2 flex justify-center items-center">
         <button className="ml-2" onClick={handleFavoriteUpdate}>
           <Image
-            src={selectedFavorite ? "/solid-star.svg" : "/star-outline.svg"}
+            src={
+              selectedFavorite
+                ? "/star/solid-star.svg"
+                : "/star/star-outline.svg"
+            }
             alt="favorite"
             width={24}
             height={24}
@@ -77,7 +81,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
           className="text-white text-sm w-[50px] px-1 py-3 bg-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
           onClick={handleEditClick}
         >
-          <Image src="/pen.svg" alt="edit records" width={24} height={24} />
+          <Image src="/pen/pen.svg" alt="edit records" width={24} height={24} />
         </button>
       </div>
     </div>

@@ -29,7 +29,7 @@ export const Home = () => {
         </div>
         <div className="absolute inset-0 flex justify-center items-center -z-1 sm:mt-0 mt-[-300px]">
           <Image
-            src="/phone-preview.svg"
+            src="/preview/phone-preview.svg"
             width={1152}
             height={820}
             alt="preview"

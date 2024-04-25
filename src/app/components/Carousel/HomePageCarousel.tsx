@@ -6,32 +6,32 @@ const carouselItemDescriptions = [
   {
     title: "Brand",
     description: "Your on chain identity",
-    darkImage: "/bonfida-green.svg",
-    lightImage: "/bonfida-purple.svg",
+    darkImage: "/bonfida/bonfida-green.svg",
+    lightImage: "/bonfida/bonfida-purple.svg",
   },
   {
     title: "Share",
     description: "Share all your links with ease",
-    darkImage: "/share-green.svg",
-    lightImage: "/share-purple.svg",
+    darkImage: "/share/share-green.svg",
+    lightImage: "/share/share-purple.svg",
   },
   {
     title: "Verify",
     description: "Peace of mind with verified links",
-    darkImage: "/shield-green.svg",
-    lightImage: "/shield-purple.svg",
+    darkImage: "/shield/shield-green.svg",
+    lightImage: "/shield/shield-purple.svg",
   },
   {
     title: "Standout",
     description: "Standout from the crowd",
-    darkImage: "/megaphone-green.svg",
-    lightImage: "/megaphone-purple.svg",
+    darkImage: "/megaphone/megaphone-green.svg",
+    lightImage: "/megaphone/megaphone-purple.svg",
   },
   {
     title: "Integrate",
     description: "Easily integrate link share",
-    darkImage: "/connect-green.svg",
-    lightImage: "/connect-purple.svg",
+    darkImage: "/connect/connect-green.svg",
+    lightImage: "/connect/connect-purple.svg",
   },
 ];
 

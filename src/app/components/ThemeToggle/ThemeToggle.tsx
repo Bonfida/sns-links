@@ -26,7 +26,9 @@ export const ThemeToggle = () => {
         onClick={handleThemeToggle}
       >
         <Image
-          src={theme === "dark" ? "/dark-mode.svg" : "/light-mode.svg"}
+          src={
+            theme === "dark" ? "/theme/dark-mode.svg" : "/theme/light-mode.svg"
+          }
           height={24}
           width={24}
           alt="theme-select"
