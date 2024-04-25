@@ -10,10 +10,12 @@ import { derive } from "@/utils/derive";
 import { registerFavourite } from "@bonfida/name-offers";
 import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
 import { makeTx } from "@/utils/makeTx";
+import ThemeContext from "@/context/theme";
 
 export const DomainListItem = ({ domain }: { domain: string }) => {
   const { publicKey, signTransaction } = useWallet();
   const { connection } = useConnection();
+  const { theme } = useContext(ThemeContext);
   const router = useRouter();
   const { setSelectedDomain, selectedDomain } = useContext(
     SelectedDomainContext
@@ -25,6 +27,16 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       manual: true,
     });
   const isFavorite = domain === favoriteDomain;
+
+  const favoriteStarIcon =
+    theme === "dark"
+      ? "/star/solid-star-green.svg"
+      : "/star/solid-star-purple.svg";
+
+  const starIcon =
+    theme === "dark"
+      ? "/star/outline-star-white.svg"
+      : "/star/outline-star-black.svg";
 
   const handleEditClick = () => {
     setSelectedDomain(domain);
@@ -61,11 +73,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       <div className="space-x-2 flex justify-center items-center">
         <button className="ml-2" onClick={handleFavoriteUpdate}>
           <Image
-            src={
-              selectedFavorite || isFavorite
-                ? "/star/solid-star.svg"
-                : "/star/star-outline.svg"
-            }
+            src={selectedFavorite || isFavorite ? favoriteStarIcon : starIcon}
             alt="favorite"
             width={24}
             height={24}
