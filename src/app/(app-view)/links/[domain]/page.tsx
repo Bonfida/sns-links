@@ -1,4 +1,4 @@
-import DomainLinksPageComponent from "@/app/components/Pages/RecordsListPage";
+import { RecordsListPage } from "@/app/components/Pages/RecordsListPage";
 
 export const metadata = {
   title: "Share Links",
@@ -12,7 +12,7 @@ type DomainLinksPageParams = {
 const DomainLinksPage = ({ params }: { params: DomainLinksPageParams }) => {
   return (
     <div className="bg-gradient-to-t to-[#03001A] from-[#000a1a] w-screen h-screen">
-      <DomainLinksPageComponent params={params} />
+      <RecordsListPage params={params} />
     </div>
   );
 };

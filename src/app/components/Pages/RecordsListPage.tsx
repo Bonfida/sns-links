@@ -1,13 +1,13 @@
 "use client";
 import RecordsList from "@/app/components/RecordsList/RecordsList";
-type DomainLinksPageParams = {
+type RecordsListPageParams = {
   domain: string;
 };
 
-const DomainLinksPageComponent = ({
+export const RecordsListPage = ({
   params,
 }: {
-  params: DomainLinksPageParams;
+  params: RecordsListPageParams;
 }) => {
   const domain: string = params.domain;
 
@@ -17,5 +17,3 @@ const DomainLinksPageComponent = ({
     </div>
   );
 };
-
-export default DomainLinksPageComponent;

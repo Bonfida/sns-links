@@ -38,7 +38,6 @@ const carouselItemDescriptions = [
 export const HomePageCarousel = () => {
   const { theme } = useContext(ThemeContext);
 
-  console.log("themein", theme);
   return (
     <div className="flex gap-3">
       {carouselItemDescriptions.map((item) => {

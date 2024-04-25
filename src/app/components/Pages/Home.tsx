@@ -5,7 +5,7 @@ import { HomePageCarousel } from "../Carousel/HomePageCarousel";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { GoToProfileButton } from "../Buttons/GoToProfileButton";
 
-const Home = () => {
+export const Home = () => {
   const { connected } = useWallet();
   return (
     <div className="flex-col flex gap-3 w-[1224px] overflow-hidden px-3 sm:px-0 mt-44 sm:mt-0">
@@ -43,5 +43,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;
