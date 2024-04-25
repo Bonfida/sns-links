@@ -62,7 +62,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
         <button className="ml-2" onClick={handleFavoriteUpdate}>
           <Image
             src={
-              selectedFavorite
+              selectedFavorite || isFavorite
                 ? "/star/solid-star.svg"
                 : "/star/star-outline.svg"
             }

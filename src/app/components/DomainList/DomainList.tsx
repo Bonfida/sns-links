@@ -2,32 +2,52 @@
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { DomainListItem } from "./DomainListItem";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 
 const DomainList = () => {
   const { publicKey } = useWallet();
   const { connection } = useConnection();
+
+  //Domains
   const { data: domainsOwned, isLoading: domainsLoading } = useFetchDomains(
     connection,
     publicKey
   );
 
+  const { data: favoriteDomain } = useFavouriteDomain(publicKey?.toBase58(), {
+    manual: true,
+  });
+
+  const sortedDomains = useMemo(() => {
+    if (!domainsOwned) return [];
+
+    return favoriteDomain && domainsOwned.includes(favoriteDomain)
+      ? [...domainsOwned].sort((a, b) =>
+          a === favoriteDomain ? -1 : b === favoriteDomain ? 1 : 0
+        )
+      : domainsOwned;
+  }, [domainsOwned, favoriteDomain]);
+
   //Search
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredDomains, setFilteredDomains] = useState<string[]>([]);
+  const [filteredDomains, setFilteredDomains] = useState<string[] | undefined>(
+    []
+  );
 
   useEffect(() => {
     if (!domainsOwned) {
       setFilteredDomains([]);
     } else if (searchTerm === "") {
-      setFilteredDomains(domainsOwned);
+      setFilteredDomains(sortedDomains);
     } else {
       const filtered = domainsOwned.filter((domain) =>
         domain.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredDomains(filtered);
     }
-  }, [searchTerm, domainsOwned]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, sortedDomains]);
 
   return (
     <div className=" flex flex-col items-center mt-10">

@@ -56,7 +56,12 @@ const LinkButton = ({
 
         {interactionType === "newTab" && link ? (
           <a href={link} target="_blank" rel="noopener noreferrer">
-            <Image src="/link-out.svg" width={18} height={18} alt="copy" />
+            <Image
+              src="/link-out/link-out.svg"
+              width={18}
+              height={18}
+              alt="copy"
+            />
           </a>
         ) : (
           <button
