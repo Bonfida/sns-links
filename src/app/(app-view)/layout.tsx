@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="light">
+      <body className="dark">
         <Providers>
           <Topbar />
           <Widget endpoint={process.env.NEXT_PUBLIC_ENDPOINT!} />
