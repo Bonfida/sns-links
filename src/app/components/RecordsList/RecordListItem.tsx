@@ -15,8 +15,8 @@ export const RecordListItem = ({
   const [isModalVisible, setModalVisible] = useState(false);
   const { data: isNft } = useIsTokenized(domain);
   return (
-    <div className="w-full flex flex-col bg-white/[7%] border-t-[1px] border-white/[24%] rounded-[24px] ">
-      <div className="flex justify-between w-full py-2 px-4">
+    <div className="w-full flex flex-col bg-white/[7%] border-t-[1px] border-white/[24%] rounded-3xl ">
+      <div className="flex justify-between w-full pt-2 pb-2 pl-5 pr-2">
         <div className="space-x-2 flex justify-center items-center">
           <span className="text-white text-lg">{record.record}</span>
         </div>
@@ -51,7 +51,7 @@ export const RecordListItem = ({
         </div>
       </div>
       {record.content && (
-        <div className="w-full border-t-white/25 border-t h-[39px] px-4 py-2">
+        <div className="w-full border-t-white/25 border-t h-[39px] pt-2 py-[14px] pl-5">
           <span className="text-base text-[#F8EFF9]/50 font-azeret">
             {record.content}
           </span>

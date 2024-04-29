@@ -110,46 +110,52 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             </div>
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">
-              <div className="flex flex-col gap-3 w-full justify- items-center">
-                <span className="text-text-heading">CONTACT</span>
-                {!recordsLoading &&
-                  recordData
-                    ?.filter((record) =>
-                      contactRecords.includes(record.record as Record)
-                    )
-                    .map((record) => (
-                      <RecordListItem
-                        key={record.record}
-                        record={record}
-                        domain={currentDomain}
-                      />
-                    ))}
-                <span className="text-text-heading">SOCIALS</span>
-                {!recordsLoading &&
-                  recordData
-                    ?.filter((record) =>
-                      socialRecords.includes(record.record as Record)
-                    )
-                    .map((record) => (
-                      <RecordListItem
-                        key={record.record}
-                        record={record}
-                        domain={currentDomain}
-                      />
-                    ))}
-                <span className="text-text-heading">WALLETS</span>
-                {!recordsLoading &&
-                  recordData
-                    ?.filter((record) =>
-                      walletRecords.includes(record.record as Record)
-                    )
-                    .map((record) => (
-                      <RecordListItem
-                        key={record.record}
-                        record={record}
-                        domain={currentDomain}
-                      />
-                    ))}
+              <div className="flex flex-col gap-8 w-full justify- items-center">
+                <div className="gap-2 w-full flex flex-col justify-center items-center">
+                  <span className="text-text-heading pb-4">CONTACT</span>
+                  {!recordsLoading &&
+                    recordData
+                      ?.filter((record) =>
+                        contactRecords.includes(record.record as Record)
+                      )
+                      .map((record) => (
+                        <RecordListItem
+                          key={record.record}
+                          record={record}
+                          domain={currentDomain}
+                        />
+                      ))}
+                </div>
+                <div className="gap-2 w-full flex flex-col justify-center items-center">
+                  <span className="text-text-heading">SOCIALS</span>
+                  {!recordsLoading &&
+                    recordData
+                      ?.filter((record) =>
+                        socialRecords.includes(record.record as Record)
+                      )
+                      .map((record) => (
+                        <RecordListItem
+                          key={record.record}
+                          record={record}
+                          domain={currentDomain}
+                        />
+                      ))}
+                </div>
+                <div className="gap-2 w-full flex flex-col justify-center items-center">
+                  <span className="text-text-heading">WALLETS</span>
+                  {!recordsLoading &&
+                    recordData
+                      ?.filter((record) =>
+                        walletRecords.includes(record.record as Record)
+                      )
+                      .map((record) => (
+                        <RecordListItem
+                          key={record.record}
+                          record={record}
+                          domain={currentDomain}
+                        />
+                      ))}
+                </div>
               </div>
             </div>
           </div>
