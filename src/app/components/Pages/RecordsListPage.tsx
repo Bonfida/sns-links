@@ -12,7 +12,7 @@ export const RecordsListPage = ({
   const domain: string = params.domain;
 
   return (
-    <div className="flex flex-col items-center justify-start w-screen h-screen overflow-auto bg-primary-bg">
+    <div className="flex flex-col items-center justify-start w-screen h-fit bg-primary-bg">
       <RecordsList domain={domain} />
     </div>
   );
