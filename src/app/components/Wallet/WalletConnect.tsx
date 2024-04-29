@@ -68,7 +68,6 @@ export const WalletConnect = ({
           // @ts-ignore
           ref={setReferenceElement}
         >
-          {/* bg-gradient-to-b from-[#E8DCEF29] */}
           <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
             <div className="sm:inline-block hidden">
               <ProfilePic
@@ -132,9 +131,9 @@ export const WalletConnect = ({
 
   return (
     <button
-      style={{ width: width ? `${width}px` : "196px" }}
       className={twMerge(
-        " h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 drop-shadow-2xl drop-shadow-white",
+        "h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 drop-shadow-2xl drop-shadow-white",
+        width ? `${width}px` : "sm:w-[196px] w-[50px]",
         green
           ? "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E]"
           : " bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg border-t border-t-[#FFFFFF33]"
@@ -151,18 +150,20 @@ export const WalletConnect = ({
           alt="wallet"
           src={green ? "/wallet/wallet-blue.svg" : "/wallet/wallet-white.svg"}
         />
-        <span
-          className={twMerge(
-            "font-bold font-azeret text-base w-fit text-white normal-case",
-            green ? "text-[#03021A]" : "text-white"
-          )}
-        >
-          {connecting
-            ? "Connecting..."
-            : green
-            ? "Login with your wallet"
-            : "Connect wallet"}
-        </span>
+        {green ? (
+          <span className="font-bold font-azeret text-base w-fit normal-case text-[#03021A]">
+            Login with your wallet
+          </span>
+        ) : (
+          <span
+            className={twMerge(
+              "font-bold font-azeret text-base w-fit text-white normal-case hidden sm:inline-flex",
+              green ? "text-[#03021A]" : "text-white"
+            )}
+          >
+            {connecting ? "Connecting..." : "Connect wallet"}
+          </span>
+        )}
       </div>
     </button>
   );

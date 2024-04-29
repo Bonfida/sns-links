@@ -10,7 +10,7 @@ export const Home = () => {
   return (
     <div className="flex-col flex gap-3 w-[1224px] overflow-hidden px-3 sm:px-0 mt-44 sm:mt-0">
       <div className="flex w-[1224px]">
-        <div className="sm:w-1/2 space-y-10 z-50 w-full">
+        <div className="sm:w-1/2 space-y-8 z-50 w-full">
           <div className="sm:w-[600px] w-[351px]">
             <span className="font-azeret font-semibold sm:text-[104px] text-[64px] text-hero-section-text leading-none">
               Your Brand On Chain
@@ -27,17 +27,17 @@ export const Home = () => {
             <WalletConnect green={true} width={258} />
           )}
         </div>
-        <div className="absolute inset-0 flex justify-center items-center -z-1 sm:mt-0 mt-[-300px]">
+        <div className="absolute inset-0 flex justify-center items-center -z-1 sm:mt-0 mt-[-220px]">
           <Image
             src="/preview/phone-preview.svg"
-            width={1152}
-            height={820}
+            width={1440}
+            height={1024}
             alt="preview"
-            objectFit="contain"
+            className=" w-[766px] h-[418px] md:w-[1440px] md:h-[895px] md:top-1/2 md:translate-y-[10%]"
           />
         </div>
       </div>
-      <div className="w-screen mt-10 z-50 hidden sm:inline-block">
+      <div className="w-screen mt-32 md:mt-20 z-50 hidden sm:inline-block">
         <HomePageCarousel />
       </div>
     </div>
