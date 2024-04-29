@@ -5,7 +5,7 @@ export const metadata = {
   description: "Profile Page",
 };
 
-const ProfilePage = () => {
+const DomainListView = () => {
   return (
     <div className="bg-primary-bg w-screen h-screen overflow-auto">
       <DomainListPage />
@@ -13,4 +13,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default DomainListView;

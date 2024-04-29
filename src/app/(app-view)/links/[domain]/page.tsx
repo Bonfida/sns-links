@@ -5,11 +5,11 @@ export const metadata = {
   description: "Edit and share your links",
 };
 
-type DomainLinksPageParams = {
+type RecordListViewParams = {
   domain: string;
 };
 
-const DomainLinksPage = ({ params }: { params: DomainLinksPageParams }) => {
+const RecordsListView = ({ params }: { params: RecordListViewParams }) => {
   return (
     <div className="bg-gradient-to-t to-[#03001A] from-[#000a1a] w-screen h-screen">
       <RecordsListPage params={params} />
@@ -17,4 +17,4 @@ const DomainLinksPage = ({ params }: { params: DomainLinksPageParams }) => {
   );
 };
 
-export default DomainLinksPage;
+export default RecordsListView;

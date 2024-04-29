@@ -9,6 +9,7 @@ import { NoLinksFoundNotice } from "../Notices/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
+import { Record } from "@bonfida/spl-name-service";
 
 const contactRecords = [
   {
@@ -57,8 +58,7 @@ const socialRecords = [
   { record: Record.Backpack, interactionType: "copy" },
 ];
 
-import { Record } from "@bonfida/spl-name-service";
-const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
+export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
   const { connection } = useConnection();
   const domain = params.domain;
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
@@ -208,5 +208,3 @@ const LinkSharePageComponent = ({ params }: { params: LinkShareParams }) => {
     </div>
   );
 };
-
-export default LinkSharePageComponent;

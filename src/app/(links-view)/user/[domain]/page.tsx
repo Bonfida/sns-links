@@ -1,4 +1,4 @@
-import LinkSharePageComponent from "@/app/components/Pages/LinkSharePage";
+import { LinkSharePage } from "@/app/components/Pages/LinkSharePage";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
 
 export const metadata = {
@@ -6,12 +6,12 @@ export const metadata = {
   description: "Check out my links!",
 };
 
-const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
+const LinkShareView = ({ params }: { params: LinkShareParams }) => {
   return (
     <div>
-      <LinkSharePageComponent params={params} />
+      <LinkSharePage params={params} />
     </div>
   );
 };
 
-export default LinkSharePage;
+export default LinkShareView;
