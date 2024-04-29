@@ -28,7 +28,9 @@ export default function RootLayout({
           <Widget endpoint={process.env.NEXT_PUBLIC_ENDPOINT!} />
           {children}
         </Providers>
-        <Footer />
+        <div className="hidden sm:inline-flex">
+          <Footer />
+        </div>
       </body>
     </html>
   );

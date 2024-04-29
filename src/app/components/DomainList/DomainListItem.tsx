@@ -128,7 +128,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
 
 export const PrimaryTag = () => {
   return (
-    <div className=" py-2 px-4 border border-primary-tag-border rounded-[14px] flex items-center justify-center bg-primary-bg">
+    <div className="py-2 px-4 border border-primary-tag-border rounded-[14px] items-center justify-center bg-primary-bg hidden sm:inline-flex">
       <span className="font-semibold text-[14px] font-azeret text-primary-tag-text">
         PRIMARY
       </span>
