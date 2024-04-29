@@ -1,11 +1,9 @@
 "use client";
-import { useState } from "react";
-import "@bonfida/sns-widget/style.css";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
 import { unwrap } from "@/utils/tokenizer/unwrap";
 import { useToastContext } from "@bonfida/components";
-import { makeTx } from "@/utils/makeTx";
+import { makeTxV2 } from "@/utils/makeTx";
+import { sleep } from "@/utils/sleep";
 
 const UnwrapModal = ({
   domain,
@@ -15,26 +13,32 @@ const UnwrapModal = ({
   close: () => void;
 }) => {
   const { connection } = useConnection();
-  const { publicKey, signTransaction } = useWallet();
+  const { publicKey, signAllTransactions } = useWallet();
   const { toast } = useToastContext();
 
   const handleUnwrap = async () => {
+    if (!publicKey || !signAllTransactions) return;
     try {
-      const ix = await unwrap(connection, domain, publicKey!);
+      toast.processing();
+      const instructions = await unwrap(connection, domain, publicKey!);
 
-      const { success, signature } = await makeTx(
+      const results = await makeTxV2({
         connection,
-        publicKey!,
-        ix,
-        signTransaction!,
-        toast
-      );
+        feePayer: publicKey,
+        instructions,
+        signAllTransactions,
+      });
 
-      if (success) {
+      if (results.length > 0) {
         toast.success("Unwrapped successfully!");
       }
     } catch (error) {
       console.log("error", error);
+      toast.error();
+    } finally {
+      await sleep(1_000);
+      toast.close();
+      close();
     }
   };
 

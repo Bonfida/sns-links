@@ -92,7 +92,7 @@ const EditRecordModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-modal-bg  border-t-modal-border active:border-t-0 font-bold text-base"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-gradient-to-b from-glass-bg to-bg-modal-bg   border-t-modal-border active:border-t-0 font-bold text-base"
               onClick={() => {
                 close();
               }}

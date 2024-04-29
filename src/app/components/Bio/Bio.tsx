@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
-import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
-import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import { updateBio } from "../../../utils/update-record/update-bio";
 import { isTokenized } from "../../../utils/tokenizer/isTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { useFetchBio } from "@/hooks/useFetchBio";
 import { useQueryClient } from "react-query";
-import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 
 const Bio = ({ domain }: { domain: string }) => {

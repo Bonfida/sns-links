@@ -3,8 +3,8 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
-import { updateRecord } from "../../../utils/update-record/update-record";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
+import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 
 export const EditPicModal = ({
   recordName,
@@ -23,6 +23,7 @@ export const EditPicModal = ({
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
     recordName as Record
   );
+  const updateRecord = useUpdateRecord();
 
   const handleUpdateClick = async (
     recordName: Record,
@@ -30,18 +31,14 @@ export const EditPicModal = ({
     recordVal: string
   ) => {
     try {
-      await updateRecord(
-        connection,
+      await updateRecord({
+        domain: domain || selectedDomain,
         recordName,
-        selectedDomain || domain,
         recordVal,
-        publicKey,
-        signTransaction!,
-        signMessage!,
-        toast,
         isRoaSupported,
-        sendRoaRequest
-      );
+        sendRoaRequest,
+      });
+      close();
     } catch (error) {
       if (error instanceof Error) {
         console.error("Failed to update record:", error);
@@ -93,7 +90,7 @@ export const EditPicModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-modal-bg  border-t-modal-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-gradient-to-b from-glass-bg to-bg-modal-bg border-t-modal-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}

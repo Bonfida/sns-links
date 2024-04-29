@@ -140,6 +140,7 @@ export const ButtonModal = ({
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
   return (
