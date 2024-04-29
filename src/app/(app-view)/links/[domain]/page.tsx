@@ -11,7 +11,7 @@ type RecordListViewParams = {
 
 const RecordsListView = ({ params }: { params: RecordListViewParams }) => {
   return (
-    <div className="bg-gradient-to-t to-[#03001A] from-[#000a1a] w-screen h-screen">
+    <div className="bg-primary-bg w-screen h-screen md:py-12">
       <RecordsListPage params={params} />
     </div>
   );

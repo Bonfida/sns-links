@@ -85,7 +85,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
           </button>
         </div>
 
-        <div className="space-y-2 mt-10 md:w-[600px] sm:w-[550px] w-[350px] ">
+        <div className="space-y-2 mt-10 md:w-[600px] sm:w-[550px] w-[350px]">
           <div className="flex flex-col justify-around">
             <div className="flex items-center justify-start w-full gap-4">
               <ProfilePic domain={domain} />
@@ -112,7 +112,9 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-8 w-full justify- items-center">
                 <div className="gap-2 w-full flex flex-col justify-center items-center">
-                  <span className="text-text-heading pb-4">CONTACT</span>
+                  <span className="text-text-heading pb-4 text-[14px]">
+                    CONTACT
+                  </span>
                   {!recordsLoading &&
                     recordData
                       ?.filter((record) =>
@@ -127,7 +129,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                       ))}
                 </div>
                 <div className="gap-2 w-full flex flex-col justify-center items-center">
-                  <span className="text-text-heading">SOCIALS</span>
+                  <span className="text-text-heading text-[14px]">SOCIALS</span>
                   {!recordsLoading &&
                     recordData
                       ?.filter((record) =>
@@ -142,7 +144,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                       ))}
                 </div>
                 <div className="gap-2 w-full flex flex-col justify-center items-center">
-                  <span className="text-text-heading">WALLETS</span>
+                  <span className="text-text-heading text-[14px]">WALLETS</span>
                   {!recordsLoading &&
                     recordData
                       ?.filter((record) =>
