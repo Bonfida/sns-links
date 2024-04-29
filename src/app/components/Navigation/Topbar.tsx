@@ -10,7 +10,7 @@ const Topbar = () => {
       <div className="flex items-center justify-between w-full md:w-[1224px] z-50 px-3 sm:px-0">
         <Link
           href="/"
-          className="flex items-center justify-center sm:gap-4 gap-2"
+          className="flex items-center justify-center sm:gap-4 gap-2  w-[149px]"
         >
           <Image
             width={80}
