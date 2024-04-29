@@ -1,40 +1,49 @@
-import { Transaction, Connection, Commitment } from "@solana/web3.js";
+import {
+  Transaction,
+  Connection,
+  Commitment,
+  VersionedTransaction,
+} from "@solana/web3.js";
+import { sleep } from "@bonfida/hooks";
 import base58 from "bs58";
-import { getToken } from "@bonfida/hooks";
-import { tokenAuthFetchMiddleware } from "@strata-foundation/web3-token-auth";
-import { sleep } from "@bonfida/utils";
-const connections: Connection[] = [];
+const HELIUS_RPC = process.env.NEXT_PUBLIC_ENDPOINT;
 
-export const getAllConnections = (connections: Connection[]): Connection[] => {
-  const token = localStorage.getItem("auth-token");
-  if (token) {
-    connections.push(
-      new Connection(process.env.NEXT_PUBLIC_ENDPOINT!, {
-        wsEndpoint: process.env.NEXT_PUBLIC_WSS_URL,
-        httpHeaders: { Authorization: `Bearer ${token}` },
-        fetchMiddleware: tokenAuthFetchMiddleware({
-          getToken,
-          tokenExpiry: 2.5 * 60 * 1_000,
-        }),
-      })
-    );
+export const JITO_ENGINE =
+  "https://mainnet.block-engine.jito.wtf/api/v1/transactions";
+
+const MAX_RETRIES = 10;
+const RETRY_SLEEP_MS = 300;
+
+const encodeSignature = (tx: Transaction | VersionedTransaction): string => {
+  if ("version" in tx) {
+    return base58.encode(tx.signatures[0]);
+  } else {
+    // Tx  are always signed before being sent
+    return base58.encode(tx.signature!);
   }
-  return connections;
+};
+
+const toError = (err: any): Error => {
+  if (err instanceof Error) {
+    return err;
+  } else {
+    return new Error(String(err));
+  }
 };
 
 const send = async (
   connection: Connection,
-  tx: Transaction,
+  tx: Transaction | VersionedTransaction,
   skipPreflight: boolean,
   preflightCommitment: Commitment
-) => {
+): Promise<string> => {
   let success = false;
-  let c = 0;
-  let error: unknown = null;
+  let attempts = 0;
+  let error: Error | null = null;
   let result: string | null = null;
 
-  while (!success && c < 10) {
-    c += 1;
+  while (!success && attempts < MAX_RETRIES) {
+    attempts += 1;
     try {
       const sig = await connection.sendRawTransaction(tx.serialize(), {
         skipPreflight,
@@ -45,39 +54,45 @@ const send = async (
     } catch (err) {
       if (err instanceof Error) {
         if (err.message.includes("already been processed")) {
-          console.log("Tx already processed");
+          console.log("Transaction already processed.");
           success = true;
-          return base58.encode(tx.signature!);
+          result = encodeSignature(tx);
+        } else if (
+          // We have tried so many times that the blockhash expired
+          err.message.includes(
+            "Transaction simulation failed: Blockhash not found"
+          )
+        ) {
+          error = toError(err);
+          break;
+        } else {
+          console.log(
+            `Retrying sending transaction due to error: ${JSON.stringify(err)}`
+          );
+          error = toError(err);
+          await sleep(RETRY_SLEEP_MS);
         }
       }
-      console.log(`Retrying sending tx because of ${JSON.stringify(err)}`);
-      error = err;
-      // Sleep 400ms before retrying...
-      await sleep(700);
     }
   }
 
-  if (!success) {
-    throw error;
-  }
+  if (result) return result;
 
-  if (!!result) {
-    return result;
-  }
-
-  throw new Error("Error sending batch transaction");
+  throw error || new Error("Error sending batch transaction");
 };
 
 export const sendRawTransaction = async (
   connection: Connection,
-  tx: Transaction,
+  tx: Transaction | VersionedTransaction,
   skipPreflight = false,
-  preflightCommitment = "processed" as Commitment
-) => {
-  const result = await Promise.all(
-    [connection, ...getAllConnections(connections)].map((c) =>
-      send(c, tx, skipPreflight, preflightCommitment)
-    )
+  preflightCommitment: Commitment = "processed"
+): Promise<string> => {
+  const connections = [
+    connection,
+    new Connection(HELIUS_RPC!),
+    new Connection(JITO_ENGINE),
+  ];
+  return Promise.race(
+    connections.map((c) => send(c, tx, skipPreflight, preflightCommitment))
   );
-  return result[0];
 };

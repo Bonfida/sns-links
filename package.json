@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@bonfida/components": "^1.1.3",
+    "@bonfida/components": "1.1.4",
     "@bonfida/hooks": "0.2.1",
     "@bonfida/name-offers": "^0.2.2",
     "@bonfida/name-tokenizer": "0.0.12",
@@ -45,10 +45,12 @@
     "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.16",
+    "babel-plugin-macros": "^3.1.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "postcss": "^8.4.31",

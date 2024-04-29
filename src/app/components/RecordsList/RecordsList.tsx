@@ -99,7 +99,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/link-outlink-out.svg"
+                    src="/link-out/link-out.svg"
                     height={30}
                     width={30}
                     alt=""

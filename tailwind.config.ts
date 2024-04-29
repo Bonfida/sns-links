@@ -61,6 +61,19 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      zIndex: {
+        // 2_000 is required for toast popup
+        "2_000": "2000",
+        modal: "1999",
+        "top-navbar": "1998",
+        "1_900": "1900",
+        "999": "999",
+        "45": "45",
+        "100": "100",
+        "200": "200",
+        "60": "60",
+        "over-default": "1",
+      },
       fontFamily: {
         azeret: ["Azeret", ...defaultTheme.fontFamily.sans],
       },

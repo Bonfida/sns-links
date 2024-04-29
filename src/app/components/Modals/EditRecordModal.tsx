@@ -3,7 +3,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
-import { updateRecord } from "../../../utils/update-record/update-record";
+import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 
 const EditRecordModal = ({
@@ -18,11 +18,12 @@ const EditRecordModal = ({
   const [recordVal, setRecordVal] = useState("");
   const { selectedDomain } = useContext(SelectedDomainContext);
   const { connection } = useConnection();
-  const { publicKey, signTransaction, signMessage } = useWallet();
+  const { publicKey, signAllTransactions, signMessage } = useWallet();
   const { toast } = useToastContext();
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
     recordName as Record
   );
+  const updateRecord = useUpdateRecord();
 
   const handleUpdateClick = async (
     recordName: Record,
@@ -30,18 +31,14 @@ const EditRecordModal = ({
     recordVal: string
   ) => {
     try {
-      await updateRecord(
-        connection,
+      updateRecord({
+        domain: selectedDomain || domain,
         recordName,
-        selectedDomain || domain,
         recordVal,
-        publicKey,
-        signTransaction!,
-        signMessage!,
-        toast,
         isRoaSupported,
-        sendRoaRequest
-      );
+        sendRoaRequest,
+      });
+      close();
     } catch (error) {
       if (error instanceof Error) {
         console.error("Failed to update record:", error);
@@ -54,7 +51,7 @@ const EditRecordModal = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10 ">
+    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10">
       <div
         className="relative bg-modal-bg h-fit flex flex-col justify-center items-center border border-modal-border rounded-xl p-5 mt-10 md:mt-0"
         onClick={(e) => e.stopPropagation()}

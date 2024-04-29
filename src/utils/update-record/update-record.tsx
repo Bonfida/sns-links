@@ -13,30 +13,43 @@ import {
   Transaction,
   Connection,
   TransactionInstruction,
+  VersionedTransaction,
 } from "@solana/web3.js";
 import { formatRecordValue } from "@/utils/formatRecordValue";
-import { makeTx } from "@/utils/makeTx";
+import { makeTxV2 } from "@/utils/makeTx";
 import { Toast } from "@bonfida/components";
 import { checkAccountExists } from "@bonfida/hooks";
 import { sleep } from "../sleep";
 import { simpleValidation } from "../simple-record-validation";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 
-export const updateRecord = async (
-  connection: Connection,
-  recordName: Record,
-  domain: string,
-  recordVal: string,
-  publicKey: PublicKey | null,
-  signTransaction: (transaction: Transaction) => Promise<Transaction>,
-  signMessage: (message: Uint8Array) => Promise<Uint8Array>,
-  toast: Toast,
-  isRoaSupported?: boolean,
-  sendRoaRequest?: (domain: string, record: Record) => Promise<void>
-) => {
-  if (!publicKey || !signTransaction || !signMessage) return;
+type TransactionType = Transaction | VersionedTransaction;
+
+export const updateRecordHanlder = async ({
+  connection,
+  publicKey,
+  domain,
+  recordName,
+  recordVal,
+  signAllTransactions,
+  isRoaSupported,
+  sendRoaRequest,
+}: {
+  connection: Connection;
+  publicKey: PublicKey | null;
+  domain: string;
+  recordName: Record;
+  recordVal: string;
+  signAllTransactions: (txs: TransactionType[]) => Promise<TransactionType[]>;
+  isRoaSupported?: boolean;
+  sendRoaRequest?: (domain: string, record: Record) => Promise<void>;
+}) => {
+  if (!publicKey || !signAllTransactions) {
+    throw new Error();
+  }
+
   try {
-    const ixs: TransactionInstruction[] = [];
+    const instructions: TransactionInstruction[] = [];
     const recordKey = getRecordV2Key(domain, recordName);
     const exist = await checkAccountExists(connection, recordKey);
     const formattedValue = formatRecordValue(recordVal, recordName);
@@ -44,24 +57,24 @@ export const updateRecord = async (
     if (formattedValue === "") {
       if (!exist) return;
       // Delete the record
-      ixs.push(deleteRecordV2(domain, recordName, publicKey, publicKey));
-      const { signature, success } = await makeTx(
-        connection,
-        publicKey,
-        ixs,
-        signTransaction,
-        toast
+      instructions.push(
+        deleteRecordV2(domain, recordName, publicKey, publicKey)
       );
-      console.log(signature, success);
-      return;
-    }
-
-    const { err } = simpleValidation(formattedValue, recordName);
-    if (err) {
-      return toast.error(err);
+      await makeTxV2({
+        connection,
+        feePayer: publicKey,
+        instructions,
+        signAllTransactions,
+      });
+    } else {
+      const { err } = simpleValidation(formattedValue, recordName);
+      if (err) {
+        throw new Error();
+      }
     }
 
     if (!exist) {
+      console.log("makes it to not exitss");
       const ix = createRecordV2Instruction(
         domain,
         recordName,
@@ -69,10 +82,10 @@ export const updateRecord = async (
         publicKey,
         publicKey
       );
-      ixs.push(ix);
+      instructions.push(ix);
     }
 
-    ixs.push(
+    instructions.push(
       ...[
         updateRecordV2Instruction(
           domain,
@@ -97,7 +110,7 @@ export const updateRecord = async (
      */
 
     if (isRoaSupported && GUARDIANS.get(recordName)) {
-      ixs.push(
+      instructions.push(
         writRoaRecordV2(
           domain,
           recordName,
@@ -107,7 +120,7 @@ export const updateRecord = async (
         )
       );
     } else if (recordName === Record.SOL) {
-      ixs.push(
+      instructions.push(
         writRoaRecordV2(
           domain,
           recordName,
@@ -118,15 +131,12 @@ export const updateRecord = async (
       );
     }
 
-    const { signature, success } = await makeTx(
+    await makeTxV2({
       connection,
-      publicKey,
-      ixs,
-      signTransaction,
-      toast
-    );
-    console.log(signature, success);
-    await sleep(1_000);
+      feePayer: publicKey,
+      instructions,
+      signAllTransactions,
+    });
 
     /**
      * If eligible to RoA send server request
@@ -135,6 +145,7 @@ export const updateRecord = async (
       await sendRoaRequest!(domain, recordName);
     }
   } catch (err) {
+    throw new Error();
     console.error(err);
   }
 };
