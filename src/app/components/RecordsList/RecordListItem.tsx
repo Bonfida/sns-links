@@ -22,7 +22,7 @@ export const RecordListItem = ({
         </div>
         <div className="flex gap-2 justify-center items-center">
           <ButtonModal
-            buttonClass="text-white text-sm w-[50px] px-1 py-3 bg-[#03021A] rounded-[16px] flex items-center justify-center border-t border-t-[#FFFFFF33] active:border-t-0"
+            buttonClass="text-white text-sm w-[50px] px-1 py-3 bg-gradient-to-b from-glass-bg to-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-[#FFFFFF33] active:border-t-0"
             buttonText={
               <Image
                 src="/pen/pen.svg"

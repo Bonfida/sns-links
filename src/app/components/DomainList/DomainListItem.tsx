@@ -110,7 +110,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
         <div className="flex gap-2 justify-center items-center">
           {isFavorite && <PrimaryTag />}
           <button
-            className="text-white text-sm w-[50px] px-1 py-3 bg-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
+            className="text-white text-sm w-[50px] px-1 py-3 bg-gradient-to-b from-glass-bg to-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
             onClick={handleEditClick}
           >
             <Image

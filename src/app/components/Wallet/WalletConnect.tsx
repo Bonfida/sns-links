@@ -69,7 +69,7 @@ export const WalletConnect = ({
           ref={setReferenceElement}
         >
           {/* bg-gradient-to-b from-[#E8DCEF29] */}
-          <div className="bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
+          <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
             <div className="sm:inline-block hidden">
               <ProfilePic
                 domain={favoriteDomain?.domain || ""}
@@ -134,10 +134,10 @@ export const WalletConnect = ({
     <button
       style={{ width: width ? `${width}px` : "196px" }}
       className={twMerge(
-        " h-12 rounded-2xl px-4 flex items-center justify-center space-x-2",
+        " h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 drop-shadow-2xl drop-shadow-white",
         green
           ? "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E]"
-          : " bg-wallet-connect-bg border-t border-t-[#FFFFFF33]"
+          : " bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg border-t border-t-[#FFFFFF33]"
       )}
       onClick={() => {
         setVisible(true);
