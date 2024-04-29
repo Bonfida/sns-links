@@ -10,9 +10,11 @@ import { derive } from "@/utils/derive";
 import { registerFavourite } from "@bonfida/name-offers";
 import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
 import ThemeContext from "@/context/theme";
+import { makeTxV2 } from "@/utils/makeTx";
+import { sleep } from "@/utils/sleep";
 
 export const DomainListItem = ({ domain }: { domain: string }) => {
-  const { publicKey, signTransaction } = useWallet();
+  const { publicKey, signAllTransactions } = useWallet();
   const { connection } = useConnection();
   const { theme } = useContext(ThemeContext);
   const router = useRouter();
@@ -45,26 +47,34 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
 
   const handleFavoriteUpdate = async () => {
     setSelectedFavorite(true);
-    if (!publicKey || !signTransaction || !domain) return;
+    if (!publicKey || !signAllTransactions || !domain) return;
 
     try {
+      toast.processing();
       const { pubkey } = await derive(domain);
-      const ix = await registerFavourite(pubkey, publicKey!, NAME_OFFERS_ID);
-      const { signature, success } = await makeTx(
-        connection,
+      const instructions = await registerFavourite(
+        pubkey,
         publicKey!,
-        ix,
-        signTransaction!,
-        toast
+        NAME_OFFERS_ID
       );
+      const results = await makeTxV2({
+        connection,
+        feePayer: publicKey,
+        instructions,
+        signAllTransactions,
+      });
 
-      console.log({ signature });
-      if (success) {
+      if (results.length > 0) {
         mutateFavoriteDomain(domain);
+        toast.success("all");
       }
     } catch (err) {
       setSelectedFavorite(false);
+      toast.error();
       console.log(err);
+    } finally {
+      await sleep(1_000);
+      toast.close();
     }
   };
   return (
@@ -79,7 +89,13 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
         onClick={handleEditClick}
       >
         <div className="space-x-2 flex justify-center items-center">
-          <button className="ml-2" onClick={handleFavoriteUpdate}>
+          <button
+            className="ml-2 z-100"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFavoriteUpdate();
+            }}
+          >
             <Image
               src={selectedFavorite || isFavorite ? favoriteStarIcon : starIcon}
               alt="favorite"
