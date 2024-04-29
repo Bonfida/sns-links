@@ -8,6 +8,7 @@ import { updateBio } from "../../../utils/update-record/update-bio";
 import { isTokenized } from "../../../utils/tokenizer/isTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { useFetchBio } from "@/hooks/useFetchBio";
+import { useQueryClient } from "react-query";
 
 const Bio = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
@@ -18,15 +19,20 @@ const Bio = ({ domain }: { domain: string }) => {
   const [bioEditMode, setBioEditMode] = useState(false);
   const [bioText, setBioText] = useState("");
   const [refresh, setRefresh] = useState(false);
-  const bioPlaceholder = !connected ? "My bio..." : "Add a bio...";
+
+  const { data: bio, isLoading: bioLoading } = useFetchBio(domain);
+  const bioPlaceholder = !connected
+    ? "My bio..."
+    : bioLoading
+    ? "Loading bio..."
+    : "Add a bio...";
   const [isModalVisible, setModalVisible] = useState(false);
+  const queryClient = useQueryClient();
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
     domain
   );
-
-  const { data: bio, isLoading: bioLoading } = useFetchBio(domain);
 
   useEffect(() => {
     if (!bioLoading && bio?.length !== 0) {
@@ -46,17 +52,22 @@ const Bio = ({ domain }: { domain: string }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (bioEditMode) {
-      updateBio(
-        connection,
-        publicKey!,
-        domain,
-        bioText,
-        signAllTransactions!,
-        toast
-      );
-      setRefresh(true);
+      if (bioText == bio) {
+        toast.error("Nothing to update");
+      } else {
+        await updateBio(
+          connection,
+          publicKey!,
+          domain,
+          bioText,
+          signAllTransactions!,
+          toast
+        );
+      }
+      queryClient.invalidateQueries(["bio", domain]);
+      setBioEditMode(false);
     }
   };
 
@@ -80,10 +91,14 @@ const Bio = ({ domain }: { domain: string }) => {
         readOnly={!isToken ? !bioEditMode : bioEditMode}
         maxLength={250}
       />
-      {connected && checkIsOwner(owner, publicKey) && (
+      {connected && checkIsOwner(owner, publicKey) && !bioLoading && (
         <div className="flex justify-between items-center">
-          <div className="text-sm">{`${bioText.length}/${250} characters`}</div>
-          {connected && checkIsOwner(owner, publicKey) && (
+          {!bioLoading && (
+            <div className="text-sm">{`${
+              bioText?.length || "0"
+            }/250 characters`}</div>
+          )}
+          <div className="flex gap-2">
             <button
               className="flex self-center"
               type="button"
@@ -91,9 +106,15 @@ const Bio = ({ domain }: { domain: string }) => {
             >
               {bioEditMode && !isToken ? "Save" : "Edit"}
             </button>
-          )}
+            {bioEditMode && (
+              <button type="button" onClick={() => setBioEditMode(false)}>
+                Cancel
+              </button>
+            )}
+          </div>
         </div>
       )}
+
       {bioEditMode && isToken && (
         <UnwrapModal domain={domain} close={() => setModalVisible(false)} />
       )}

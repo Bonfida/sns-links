@@ -50,7 +50,7 @@ const DomainList = () => {
   }, [searchTerm, sortedDomains]);
 
   return (
-    <div className=" flex flex-col items-center mt-10">
+    <div className="flex flex-col items-center mt-10 h-full">
       <input
         type="text"
         placeholder="Search domains..."

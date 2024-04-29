@@ -17,11 +17,8 @@ import {
 } from "@solana/web3.js";
 import { formatRecordValue } from "@/utils/formatRecordValue";
 import { makeTxV2 } from "@/utils/makeTx";
-import { Toast } from "@bonfida/components";
 import { checkAccountExists } from "@bonfida/hooks";
-import { sleep } from "../sleep";
 import { simpleValidation } from "../simple-record-validation";
-import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 
 type TransactionType = Transaction | VersionedTransaction;
 
@@ -74,7 +71,6 @@ export const updateRecordHanlder = async ({
     }
 
     if (!exist) {
-      console.log("makes it to not exitss");
       const ix = createRecordV2Instruction(
         domain,
         recordName,

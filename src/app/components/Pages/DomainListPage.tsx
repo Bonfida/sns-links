@@ -37,7 +37,7 @@ export const DomainListPage = () => {
   }, [publicKey]);
 
   return (
-    <div className="flex w-full min-h-screen justify-center">
+    <div className="flex w-full h-full justify-center">
       {!connected && <NotConnectedModal />}
       {connected && (favoriteLoading || domainsLoading) && (
         <>
@@ -52,13 +52,13 @@ export const DomainListPage = () => {
         </>
       )}
       {connected && !favoriteLoading && !domainsLoading && (
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           {domainsOwned?.length !== 0 ? (
             <>
               <div className="flex items-start">
                 <ProfileOverview />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center ">
                 <DomainList />
               </div>
             </>

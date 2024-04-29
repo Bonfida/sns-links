@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from "react-query";
 
 export const useFetchBio = (domain: string): UseQueryResult<string> => {
   const { data: domainInfo, keys } = useDomainsInfo([domain]);
-  const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
+  const domainKey = keys?.find((e) => e.domain === domain)?.pubkey;
   const fetchBio = async (): Promise<string> => {
     const content: string | undefined =
       domainKey &&

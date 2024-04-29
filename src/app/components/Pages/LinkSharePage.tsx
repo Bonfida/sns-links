@@ -67,7 +67,7 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
   );
   const [isMounted, setIsMounted] = useState(false);
   const { data: domainInfo, keys } = useDomainsInfo([domain]);
-  const domainKey = keys.find((e) => e.domain === domain)?.pubkey;
+  const domainKey = keys?.find((e) => e.domain === domain)?.pubkey;
   const userSocialRecords = recordsData?.filter(
     (record) =>
       socialRecords.some((social) => social.record === record.record) &&
