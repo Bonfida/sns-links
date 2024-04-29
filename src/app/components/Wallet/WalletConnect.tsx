@@ -149,7 +149,7 @@ export const WalletConnect = ({
           width={19}
           height={17}
           alt="wallet"
-          src={green ? "/wallet/wallet-blue.svg" : "/wallet-white.svg"}
+          src={green ? "/wallet/wallet-blue.svg" : "/wallet/wallet-white.svg"}
         />
         <span
           className={twMerge(
