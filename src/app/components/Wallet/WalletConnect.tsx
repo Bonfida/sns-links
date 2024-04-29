@@ -69,7 +69,7 @@ export const WalletConnect = ({
           ref={setReferenceElement}
         >
           {/* bg-gradient-to-b from-[#E8DCEF29] */}
-          <div className="bg-wallet-connect-bg h-12 rounded-2xl px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
+          <div className="bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
             <div className="sm:inline-block hidden">
               <ProfilePic
                 domain={favoriteDomain?.domain || ""}
@@ -87,7 +87,7 @@ export const WalletConnect = ({
               />
             </div>
             <span className="font-bold text-white font-azeret w-fit sm:inline-block hidden">
-              {displayedUser}
+              {displayedUser}.sol
             </span>
           </div>
         </Popover.Button>
@@ -166,14 +166,4 @@ export const WalletConnect = ({
       </div>
     </button>
   );
-};
-
-const FAV_LIMIT_16px = 11;
-const FAV_LIMIT_SM = 13;
-
-const formatFav = (favoriteDomain: string, publicKey: PublicKey): string => {
-  if (favoriteDomain.length <= FAV_LIMIT_SM) {
-    return favoriteDomain + ".sol";
-  }
-  return abbreviatePubkey(publicKey, 4);
 };

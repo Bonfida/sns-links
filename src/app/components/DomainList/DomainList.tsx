@@ -59,7 +59,7 @@ const DomainList = () => {
         className="mb-4 sm:w-1/4 w-1/2 px-4 py-2 border rounded-lg bg-search-input-bg text-search-input-text border-search-input-border"
       />
       {!domainsLoading && (
-        <div className=" md:w-[800px] sm:w-[450px] w-screen px-3 sm:px-0 space-y-3">
+        <div className="overflow-y-auto md:w-[800px] sm:w-[450px] w-screen px-3 sm:px-0 space-y-3 max-h-[70vh] dark-blues-scrollbar">
           {filteredDomains?.map((domain) => {
             return <DomainListItem domain={domain} key={domain} />;
           })}
