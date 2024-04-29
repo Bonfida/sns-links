@@ -114,29 +114,28 @@ const Bio = ({ domain }: { domain: string }) => {
         </div>
       </div>
 
-      <textarea
-        name="postContent"
-        placeholder={bioPlaceholder}
-        value={bioText}
-        onChange={(e) => setBioText(e.target.value)}
-        rows={3}
-        cols={45}
-        className={twMerge(
-          "rounded-2xl bg-inherit py-2 px-3",
-          bioEditMode && !isToken
-            ? "bg-search-input-bg text-search-input-text border-bio-edit-border"
-            : "bg-inherit text-bio-text "
-        )}
-        readOnly={!isToken ? !bioEditMode : bioEditMode}
-        maxLength={250}
-      />
-      {connected && checkIsOwner(owner, publicKey) && !bioLoading && (
-        <div className="flex justify-between items-center">
-          {!bioLoading && bioEditMode && (
+      {bioEditMode ? (
+        <>
+          <textarea
+            name="postContent"
+            placeholder={bioPlaceholder}
+            value={bioText}
+            onChange={(e) => setBioText(e.target.value)}
+            rows={3}
+            cols={45}
+            className="rounded-2xl  py-2 px-3 bg-search-input-bg text-search-input-text border-bio-edit-border"
+            readOnly={!isToken ? !bioEditMode : bioEditMode}
+            maxLength={250}
+          />
+          <div className="flex justify-between items-center">
             <div className="text-sm text-bio-placeholder-text">{`${
               bioText?.length || "0"
             }/250 characters`}</div>
-          )}
+          </div>
+        </>
+      ) : (
+        <div className="h-[33px]">
+          <span className="bg-inherit text-bio-text">{bioText}</span>
         </div>
       )}
 

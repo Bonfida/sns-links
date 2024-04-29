@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 const Footer = () => {
   return (
-    <footer className="flex justify-center w-screen h-[72px] bg-footer-bg items-center">
+    <footer className="flex justify-center w-screen h-[72px] bg-primary-bg items-center">
       <div className="flex items-center justify-center w-[1224px]">
         <div className="flex items-center justify-between">
           <Link

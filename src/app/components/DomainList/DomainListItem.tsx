@@ -9,7 +9,6 @@ import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { derive } from "@/utils/derive";
 import { registerFavourite } from "@bonfida/name-offers";
 import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
-import { makeTx } from "@/utils/makeTx";
 import ThemeContext from "@/context/theme";
 
 export const DomainListItem = ({ domain }: { domain: string }) => {
