@@ -385,6 +385,9 @@ body {
   --glass-bg: rgba(255, 255, 255, 0.07);
   --primary-bg: #03021a;
   --theme-select-shadow: #d7fd75;
+  --bio-placeholder-text: #f8eff9cc;
+  --bio-edit-border: #ffffff3d;
+  --bio-text: #e8dcef;
 }
 
 .light {

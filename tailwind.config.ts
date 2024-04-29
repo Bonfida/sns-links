@@ -55,6 +55,9 @@ const config: Config = {
         "top-border-highlight": "var(--top-border-highlight)",
         "glass-bg": "var(--glass-bg)",
         "primary-bg": "var(--primary-bg)",
+        "bio-placeholder-text": "var(--bio-placeholder-text)",
+        "bio-text": "var(--bio-text)",
+        "bio-edit-border": "var(--bio-edit-border)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
