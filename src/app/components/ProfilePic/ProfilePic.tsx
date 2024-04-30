@@ -7,6 +7,7 @@ import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { ButtonModal } from "../ButtonModal";
 import { EditPicModal } from "../Modals/EditPicModal";
+import { GenericLoading } from "@bonfida/components";
 
 const ProfilePic = ({
   domain,
@@ -46,6 +47,9 @@ const ProfilePic = ({
         className="object-fit rounded-full"
         alt="Profile"
       />
+      {recordsLoading && (
+        <GenericLoading className="absolute bottom-0 left-0 w-full h-1/6" />
+      )}
       {connected && checkIsOwner(owner, publicKey) && hideEdit !== true && (
         <div className="absolute bottom-0 left-0 flex items-center justify-center w-full bg-gray-700 bg-opacity-50 h-1/6">
           <ButtonModal

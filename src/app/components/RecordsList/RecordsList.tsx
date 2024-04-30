@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { RecordListItem } from "./RecordListItem";
+import { SpinnerFida } from "@bonfida/components";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -69,7 +70,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   }, [connected, publicKey, owner]);
 
   return (
-    <div className="w-full py-5">
+    <div className="w-full py-5 h-full">
       <div className=" flex flex-col items-center ">
         <div className="md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
           <button onClick={navigateBack} className="flex gap-2 items-center">
@@ -92,72 +93,80 @@ const RecordsTable = ({ domain }: { domain: string }) => {
               <h1 className="md:text-5xl text-3xl font-bold text-profile-overview-text">
                 {currentDomain}.sol
               </h1>
-              {isOwner && (
-                <a
-                  href={`http://localhost:3000/user/${domain}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/link-out/link-out.svg"
-                    height={30}
-                    width={30}
-                    alt=""
-                    className="w-18 h-18 sm:w-30 sm:h-30"
-                  />
-                </a>
-              )}
+
+              <a
+                href={`http://localhost:3000/user/${domain}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/link-out/link-out.svg"
+                  height={30}
+                  width={30}
+                  alt=""
+                  className="w-18 h-18 sm:w-30 sm:h-30"
+                />
+              </a>
             </div>
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-8 w-full justify- items-center mb-10">
-                <div className="gap-2 w-full flex flex-col justify-center items-center">
-                  <span className="text-text-heading pb-4 text-[14px]">
-                    CONTACT
-                  </span>
-                  {!recordsLoading &&
-                    recordData
-                      ?.filter((record) =>
-                        contactRecords.includes(record.record as Record)
-                      )
-                      .map((record) => (
-                        <RecordListItem
-                          key={record.record}
-                          record={record}
-                          domain={currentDomain}
-                        />
-                      ))}
-                </div>
-                <div className="gap-2 w-full flex flex-col justify-center items-center">
-                  <span className="text-text-heading text-[14px]">SOCIALS</span>
-                  {!recordsLoading &&
-                    recordData
-                      ?.filter((record) =>
-                        socialRecords.includes(record.record as Record)
-                      )
-                      .map((record) => (
-                        <RecordListItem
-                          key={record.record}
-                          record={record}
-                          domain={currentDomain}
-                        />
-                      ))}
-                </div>
-                <div className="gap-2 w-full flex flex-col justify-center items-center">
-                  <span className="text-text-heading text-[14px]">WALLETS</span>
-                  {!recordsLoading &&
-                    recordData
-                      ?.filter((record) =>
-                        walletRecords.includes(record.record as Record)
-                      )
-                      .map((record) => (
-                        <RecordListItem
-                          key={record.record}
-                          record={record}
-                          domain={currentDomain}
-                        />
-                      ))}
-                </div>
+                {recordsLoading ? (
+                  <SpinnerFida variant="white" />
+                ) : (
+                  <>
+                    <div className="gap-2 w-full flex flex-col justify-center items-center">
+                      <span className="text-text-heading pb-4 text-[14px]">
+                        CONTACT
+                      </span>
+                      {recordData
+                        ?.filter((record) =>
+                          contactRecords.includes(record.record as Record)
+                        )
+                        .map((record) => (
+                          <RecordListItem
+                            key={record.record}
+                            record={record}
+                            domain={currentDomain}
+                          />
+                        ))}
+                    </div>
+                    <div className="gap-2 w-full flex flex-col justify-center items-center">
+                      <span className="text-text-heading text-[14px]">
+                        SOCIALS
+                      </span>
+                      {!recordsLoading &&
+                        recordData
+                          ?.filter((record) =>
+                            socialRecords.includes(record.record as Record)
+                          )
+                          .map((record) => (
+                            <RecordListItem
+                              key={record.record}
+                              record={record}
+                              domain={currentDomain}
+                            />
+                          ))}
+                    </div>
+                    <div className="gap-2 w-full flex flex-col justify-center items-center">
+                      <span className="text-text-heading text-[14px]">
+                        WALLETS
+                      </span>
+                      {!recordsLoading &&
+                        recordData
+                          ?.filter((record) =>
+                            walletRecords.includes(record.record as Record)
+                          )
+                          .map((record) => (
+                            <RecordListItem
+                              key={record.record}
+                              record={record}
+                              domain={currentDomain}
+                            />
+                          ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
