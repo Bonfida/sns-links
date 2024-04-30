@@ -65,7 +65,6 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
     connection,
     domain
   );
-  const [isMounted, setIsMounted] = useState(false);
   const { data: domainInfo, keys } = useDomainsInfo([domain]);
   const domainKey = keys?.find((e) => e.domain === domain)?.pubkey;
   const userSocialRecords = recordsData?.filter(
@@ -97,7 +96,7 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-start w-screen h-screen p-10 overflow-auto">
+    <div className="flex flex-col items-center justify-start w-full h-full">
       <div className="flex flex-col items-center gap-3">
         <div className="flex flex-col">
           {recordsLoading ? (

@@ -1,3 +1,4 @@
+import Topbar from "@/app/components/Navigation/Topbar";
 import { LinkSharePage } from "@/app/components/Pages/LinkSharePage";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
 
@@ -8,7 +9,7 @@ export const metadata = {
 
 const LinkShareView = ({ params }: { params: LinkShareParams }) => {
   return (
-    <div>
+    <div className="w-screen h-screen bg-primary-bg">
       <LinkSharePage params={params} />
     </div>
   );
