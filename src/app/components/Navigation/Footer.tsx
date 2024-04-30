@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 const Footer = () => {
   return (
-    <footer className="bg-bg-main flex items-center justify-center w-screen md:h-[72px]">
-      <div className="flex sm:flex-row flex-col items-center md:justify-between justify-center w-full md:w-[1224px] z-50 px-3 gap-y-8">
+    <footer className="bg-bg-main flex items-center justify-center w-screen md:h-[72px] pt-5 sm:pt-0">
+      <div className="flex sm:flex-row flex-col items-center md:justify-between justify-center w-full md:w-[1224px] z-50 px-3 gap-y-6">
         <Link
           href="/"
           className="flex items-center justify-center sm:gap-4 gap-2 w-[149px]"

@@ -1,33 +1,16 @@
+import { GenericLoading } from "@bonfida/components";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const ProfileOverviewSkeleton = () => {
   return (
-    <div className="flex self-start justify-start items-center space-x-5 rounded-full">
-      <Skeleton
-        width={100}
-        height={100}
-        highlightColor="#637381"
-        baseColor="#2e3b55"
-        circle
-      />
-      <div className="flex flex-col">
+    <div className="flex flex-col sm:flex-row justify-start items-center sm:space-x-5 w-full gap-y-5 py-3 sm:py-0">
+      <GenericLoading className="rounded-full sm:w-[120px] sm:h-[120px] w-[56px] h-[56px]" />
+      <div className="flex flex-col items-center sm:items-start gap-y-2">
         <h1 className="">
-          <Skeleton
-            highlightColor="#637381"
-            baseColor="#2e3b55"
-            height={48}
-            width={218.51}
-            className="rounded-xl"
-          />
+          <GenericLoading className="rounded-lg w-[115px] sm:w-[171px] h-8 sm:h-10" />
         </h1>
         <h2 className="">
-          <Skeleton
-            highlightColor="#637381"
-            baseColor="#2e3b55"
-            height={32}
-            width={207}
-            className="rounded-xl"
-          />
+          <GenericLoading className="rounded-lg h-6 sm:h-8 w-[104px] sm:w-[150px]" />
         </h2>
       </div>
     </div>

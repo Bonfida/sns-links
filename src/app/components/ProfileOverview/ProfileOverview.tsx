@@ -23,7 +23,7 @@ const ProfileOverview = () => {
   });
 
   return (
-    <div className="flex flex-col sm:flex-row justify-start items-center sm:space-x-5 w-full">
+    <div className="flex flex-col sm:flex-row justify-start items-center sm:space-x-5 w-full gap-y-5 py-3 sm:py-0">
       {favoriteDomain ? (
         <>
           <Image

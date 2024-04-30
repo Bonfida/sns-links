@@ -6,7 +6,7 @@ import { useFetchDomains } from "@/hooks/useFetchDomains";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import NotConnectedModal from "../Modals/NotConnectedModal";
 import DomainList from "@/app/components/DomainList/DomainList";
-import DomainTableSkeleton from "../Skeletons/DomainTableSkeleton";
+import DomainTableSkeleton from "../Skeletons/DomainListSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { NoDomainsFound } from "../Notices/NoDomainsFound";
@@ -19,13 +19,12 @@ export const DomainListPage = () => {
   const router = useRouter();
   const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
-  const { data: domainsOwned, isLoading: domainsLoading } = useFetchDomains(
-    connection,
-    publicKey
-  );
-  const { data: favoriteDomain, loading: favoriteLoading } = useFavouriteDomain(
+  const { isLoading: domainsLoading } = useFetchDomains(connection, publicKey);
+  const { loading: favoriteLoading } = useFavouriteDomain(
     publicKey?.toBase58()!
   );
+
+  const loading = domainsLoading || favoriteLoading;
 
   useEffect(() => {
     if (!publicKey) {
@@ -37,37 +36,21 @@ export const DomainListPage = () => {
   }, [publicKey]);
 
   return (
-    <div className="flex w-full h-full justify-center">
-      {!connected && <NotConnectedModal />}
-      {connected && (favoriteLoading || domainsLoading) && (
+    <div className="flex flex-col w-full h-full items-center justify-center py-12">
+      {loading ? (
         <>
-          <div className="flex flex-col items-center justify-center">
-            <div className="w-full">
-              <ProfileOverviewSkeleton />
-              <div className="">
-                <DomainTableSkeleton />
-              </div>
-            </div>
+          <div className="md:w-[800px] sm:w-[450px] w-screen">
+            <ProfileOverviewSkeleton />
           </div>
+          <DomainTableSkeleton />
         </>
-      )}
-      {connected && !favoriteLoading && !domainsLoading && (
-        <div className="flex flex-col ">
-          {domainsOwned?.length !== 0 ? (
-            <>
-              <div className="flex items-start">
-                <ProfileOverview />
-              </div>
-              <div className="flex items-center ">
-                <DomainList />
-              </div>
-            </>
-          ) : (
-            <div>
-              <NoDomainsFound />
-            </div>
-          )}
-        </div>
+      ) : (
+        <>
+          <div className="md:w-[800px] sm:w-[450px] w-screen">
+            <ProfileOverview />
+          </div>
+          <DomainList />
+        </>
       )}
     </div>
   );

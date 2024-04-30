@@ -7,7 +7,7 @@ export const metadata = {
 
 const DomainListView = () => {
   return (
-    <div className="bg-primary-bg w-screen h-screen md:py-12">
+    <div className="bg-primary-bg w-screen h-screen">
       <DomainListPage />
     </div>
   );
