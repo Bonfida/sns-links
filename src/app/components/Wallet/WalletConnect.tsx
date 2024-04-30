@@ -76,8 +76,7 @@ export const WalletConnect = ({
               <ProfilePic
                 domain={favoriteDomain?.domain || ""}
                 hideEdit={true}
-                customHeight={24}
-                customWidth={24}
+                customSize="h-6 w-6"
               />
             </div>
             <div className="sm:hidden inline-flex items-center justify-center">
@@ -102,7 +101,7 @@ export const WalletConnect = ({
           {...attributes.popper}
           className="absolute w-full md:w-[253px] z-60"
         >
-          <div className="bg-primary-bg rounded-[24px] border border-standard-border md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4">
+          <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg rounded-[24px] border border-standard-border md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4">
             <span className="text-wallet-connect-text text-[14px] font-azeret sm:hidden">
               {favOrFirst}.sol
             </span>

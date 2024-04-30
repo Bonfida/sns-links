@@ -88,25 +88,31 @@ const RecordsTable = ({ domain }: { domain: string }) => {
 
         <div className="space-y-2 mt-10 md:w-[600px] sm:w-[550px] w-[350px]">
           <div className="flex flex-col justify-around">
-            <div className="flex items-center justify-start w-full gap-4">
-              <ProfilePic domain={domain} />
-              <h1 className="md:text-5xl text-3xl font-bold text-profile-overview-text">
-                {currentDomain}.sol
-              </h1>
+            <div className="flex sm:flex-row flex-col items-center justify-start w-full gap-4">
+              <ProfilePic
+                domain={domain}
+                customSize="h-[56px] w-[56px] sm:h-[120px] w-[120px]"
+              />
+              <div className="flex gap-4">
+                <h1 className="md:text-5xl text-2xl font-bold text-profile-overview-text">
+                  {currentDomain}.sol
+                </h1>
 
-              <a
-                href={`http://localhost:3000/user/${domain}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/link-out/link-out.svg"
-                  height={30}
-                  width={30}
-                  alt=""
-                  className="w-18 h-18 sm:w-30 sm:h-30"
-                />
-              </a>
+                <a
+                  href={`http://localhost:3000/user/${domain}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
+                >
+                  <Image
+                    src="/link-out/link-out.svg"
+                    height={30}
+                    width={30}
+                    alt=""
+                    className="w-6 h-6 sm:w-[30px] sm:h-[30px]"
+                  />
+                </a>
+              </div>
             </div>
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">

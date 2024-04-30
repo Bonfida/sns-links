@@ -8,16 +8,15 @@ import { checkIsOwner } from "@/utils/owner/checkIsOwner";
 import { ButtonModal } from "../ButtonModal";
 import { EditPicModal } from "../Modals/EditPicModal";
 import { GenericLoading } from "@bonfida/components";
+import { twMerge } from "tailwind-merge";
 
 const ProfilePic = ({
   domain,
-  customHeight,
-  customWidth,
+  customSize,
   hideEdit,
 }: {
   domain: string;
-  customHeight?: number;
-  customWidth?: number;
+  customSize?: string;
   hideEdit?: Boolean;
 }) => {
   const { connection } = useConnection();
@@ -41,10 +40,13 @@ const ProfilePic = ({
   return (
     <div className="relative overflow-hidden rounded-full">
       <Image
-        width={customWidth || 100}
-        height={customHeight || 100}
+        width={120}
+        height={120}
         src={picRecord?.content || "/user/default-profile.svg"}
-        className="object-fit rounded-full"
+        className={twMerge(
+          "object-fit rounded-full",
+          customSize ? customSize : "sm:h-[120px] w-[120px]"
+        )}
         alt="Profile"
       />
       {recordsLoading && (
