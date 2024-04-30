@@ -58,6 +58,7 @@ const config: Config = {
         "bio-placeholder-text": "var(--bio-placeholder-text)",
         "bio-text": "var(--bio-text)",
         "bio-edit-border": "var(--bio-edit-border)",
+        "standard-border": "var(--standard-border)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

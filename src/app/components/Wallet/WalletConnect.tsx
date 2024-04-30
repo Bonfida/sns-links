@@ -7,11 +7,14 @@ import { twMerge } from "tailwind-merge";
 import { usePrevious } from "ahooks";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { useModalContext } from "../../../hooks/useModalContext";
 import { useDomainsForOwner, useFavoriteDomain } from "@bonfida/sns-react";
 import Image from "next/image";
+import { BuyADomainButton } from "../Buttons/BuyADomain";
+import ThemeContext from "@/context/theme";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 
 export const WalletConnect = ({
   width,
@@ -23,6 +26,8 @@ export const WalletConnect = ({
   //Connection and Wallet
   const { connected, publicKey, connecting, disconnect } = useWallet();
   const { connection } = useConnection();
+  const { theme, setTheme } = useContext(ThemeContext);
+  const themeDescription = theme === "dark" ? "Dark mode" : "Light mode";
 
   // Domain
   const { result: userDomainList, loading: isuserDomainListLoading } =
@@ -30,8 +35,6 @@ export const WalletConnect = ({
 
   const { result: favoriteDomain, loading: isFaovriteDomainLoading } =
     useFavoriteDomain(connection, publicKey);
-
-  const loading = isuserDomainListLoading || isFaovriteDomainLoading;
 
   const favOrFirst = favoriteDomain
     ? favoriteDomain.domain
@@ -68,7 +71,7 @@ export const WalletConnect = ({
           // @ts-ignore
           ref={setReferenceElement}
         >
-          <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center space-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
+          <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center sm:gap-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
             <div className="sm:inline-block hidden">
               <ProfilePic
                 domain={favoriteDomain?.domain || ""}
@@ -77,7 +80,7 @@ export const WalletConnect = ({
                 customWidth={24}
               />
             </div>
-            <div className="sm:hidden inline-block">
+            <div className="sm:hidden inline-flex items-center justify-center">
               <Image
                 width={24}
                 height={24}
@@ -97,31 +100,51 @@ export const WalletConnect = ({
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}
-          className="absolute w-full md:w-[200px] z-50"
+          className="absolute w-full md:w-[253px] z-60"
         >
-          <div className="bg-wallet-connect-popout-bg rounded-[24px] border-[1px] border-[#2A2A51] p-[8px] md:mt-2 mb-2 md:mb-0">
-            <div className="flex flex-col pl-[20px] space-y-2 text-link font-azeret font-medium text-[16px] my-2">
-              <button
-                onClick={() =>
-                  router.push(`/profile/pubkey=${publicKey.toBase58()}`)
-                }
-                type="button"
-                className="w-fit"
-              >
-                View profile
-              </button>
-              <button
-                onClick={() => setVisible(true)}
-                type="button"
-                className="w-fit"
-              >
-                Change wallet
-              </button>
-
-              <div className="w-[95%] my-0 divider" />
-              <button onClick={disconnect} type="button" className="w-fit">
-                Disconnect
-              </button>
+          <div className="bg-primary-bg rounded-[24px] border border-standard-border md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4">
+            <span className="text-wallet-connect-text text-[14px] font-azeret sm:hidden">
+              {favOrFirst}.sol
+            </span>
+            <div className="flex flex-col font-azeret font-medium text-2xl z-60">
+              <div className="py-3 border-b border-b-standard-border h-12 z-60">
+                <button
+                  onClick={() =>
+                    router.push(`/profile/pubkey=${publicKey.toBase58()}`)
+                  }
+                  type="button"
+                  className="w-fit font-semibold text-link"
+                >
+                  View profile
+                </button>
+              </div>
+              <div className="py-3 border-b border-b-standard-border h-12">
+                <button
+                  onClick={() => setVisible(true)}
+                  type="button"
+                  className="w-fit text-link"
+                >
+                  Change wallet
+                </button>
+              </div>
+              <div className="sm:pt-6 sm:pb- py-3 h-14 sm:border-b-0 border-b border-b-standard-border">
+                <button
+                  onClick={disconnect}
+                  type="button"
+                  className="w-fit text-link"
+                >
+                  Disconnect
+                </button>
+              </div>
+            </div>
+            <div className="sm:hidden py-5 space-y-5">
+              <BuyADomainButton customButtonStyle="rounded-[15px] px-3 py-2 font-bold text-base font-azeret text-action-button-text w-full flex justify-center" />
+              <div className="flex justify-between w-full items-center">
+                <span className="text-wallet-connect-text text-2xl font-azeret font-semibold">
+                  {themeDescription}
+                </span>
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </Popover.Panel>

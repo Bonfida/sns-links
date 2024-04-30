@@ -26,7 +26,9 @@ const Topbar = () => {
         </Link>
 
         <div className="flex justify-center gap-6">
-          <ThemeToggle />
+          <div className="hidden sm:inline-flex ">
+            <ThemeToggle />
+          </div>
           <WalletConnect />
         </div>
       </div>

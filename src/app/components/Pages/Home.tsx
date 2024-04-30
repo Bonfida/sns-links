@@ -10,7 +10,7 @@ export const Home = () => {
   return (
     <div className="flex-col flex gap-3 w-[1224px] overflow-hidden px-3 sm:px-0 mt-44 sm:mt-0">
       <div className="flex w-[1224px]">
-        <div className="sm:w-1/2 space-y-8 z-50 w-full">
+        <div className="sm:w-1/2 space-y-8 z-10 w-full">
           <div className="sm:w-[600px] w-[351px]">
             <span className="font-azeret font-semibold sm:text-[104px] text-[64px] text-hero-section-text leading-none">
               Your Brand On Chain
