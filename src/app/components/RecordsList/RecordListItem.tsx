@@ -52,6 +52,7 @@ export const RecordListItem = ({
               <EditRecordModal
                 recordName={record.record}
                 domain={domain}
+                currentValue={record.content}
                 close={() => setModalVisible(false)}
               />
             )}

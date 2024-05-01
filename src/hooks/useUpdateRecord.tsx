@@ -23,27 +23,34 @@ import { simpleValidation } from "../utils/simple-record-validation";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { updateRecordHanlder } from "@/utils/update-record/update-record";
+import { useFetchRecords } from "./useFetchRecords";
 
 export const useUpdateRecord = () => {
   const { connection } = useConnection();
   const { publicKey, signAllTransactions } = useWallet();
-  const { toast, setState } = useToastContext();
+  const { toast } = useToastContext();
 
   const updateRecord = async ({
     domain,
     recordName,
-    recordVal,
+    recordValue,
+    currentValue,
     isRoaSupported,
     sendRoaRequest,
   }: {
     domain: string;
     recordName: Record;
-    recordVal: string;
+    recordValue: string;
+    currentValue: string | undefined;
     isRoaSupported?: boolean;
     sendRoaRequest?:
       | ((domain: string, record: Record) => Promise<void>)
       | undefined;
   }) => {
+    if (recordValue === currentValue || recordValue.length === 0) {
+      toast.error("Nothing to update");
+      return;
+    }
     try {
       toast.processing();
 
@@ -55,7 +62,7 @@ export const useUpdateRecord = () => {
         isRoaSupported,
         sendRoaRequest,
         recordName,
-        recordVal,
+        recordValue,
       });
 
       toast.success("all");

@@ -27,7 +27,7 @@ export const updateRecordHanlder = async ({
   publicKey,
   domain,
   recordName,
-  recordVal,
+  recordValue,
   signAllTransactions,
   isRoaSupported,
   sendRoaRequest,
@@ -36,7 +36,7 @@ export const updateRecordHanlder = async ({
   publicKey: PublicKey | null;
   domain: string;
   recordName: Record;
-  recordVal: string;
+  recordValue: string;
   signAllTransactions: (txs: TransactionType[]) => Promise<TransactionType[]>;
   isRoaSupported?: boolean;
   sendRoaRequest?: (domain: string, record: Record) => Promise<void>;
@@ -49,7 +49,7 @@ export const updateRecordHanlder = async ({
     const instructions: TransactionInstruction[] = [];
     const recordKey = getRecordV2Key(domain, recordName);
     const exist = await checkAccountExists(connection, recordKey);
-    const formattedValue = formatRecordValue(recordVal, recordName);
+    const formattedValue = formatRecordValue(recordValue, recordName);
 
     if (formattedValue === "") {
       if (!exist) return;

@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
@@ -11,16 +10,16 @@ import ThemeContext from "@/context/theme";
 const EditRecordModal = ({
   recordName,
   domain,
+  currentValue,
   close,
 }: {
   recordName: string;
   domain: string;
+  currentValue: string | undefined;
   close: () => void;
 }) => {
   const [recordVal, setRecordVal] = useState("");
   const { selectedDomain } = useContext(SelectedDomainContext);
-  const { connection } = useConnection();
-  const { publicKey, signAllTransactions, signMessage } = useWallet();
   const { toast } = useToastContext();
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
     recordName as Record
@@ -31,13 +30,14 @@ const EditRecordModal = ({
   const handleUpdateClick = async (
     recordName: Record,
     selectedDomain: string,
-    recordVal: string
+    recordValue: string
   ) => {
     try {
-      updateRecord({
+      await updateRecord({
         domain: selectedDomain || domain,
         recordName,
-        recordVal,
+        recordValue,
+        currentValue,
         isRoaSupported,
         sendRoaRequest,
       });
