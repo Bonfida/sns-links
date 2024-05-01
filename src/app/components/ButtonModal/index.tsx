@@ -161,11 +161,7 @@ export const ButtonModal = ({
           style={{ margin: 0 }}
         >
           <div
-            className={twMerge(
-              "modal-box",
-              modalClass,
-              smallScreen && "w-screen pt-10"
-            )}
+            className={twMerge(modalClass, smallScreen && "w-screen pt-10")}
             ref={clickAwayRef}
           >
             {!!closeIconClass && (

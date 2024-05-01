@@ -6,12 +6,6 @@ import ThemeContext from "@/context/theme";
 export const ThemeToggle = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.body.classList.remove("dark", "light");
-    document.body.classList.add(theme);
-  }, [theme]);
-
   const handleThemeToggle = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };

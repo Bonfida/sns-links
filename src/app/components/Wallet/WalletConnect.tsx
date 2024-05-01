@@ -110,16 +110,16 @@ export const WalletConnect = ({
         >
           <div
             className={twMerge(
-              "rounded-[24px] border border-primary-border md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4",
+              "rounded-[24px] md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4",
               theme === "dark"
-                ? "bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg"
-                : "bg-primary-bg"
+                ? "bg-wallet-connect-bg  border border-primary-border"
+                : "bg-primary-bg border border-[#00000012]"
             )}
           >
             <span className="text-[#f8eff9] text-[14px] font-azeret sm:hidden">
               {favOrFirst}.sol
             </span>
-            <div className="flex flex-col font-azeret font-medium text-2xl z-60">
+            <div className="flex flex-col font-azeret font-medium sm:text-2xl text-4xl z-60">
               <div
                 className={twMerge(
                   "py-3 border-b h-12",

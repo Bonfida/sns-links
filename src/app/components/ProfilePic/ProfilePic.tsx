@@ -45,7 +45,7 @@ const ProfilePic = ({
         src={picRecord?.content || "/user/default-profile.svg"}
         className={twMerge(
           "object-fit rounded-full",
-          customSize ? customSize : "sm:h-[120px] w-[120px]"
+          customSize ? customSize : "sm:h-[120px] sm:w-[120px]"
         )}
         alt="Profile"
       />
@@ -66,7 +66,7 @@ const ProfilePic = ({
             }
             visible={isModalVisible}
             setVisible={setModalVisible}
-            modalClass="bg-[#03001A] w-full sm:min-w-[520px] h-fit overflow-y-visible"
+            modalClass=""
           >
             <EditPicModal
               recordName="pic"

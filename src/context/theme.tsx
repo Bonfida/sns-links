@@ -1,26 +1,32 @@
-import React, { createContext, useState, ReactNode, useEffect } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 
 type ThemeSetter = (theme: string | ((prevTheme: string) => string)) => void;
 
-const ThemeContext = createContext<{
+interface ThemeContextType {
   theme: string;
   setTheme: ThemeSetter;
-}>({
-  theme: "",
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "dark",
   setTheme: () => {},
 });
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("dark");
-
-  useEffect(() => {
-    const storedTheme =
+  const [theme, setTheme] = useState<string>(() => {
+    return (
       localStorage.getItem("theme") ||
       (window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
-        : "light");
-    setTheme(storedTheme);
-  }, []);
+        : "light")
+    );
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = "";
+    document.body.classList.add(theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

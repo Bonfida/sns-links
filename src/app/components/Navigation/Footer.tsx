@@ -1,6 +1,11 @@
+"use client";
+import ThemeContext from "@/context/theme";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
 const Footer = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <footer className="bg-primary-bg flex items-center justify-center w-screen md:h-[72px] pt-5 sm:pt-0">
       <div className="flex sm:flex-row flex-col items-center md:justify-between justify-center w-full md:w-[1224px] z-50 px-3 gap-y-6">
@@ -11,7 +16,11 @@ const Footer = () => {
           <Image
             width={80}
             height={80}
-            src="/bonfida/bonfida-white.svg"
+            src={
+              theme === "dark"
+                ? "/bonfida/bonfida-white.svg"
+                : "/bonfida/bonfida-black.svg"
+            }
             className="w-5 h-6"
             alt="SNS Links Logo"
           />

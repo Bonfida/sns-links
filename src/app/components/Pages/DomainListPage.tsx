@@ -19,7 +19,10 @@ export const DomainListPage = () => {
   const router = useRouter();
   const { connected, publicKey } = useWallet();
   const { connection } = useConnection();
-  const { isLoading: domainsLoading } = useFetchDomains(connection, publicKey);
+  const { isLoading: domainsLoading, data: domainsOwned } = useFetchDomains(
+    connection,
+    publicKey
+  );
   const { loading: favoriteLoading } = useFavouriteDomain(
     publicKey?.toBase58()!
   );
@@ -36,7 +39,7 @@ export const DomainListPage = () => {
   }, [publicKey]);
 
   return (
-    <div className="flex flex-col w-full h-full items-center justify-center py-12">
+    <div className="flex flex-col w-full h-full items-center">
       {loading ? (
         <>
           <div className="md:w-[800px] sm:w-[450px] w-screen">
@@ -44,13 +47,15 @@ export const DomainListPage = () => {
           </div>
           <DomainTableSkeleton />
         </>
-      ) : (
+      ) : domainsOwned && domainsOwned?.length > 0 ? (
         <>
           <div className="md:w-[800px] sm:w-[450px] w-screen">
             <ProfileOverview />
           </div>
           <DomainList />
         </>
+      ) : (
+        <NoDomainsFound />
       )}
     </div>
   );

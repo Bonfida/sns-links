@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { RecordListItem } from "./RecordListItem";
 import { SpinnerFida } from "@bonfida/components";
+import ThemeContext from "@/context/theme";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -50,7 +51,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     connection,
     selectedDomain || domain
   );
-
+  const { theme } = useContext(ThemeContext);
   const { data: recordData, isLoading: recordsLoading } = useFetchRecords(
     connection,
     domain
@@ -75,7 +76,11 @@ const RecordsTable = ({ domain }: { domain: string }) => {
         <div className="md:w-[600px] sm:w-[550px] w-[350px] flex justify-start">
           <button onClick={navigateBack} className="flex gap-2 items-center">
             <Image
-              src="/back/back-green.svg"
+              src={
+                theme === "dark"
+                  ? "/back/back-green.svg"
+                  : "/back/back-purple.svg"
+              }
               width={18}
               height={15}
               alt="back"
@@ -91,7 +96,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             <div className="flex sm:flex-row flex-col items-center justify-start w-full gap-4">
               <ProfilePic
                 domain={domain}
-                customSize="h-[56px] w-[56px] sm:h-[120px] w-[120px]"
+                customSize="h-[56px] w-[56px] sm:h-[120px] sm:w-[120px]"
               />
               <div className="flex gap-4">
                 <h1 className="md:text-5xl text-2xl font-bold text-primary-text">
@@ -105,7 +110,11 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                   className="flex items-center"
                 >
                   <Image
-                    src="/link-out/link-out.svg"
+                    src={
+                      theme === "dark"
+                        ? "/link-out/link-out-green.svg"
+                        : "/link-out/link-out-purple.svg"
+                    }
                     height={30}
                     width={30}
                     alt=""
@@ -122,7 +131,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                 ) : (
                   <>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">
-                      <span className="text-text-heading pb-4 text-[14px]">
+                      <span className="text-primary-text pb-4 text-[14px]">
                         CONTACT
                       </span>
                       {recordData
@@ -138,7 +147,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                         ))}
                     </div>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">
-                      <span className="text-text-heading text-[14px]">
+                      <span className="text-primary-text text-[14px]">
                         SOCIALS
                       </span>
                       {!recordsLoading &&
@@ -155,7 +164,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                           ))}
                     </div>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">
-                      <span className="text-text-heading text-[14px]">
+                      <span className="text-primary-text text-[14px]">
                         WALLETS
                       </span>
                       {!recordsLoading &&

@@ -27,8 +27,8 @@ export default function RootLayout({
           <Topbar />
           <Widget endpoint={process.env.NEXT_PUBLIC_ENDPOINT!} />
           {children}
+          <Footer />
         </Providers>
-        <Footer />
       </body>
     </html>
   );

@@ -17,8 +17,6 @@ export const EditPicModal = ({
 }) => {
   const [recordVal, setRecordVal] = useState("");
   const { selectedDomain } = useContext(SelectedDomainContext);
-  const { connection } = useConnection();
-  const { publicKey, signTransaction, signMessage } = useWallet();
   const { toast } = useToastContext();
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
     recordName as Record
@@ -53,7 +51,7 @@ export const EditPicModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       <div
-        className="relative bg-primary-bg h-fit flex flex-col justify-center items-center border border-primary-border rounded-xl p-5 mt-10 md:mt-0"
+        className="relative bg-primary-bg h-fit flex flex-col justify-center items-center border border-primary-border rounded-xl p-5"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full flex justify-start">
@@ -90,7 +88,7 @@ export const EditPicModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg border-t-priamry-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t border-t-top-border-highlight text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg border-t-priamry-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}
