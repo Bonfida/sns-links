@@ -16,9 +16,9 @@ export const Home = () => {
               Your Brand On Chain
             </span>
             <p className="font-medium text-base font-azeret text-primary-text sm:w-[505px] w-full">
-              Upload all of your platform links using SNS links and share easily
-              with friends. Your .sol domain now holds the key to sharing your
-              brand across the web.
+              Upload all of your platform links using SNS and share them easily
+              with friends. Use your .sol domain to build brands and connections
+              across the web!
             </p>
           </div>
           {connected ? (
