@@ -162,7 +162,6 @@ export const makeTxV2 = async ({
     let sig: string | null = null;
 
     try {
-      console.log("but here?");
       console.info(`Sending ${i + 1}/${signedTxs.length}`);
 
       sig = await attemptTransactionSend({
