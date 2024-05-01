@@ -1,7 +1,7 @@
 "use client";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useFetchRecords } from "../../../hooks/useFetchRecords";
-import LinkButton from "@/app/components/Buttons/LinkButton";
+import UserLinksListItem from "@/app/components/Buttons/UserLinksListItem";
 import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
 import { useState } from "react";
@@ -58,7 +58,7 @@ const socialRecords = [
   { record: Record.Backpack, interactionType: "copy" },
 ];
 
-export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
+export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
   const { connection } = useConnection();
   const domain = params.domain;
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
@@ -112,12 +112,14 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
           )}
         </div>
 
-        <h1 className="font-bold text-white font-azeret text-2xl">
+        <h1 className="font-bold text-primary-text font-azeret text-2xl">
           {domain}.sol
         </h1>
         <div className="flex flex-col items-center justify-center">
-          <span className="text-sm sm:text-base text-[#F8EFF9CC]">Bio</span>
-          <span className="text-base sm:text-lg text-[#E8DCEF]">{content}</span>
+          <span className="text-sm sm:text-base text-primary-text">Bio</span>
+          <span className="text-base sm:text-lg text-primary-text">
+            {content}
+          </span>
         </div>
       </div>
 
@@ -136,7 +138,7 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
             <div className="flex flex-col gap-3 w-full justify-center items-center">
               {!!userContactRecords?.length && (
                 <>
-                  <span>Contact</span>
+                  <span className="text-primary-text">Contact</span>
                   {userContactRecords.map((record) => {
                     const contactRecord = contactRecords.find(
                       (contact) => contact.record === record.record
@@ -144,7 +146,7 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
                     const finalUrl =
                       contactRecord?.urlPrefix + (record.content || "");
                     return (
-                      <LinkButton
+                      <UserLinksListItem
                         key={record.record}
                         name={record.record}
                         value={record.content}
@@ -159,7 +161,7 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
 
               {!!userSocialRecords?.length && (
                 <>
-                  <span>Socials</span>
+                  <span className="text-primary-text">Socials</span>
                   {userSocialRecords.map((record) => {
                     const socialRecord = socialRecords.find(
                       (social) => social.record === record.record
@@ -171,7 +173,7 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
                       socialRecord.urlPrefix + (record.content || "");
 
                     return (
-                      <LinkButton
+                      <UserLinksListItem
                         key={record.record}
                         name={record.record}
                         value={finalUrl}
@@ -185,10 +187,10 @@ export const LinkSharePage = ({ params }: { params: LinkShareParams }) => {
               )}
               {!!userWalletRecords?.length && (
                 <>
-                  <span>Wallets</span>
+                  <span className="text-primary-text">Wallets</span>
                   {userWalletRecords.map((record) => {
                     return (
-                      <LinkButton
+                      <UserLinksListItem
                         key={record.record}
                         name={record.record}
                         value={record.content}

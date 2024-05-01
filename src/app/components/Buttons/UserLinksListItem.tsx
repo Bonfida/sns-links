@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
 import Badge from "../Badges/Tooltip";
 import { useConnection } from "@solana/wallet-adapter-react";
 import Image from "next/image";
+import ThemeContext from "@/context/theme";
 
-const LinkButton = ({
+const UserLinksListItem = ({
   name,
   value,
   domain,
@@ -25,6 +26,7 @@ const LinkButton = ({
     domain,
     name as Record
   );
+  const { theme } = useContext(ThemeContext);
   const handleCopy = (value: string) => {
     navigator.clipboard.writeText(value).then(
       () => {
@@ -43,7 +45,7 @@ const LinkButton = ({
     <div className="h-[65px] flex bg-list-item-bg border-t-[1px] border-list-item-border rounded-[24px] sm:w-[450px] w-[351px]">
       <div className="flex justify-between items-center w-full py-2 px-5">
         <div className="flex justify-between items-center">
-          <span className="text-white text-lg w-7">
+          <span className="text-primary-text text-lg w-7">
             {name.charAt(0).toUpperCase() + name.slice(1)}
           </span>
           {ROA && (
@@ -57,7 +59,11 @@ const LinkButton = ({
         {interactionType === "newTab" && link ? (
           <a href={link} target="_blank" rel="noopener noreferrer">
             <Image
-              src="/link-out/link-out.svg"
+              src={
+                theme === "dark"
+                  ? "/link-out/link-out-green.svg"
+                  : "/link-out/link-out-purple.svg"
+              }
               width={18}
               height={18}
               alt="copy"
@@ -83,4 +89,4 @@ const LinkButton = ({
   );
 };
 
-export default LinkButton;
+export default UserLinksListItem;
