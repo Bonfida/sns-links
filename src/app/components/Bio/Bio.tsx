@@ -120,7 +120,7 @@ const Bio = ({ domain }: { domain: string }) => {
             onChange={(e) => setBioText(e.target.value)}
             rows={3}
             cols={45}
-            className="rounded-2xl  py-2 px-3 bg-search-input-bg text-search-input-text border-bio-edit-border"
+            className="rounded-2xl  py-2 px-3 bg-input-bg text-search-input-text border-primary-border"
             readOnly={!isToken ? !bioEditMode : bioEditMode}
             maxLength={250}
           />

@@ -65,14 +65,10 @@ const HomePageCarouseltem = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className="flex flex-col justify-center items-start w-[235px] border border-carousel-border p-5 gap-3 rounded-2xl bg-carousel-item-bg">
+    <div className="flex flex-col justify-center items-start w-[235px] border border-primary-border p-5 gap-3 rounded-2xl bg-carousel-item-bg">
       <Image src={image} width={56.34} height={64} alt="" />
-      <span className="text-2xl text-carousel-item-text font-semibold">
-        {title}
-      </span>
-      <p className="text-base text-carousel-item-text font-medium">
-        {description}
-      </p>
+      <span className="text-2xl text-primary-text font-semibold">{title}</span>
+      <p className="text-base text-primary-text font-medium">{description}</p>
     </div>
   );
 };

@@ -26,7 +26,7 @@ export const WalletConnect = ({
   //Connection and Wallet
   const { connected, publicKey, connecting, disconnect } = useWallet();
   const { connection } = useConnection();
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const themeDescription = theme === "dark" ? "Dark mode" : "Light mode";
 
   // Domain
@@ -71,7 +71,14 @@ export const WalletConnect = ({
           // @ts-ignore
           ref={setReferenceElement}
         >
-          <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg h-12 rounded-[15px] px-4 flex items-center justify-center sm:gap-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]">
+          <div
+            className={twMerge(
+              "h-12 rounded-[15px] px-4 flex items-center justify-center sm:gap-x-2 border-t border-t-[#FFFFFF33] sm:w-[196px] w-[50px]",
+              theme === "dark"
+                ? "bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg"
+                : "bg-wallet-connect-bg"
+            )}
+          >
             <div className="sm:inline-block hidden">
               <ProfilePic
                 domain={favoriteDomain?.domain || ""}
@@ -99,14 +106,28 @@ export const WalletConnect = ({
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}
-          className="absolute w-full md:w-[253px] z-60"
+          className="absolute w-full sm:w-[253px] z-60"
         >
-          <div className="bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg rounded-[24px] border border-standard-border md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4">
-            <span className="text-wallet-connect-text text-[14px] font-azeret sm:hidden">
+          <div
+            className={twMerge(
+              "rounded-[24px] border border-primary-border md:mt-2 mb-2 md:mb-0 z-60 gap-3  p-4",
+              theme === "dark"
+                ? "bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg"
+                : "bg-primary-bg"
+            )}
+          >
+            <span className="text-[#f8eff9] text-[14px] font-azeret sm:hidden">
               {favOrFirst}.sol
             </span>
             <div className="flex flex-col font-azeret font-medium text-2xl z-60">
-              <div className="py-3 border-b border-b-standard-border h-12 z-60">
+              <div
+                className={twMerge(
+                  "py-3 border-b h-12",
+                  theme === "dark"
+                    ? "border-b-primary-border"
+                    : "border-b-secondary-border"
+                )}
+              >
                 <button
                   onClick={() =>
                     router.push(`/profile/pubkey=${publicKey.toBase58()}`)
@@ -117,7 +138,14 @@ export const WalletConnect = ({
                   View profile
                 </button>
               </div>
-              <div className="py-3 border-b border-b-standard-border h-12">
+              <div
+                className={twMerge(
+                  "py-3 border-b h-12",
+                  theme === "dark"
+                    ? "border-b-primary-border"
+                    : "border-b-secondary-border"
+                )}
+              >
                 <button
                   onClick={() => setVisible(true)}
                   type="button"
@@ -126,7 +154,7 @@ export const WalletConnect = ({
                   Change wallet
                 </button>
               </div>
-              <div className="sm:pt-6 sm:pb- py-3 h-14 sm:border-b-0 border-b border-b-standard-border">
+              <div className="sm:pt-6 sm:pb- py-3 h-14 sm:border-b-0 border-b border-b-primary-border">
                 <button
                   onClick={disconnect}
                   type="button"
@@ -139,7 +167,7 @@ export const WalletConnect = ({
             <div className="sm:hidden py-5 space-y-5">
               <BuyADomainButton customButtonStyle="rounded-[15px] px-3 py-2 font-bold text-base font-azeret text-action-button-text w-full flex justify-center" />
               <div className="flex justify-between w-full items-center">
-                <span className="text-wallet-connect-text text-2xl font-azeret font-semibold">
+                <span className="text-[#f8eff9] text-2xl font-azeret font-semibold">
                   {themeDescription}
                 </span>
                 <ThemeToggle />
@@ -158,7 +186,9 @@ export const WalletConnect = ({
         width ? `${width}px` : "sm:w-[196px] w-[50px]",
         green
           ? "bg-gradient-to-r from-[#00F0FF] to-[#CBFF5E]"
-          : " bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg border-t border-t-[#FFFFFF33]"
+          : theme === "dark"
+          ? "bg-gradient-to-b from-glass-bg to-bg-wallet-connect-bg border-t border-t-[#FFFFFF33]"
+          : "bg-wallet-connect-bg"
       )}
       onClick={() => {
         setVisible(true);

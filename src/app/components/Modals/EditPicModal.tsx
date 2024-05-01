@@ -53,16 +53,16 @@ export const EditPicModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       <div
-        className="relative bg-modal-bg h-fit flex flex-col justify-center items-center border border-modal-border rounded-xl p-5 mt-10 md:mt-0"
+        className="relative bg-primary-bg h-fit flex flex-col justify-center items-center border border-primary-border rounded-xl p-5 mt-10 md:mt-0"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full flex justify-start">
-          <span className="text-sm text-modal-text font-azeret font-semibold">
+          <span className="text-sm text-primary-text font-azeret font-semibold">
             Image URL
           </span>
         </div>
         <input
-          className="bg-modal-input-bg text-modal-text h-[39px] sm:w-[552px] w-[331px] text-center border border-modal-border rounded-lg"
+          className="bg-input-bg text-primary-text h-[39px] sm:w-[552px] w-[331px] text-center border border-primary-border rounded-lg"
           placeholder="ex:https://imgur.com/..."
           onChange={(event) => {
             setRecordVal(event.target.value);
@@ -78,7 +78,7 @@ export const EditPicModal = ({
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px] border-t text-action-button-text border-t-action-button-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px] border-t text-action-button-text border-t-top-border-highlight active:border-t-0 font-bold"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -90,7 +90,7 @@ export const EditPicModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-gradient-to-b from-glass-bg to-bg-modal-bg border-t-modal-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg border-t-priamry-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}

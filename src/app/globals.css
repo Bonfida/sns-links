@@ -445,120 +445,63 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
 .dark {
-  --bg-main: #03021a;
   --topbar-border: #ffffff24;
-  --topbar-text: #f8eff9;
   --action-button-bg: linear-gradient(to right, #00f0ff, #cbff5e);
   --action-button-text: #03021a;
-  --action-button-border: #ffffff33;
   --focus-button-border: linear-gradient(to right, #a5fbac, #d7fd75);
   --list-item-bg: #15142b;
   --list-item-border: #ffffff3d;
   --list-item-text: #f8eff9;
   --primary-tag-text: #a5fbac;
   --primary-tag-border: #ffffff3d;
-  --search-input-bg: #ffffff12;
   --search-input-text: #f8eff9;
   --search-input-border: #ffffff3d;
   --link: #a5fbac;
-  --record-heading: #f8eff9;
   --record-value: rgba(248, 239, 249, 0.5);
-  --edit-button-top-border: #ffffff33;
   --edit-button-bg: #03021a;
   --wallet-connect-bg: #03021a;
-  --wallet-connect-text: #f8eff9;
-  --wallet-connect-top-border: #ffffff33;
-  --wallet-connect-popout-bg: #13122b;
-  --wallet-connect-popout-border: #2a2a51;
-  --profile-overview-text: #f8eff9;
-  --hero-section-text: #f8eff9;
   --carousel-item-bg: #03021a;
-  --carousel-item-text: #f8eff9;
-  --generic-text: #f8eff9;
-  --carousel-border: #ffffff3d;
-  --modal-bg: #03021a;
-  --modal-border: #ffffff3d;
-  --modal-input-bg: #ffffff12;
-  --modal-text: #f8eff9;
-  --record-group-heading-text: #f8eff9;
+  --input-bg: #ffffff12;
   --footer-bg: #000a1a;
   --top-border-highlight: #ffffff33;
+  --primary-border: #ffffff3d;
   --glass-bg: rgba(255, 255, 255, 0.07);
   --primary-bg: #03021a;
   --theme-select-shadow: #d7fd75;
+  --primary-text: #f8eff9;
   --bio-placeholder-text: #f8eff9cc;
-  --bio-edit-border: #ffffff3d;
   --bio-text: #e8dcef;
 }
 
 .light {
-  --bg-main: #f8eff9;
   --topbar-border: #f8eff9;
-  --topbar-text: #03021a;
   --action-button-bg: linear-gradient(to right, #00f0ff, #cbff5e);
   --action-button-text: #03021a;
-  --action-button-border: #ffffff33;
   --focus-button-border: linear-gradient(to right, #6963e0, #8d43e0);
   --list-item-bg: #ede6ef;
   --list-item-border: #00000012;
   --list-item-text: #03021a;
   --primary-tag-text: #6963e0;
   --primary-tag-border: #00000012;
-  --search-input-bg: #0000000a;
   --search-input-text: #03021a;
   --search-input-border: #00000012;
   --link: #6963e0;
-  --record-heading: #03021a;
   --record-value: rgba(248, 239, 249, 0.5);
-  --edit-button-top-border: #ffffff33;
   --edit-button-bg: #6963e0;
   --wallet-connect-bg: #6963e0;
-  --wallet-connect-text: #f8eff9;
-  --wallet-connect-top-border: #ffffff33;
-  --wallet-connect-popout-bg: #13122b;
-  --wallet-connect-popout-border: #2a2a51;
-  --profile-overview-text: #f8eff9;
-  --hero-section-text: #03021a;
   --carousel-item-bg: #e8dcef;
-  --carousel-item-text: #03021a;
-  --generic-text: #f8eff9;
-  --carousel-border: #ffffff3d;
-  --modal-bg: #03021a;
-  --modal-border: #ffffff3d;
-  --modal-input-bg: #0000000a;
-  --modal-text: #f8eff9;
-  --record-group-heading-text: #f8eff9;
+  --input-bg: #0000000a;
   --footer-bg: #000a1a;
   --top-border-highlight: #ffffff33;
-  --standard-border: #ffffff3d;
+  --primary-border: #ffffff3d;
+  --secondary-border: #00000012;
   --glass-bg: #0000000a;
   --primary-bg: #f8eff9;
   --theme-select-shadow: #6963e0;
+  --bio-text: #03021a;
+  --bio-placeholder-text: #03021a;
+  --primary-text: #03021a;
 }
 
 .toast > * {

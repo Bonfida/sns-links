@@ -53,7 +53,7 @@ const EditRecordModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-10">
       <div
-        className="relative bg-modal-bg h-fit flex flex-col justify-center items-center border border-modal-border rounded-2xl p-6 gap-y-3"
+        className="relative bg-primary-bg h-fit flex flex-col justify-center items-center border border-primary-border rounded-2xl p-6 gap-y-3"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
@@ -63,7 +63,7 @@ const EditRecordModal = ({
             </h2>
           </div>
           <input
-            className="bg-[#FFFFFF12] text-modal-text h-[113px] sm:w-[552px] w-[331px] text-center border border-modal-border rounded-2xl"
+            className="bg-[#FFFFFF12] text-primary-text h-[113px] sm:w-[552px] w-[331px] text-center border border-primary-border rounded-2xl"
             placeholder="Enter new record"
             onChange={(event) => {
               setRecordVal(event.target.value);
@@ -80,7 +80,7 @@ const EditRecordModal = ({
           <div className="flex flex-col gap-3 sm:flex-row items-center justify-between w-full mt-6 ">
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px]  border-t text-action-button-text  border-t-modal-border active:border-t-0 font-bold text-base"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px]  border-t text-action-button-text  border-t-primary-border active:border-t-0 font-bold text-base"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -92,7 +92,7 @@ const EditRecordModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-gradient-to-b from-glass-bg to-bg-modal-bg   border-t-modal-border active:border-t-0 font-bold text-base"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg   border-t-primary-border active:border-t-0 font-bold text-base"
               onClick={() => {
                 close();
               }}

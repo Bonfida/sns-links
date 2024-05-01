@@ -72,7 +72,7 @@ const LinkButton = ({
           >
             <Image src="/copy/copy.svg" width={18} height={18} alt="copy" />
             {showCopyConfirmation && (
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-modal-bg text-white rounded-md whitespace-nowrap text-xs z-100">
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-primary-bg text-white rounded-md whitespace-nowrap text-xs z-100">
                 Link copied!
               </div>
             )}

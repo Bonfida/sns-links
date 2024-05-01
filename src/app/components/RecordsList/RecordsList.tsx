@@ -94,7 +94,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                 customSize="h-[56px] w-[56px] sm:h-[120px] w-[120px]"
               />
               <div className="flex gap-4">
-                <h1 className="md:text-5xl text-2xl font-bold text-profile-overview-text">
+                <h1 className="md:text-5xl text-2xl font-bold text-primary-text">
                   {currentDomain}.sol
                 </h1>
 

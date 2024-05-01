@@ -12,6 +12,7 @@ import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
 import ThemeContext from "@/context/theme";
 import { makeTxV2 } from "@/utils/makeTx";
 import { sleep } from "@/utils/sleep";
+import { twMerge } from "tailwind-merge";
 
 export const DomainListItem = ({ domain }: { domain: string }) => {
   const { publicKey, signAllTransactions } = useWallet();
@@ -110,7 +111,12 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
         <div className="flex gap-2 justify-center items-center">
           {isFavorite && <PrimaryTag />}
           <button
-            className="text-white text-sm w-[50px] px-1 py-3 bg-gradient-to-b from-glass-bg to-edit-button-bg rounded-[16px] flex items-center justify-center border-t border-t-edit-button-top-border active:border-t-0"
+            className={twMerge(
+              "w-[50px] px-1 py-3 rounded-[16px] flex items-center justify-center border-t border-t-top-border-highlight active:border-t-0",
+              theme === "dark"
+                ? "bg-gradient-to-b from-glass-bg to-edit-button-bg"
+                : "bg-edit-button-bg"
+            )}
             onClick={handleEditClick}
           >
             <Image

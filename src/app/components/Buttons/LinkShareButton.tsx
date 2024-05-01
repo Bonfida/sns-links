@@ -28,7 +28,7 @@ const LinkShareButton = ({ domain }: { domain: string }) => {
           alt={"share link"}
         />
         {showCopyConfirmation && (
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-modal-bg text-generic-text rounded-md whitespace-nowrap text-xs">
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-primary-bg text-primary-text rounded-md whitespace-nowrap text-xs">
             Link copied!
           </div>
         )}

@@ -44,7 +44,7 @@ const UnwrapModal = ({
 
   return (
     <div className="flex flex-col justify-start items-start">
-      <span className="text-2xl text-modal-text font-azeret font-semibold">
+      <span className="text-2xl text-primary-text font-azeret font-semibold">
         Tokenized Domain
       </span>
       <div className="space-y-4">
@@ -63,7 +63,7 @@ const UnwrapModal = ({
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-action-button-text border-t-modal-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-action-button-text border-t-primary-border active:border-t-0 font-bold"
               onClick={() => {
                 handleUnwrap();
               }}
@@ -71,7 +71,7 @@ const UnwrapModal = ({
               Unwrap
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-modal-text bg-modal-bg  border-t-modal-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-primary-text bg-primary-bg border-t-primary-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}
