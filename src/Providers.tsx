@@ -1,6 +1,6 @@
 "use client";
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
-import React, { FC, useMemo } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -21,6 +21,15 @@ const queryClient = new QueryClient();
 export const Providers: FC<Props> = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const wallets = useMemo(() => [new PhantomWalletAdapter()], [endpoint]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <QueryClientProvider client={queryClient}>

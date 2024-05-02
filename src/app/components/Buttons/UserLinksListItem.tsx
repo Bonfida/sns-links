@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
 import Badge from "../Badges/Tooltip";

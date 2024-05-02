@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
