@@ -21,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="dark">
+    <html lang="en" suppressHydrationWarning>
+      <body>
         <Providers>
           <Topbar />
           <Widget endpoint={process.env.NEXT_PUBLIC_ENDPOINT!} />

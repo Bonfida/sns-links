@@ -1,10 +1,9 @@
 "use client";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
 const Footer = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
 
   return (
     <footer className="bg-primary-bg flex items-center justify-center w-screen md:h-[72px] pt-5 sm:pt-0">

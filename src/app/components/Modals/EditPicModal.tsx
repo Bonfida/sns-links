@@ -8,14 +8,16 @@ import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 
 export const EditPicModal = ({
   recordName,
+  currentValue,
   domain,
   close,
 }: {
   recordName: string;
+  currentValue: string | undefined;
   domain: string;
   close: () => void;
 }) => {
-  const [recordVal, setRecordVal] = useState("");
+  const [recordValue, setRecordValue] = useState("");
   const { selectedDomain } = useContext(SelectedDomainContext);
   const { toast } = useToastContext();
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
@@ -26,13 +28,14 @@ export const EditPicModal = ({
   const handleUpdateClick = async (
     recordName: Record,
     selectedDomain: string,
-    recordVal: string
+    recordValue: string
   ) => {
     try {
       await updateRecord({
         domain: domain || selectedDomain,
         recordName,
-        recordVal,
+        recordValue,
+        currentValue,
         isRoaSupported,
         sendRoaRequest,
       });
@@ -63,7 +66,7 @@ export const EditPicModal = ({
           className="bg-input-bg text-primary-text h-[39px] sm:w-[552px] w-[331px] text-center border border-primary-border rounded-lg"
           placeholder="ex:https://imgur.com/..."
           onChange={(event) => {
-            setRecordVal(event.target.value);
+            setRecordValue(event.target.value);
           }}
         />
         <div className="w-full justify-start">
@@ -81,7 +84,7 @@ export const EditPicModal = ({
                 handleUpdateClick(
                   recordName as Record,
                   selectedDomain,
-                  recordVal
+                  recordValue
                 );
               }}
             >

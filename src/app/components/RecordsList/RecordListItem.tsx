@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import EditRecordModal from "../Modals/EditRecordModal";
 import { useIsTokenized } from "@/hooks/useIsTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { twMerge } from "tailwind-merge";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 
 export const RecordListItem = ({
   record,
@@ -16,7 +16,7 @@ export const RecordListItem = ({
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const { data: isNft } = useIsTokenized(domain);
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   return (
     <div className="w-full flex flex-col bg-list-item-bg border-t-[1px] border-white/[24%] rounded-3xl ">
       <div className="flex justify-between w-full pt-2 pb-2 pl-5 pr-2">

@@ -1,4 +1,4 @@
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useContext } from "react";
 
@@ -36,7 +36,7 @@ const carouselItemDescriptions = [
 ];
 
 export const HomePageCarousel = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
 
   return (
     <div className="flex gap-3">
@@ -63,7 +63,6 @@ const HomePageCarouseltem = ({
   description: string;
   image: string;
 }) => {
-  const { theme } = useContext(ThemeContext);
   return (
     <div className="flex flex-col justify-center items-start w-[235px] border border-primary-border p-5 gap-3 rounded-2xl bg-carousel-item-bg">
       <Image src={image} width={56.34} height={64} alt="" />

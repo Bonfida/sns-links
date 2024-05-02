@@ -4,7 +4,7 @@ import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
 import Badge from "../Badges/Tooltip";
 import { useConnection } from "@solana/wallet-adapter-react";
 import Image from "next/image";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 
 const UserLinksListItem = ({
   name,
@@ -26,7 +26,7 @@ const UserLinksListItem = ({
     domain,
     name as Record
   );
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   const handleCopy = (value: string) => {
     navigator.clipboard.writeText(value).then(
       () => {

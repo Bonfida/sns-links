@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { RecordListItem } from "./RecordListItem";
 import { SpinnerFida } from "@bonfida/components";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -51,7 +51,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     connection,
     selectedDomain || domain
   );
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   const { data: recordData, isLoading: recordsLoading } = useFetchRecords(
     connection,
     domain

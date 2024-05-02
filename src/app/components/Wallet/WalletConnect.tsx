@@ -7,14 +7,14 @@ import { twMerge } from "tailwind-merge";
 import { usePrevious } from "ahooks";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { PublicKey } from "@solana/web3.js";
 import { useModalContext } from "../../../hooks/useModalContext";
 import { useDomainsForOwner, useFavoriteDomain } from "@bonfida/sns-react";
 import Image from "next/image";
 import { BuyADomainButton } from "../Buttons/BuyADomain";
-import ThemeContext from "@/context/theme";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
+import { useTheme } from "next-themes";
 
 export const WalletConnect = ({
   width,
@@ -26,7 +26,7 @@ export const WalletConnect = ({
   //Connection and Wallet
   const { connected, publicKey, connecting, disconnect } = useWallet();
   const { connection } = useConnection();
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   const themeDescription = theme === "dark" ? "Dark mode" : "Light mode";
 
   // Domain

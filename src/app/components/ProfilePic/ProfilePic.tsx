@@ -70,6 +70,7 @@ const ProfilePic = ({
           >
             <EditPicModal
               recordName="pic"
+              currentValue={picRecord?.content}
               domain={domain}
               close={() => setModalVisible(false)}
             />

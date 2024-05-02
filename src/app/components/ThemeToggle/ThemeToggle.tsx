@@ -1,13 +1,14 @@
+"use client";
 import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 
 export const ThemeToggle = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useTheme();
 
-  const handleThemeToggle = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
   };
 
   return (
@@ -17,7 +18,7 @@ export const ThemeToggle = () => {
           "absolute rounded-full h-[38px] w-[38px] bg-primary-bg border-t border-t-top-border-highlight shadow-theme-select transition-all duration-300 ease-in-out flex justify-center items-center",
           theme === "light" ? "left-0" : "right-0"
         )}
-        onClick={handleThemeToggle}
+        onClick={toggleTheme}
       >
         <Image
           src={

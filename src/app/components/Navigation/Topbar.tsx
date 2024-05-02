@@ -3,11 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { WalletConnect } from "../Wallet/WalletConnect";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
-import { useContext } from "react";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 
 const Topbar = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   return (
     <div className="bg-primary-bg flex items-center justify-center w-screen md:h-[72px] h-[64px] pt-3 border-b border-b-topbar-border sm:border-0">
       <div className="flex items-center justify-between w-full md:w-[1224px] z-50 px-3 sm:px-0">

@@ -5,7 +5,7 @@ import { Record } from "@bonfida/spl-name-service";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { twMerge } from "tailwind-merge";
-import ThemeContext from "@/context/theme";
+import { useTheme } from "next-themes";
 
 const EditRecordModal = ({
   recordName,
@@ -24,7 +24,7 @@ const EditRecordModal = ({
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
     recordName as Record
   );
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   const updateRecord = useUpdateRecord();
 
   const handleUpdateClick = async (

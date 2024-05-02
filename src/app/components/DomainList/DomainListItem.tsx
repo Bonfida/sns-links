@@ -9,15 +9,15 @@ import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { derive } from "@/utils/derive";
 import { registerFavourite } from "@bonfida/name-offers";
 import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
-import ThemeContext from "@/context/theme";
 import { makeTxV2 } from "@/utils/makeTx";
 import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
+import { useTheme } from "next-themes";
 
 export const DomainListItem = ({ domain }: { domain: string }) => {
   const { publicKey, signAllTransactions } = useWallet();
   const { connection } = useConnection();
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   const router = useRouter();
   const { setSelectedDomain, selectedDomain } = useContext(
     SelectedDomainContext
