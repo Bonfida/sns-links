@@ -9,6 +9,7 @@ import { ButtonModal } from "../ButtonModal";
 import { EditPicModal } from "../Modals/EditPicModal";
 import { GenericLoading } from "@bonfida/components";
 import { twMerge } from "tailwind-merge";
+import { useTheme } from "next-themes";
 
 const ProfilePic = ({
   domain,
@@ -20,6 +21,7 @@ const ProfilePic = ({
   hideEdit?: Boolean;
 }) => {
   const { connection } = useConnection();
+  const { theme } = useTheme();
   const { publicKey, connected } = useWallet();
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -50,7 +52,12 @@ const ProfilePic = ({
         alt="Profile"
       />
       {recordsLoading && (
-        <GenericLoading className="absolute bottom-0 left-0 w-full h-1/6" />
+        <GenericLoading
+          className={twMerge(
+            "absolute bottom-0 left-0 w-full h-1/6",
+            theme === "light" ? "bg-list-item-bg" : ""
+          )}
+        />
       )}
       {connected && checkIsOwner(owner, publicKey) && hideEdit !== true && (
         <div className="absolute bottom-0 left-0 flex items-center justify-center w-full bg-gray-700 bg-opacity-50 h-1/6">

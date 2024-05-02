@@ -127,7 +127,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-8 w-full justify- items-center mb-10">
                 {recordsLoading ? (
-                  <SpinnerFida variant="white" />
+                  <SpinnerFida variant={theme === "dark" ? "white" : "color"} />
                 ) : (
                   <>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">

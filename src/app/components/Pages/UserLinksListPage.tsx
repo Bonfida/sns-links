@@ -10,6 +10,8 @@ import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { LinkShareParams } from "@/app/types/LinkShareParams";
 import { Record } from "@bonfida/spl-name-service";
+import { useTheme } from "next-themes";
+import { twMerge } from "tailwind-merge";
 
 const contactRecords = [
   {
@@ -60,6 +62,7 @@ const socialRecords = [
 
 export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
   const { connection } = useConnection();
+  const { theme } = useTheme();
   const domain = params.domain;
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
@@ -100,7 +103,12 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
       <div className="flex flex-col items-center gap-3">
         <div className="flex flex-col">
           {recordsLoading ? (
-            <GenericLoading className="w-24 h-24 rounded-full" />
+            <GenericLoading
+              className={twMerge(
+                "w-24 h-24 rounded-full",
+                theme === "light" ? "bg-list-item-bg" : ""
+              )}
+            />
           ) : (
             <Image
               alt="Profile picture"
@@ -127,7 +135,10 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
         <div className="mt-10">
           {Array.from({ length: 10 }).map((_, idx) => (
             <GenericLoading
-              className="w-72 h-12 rounded-md my-2"
+              className={twMerge(
+                "w-72 h-12 rounded-md my-2",
+                theme === "light" ? "bg-list-item-bg" : ""
+              )}
               key={`loading-record-${idx}`}
             />
           ))}
