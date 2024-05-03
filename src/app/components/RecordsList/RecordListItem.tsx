@@ -6,6 +6,7 @@ import { useIsTokenized } from "@/hooks/useIsTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { useQueryClient } from "react-query";
 
 export const RecordListItem = ({
   record,
@@ -15,7 +16,9 @@ export const RecordListItem = ({
   domain: string;
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const { data: isNft } = useIsTokenized(domain);
+  const { data: isToken } = useIsTokenized(domain);
+  const queryClient = useQueryClient();
+  const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
   const { theme } = useTheme();
   return (
     <div className="w-full flex flex-col bg-list-item-bg border-t-[1px] border-white/[24%] rounded-3xl ">
@@ -43,9 +46,10 @@ export const RecordListItem = ({
             visible={isModalVisible}
             setVisible={setModalVisible}
           >
-            {isNft ? (
+            {isToken ? (
               <UnwrapModal
                 domain={domain}
+                refresh={() => refreshIsToken}
                 close={() => setModalVisible(false)}
               />
             ) : (
