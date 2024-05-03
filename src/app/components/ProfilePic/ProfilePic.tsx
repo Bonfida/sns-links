@@ -4,7 +4,7 @@ import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { Record } from "@bonfida/spl-name-service";
 import Image from "next/image";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
-import { checkIsOwner } from "@/utils/owner/checkIsOwner";
+import { checkIsOwner } from "@/utils/owner";
 import { ButtonModal } from "../ButtonModal";
 import { EditPicModal } from "../Modals/EditPicModal";
 import { GenericLoading } from "@bonfida/components";

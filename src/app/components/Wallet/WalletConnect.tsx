@@ -1,6 +1,6 @@
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
+import { abbreviatePubkey } from "@/utils/abbreviate-pubkey";
 import { useRouter } from "next/navigation";
 import ProfilePic from "../ProfilePic/ProfilePic";
 import { twMerge } from "tailwind-merge";

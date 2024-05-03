@@ -1,29 +1,8 @@
-import {
-  Record,
-  getRecordV2Key,
-  deleteRecordV2,
-  createRecordV2Instruction,
-  updateRecordV2Instruction,
-  validateRecordV2Content,
-  GUARDIANS,
-  writRoaRecordV2,
-} from "@bonfida/spl-name-service";
-import {
-  PublicKey,
-  Transaction,
-  Connection,
-  TransactionInstruction,
-} from "@solana/web3.js";
-import { formatRecordValue } from "@/utils/formatRecordValue";
-import { makeTxV2 } from "@/utils/makeTx";
-import { Toast, useToastContext } from "@bonfida/components";
-import { checkAccountExists } from "@bonfida/hooks";
+import { Record } from "@bonfida/spl-name-service";
+import { useToastContext } from "@bonfida/components";
 import { sleep } from "../utils/sleep";
-import { simpleValidation } from "../utils/simple-record-validation";
-import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { updateRecordHanlder } from "@/utils/update-record/update-record";
-import { useFetchRecords } from "./useFetchRecords";
 
 export const useUpdateRecord = () => {
   const { connection } = useConnection();

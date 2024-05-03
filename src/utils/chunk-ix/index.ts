@@ -5,7 +5,7 @@ import {
   TransactionMessage,
   VersionedTransaction,
 } from "@solana/web3.js";
-import { COMPUTE_IX, DUMMY_COMPUTE_CU } from "./priority-fee";
+import { COMPUTE_IX, DUMMY_COMPUTE_CU } from "../make-tx-v2/priority-fee";
 
 const MAX = 1_232;
 

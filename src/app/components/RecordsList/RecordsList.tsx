@@ -5,7 +5,7 @@ import ProfilePic from "../ProfilePic/ProfilePic";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { checkIsOwner } from "@/utils/owner/checkIsOwner";
+import { checkIsOwner } from "@/utils/owner";
 import Bio from "../Bio/Bio";
 import { useRouter } from "next/navigation";
 import Image from "next/image";

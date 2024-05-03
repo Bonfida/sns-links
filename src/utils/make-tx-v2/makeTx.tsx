@@ -8,12 +8,12 @@ import {
   VersionedTransaction,
   TransactionMessage,
 } from "@solana/web3.js";
-import { sleep } from "./sleep";
-import { sendRawTransaction } from "./send-raw-transaction/send-raw-transaction";
+import { sleep } from "../sleep";
+import { sendRawTransaction } from "../send-raw-transaction";
 import { getConnection } from "./getConnection";
-import { chunkIx } from "./chunkIx";
+import { chunkIx } from "../chunk-ix";
 import { COMPUTE_IX, getCuUsage } from "./priority-fee";
-import { SnsClientError } from "./errors/common";
+import { SnsClientError } from "../errors";
 
 export const LOOKUP_TABLE = new PublicKey(
   "4j2dBsgjSGJGYSGy7PaZn8Xr9zH2EFqXjMjkpCh1DYEU"

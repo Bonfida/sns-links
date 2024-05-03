@@ -1,4 +1,4 @@
-import { abbreviatePubkey } from "@/utils/abbreviate-pubkey/abbreviatePubkey";
+import { abbreviatePubkey } from "@/utils/abbreviate-pubkey";
 import Image from "next/image";
 import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";

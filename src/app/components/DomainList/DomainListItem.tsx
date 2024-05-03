@@ -9,7 +9,7 @@ import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { derive } from "@/utils/derive";
 import { registerFavourite } from "@bonfida/name-offers";
 import { NAME_OFFERS_ID } from "@bonfida/spl-name-service";
-import { makeTxV2 } from "@/utils/makeTx";
+import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";

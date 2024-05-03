@@ -14,7 +14,7 @@ import {
 } from "@solana/web3.js";
 import { Toast } from "@bonfida/components";
 import { sleep } from "../sleep";
-import { sendRawTransaction } from "../../utils/send-raw-transaction/send-raw-transaction";
+import { sendRawTransaction } from "../send-raw-transaction";
 
 export const updateBio = async (
   connection: Connection,

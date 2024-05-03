@@ -2,7 +2,7 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { unwrap } from "@/utils/tokenizer/unwrap";
 import { useToastContext } from "@bonfida/components";
-import { makeTxV2 } from "@/utils/makeTx";
+import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
