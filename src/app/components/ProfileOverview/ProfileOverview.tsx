@@ -4,6 +4,7 @@ import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { Record } from "@bonfida/spl-name-service";
+import { useTheme } from "next-themes";
 
 const ProfileOverview = () => {
   const { connection } = useConnection();
@@ -12,6 +13,7 @@ const ProfileOverview = () => {
   const { data: favoriteDomain, loading: favoriteLoading } = useFavouriteDomain(
     publicKey?.toBase58()
   );
+  const { theme } = useTheme();
 
   const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
     connection,
@@ -35,9 +37,30 @@ const ProfileOverview = () => {
           />
 
           <div className="flex flex-col items-center sm:items-start">
-            <span className="md:text-4xl text-2xl font-semibold text-primary-text font-azeret">
-              {favoriteDomain}.sol
-            </span>
+            <div className="flex gap-4">
+              <span className="md:text-4xl text-2xl font-semibold text-primary-text font-azeret">
+                {favoriteDomain}.sol
+              </span>
+              <a
+                href={`http://localhost:3000/user/${favoriteDomain}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                <Image
+                  src={
+                    theme === "dark"
+                      ? "/link-out/link-out-green.svg"
+                      : "/link-out/link-out-purple.svg"
+                  }
+                  height={30}
+                  width={30}
+                  alt=""
+                  className="w-6 h-6 sm:w-[30px] sm:h-[30px]"
+                />
+              </a>
+            </div>
+
             <span className="md:text-2xl text-base text-primary-text font-azeret">
               {abbreviatedPubkey}
             </span>
