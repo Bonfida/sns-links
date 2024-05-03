@@ -42,7 +42,7 @@ const ProfileOverview = () => {
                 {favoriteDomain}.sol
               </span>
               <a
-                href={`http://localhost:3000/user/${favoriteDomain}`}
+                href={`https://sns-links.vercel.app/user/${favoriteDomain}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center"

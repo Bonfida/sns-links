@@ -104,7 +104,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                 </h1>
 
                 <a
-                  href={`http://localhost:3000/user/${domain}`}
+                  href={`https://sns-links.vercel.app/user/${domain}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center"
