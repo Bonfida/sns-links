@@ -4,7 +4,6 @@ import { useFetchRecords } from "../../../hooks/useFetchRecords";
 import UserLinksListItem from "@/app/components/Buttons/UserLinksListItem";
 import Image from "next/image";
 import { GenericLoading } from "@bonfida/components";
-import { useState } from "react";
 import { NoLinksFoundNotice } from "../Notices/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";

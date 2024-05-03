@@ -8,7 +8,6 @@ import { usePrevious } from "ahooks";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useState, useEffect } from "react";
-import { PublicKey } from "@solana/web3.js";
 import { useModalContext } from "../../../hooks/useModalContext";
 import { useDomainsForOwner, useFavoriteDomain } from "@bonfida/sns-react";
 import Image from "next/image";

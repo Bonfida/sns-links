@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
