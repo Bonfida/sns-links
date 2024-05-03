@@ -37,7 +37,7 @@ const ProfileOverview = () => {
           />
 
           <div className="flex flex-col items-center sm:items-start">
-            <div className="flex gap-4">
+            <div className="flex gap-2">
               <span className="md:text-4xl text-2xl font-semibold text-primary-text font-azeret">
                 {favoriteDomain}.sol
               </span>
