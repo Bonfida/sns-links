@@ -41,7 +41,7 @@ export const WalletConnect = ({
     : userDomainList?.[0]?.domain;
 
   const displayedUser = favOrFirst
-    ? favOrFirst
+    ? favOrFirst + ".sol"
     : abbreviatePubkey(publicKey, 4);
 
   // Router
@@ -95,7 +95,7 @@ export const WalletConnect = ({
               />
             </div>
             <span className="font-bold text-white font-azeret w-fit sm:inline-block hidden">
-              {displayedUser}.sol
+              {displayedUser}
             </span>
           </div>
         </Popover.Button>
