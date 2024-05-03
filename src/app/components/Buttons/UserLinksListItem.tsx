@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
-import Badge from "../Badges/Tooltip";
+import Badge from "../Tooltip/Tooltip";
 import { useConnection } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";

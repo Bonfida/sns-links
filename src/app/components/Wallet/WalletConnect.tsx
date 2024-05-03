@@ -14,6 +14,7 @@ import Image from "next/image";
 import { BuyADomainButton } from "../Buttons/BuyADomain";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 import { useTheme } from "next-themes";
+import { GenericLoading } from "@bonfida/components";
 
 export const WalletConnect = ({
   width,
@@ -43,6 +44,8 @@ export const WalletConnect = ({
     ? favOrFirst + ".sol"
     : abbreviatePubkey(publicKey, 4);
 
+  const loading = isuserDomainListLoading || isFaovriteDomainLoading;
+
   // Router
   const router = useRouter();
 
@@ -61,7 +64,8 @@ export const WalletConnect = ({
     if (previous && visibleContext) {
       setVisibleContext(false);
     }
-  }, [visible, setVisibleContext, visibleContext, previous]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
 
   if (connected && publicKey) {
     return (
@@ -78,13 +82,23 @@ export const WalletConnect = ({
                 : "bg-wallet-connect-bg"
             )}
           >
-            <div className="sm:inline-block hidden">
-              <ProfilePic
-                domain={favoriteDomain?.domain || ""}
-                hideEdit={true}
-                customSize="h-6 w-6"
+            {loading ? (
+              <GenericLoading
+                className={twMerge(
+                  "rounded-full h-6 w-6",
+                  theme === "light" ? "bg-list-item-bg" : ""
+                )}
               />
-            </div>
+            ) : (
+              <div className="sm:inline-block hidden">
+                <ProfilePic
+                  domain={favoriteDomain?.domain || ""}
+                  hideEdit={true}
+                  customSize="h-6 w-6"
+                />
+              </div>
+            )}
+
             <div className="sm:hidden inline-flex items-center justify-center">
               <Image
                 width={24}
@@ -93,9 +107,18 @@ export const WalletConnect = ({
                 src="/wallet/wallet-white.svg"
               />
             </div>
-            <span className="font-bold text-white font-azeret w-fit sm:inline-block hidden">
-              {displayedUser}
-            </span>
+            {loading ? (
+              <GenericLoading
+                className={twMerge(
+                  "w-1/2 h-6 flex items-center justify-center rounded-[15px]",
+                  theme === "light" ? "bg-list-item-bg" : ""
+                )}
+              />
+            ) : (
+              <span className="font-bold text-white font-azeret w-fit sm:inline-block hidden">
+                {displayedUser}
+              </span>
+            )}
           </div>
         </Popover.Button>
 

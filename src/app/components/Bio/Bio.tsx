@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { updateBio } from "../../../utils/update-record/update-bio";
-import { isTokenized } from "../../../utils/tokenizer/isTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { useFetchBio } from "@/hooks/useFetchBio";
 import { useQueryClient } from "react-query";
