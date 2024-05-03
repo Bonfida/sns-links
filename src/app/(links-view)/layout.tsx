@@ -1,4 +1,3 @@
-"use client";
 import "../globals.css";
 import { Providers } from "@/Providers";
 import Footer from "../components/Navigation/Footer";

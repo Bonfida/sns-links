@@ -504,6 +504,9 @@ input::-webkit-inner-spin-button {
   --primary-text: #03021a;
 }
 
+body {
+  background-color: var(--primary-bg);
+}
 .toast > * {
   animation: toast-pop 0.25s ease-out;
 }

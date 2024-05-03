@@ -39,7 +39,7 @@ export const DomainListPage = () => {
   }, [publicKey]);
 
   return (
-    <div className="flex flex-col w-full h-full items-center">
+    <div className="flex flex-col w-full h-full items-center mt-[50px]">
       {loading ? (
         <>
           <div className="md:w-[800px] sm:w-[450px] w-screen">

@@ -4,7 +4,7 @@ import {
   getMultipleRecordsV2,
 } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
-import { recordsToFetch } from "@/app/constants/recordsToFetch";
+import { recordsToFetch } from "@/app/constants/records-to-fetch";
 import { Connection } from "@solana/web3.js";
 
 export const useFetchRecords = (
