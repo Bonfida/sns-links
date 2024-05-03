@@ -35,14 +35,14 @@ const UnwrapModal = ({
       });
 
       if (results.length > 0) {
-        toast.success("Unwrapped successfully!");
+        toast.success("all");
       }
     } catch (error) {
       console.log("error", error);
       toast.error();
     } finally {
-      refresh();
       await sleep(1_000);
+      refresh();
       toast.close();
       close();
     }

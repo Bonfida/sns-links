@@ -64,7 +64,7 @@ export const RecordListItem = ({
         </div>
       </div>
       {record.content && (
-        <div className="w-full border-t-white/25 border-t h-[39px] pt-2 py-[14px] pl-5">
+        <div className="w-full border-t-white/25 border-t h-[39px] pt-2 py-[14px] pl-5 overflow-x-scroll">
           <span
             className={twMerge(
               theme === "dark" ? "text-[#F8EFF9]/50" : "text-primary-text/90",
