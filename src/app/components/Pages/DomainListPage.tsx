@@ -17,7 +17,7 @@ export const metadata = {
 
 export const DomainListPage = () => {
   const router = useRouter();
-  const { connected, publicKey } = useWallet();
+  const { publicKey } = useWallet();
   const { connection } = useConnection();
   const { isLoading: domainsLoading, data: domainsOwned } = useFetchDomains(
     connection,

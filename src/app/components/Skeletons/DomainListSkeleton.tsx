@@ -10,7 +10,7 @@ const DomainTableSkeleton = () => {
       <div className="md:w-[800px] sm:w-[450px] w-screen items-center justify-center flex">
         <GenericLoading
           className={twMerge(
-            "rounded-lg mb-4 sm:w-1/4 w-1/2 h-[42px]",
+            "rounded-xl mb-4 sm:w-1/3 w-1/2 h-[42px]",
             theme === "light" ? "bg-list-item-bg" : ""
           )}
         />
