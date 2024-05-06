@@ -122,7 +122,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                 ) : (
                   <>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">
-                      <span className="text-primary-text pb-4 text-[14px]">
+                      <span className="text-primary-text pb-4 text-[14px] font-semibold">
                         CONTACT
                       </span>
                       {recordData
@@ -139,7 +139,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                         ))}
                     </div>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">
-                      <span className="text-primary-text text-[14px]">
+                      <span className="text-primary-text text-[14px] font-semibold">
                         SOCIALS
                       </span>
                       {!recordsLoading &&
@@ -157,7 +157,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                           ))}
                     </div>
                     <div className="gap-2 w-full flex flex-col justify-center items-center">
-                      <span className="text-primary-text text-[14px]">
+                      <span className="text-primary-text text-[14px] font-semibold">
                         WALLETS
                       </span>
                       {!recordsLoading &&
