@@ -26,10 +26,6 @@ export const useUpdateRecord = () => {
       | ((domain: string, record: Record) => Promise<void>)
       | undefined;
   }) => {
-    if (recordValue === currentValue || recordValue.length === 0) {
-      toast.error("Nothing to update");
-      return;
-    }
     try {
       toast.processing();
 
@@ -45,7 +41,6 @@ export const useUpdateRecord = () => {
       });
 
       toast.success("all");
-      //add a refresh here
     } catch (err) {
       console.log("error", err);
       toast.error();

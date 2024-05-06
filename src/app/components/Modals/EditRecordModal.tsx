@@ -12,13 +12,11 @@ const EditRecordModal = ({
   recordName,
   domain,
   currentValue,
-  refresh,
   close,
 }: {
-  recordName: string;
+  recordName: Record;
   domain: string;
   currentValue: string | undefined;
-  refresh: () => Promise<void>;
   close: () => void;
 }) => {
   const [recordVal, setRecordVal] = useState("");
@@ -29,6 +27,8 @@ const EditRecordModal = ({
   );
   const { theme } = useTheme();
   const updateRecord = useUpdateRecord();
+
+  const queryClient = useQueryClient();
 
   const handleUpdateClick = async (
     recordName: Record,
@@ -44,7 +44,7 @@ const EditRecordModal = ({
         isRoaSupported,
         sendRoaRequest,
       });
-      refresh();
+      await queryClient.invalidateQueries(["records", domain]);
       close();
     } catch (error) {
       if (error instanceof Error) {

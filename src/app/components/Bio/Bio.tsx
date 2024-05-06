@@ -131,7 +131,7 @@ const Bio = ({ domain }: { domain: string }) => {
               placeholder={bioPlaceholder}
               value={bioText}
               onChange={(e) => setBioText(e.target.value)}
-              rows={3}
+              rows={1}
               cols={45}
               className="rounded-2xl  py-2 px-3 bg-input-bg text-search-input-text border-primary-border"
               readOnly={!isToken ? !bioEditMode : bioEditMode}
@@ -144,7 +144,7 @@ const Bio = ({ domain }: { domain: string }) => {
             </div>
           </>
         ) : (
-          <div className="mb-8">
+          <div className="mb-8 h-[28px]">
             {!bioLoading ? (
               <span className="bg-inherit text-bio-text">{bioText}</span>
             ) : (

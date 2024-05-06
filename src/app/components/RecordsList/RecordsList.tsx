@@ -40,7 +40,7 @@ const socialRecords = [
 
 const RecordsTable = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
-  const { publicKey, connected, signMessage, signTransaction } = useWallet();
+  const { publicKey } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
 
@@ -58,7 +58,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     domain
   );
   const queryClient = useQueryClient();
-  const refreshRecords = queryClient.invalidateQueries(["records", domain]);
 
   const navigateBack = () => {
     router.push(`/profile/${publicKey}`);
@@ -130,7 +129,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                       </span>
                       {recordData
                         ?.filter((record) =>
-                          contactRecords.includes(record.record as Record)
+                          contactRecords.includes(record.record)
                         )
                         .map((record) => (
                           <RecordListItem
@@ -138,7 +137,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                             record={record}
                             domain={currentDomain}
                             isOwner={isOwner}
-                            refresh={() => refreshRecords}
                           />
                         ))}
                     </div>
@@ -149,7 +147,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                       {!recordsLoading &&
                         recordData
                           ?.filter((record) =>
-                            socialRecords.includes(record.record as Record)
+                            socialRecords.includes(record.record)
                           )
                           .map((record) => (
                             <RecordListItem
@@ -157,7 +155,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               record={record}
                               domain={currentDomain}
                               isOwner={isOwner}
-                              refresh={() => refreshRecords}
                             />
                           ))}
                     </div>
@@ -168,7 +165,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                       {!recordsLoading &&
                         recordData
                           ?.filter((record) =>
-                            walletRecords.includes(record.record as Record)
+                            walletRecords.includes(record.record)
                           )
                           .map((record) => (
                             <RecordListItem
@@ -176,7 +173,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               record={record}
                               domain={currentDomain}
                               isOwner={isOwner}
-                              refresh={() => refreshRecords}
                             />
                           ))}
                     </div>

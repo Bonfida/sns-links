@@ -57,12 +57,13 @@ export const updateRecordHanlder = async ({
       instructions.push(
         deleteRecordV2(domain, recordName, publicKey, publicKey)
       );
-      await makeTxV2({
+      const results = await makeTxV2({
         connection,
         feePayer: publicKey,
         instructions,
         signAllTransactions,
       });
+      return results;
     } else {
       const { err } = simpleValidation(formattedValue, recordName);
       if (err) {
@@ -127,7 +128,7 @@ export const updateRecordHanlder = async ({
       );
     }
 
-    await makeTxV2({
+    const results = await makeTxV2({
       connection,
       feePayer: publicKey,
       instructions,
@@ -140,6 +141,7 @@ export const updateRecordHanlder = async ({
     if (isRoaSupported) {
       await sendRoaRequest!(domain, recordName);
     }
+    return results;
   } catch (err) {
     throw new Error();
     console.error(err);
