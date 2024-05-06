@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useToastContext } from "@bonfida/components";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
@@ -17,13 +17,13 @@ const Bio = ({ domain }: { domain: string }) => {
     useWallet();
   const [bioEditMode, setBioEditMode] = useState(false);
   const { data: bio, isLoading: bioLoading } = useFetchBio(domain);
-  const [bioText, setBioText] = useState(() => {
-    if (!bioLoading && bio?.length !== 0) {
-      return bio;
-    } else {
-      return "";
+  const [bioText, setBioText] = useState("");
+
+  useEffect(() => {
+    if (!bioLoading && bio && bio?.length !== 0) {
+      setBioText(bio);
     }
-  });
+  }, [bio, bioLoading]);
 
   const bioPlaceholder = !connected
     ? "My bio..."
@@ -37,11 +37,13 @@ const Bio = ({ domain }: { domain: string }) => {
     connection,
     domain
   );
+
+  const isOwner = owner === publicKey?.toBase58();
   const { data: isToken } = useIsTokenized(domain);
   const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
 
   const handleSubmit = async () => {
-    if (!publicKey || !signAllTransactions || !bioText) return;
+    if (!publicKey || !signAllTransactions) return;
     if (bioText == bio || bioText?.length === 0) {
       toast.error("Nothing to update");
     } else {
@@ -66,7 +68,7 @@ const Bio = ({ domain }: { domain: string }) => {
       <div className="flex justify-between">
         <span className="text-bio-placeholder-text text-sm">Bio</span>
         <div className="flex gap-2">
-          {bioEditMode && (
+          {bioEditMode && isOwner && (
             <>
               <button
                 className="text-link text-sm"
@@ -91,7 +93,7 @@ const Bio = ({ domain }: { domain: string }) => {
             </>
           )}
 
-          {!bioEditMode && !isToken && (
+          {!bioEditMode && isOwner && !isToken && (
             <button
               className="flex self-center text-link text-sm"
               type="button"
@@ -100,7 +102,7 @@ const Bio = ({ domain }: { domain: string }) => {
               Edit
             </button>
           )}
-          {!bioEditMode && isToken && (
+          {!bioEditMode && isOwner && isToken && (
             <ButtonModal
               buttonText="Edit"
               buttonClass=" flex self-center text-link text-sm"
@@ -117,7 +119,7 @@ const Bio = ({ domain }: { domain: string }) => {
         </div>
       </div>
 
-      {bioEditMode ? (
+      {bioEditMode && isOwner ? (
         <>
           <textarea
             name="postContent"

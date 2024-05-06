@@ -29,7 +29,7 @@ export const SearchAction = ({
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         disabled={disabled}
-        className="relative w-full pl-4 pr-7 py-2 border rounded-xl bg-input-bg text-search-input-text border-search-input-border"
+        className="relative w-full pl-4 pr-7 py-2 rounded-xl bg-input-bg text-search-input-text border-search-input-border"
       />
       <button
         className={twMerge(

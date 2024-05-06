@@ -5,7 +5,6 @@ import ProfilePic from "../ProfilePic/ProfilePic";
 import { Record } from "@bonfida/spl-name-service";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { checkIsOwner } from "@/utils/owner";
 import Bio from "../Bio/Bio";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -40,7 +39,6 @@ const socialRecords = [
 
 const RecordsTable = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
-  const [isOwner, setIsOwner] = useState(false);
   const { publicKey, connected, signMessage, signTransaction } = useWallet();
   const { selectedDomain } = useContext(SelectedDomainContext);
   const currentDomain = selectedDomain || domain;
@@ -51,6 +49,8 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     connection,
     selectedDomain || domain
   );
+
+  const isOwner = owner === publicKey?.toBase58();
   const { theme } = useTheme();
   const { data: recordData, isLoading: recordsLoading } = useFetchRecords(
     connection,
@@ -60,15 +60,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   const navigateBack = () => {
     router.push(`/profile/${publicKey}`);
   };
-
-  useEffect(() => {
-    if (!connected) {
-      setIsOwner(false);
-    }
-    if (connected && checkIsOwner(owner, publicKey)) {
-      setIsOwner(true);
-    }
-  }, [connected, publicKey, owner]);
 
   return (
     <div className="w-full py-5 h-full">
@@ -143,6 +134,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                             key={record.record}
                             record={record}
                             domain={currentDomain}
+                            isOwner={isOwner}
                           />
                         ))}
                     </div>
@@ -160,6 +152,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               key={record.record}
                               record={record}
                               domain={currentDomain}
+                              isOwner={isOwner}
                             />
                           ))}
                     </div>
@@ -177,6 +170,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               key={record.record}
                               record={record}
                               domain={currentDomain}
+                              isOwner={isOwner}
                             />
                           ))}
                     </div>
