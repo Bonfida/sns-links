@@ -140,7 +140,9 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
             <div className="flex flex-col gap-3 w-full justify-center items-center">
               {!!userContactRecords?.length && (
                 <>
-                  <span className="text-primary-text">Contact</span>
+                  <span className="text-primary-text font-semibold text-[14px]">
+                    Contact
+                  </span>
                   {userContactRecords.map((record) => {
                     const contactRecord = contactRecords.find(
                       (contact) => contact.record === record.record
@@ -163,7 +165,9 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
 
               {!!userSocialRecords?.length && (
                 <>
-                  <span className="text-primary-text">Socials</span>
+                  <span className="text-primary-text font-semibold text-[14px]">
+                    Socials
+                  </span>
                   {userSocialRecords.map((record) => {
                     const socialRecord = socialRecords.find(
                       (social) => social.record === record.record
@@ -189,7 +193,9 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
               )}
               {!!userWalletRecords?.length && (
                 <>
-                  <span className="text-primary-text">Wallets</span>
+                  <span className="text-primary-text font-semibold text-[14px]">
+                    Wallets
+                  </span>
                   {userWalletRecords.map((record) => {
                     return (
                       <UserLinksListItem
