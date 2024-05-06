@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { useToastContext } from "@bonfida/components";
+import { GenericLoading, useToastContext } from "@bonfida/components";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { updateBio } from "../../../utils/update-record/update-bio";
 import UnwrapModal from "../Modals/UnwrapModal";
@@ -46,6 +46,8 @@ const Bio = ({ domain }: { domain: string }) => {
     if (!publicKey || !signAllTransactions) return;
     if (bioText == bio || bioText?.length === 0) {
       toast.error("Nothing to update");
+    } else if (bioText.length > 250) {
+      toast.error("Over the character limit");
     } else {
       await updateBio(
         connection,
@@ -140,7 +142,11 @@ const Bio = ({ domain }: { domain: string }) => {
         </>
       ) : (
         <div className="h-[33px]">
-          <span className="bg-inherit text-bio-text">{bioText}</span>
+          {!bioLoading ? (
+            <span className="bg-inherit text-bio-text">{bioText}</span>
+          ) : (
+            <GenericLoading className="w-full" />
+          )}
         </div>
       )}
     </form>

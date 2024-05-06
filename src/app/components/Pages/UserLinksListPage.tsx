@@ -3,7 +3,7 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { useFetchRecords } from "../../../hooks/useFetchRecords";
 import UserLinksListItem from "@/app/components/Buttons/UserLinksListItem";
 import Image from "next/image";
-import { GenericLoading } from "@bonfida/components";
+import { GenericLoading, SpinnerFida } from "@bonfida/components";
 import { NoLinksFoundNotice } from "../Notices/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
@@ -99,7 +99,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full">
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-3 max-w-full">
         <div className="flex flex-col">
           {recordsLoading ? (
             <GenericLoading
@@ -122,9 +122,9 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
         <h1 className="font-bold text-primary-text font-azeret text-2xl">
           {domain}.sol
         </h1>
-        <div className="flex flex-col items-center justify-center">
-          <span className="text-sm sm:text-base text-primary-text">Bio</span>
-          <span className="text-base sm:text-lg text-primary-text">
+        <div className="flex flex-col items-center justify-center max-w-full">
+          <span className="text-sm sm:text-base text-bio-text">Bio</span>
+          <span className="text-base sm:text-lg text-primary-text w-3/4 px-4 py-2 overflow-auto">
             {content}
           </span>
         </div>
@@ -132,15 +132,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
 
       {recordsLoading ? (
         <div className="mt-10">
-          {Array.from({ length: 10 }).map((_, idx) => (
-            <GenericLoading
-              className={twMerge(
-                "w-72 h-12 rounded-md my-2",
-                theme === "light" ? "bg-list-item-bg" : ""
-              )}
-              key={`loading-record-${idx}`}
-            />
-          ))}
+          <SpinnerFida variant={theme === "dark" ? "white" : "color"} />
         </div>
       ) : (
         <div className="flex flex-col mt-10 space-y-3">
