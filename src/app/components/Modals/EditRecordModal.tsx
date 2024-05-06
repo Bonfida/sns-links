@@ -60,12 +60,12 @@ const EditRecordModal = ({
     >
       <div>
         <div className="w-full flex justify-start">
-          <h2 className="text-sm text-[#F8EFF9CC] font-azeret font-semibold">
+          <h2 className="text-sm text-primary-text font-azeret font-semibold">
             {recordName.charAt(0).toUpperCase() + recordName.slice(1)}
           </h2>
         </div>
         <input
-          className="bg-[#FFFFFF12] text-primary-text h-[113px] sm:w-[552px] w-[331px] text-center border border-primary-border rounded-2xl"
+          className="bg-glass-bg text-primary-text h-[113px] sm:w-[552px] w-[331px] text-center border border-primary-border rounded-2xl"
           placeholder="Enter new record"
           onChange={(event) => {
             setRecordVal(event.target.value);
