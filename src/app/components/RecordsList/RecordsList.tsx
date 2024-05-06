@@ -12,6 +12,7 @@ import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { RecordListItem } from "./RecordListItem";
 import { SpinnerFida } from "@bonfida/components";
 import { useTheme } from "next-themes";
+import { useQueryClient } from "react-query";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -56,6 +57,8 @@ const RecordsTable = ({ domain }: { domain: string }) => {
     connection,
     domain
   );
+  const queryClient = useQueryClient();
+  const refreshRecords = queryClient.invalidateQueries(["records", domain]);
 
   const navigateBack = () => {
     router.push(`/profile/${publicKey}`);
@@ -135,6 +138,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                             record={record}
                             domain={currentDomain}
                             isOwner={isOwner}
+                            refresh={() => refreshRecords}
                           />
                         ))}
                     </div>
@@ -153,6 +157,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               record={record}
                               domain={currentDomain}
                               isOwner={isOwner}
+                              refresh={() => refreshRecords}
                             />
                           ))}
                     </div>
@@ -171,6 +176,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               record={record}
                               domain={currentDomain}
                               isOwner={isOwner}
+                              refresh={() => refreshRecords}
                             />
                           ))}
                     </div>

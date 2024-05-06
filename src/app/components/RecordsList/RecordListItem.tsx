@@ -12,10 +12,12 @@ export const RecordListItem = ({
   record,
   domain,
   isOwner,
+  refresh,
 }: {
   record: { record: string; content?: string | undefined };
   domain: string;
   isOwner: boolean;
+  refresh: () => Promise<void>;
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const { data: isToken } = useIsTokenized(domain);
@@ -63,6 +65,7 @@ export const RecordListItem = ({
                   domain={domain}
                   currentValue={record.content}
                   close={() => setModalVisible(false)}
+                  refresh={refresh}
                 />
               )}
             </ButtonModal>
@@ -70,7 +73,7 @@ export const RecordListItem = ({
         )}
       </div>
       {record.content && (
-        <div className="w-full border-t-white/25 border-t h-[39px] pt-2 py-[14px] pl-5 overflow-x-scroll">
+        <div className="w-full border-t-white/25 border-t h-[39px] pt-2 py-[14px] pl-5 ">
           <span
             className={twMerge(
               theme === "dark" ? "text-[#F8EFF9]/50" : "text-primary-text/90",

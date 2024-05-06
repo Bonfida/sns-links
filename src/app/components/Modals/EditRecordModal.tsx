@@ -6,16 +6,19 @@ import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { useQueryClient } from "react-query";
 
 const EditRecordModal = ({
   recordName,
   domain,
   currentValue,
+  refresh,
   close,
 }: {
   recordName: string;
   domain: string;
   currentValue: string | undefined;
+  refresh: () => Promise<void>;
   close: () => void;
 }) => {
   const [recordVal, setRecordVal] = useState("");
@@ -41,6 +44,7 @@ const EditRecordModal = ({
         isRoaSupported,
         sendRoaRequest,
       });
+      refresh();
       close();
     } catch (error) {
       if (error instanceof Error) {
