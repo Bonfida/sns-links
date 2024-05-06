@@ -131,11 +131,11 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
       </div>
 
       {recordsLoading ? (
-        <div className="mt-10">
+        <div className="mt-8">
           <SpinnerFida variant={theme === "dark" ? "white" : "color"} />
         </div>
       ) : (
-        <div className="flex flex-col mt-10 space-y-3">
+        <div className="flex flex-col mt-8 space-y-3">
           <div className="flex justify-center items-center flex-col">
             <div className="flex flex-col gap-3 w-full justify-center items-center">
               {!!userContactRecords?.length && (
