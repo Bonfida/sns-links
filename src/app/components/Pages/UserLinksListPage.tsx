@@ -99,7 +99,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
 
   return (
     <div className="flex flex-col items-center justify-start w-full h-full">
-      <div className="flex flex-col items-center gap-3 max-w-full">
+      <div className="flex flex-col items-center gap-3 w-full">
         <div className="flex flex-col">
           {recordsLoading ? (
             <GenericLoading
@@ -122,9 +122,9 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
         <h1 className="font-bold text-primary-text font-azeret text-2xl">
           {domain}.sol
         </h1>
-        <div className="flex flex-col items-center justify-center max-w-full">
+        <div className="flex flex-col items-center justify-center w-full">
           <span className="text-sm sm:text-base text-bio-text">Bio</span>
-          <span className="text-base sm:text-lg text-primary-text w-3/4 px-4 py-2 overflow-auto">
+          <span className="text-base sm:text-lg text-primary-text w-3/4 flex justify-center flex-wrap px-4 py-2 text-center">
             {content}
           </span>
         </div>

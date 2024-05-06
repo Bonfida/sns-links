@@ -63,93 +63,97 @@ const Bio = ({ domain }: { domain: string }) => {
   };
 
   return (
-    <form
-      method="post"
-      className="flex flex-col mt-6 overflow-y-auto no-scrollbar "
-    >
-      <div className="flex justify-between">
-        <span className="text-bio-placeholder-text text-sm">Bio</span>
-        <div className="flex gap-2">
-          {bioEditMode && isOwner && (
-            <>
-              <button
-                className="text-link text-sm"
-                type="button"
-                onClick={() => setBioEditMode(false)}
-              >
-                <Image
-                  src="/cancel/red-x.svg"
-                  height={15}
-                  width={15}
-                  alt="cancel"
-                />
-              </button>
-              <button onClick={handleSubmit}>
-                <Image
-                  src="/confirm/green-check.svg"
-                  width={19.51}
-                  height={14.25}
-                  alt="confirm"
-                />
-              </button>
-            </>
-          )}
+    <div className="flex flex-col mt-6 overflow-y-auto">
+      <div className="flex flex-col">
+        <div className="flex justify-between z-10 mb-2">
+          <span className="text-bio-placeholder-text text-sm">Bio</span>
+          <div className="flex gap-2">
+            {bioEditMode && isOwner && (
+              <>
+                <button
+                  className="text-link text-sm"
+                  type="button"
+                  onClick={() => setBioEditMode(false)}
+                >
+                  <Image
+                    src="/cancel/red-x.svg"
+                    height={15}
+                    width={15}
+                    alt="cancel"
+                  />
+                </button>
+                <button onClick={handleSubmit}>
+                  <Image
+                    src="/confirm/green-check.svg"
+                    width={19.51}
+                    height={14.25}
+                    alt="confirm"
+                  />
+                </button>
+              </>
+            )}
 
-          {!bioEditMode && isOwner && !isToken && (
-            <button
-              className="flex self-center text-link text-sm"
-              type="button"
-              onClick={(prev) => setBioEditMode(true)}
-            >
-              Edit
-            </button>
-          )}
-          {!bioEditMode && isOwner && isToken && (
-            <ButtonModal
-              buttonText="Edit"
-              buttonClass=" flex self-center text-link text-sm"
-              setVisible={setModalVisible}
-              visible={isModalVisible}
-            >
-              <UnwrapModal
-                domain={domain}
-                refresh={() => refreshIsToken}
-                close={() => setModalVisible(false)}
-              />
-            </ButtonModal>
-          )}
+            {!bioEditMode && isOwner && !isToken && (
+              <button
+                className="flex self-center text-link text-sm"
+                type="button"
+                onClick={(prev) => setBioEditMode(true)}
+              >
+                Edit
+              </button>
+            )}
+            {!bioEditMode && isOwner && isToken && (
+              <ButtonModal
+                buttonText="Edit"
+                buttonClass=" flex self-center text-link text-sm"
+                setVisible={setModalVisible}
+                visible={isModalVisible}
+              >
+                <UnwrapModal
+                  domain={domain}
+                  refresh={() => refreshIsToken}
+                  close={() => setModalVisible(false)}
+                />
+              </ButtonModal>
+            )}
+          </div>
         </div>
       </div>
 
-      {bioEditMode && isOwner ? (
-        <>
-          <textarea
-            name="postContent"
-            placeholder={bioPlaceholder}
-            value={bioText}
-            onChange={(e) => setBioText(e.target.value)}
-            rows={3}
-            cols={45}
-            className="rounded-2xl  py-2 px-3 bg-input-bg text-search-input-text border-primary-border"
-            readOnly={!isToken ? !bioEditMode : bioEditMode}
-            maxLength={250}
-          />
-          <div className="flex justify-between items-center">
-            <div className="text-sm text-bio-placeholder-text">{`${
-              bioText?.length || "0"
-            }/250 characters`}</div>
+      <form
+        method="post"
+        className="flex flex-col  overflow-y-auto no-scrollbar"
+      >
+        {bioEditMode && isOwner ? (
+          <>
+            <textarea
+              name="postContent"
+              placeholder={bioPlaceholder}
+              value={bioText}
+              onChange={(e) => setBioText(e.target.value)}
+              rows={3}
+              cols={45}
+              className="rounded-2xl  py-2 px-3 bg-input-bg text-search-input-text border-primary-border"
+              readOnly={!isToken ? !bioEditMode : bioEditMode}
+              maxLength={250}
+            />
+            <div className="flex justify-between items-center">
+              <div className="text-sm text-bio-placeholder-text">{`${
+                bioText?.length || "0"
+              }/250 characters`}</div>
+            </div>
+          </>
+        ) : (
+          <div className="mb-8">
+            {!bioLoading ? (
+              <span className="bg-inherit text-bio-text">{bioText}</span>
+            ) : (
+              <GenericLoading className="w-full" />
+            )}
           </div>
-        </>
-      ) : (
-        <div className="h-[33px]">
-          {!bioLoading ? (
-            <span className="bg-inherit text-bio-text">{bioText}</span>
-          ) : (
-            <GenericLoading className="w-full" />
-          )}
-        </div>
-      )}
-    </form>
+        )}
+      </form>
+    </div>
   );
 };
 
