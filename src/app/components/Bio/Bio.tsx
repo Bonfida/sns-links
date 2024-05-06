@@ -9,6 +9,7 @@ import { useQueryClient } from "react-query";
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
 import { useIsTokenized } from "@/hooks/useIsTokenized";
+import { useTheme } from "next-themes";
 
 const Bio = ({ domain }: { domain: string }) => {
   const { connection } = useConnection();
@@ -41,6 +42,8 @@ const Bio = ({ domain }: { domain: string }) => {
   const isOwner = owner === publicKey?.toBase58();
   const { data: isToken } = useIsTokenized(domain);
   const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
+
+  const { theme } = useTheme();
 
   const handleSubmit = async () => {
     if (!publicKey || !signAllTransactions) return;
@@ -84,7 +87,11 @@ const Bio = ({ domain }: { domain: string }) => {
                 </button>
                 <button onClick={handleSubmit}>
                   <Image
-                    src="/confirm/green-check.svg"
+                    src={
+                      theme === "dark"
+                        ? "/confirm/green-check.svg"
+                        : "/confirm/purple-check.svg"
+                    }
                     width={19.51}
                     height={14.25}
                     alt="confirm"
