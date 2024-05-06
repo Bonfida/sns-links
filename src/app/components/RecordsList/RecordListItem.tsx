@@ -26,7 +26,9 @@ export const RecordListItem = ({
     <div className="w-full flex flex-col bg-list-item-bg border-t-[1px] border-white/[24%] rounded-3xl ">
       <div className="flex justify-between w-full pt-2 pb-2 pl-5 pr-2 h-[65px]">
         <div className="space-x-2 flex justify-center items-center">
-          <span className="text-primary-text text-lg">{record.record}</span>
+          <span className="text-primary-text text-lg">
+            {record.record.charAt(0).toUpperCase() + record.record.slice(1)}
+          </span>
         </div>
         {isOwner && (
           <div className="flex gap-2 justify-center items-center">

@@ -82,7 +82,7 @@ const EditRecordModal = ({
         <div className="flex flex-col gap-3 sm:flex-row items-center justify-between w-full mt-6 ">
           <button
             style={{ backgroundImage: "var(--action-button-bg)" }}
-            className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px]  border-t text-action-button-text  border-t-primary-border active:border-t-0 font-bold text-base"
+            className="sm:w-[268px] w-[329px] h-[47px] rounded-[15px]  border-t text-action-button-text  border-t-primary-border active:border-t-0 font-bold text-base"
             onClick={() => {
               handleUpdateClick(
                 recordName as Record,
@@ -95,7 +95,7 @@ const EditRecordModal = ({
           </button>
           <button
             className={twMerge(
-              "sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-white bg-gradient-to-b from-glass-bg to-bg-primary-bg  border-t-top-border-highlight active:border-t-0 font-bold text-base",
+              "sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t text-white bg-gradient-to-b from-glass-bg to-bg-primary-bg  border-t-top-border-highlight active:border-t-0 font-bold text-base",
               theme === "dark"
                 ? "bg-gradient-to-b from-glass-bg to-bg-primary-bg"
                 : "bg-edit-button-bg"

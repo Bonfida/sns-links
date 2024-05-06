@@ -78,7 +78,7 @@ export const EditPicModal = ({
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px] border-t text-action-button-text border-t-top-border-highlight active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[15px] border-t text-action-button-text border-t-top-border-highlight active:border-t-0 font-bold"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -90,7 +90,7 @@ export const EditPicModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t border-t-top-border-highlight text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg border-t-priamry-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg border-t-priamry-border active:border-t-0 font-bold"
               onClick={() => {
                 close();
               }}

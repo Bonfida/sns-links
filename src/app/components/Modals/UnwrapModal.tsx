@@ -69,7 +69,7 @@ const UnwrapModal = ({
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[24px]  border-t text-action-button-text border-t-primary-border active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px] h-[47px] rounded-[15px]  border-t text-action-button-text border-t-primary-border active:border-t-0 font-bold"
               onClick={() => {
                 handleUnwrap();
               }}
@@ -78,7 +78,7 @@ const UnwrapModal = ({
             </button>
             <button
               className={twMerge(
-                "sm:w-[268px] w-[329px] h-[47px] rounded-[24px] border-t text-white bg-primary-bg border-t-top-border-highlight active:border-t-0 font-bold",
+                "sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t text-white bg-primary-bg border-t-top-border-highlight active:border-t-0 font-bold",
                 theme === "dark"
                   ? "bg-gradient-to-b from-glass-bg to-bg-primary-bg"
                   : "bg-edit-button-bg"
