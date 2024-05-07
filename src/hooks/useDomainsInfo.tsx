@@ -4,21 +4,18 @@ import { NameRegistryState } from "@bonfida/spl-name-service";
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 import { useMultipleAccountInfoWs } from "./useMultipleAccountInfoWs";
 
-// Assuming the derive function might return complex objects, define a result interface
 interface DeriveResult {
   isSub: boolean;
-  parent?: PublicKey; // Make 'parent' optional or '| undefined'
+  parent?: PublicKey;
   pubkey: PublicKey;
   hashed: Buffer;
-  isSubRecord?: boolean; // Include other properties as necessary
+  isSubRecord?: boolean;
 }
 
-// Callback to deserialize data for NameRegistryState
 const callBack = (info: AccountInfo<Buffer>) => {
   return NameRegistryState.deserialize(info.data);
 };
 
-// Function to fetch domain keys from the domain names
 const fetchDomainKeys = async (
   domains: string[] | undefined | null
 ): Promise<{ pubkey: PublicKey; domain: string }[]> => {
@@ -27,12 +24,11 @@ const fetchDomainKeys = async (
     domains.map((domain) => derive(domain))
   );
   return derivedResults.map((result, idx) => ({
-    pubkey: result.pubkey, // Extracting the PublicKey directly
+    pubkey: result.pubkey,
     domain: domains[idx],
   }));
 };
 
-// Hook to use domain information
 export const useDomainsInfo = (domains: string[] | undefined | null) => {
   const queryKey = ["domainsInfo", { domains }];
 

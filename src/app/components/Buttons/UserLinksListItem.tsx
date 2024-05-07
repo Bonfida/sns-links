@@ -19,14 +19,23 @@ const UserLinksListItem = ({
   interactionType?: string | "copy";
   link?: string;
 }) => {
+  // Connection
   const { connection } = useConnection();
+
+  // Misc.
   const [showCopyConfirmation, setShowCopyConfirmation] = useState(false);
+
+  // Theme
+  const { theme } = useTheme();
+
+  // Record verification
   const { data: ROA, isLoading: ROALoading } = useFetchVerifyROA(
     connection,
     domain,
     name as Record
   );
-  const { theme } = useTheme();
+
+  // Handlers
   const handleCopy = (value: string) => {
     navigator.clipboard.writeText(value).then(
       () => {

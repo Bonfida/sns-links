@@ -19,13 +19,19 @@ export const RecordListItem = ({
   domain: string;
   isOwner: boolean;
 }) => {
+  // Visibility
   const [isModalVisible, setModalVisible] = useState(false);
-  const { data: isToken } = useIsTokenized(domain);
-  const queryClient = useQueryClient();
-  const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
-  const { theme } = useTheme();
-  const deleteRecord = useUpdateRecord();
 
+  // Misc.
+  const queryClient = useQueryClient();
+  const { theme } = useTheme();
+
+  // Is NFT
+  const { data: isToken } = useIsTokenized(domain);
+  const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
+
+  //Handlers
+  const deleteRecord = useUpdateRecord();
   const handleDelete = async () => {
     try {
       await deleteRecord({

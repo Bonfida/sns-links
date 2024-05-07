@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useFetchDomains } from "@/hooks/useFetchDomains";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
-import NotConnectedModal from "../Modals/NotConnectedModal";
 import DomainList from "@/app/components/DomainList/DomainList";
 import DomainTableSkeleton from "../Skeletons/DomainListSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";

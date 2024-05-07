@@ -1,14 +1,10 @@
 import {
   verifyRightOfAssociation,
   Record,
-  GUARDIANS,
-  ETH_ROA_RECORDS,
   getRecordV2,
-  getRecordV2Key,
 } from "@bonfida/spl-name-service";
-import { Connection, PublicKey } from "@solana/web3.js";
+import { Connection } from "@solana/web3.js";
 import { useQuery, UseQueryResult } from "react-query";
-import { Record as SnsRecord } from "@bonfida/sns-records";
 
 export const useFetchVerifyROA = (
   connection: Connection,

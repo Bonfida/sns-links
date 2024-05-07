@@ -1,8 +1,10 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
+
 export const GoToProfileButton = () => {
   const router = useRouter();
   const { publicKey } = useWallet();
+
   const handleNavigation = () => {
     router.push(`/profile/${publicKey}`);
   };

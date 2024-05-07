@@ -2,7 +2,7 @@ import { Home } from "../components/Pages/Home";
 
 export default function MyApp() {
   return (
-    <main className="flex justify-center w-screen h-screen md:pt-12 bg-primary-bg">
+    <main className="bg-primary-bg w-screen h-screen flex justify-center">
       <Home />
     </main>
   );

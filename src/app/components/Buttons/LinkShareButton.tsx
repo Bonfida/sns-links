@@ -3,9 +3,11 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import Image from "next/image";
 
 const LinkShareButton = ({ domain }: { domain: string }) => {
+  // Misc.
   const { selectedDomain } = useContext(SelectedDomainContext);
   const [showCopyConfirmation, setShowCopyConfirmation] = useState(false);
 
+  // Handlers
   const handleShareClick = () => {
     navigator.clipboard
       .writeText(`localhost:3000/user/${selectedDomain || domain}`)

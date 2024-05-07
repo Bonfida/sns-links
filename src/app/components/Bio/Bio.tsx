@@ -12,10 +12,17 @@ import { useIsTokenized } from "@/hooks/useIsTokenized";
 import { useTheme } from "next-themes";
 
 const Bio = ({ domain }: { domain: string }) => {
+  // Wallet and conection
   const { connection } = useConnection();
-  const { toast } = useToastContext();
   const { publicKey, signAllTransactions, signMessage, connected } =
     useWallet();
+
+  // Misc.
+  const { toast } = useToastContext();
+  const queryClient = useQueryClient();
+  const { theme } = useTheme();
+
+  //Bio
   const [bioEditMode, setBioEditMode] = useState(false);
   const { data: bio, isLoading: bioLoading } = useFetchBio(domain);
   const [bioText, setBioText] = useState("");
@@ -32,19 +39,16 @@ const Bio = ({ domain }: { domain: string }) => {
     ? "Loading bio..."
     : "Add a bio...";
   const [isModalVisible, setModalVisible] = useState(false);
-  const queryClient = useQueryClient();
 
-  const { data: owner, isLoading: ownerLoading } = useFetchOwner(
-    connection,
-    domain
-  );
-
+  // Ownership
+  const { data: owner } = useFetchOwner(connection, domain);
   const isOwner = owner === publicKey?.toBase58();
+
+  // Is NFT
   const { data: isToken } = useIsTokenized(domain);
   const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
 
-  const { theme } = useTheme();
-
+  //Handlers
   const handleSubmit = async () => {
     if (!publicKey || !signAllTransactions) return;
     if (bioText == bio || bioText?.length === 0) {
@@ -152,11 +156,7 @@ const Bio = ({ domain }: { domain: string }) => {
           </>
         ) : (
           <div className="mb-8 h-[28px]">
-            {!bioLoading ? (
-              <span className="bg-inherit text-bio-text">{bioText}</span>
-            ) : (
-              <GenericLoading className="w-full" />
-            )}
+            <span className="bg-inherit text-bio-text">{bioText}</span>
           </div>
         )}
       </form>

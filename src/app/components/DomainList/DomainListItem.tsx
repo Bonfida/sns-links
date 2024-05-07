@@ -15,14 +15,19 @@ import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
 
 export const DomainListItem = ({ domain }: { domain: string }) => {
+  // Wallet and connection
   const { publicKey, signAllTransactions } = useWallet();
   const { connection } = useConnection();
+
+  // Theme
   const { theme } = useTheme();
-  const router = useRouter();
-  const { setSelectedDomain, selectedDomain } = useContext(
-    SelectedDomainContext
-  );
+
+  // Misc.
   const { toast } = useToastContext();
+  const router = useRouter();
+
+  //Domain
+  const { setSelectedDomain } = useContext(SelectedDomainContext);
   const [selectedFavorite, setSelectedFavorite] = useState(false);
   const { mutate: mutateFavoriteDomain, data: favoriteDomain } =
     useFavouriteDomain(publicKey?.toBase58(), {
@@ -40,6 +45,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       ? "/star/outline-star-white.svg"
       : "/star/outline-star-black.svg";
 
+  //Handlers
   const handleEditClick = () => {
     setSelectedDomain(domain);
 

@@ -26,6 +26,8 @@ export const WalletConnect = ({
   //Connection and Wallet
   const { connected, publicKey, connecting, disconnect } = useWallet();
   const { connection } = useConnection();
+
+  // Theme
   const { theme } = useTheme();
   const themeDescription = theme === "dark" ? "Dark mode" : "Light mode";
 

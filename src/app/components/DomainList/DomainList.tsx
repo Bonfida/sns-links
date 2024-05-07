@@ -7,6 +7,7 @@ import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { SearchAction } from "../Search/SearchAction";
 
 const DomainList = () => {
+  // Wallet and connection
   const { publicKey } = useWallet();
   const { connection } = useConnection();
 
