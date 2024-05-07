@@ -8,6 +8,28 @@ import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
 
+const recordPlaceholderTextMap = new Map<Record, string>([
+  [Record.ARWV, "0x..."],
+  [Record.SOL, "SOL..."],
+  [Record.ETH, "0x..."],
+  [Record.BTC, "bc1..."],
+  [Record.LTC, "3CD..."],
+  [Record.DOGE, "0x..."],
+  [Record.Email, "user@..."],
+  [Record.Url, "https://..."],
+  [Record.Discord, "username..."],
+  [Record.Github, "https://github.com/..."],
+  [Record.Reddit, "https://reddit.com/user/..."],
+  [Record.Twitter, "https://x.com/..."],
+  [Record.Telegram, "username..."],
+  [Record.Pic, "https://..."],
+  [Record.SHDW, "SHDW..."],
+  [Record.POINT, "0x..."],
+  [Record.BSC, "0x..."],
+  [Record.Injective, "0x..."],
+  [Record.Backpack, "username..."],
+]);
+
 const EditRecordModal = ({
   recordName,
   domain,
@@ -70,7 +92,7 @@ const EditRecordModal = ({
         </div>
         <input
           className="bg-glass-bg text-primary-text h-[113px] sm:w-[552px] w-[331px] text-center border border-primary-border rounded-2xl"
-          placeholder="Enter new record"
+          placeholder={recordPlaceholderTextMap.get(recordName)}
           onChange={(event) => {
             setRecordVal(event.target.value);
           }}
