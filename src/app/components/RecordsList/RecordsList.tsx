@@ -13,6 +13,7 @@ import { RecordListItem } from "./RecordListItem";
 import { SpinnerFida } from "@bonfida/components";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
+import { useRecordsV2 } from "@/hooks/useRecordsV2";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -53,10 +54,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
 
   const isOwner = owner === publicKey?.toBase58();
   const { theme } = useTheme();
-  const { data: recordData, isLoading: recordsLoading } = useFetchRecords(
-    connection,
-    domain
-  );
+  const { data: recordData, loading: recordsLoading } = useRecordsV2(domain);
   const queryClient = useQueryClient();
 
   const navigateBack = () => {

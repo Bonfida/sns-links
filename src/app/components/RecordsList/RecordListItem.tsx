@@ -14,6 +14,11 @@ import { useUpdateROA } from "@/hooks/useUpdateROA";
 import { SpinnerFida } from "@bonfida/components";
 import { ModalWrapper } from "../Modals/ModalWrapper";
 import { VerifyEvmRecordsV2 } from "../Modals/VerifyEVM/VerifyEVMRecord";
+import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
+import { useConnection } from "@solana/wallet-adapter-react";
+import Badge from "../Tooltip/Tooltip";
+import { Result } from "@/hooks/useRecordsV2";
+import { getRecordValue } from "@/utils/get-record-value";
 
 const verifiableRecords = [
   Record.SOL,
@@ -35,10 +40,23 @@ export const RecordListItem = ({
   domain,
   isOwner,
 }: {
-  record: { record: Record; content?: string | undefined };
+  record: Result;
   domain: string;
   isOwner: boolean;
 }) => {
+  // Wallet and connection
+  const { connection } = useConnection();
+
+  // Record data
+  const {
+    record: recordName,
+    canBeVerifiedBy,
+    isSignInvalid,
+    isSigned,
+    isVerified,
+  } = record;
+  const recordContent = getRecordValue(record);
+
   // Visibility
   const [isModalVisible, setModalVisible] = useState(false);
   const [evmVerify, setEvmVerify] = useState<EvmVerifyState>({
@@ -60,9 +78,9 @@ export const RecordListItem = ({
     try {
       await deleteRecord({
         domain,
-        recordName: record.record,
+        recordName: recordName,
         recordValue: "",
-        currentValue: record.content,
+        currentValue: recordContent,
       });
     } catch (err) {
       console.log("Error: ", err);
@@ -73,11 +91,11 @@ export const RecordListItem = ({
 
   const updateROA = useUpdateROA();
   const handleRoa = async () => {
-    if (EVM_RECORDS.includes(record.record)) {
+    if (EVM_RECORDS.includes(recordName)) {
       return setEvmVerify((prev) => ({
         visible: true,
-        content: record.content,
-        record: record.record,
+        content: recordContent,
+        record: recordName,
       }));
     }
 
@@ -97,10 +115,17 @@ export const RecordListItem = ({
           <span className="text-primary-text text-lg">
             {record.record.charAt(0).toUpperCase() + record.record.slice(1)}
           </span>
+          {verifiableRecords.includes(record.record) && isVerified && (
+            <Badge
+              tooltipContent={`Ownership is verified`}
+              imgSrc="/verifications/verified-badge.svg"
+              sizeClass="w-[20px]"
+            />
+          )}
         </div>
         {isOwner && (
           <div className="flex gap-2 justify-center items-center">
-            {record.content && verifiableRecords.includes(record.record) && (
+            {recordContent && verifiableRecords.includes(record.record) && (
               <button
                 className="border-white/10 bg-[#13122B]/90 border-[1px] rounded-lg px-4 py-2 text-xs text-white ml-2"
                 type="button"
@@ -145,7 +170,7 @@ export const RecordListItem = ({
                 <EditRecordModal
                   recordName={record.record}
                   domain={domain}
-                  currentValue={record.content}
+                  currentValue={recordContent}
                   close={() => setModalVisible(false)}
                 />
               )}
@@ -153,7 +178,7 @@ export const RecordListItem = ({
           </div>
         )}
       </div>
-      {record.content && (
+      {recordContent && (
         <div className="w-full border-t-white/25 border-t h-[39px] pt-2 py-[14px] pl-5 pr-[26px] flex justify-between">
           <span
             className={twMerge(
@@ -161,7 +186,7 @@ export const RecordListItem = ({
               "text-base font-azeret"
             )}
           >
-            {record.content}
+            {recordContent}
           </span>
           <button onClick={handleDelete}>
             <Image
