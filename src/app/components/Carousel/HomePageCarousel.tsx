@@ -4,7 +4,7 @@ import Image from "next/image";
 const carouselItemDescriptions = [
   {
     title: "Brand",
-    description: "Your on chain identity",
+    description: "Your on chain identity under one roof",
     darkImage: "/bonfida/bonfida-green.svg",
     lightImage: "/bonfida/bonfida-purple.svg",
   },
@@ -16,19 +16,19 @@ const carouselItemDescriptions = [
   },
   {
     title: "Verify",
-    description: "Safety with verified links",
+    description: "Peace of mind with verified links",
     darkImage: "/shield/shield-green.svg",
     lightImage: "/shield/shield-purple.svg",
   },
   {
     title: "Standout",
-    description: "Standout from the crowd",
+    description: "Standout from the crowd with profile customization",
     darkImage: "/megaphone/megaphone-green.svg",
     lightImage: "/megaphone/megaphone-purple.svg",
   },
   {
     title: "Integrate",
-    description: "Easily integrate link share",
+    description: "One link, endless possibilities",
     darkImage: "/connect/connect-green.svg",
     lightImage: "/connect/connect-purple.svg",
   },
