@@ -1,4 +1,10 @@
-import { useContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -14,7 +20,15 @@ import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
 
-export const DomainListItem = ({ domain }: { domain: string }) => {
+export const DomainListItem = ({
+  domain,
+  removePreviousFav,
+  setRemovePreviousFav,
+}: {
+  domain: string;
+  removePreviousFav: boolean;
+  setRemovePreviousFav: Dispatch<SetStateAction<boolean>>;
+}) => {
   // Wallet and connection
   const { publicKey, signAllTransactions } = useWallet();
   const { connection } = useConnection();
@@ -35,6 +49,8 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
     });
   const isFavorite = domain === favoriteDomain;
 
+  const [shouldStarIconBeFilled, setShouldStarIconBeFilled] = useState(false);
+
   const favoriteStarIcon =
     theme === "dark"
       ? "/star/solid-star-green.svg"
@@ -53,6 +69,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
   };
 
   const handleFavoriteUpdate = async () => {
+    setRemovePreviousFav(true);
     setSelectedFavorite(true);
     if (!publicKey || !signAllTransactions || !domain) return;
 
@@ -77,6 +94,8 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       }
     } catch (err) {
       setSelectedFavorite(false);
+      setRemovePreviousFav(false);
+      setShouldStarIconBeFilled(false);
       toast.error();
       console.log(err);
     } finally {
@@ -84,6 +103,18 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
       toast.close();
     }
   };
+
+  useEffect(() => {
+    if (isFavorite) {
+      if (removePreviousFav) {
+        setShouldStarIconBeFilled(false);
+      } else {
+        setShouldStarIconBeFilled(true);
+      }
+    } else if (selectedFavorite) {
+      setShouldStarIconBeFilled(true);
+    }
+  }, [isFavorite, shouldStarIconBeFilled, removePreviousFav, selectedFavorite]);
   return (
     <div
       style={{
@@ -104,7 +135,7 @@ export const DomainListItem = ({ domain }: { domain: string }) => {
             }}
           >
             <Image
-              src={selectedFavorite || isFavorite ? favoriteStarIcon : starIcon}
+              src={shouldStarIconBeFilled ? favoriteStarIcon : starIcon}
               alt="favorite"
               width={24}
               height={24}

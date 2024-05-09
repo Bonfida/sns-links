@@ -55,7 +55,6 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   const isOwner = owner === publicKey?.toBase58();
   const { theme } = useTheme();
   const { data: recordData, loading: recordsLoading } = useRecordsV2(domain);
-  const queryClient = useQueryClient();
 
   const navigateBack = () => {
     router.push(`/profile/${publicKey}`);

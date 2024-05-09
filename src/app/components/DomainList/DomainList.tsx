@@ -21,6 +21,7 @@ const DomainList = () => {
     manual: true,
   });
 
+  const [removePreviousFav, setRemovePreviousFav] = useState(false);
   const sortedDomains = useMemo(() => {
     if (!domainsOwned) return [];
 
@@ -61,7 +62,14 @@ const DomainList = () => {
       {!domainsLoading && (
         <div className="overflow-y-auto md:w-[800px] sm:w-[450px] w-screen px-3 sm:px-0 space-y-3 max-h-[70vh]">
           {filteredDomains?.map((domain) => {
-            return <DomainListItem domain={domain} key={domain} />;
+            return (
+              <DomainListItem
+                domain={domain}
+                key={domain}
+                removePreviousFav={removePreviousFav}
+                setRemovePreviousFav={setRemovePreviousFav}
+              />
+            );
           })}
         </div>
       )}
