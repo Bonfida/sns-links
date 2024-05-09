@@ -16,11 +16,9 @@ import {
   VersionedTransaction,
 } from "@solana/web3.js";
 import { formatRecordValue } from "@/utils/update-record/format-record-value";
-import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
+import { TransactionType, makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { checkAccountExists } from "@bonfida/hooks";
 import { simpleValidation } from "./simple-record-validation";
-
-type TransactionType = Transaction | VersionedTransaction;
 
 export const updateRecordHanlder = async ({
   connection,

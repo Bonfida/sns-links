@@ -19,7 +19,7 @@ export const LOOKUP_TABLE = new PublicKey(
   "4j2dBsgjSGJGYSGy7PaZn8Xr9zH2EFqXjMjkpCh1DYEU"
 );
 
-type TransactionType = Transaction | VersionedTransaction;
+export type TransactionType = Transaction | VersionedTransaction;
 
 export type makeTxParams = {
   connection: Connection;

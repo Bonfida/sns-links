@@ -13,6 +13,7 @@
     "@bonfida/hooks": "0.2.1",
     "@bonfida/name-offers": "^0.2.2",
     "@bonfida/name-tokenizer": "0.0.12",
+    "@bonfida/sns-emitter": "^0.2.1",
     "@bonfida/sns-react": "^2.0.1",
     "@bonfida/sns-records": "^0.0.1-alpha.8",
     "@bonfida/sns-widget": "^0.0.5",

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
-import { use, useState } from "react";
+import { useState } from "react";
 import EditRecordModal from "../Modals/EditRecordModal";
 import { useIsTokenized } from "@/hooks/useIsTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
@@ -9,6 +9,26 @@ import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { Record } from "@bonfida/spl-name-service";
+import { EVM_RECORDS } from "@/utils/update-roa";
+import { useUpdateROA } from "@/hooks/useUpdateROA";
+import { SpinnerFida } from "@bonfida/components";
+import { ModalWrapper } from "../Modals/ModalWrapper";
+import { VerifyEvmRecordsV2 } from "../Modals/VerifyEVM/VerifyEVMRecord";
+
+const verifiableRecords = [
+  Record.SOL,
+  Record.CNAME,
+  Record.ETH,
+  Record.BSC,
+  Record.Injective,
+  Record.Url,
+];
+
+type EvmVerifyState = {
+  visible: boolean;
+  record?: Record;
+  content?: string;
+};
 
 export const RecordListItem = ({
   record,
@@ -21,6 +41,10 @@ export const RecordListItem = ({
 }) => {
   // Visibility
   const [isModalVisible, setModalVisible] = useState(false);
+  const [evmVerify, setEvmVerify] = useState<EvmVerifyState>({
+    visible: false,
+  });
+  const [isVerificationLoading, setIsVerificationLoading] = useState(false);
 
   // Misc.
   const queryClient = useQueryClient();
@@ -41,7 +65,26 @@ export const RecordListItem = ({
         currentValue: record.content,
       });
     } catch (err) {
-      console.log("err", err);
+      console.log("Error: ", err);
+    } finally {
+      await queryClient.invalidateQueries(["records", domain]);
+    }
+  };
+
+  const updateROA = useUpdateROA();
+  const handleRoa = async () => {
+    if (EVM_RECORDS.includes(record.record)) {
+      return setEvmVerify((prev) => ({
+        visible: true,
+        content: record.content,
+        record: record.record,
+      }));
+    }
+
+    try {
+      await updateROA({ domain, record: record.record });
+    } catch (err) {
+      console.log("Error: ", err);
     } finally {
       await queryClient.invalidateQueries(["records", domain]);
     }
@@ -57,6 +100,22 @@ export const RecordListItem = ({
         </div>
         {isOwner && (
           <div className="flex gap-2 justify-center items-center">
+            {record.content && verifiableRecords.includes(record.record) && (
+              <button
+                className="border-white/10 bg-[#13122B]/90 border-[1px] rounded-lg px-4 py-2 text-xs text-white ml-2"
+                type="button"
+                onClick={handleRoa}
+              >
+                {isVerificationLoading ? (
+                  <SpinnerFida
+                    variant={theme === "dark" ? "white" : "color"}
+                    className="h-[18px]"
+                  />
+                ) : (
+                  "Verify"
+                )}
+              </button>
+            )}
             <ButtonModal
               buttonClass={twMerge(
                 "text-sm w-[50px] px-1 py-3 rounded-[16px] flex items-center justify-center border-t border-t-top-border-highlight active:border-t-0",
@@ -117,6 +176,19 @@ export const RecordListItem = ({
             />
           </button>
         </div>
+      )}
+      {evmVerify.record && evmVerify.content && (
+        <ModalWrapper
+          visible={evmVerify.visible}
+          setVisible={() => setEvmVerify({ visible: false })}
+        >
+          <VerifyEvmRecordsV2
+            domain={domain}
+            record={evmVerify.record}
+            close={() => setEvmVerify({ visible: false })}
+            recordContent={evmVerify.content}
+          />
+        </ModalWrapper>
       )}
     </div>
   );
