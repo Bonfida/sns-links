@@ -16,7 +16,7 @@ const carouselItemDescriptions = [
   },
   {
     title: "Verify",
-    description: "Peace of mind with verified links",
+    description: "Safety with verified links",
     darkImage: "/shield/shield-green.svg",
     lightImage: "/shield/shield-purple.svg",
   },
@@ -63,10 +63,20 @@ const HomePageCarouseltem = ({
   image: string;
 }) => {
   return (
-    <div className="flex flex-col justify-center items-start w-[235px] border border-primary-border p-5 gap-3 rounded-2xl bg-carousel-item-bg">
-      <Image src={image} width={56.34} height={64} alt="" />
-      <span className="text-2xl text-primary-text font-semibold">{title}</span>
-      <p className="text-base text-primary-text font-medium">{description}</p>
+    <div className="flex flex-col justify-center items-start xl:w-[235px] lg:w-[200px] w-[120px] md:w-[145px] border border-primary-border p-5 gap-3 rounded-2xl bg-carousel-item-bg">
+      <Image
+        src={image}
+        width={56.34}
+        height={64}
+        alt=""
+        className="md:w-[56.34px] md:h-[64px] w-[25px] h-[32px]"
+      />
+      <span className="md:text-2xl text-xl text-primary-text font-semibold">
+        {title}
+      </span>
+      <p className="md:text-base text-sm text-primary-text font-medium">
+        {description}
+      </p>
     </div>
   );
 };

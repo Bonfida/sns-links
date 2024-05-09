@@ -12,9 +12,14 @@ export const Home = () => {
       <div className="flex w-[1224px]">
         <div className="sm:w-1/2 space-y-8 z-10 w-full">
           <div className="sm:w-[600px] w-[351px]">
-            <span className="font-azeret font-semibold sm:text-[104px] text-[64px] text-primary-text leading-none">
+            <span className="font-azeret font-semibold md:text-[104px] text-[64px] text-primary-text leading-none hidden md:inline-block">
               Your Brand On Chain
             </span>
+            <div className="flex flex-col font-azeret font-semibold md:text-[104px] text-[64px] text-primary-text leading-none md:hidden">
+              <span>Your</span>
+              <span>Brand</span>
+              <span>On Chain</span>
+            </div>
             <p className="font-medium text-base font-azeret text-primary-text sm:w-[505px] w-full">
               Upload all of your platform links using SNS and share them easily
               with friends. Use your .sol domain to build brands and connections
@@ -27,13 +32,13 @@ export const Home = () => {
             <WalletConnect green={true} width={258} />
           )}
         </div>
-        <div className="absolute inset-0 flex justify-center items-center -z-1 sm:mt-0 mb-[80px]">
+        <div className="absolute flex justify-center items-center w-[190px] h-[135px] sm:w-[220px] sm:h-[156px] lg:w-[365px] lg:h-[260px] ml-40 lg:ml-[700px] -mt-12 lg:mt-[247px] sm:ml-96 sm:mt-32 md:ml-[550px] md:mt-40 md:w-[240px] md:h-[171px] xl:w-[380px] xl:h-[270px]">
           <Image
-            src="/preview/phone-preview.svg"
+            src="/preview/phone-preview.png"
             width={1440}
             height={1024}
             alt="preview"
-            className=" w-[766px] h-[418px] md:w-[1440px] md:h-[895px] md:top-1/2 md:translate-y-[10%]"
+            className=""
           />
         </div>
       </div>
