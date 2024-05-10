@@ -32,7 +32,7 @@ export const Home = () => {
             <WalletConnect green={true} width={258} />
           )}
         </div>
-        <div className="absolute flex justify-center items-center w-[190px] h-[135px] sm:w-[220px] lg:w-[365px] lg:h-[260px] ml-40 lg:ml-[700px] lg:mt-[247px] sm:ml-96 sm:mt-32 md:ml-[525px] md:mt-40 md:w-[240px] xl:w-[410px] xl:mt-[295px]">
+        <div className="absolute flex justify-center items-center w-[190px] h-[135px] sm:w-[220px] lg:w-[365px] lg:h-[260px] ml-40 lg:ml-[600px] lg:mt-[247px] sm:ml-96 sm:mt-32 md:ml-[525px] xl:ml-[700px] md:mt-40 md:w-[240px] xl:w-[370px] xl:mt-[250px]">
           <Image
             src="/preview/phone-preview.png"
             width={1440}
@@ -42,7 +42,7 @@ export const Home = () => {
           />
         </div>
       </div>
-      <div className="w-screen mt-32 md:mt-20 xl:mt-[130px] z-50 hidden sm:inline-block">
+      <div className="w-screen mt-32 md:mt-20 xl:mt-[78px] lg:mt-[72px] z-50 hidden sm:inline-block">
         <HomePageCarousel />
       </div>
     </div>
