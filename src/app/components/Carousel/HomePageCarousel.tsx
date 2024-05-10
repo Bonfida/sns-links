@@ -74,7 +74,7 @@ const HomePageCarouseltem = ({
       <span className="md:text-2xl text-xl text-primary-text font-semibold">
         {title}
       </span>
-      <p className="md:text-base text-sm text-primary-text font-medium">
+      <p className="md:text-base text-sm text-primary-text font-medium  sm:h-[100px] lg:h-[72px] xl:h-12">
         {description}
       </p>
     </div>
