@@ -172,11 +172,9 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
                     const socialRecord = socialRecords.find(
                       (social) => social.record === record.record
                     );
-                    if (!socialRecord || socialRecord.urlPrefix === undefined)
-                      return null;
 
                     const finalUrl =
-                      socialRecord.urlPrefix + (record.content || "");
+                      socialRecord?.urlPrefix + (record.content || "");
 
                     return (
                       <UserLinksListItem
@@ -184,7 +182,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
                         name={record.record}
                         value={finalUrl}
                         domain={domain}
-                        interactionType={socialRecord.interactionType}
+                        interactionType={socialRecord?.interactionType}
                         link={finalUrl}
                       />
                     );
