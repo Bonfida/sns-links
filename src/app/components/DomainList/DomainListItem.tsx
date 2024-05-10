@@ -19,6 +19,7 @@ import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { useQueryClient } from "react-query";
 
 export const DomainListItem = ({
   domain,
@@ -43,11 +44,14 @@ export const DomainListItem = ({
   //Domain
   const { setSelectedDomain } = useContext(SelectedDomainContext);
   const [selectedFavorite, setSelectedFavorite] = useState(false);
-  const { mutate: mutateFavoriteDomain, data: favoriteDomain } =
+
+  const { data: favoriteDomain, mutate: mutateFavoriteDomain } =
     useFavouriteDomain(publicKey?.toBase58(), {
       manual: true,
     });
+
   const isFavorite = domain === favoriteDomain;
+  const queryClient = useQueryClient();
 
   const [shouldStarIconBeFilled, setShouldStarIconBeFilled] = useState(false);
 
@@ -93,14 +97,15 @@ export const DomainListItem = ({
         toast.success("all");
       }
     } catch (err) {
-      setSelectedFavorite(false);
-      setRemovePreviousFav(false);
       setShouldStarIconBeFilled(false);
       toast.error();
       console.log(err);
     } finally {
+      setSelectedFavorite(false);
+      setRemovePreviousFav(false);
       await sleep(1_000);
       toast.close();
+      await queryClient.invalidateQueries(["Domains", publicKey]);
     }
   };
 
@@ -113,6 +118,8 @@ export const DomainListItem = ({
       }
     } else if (selectedFavorite) {
       setShouldStarIconBeFilled(true);
+    } else {
+      setShouldStarIconBeFilled(false);
     }
   }, [isFavorite, shouldStarIconBeFilled, removePreviousFav, selectedFavorite]);
   return (

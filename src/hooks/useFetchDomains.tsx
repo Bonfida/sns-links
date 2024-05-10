@@ -43,7 +43,7 @@ export const useFetchDomains = (
   };
 
   return useQuery<string[], unknown>({
-    queryKey: ["tokenizedDomains", owner],
+    queryKey: ["Domains", owner],
     queryFn: fetchDomains,
   });
 };
