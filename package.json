@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@bonfida/components": "1.1.4",
+    "@bonfida/components": "1.2.0",
     "@bonfida/hooks": "0.2.1",
     "@bonfida/name-offers": "^0.2.2",
     "@bonfida/name-tokenizer": "0.0.12",

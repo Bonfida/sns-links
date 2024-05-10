@@ -9,6 +9,8 @@ import DomainTableSkeleton from "../Skeletons/DomainListSkeleton";
 import ProfileOverviewSkeleton from "../Skeletons/ProfileOverviewSkeleton";
 import { useFavouriteDomain } from "@/hooks/useFetchFavoriteDomain";
 import { NoDomainsFound } from "../Notices/NoDomainsFound";
+import { useTheme } from "next-themes";
+import { useToastContext } from "@bonfida/components";
 
 export const metadata = {
   title: "Profile Page",
@@ -26,6 +28,8 @@ export const DomainListPage = () => {
     publicKey?.toBase58()!
   );
 
+  const { theme } = useTheme();
+  const { setLight } = useToastContext();
   const loading = domainsLoading || favoriteLoading;
 
   useEffect(() => {
@@ -36,6 +40,15 @@ export const DomainListPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey]);
+
+  useEffect(() => {
+    if (theme === "light") {
+      setLight(true);
+    } else {
+      setLight(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme]);
 
   return (
     <div className="flex flex-col w-full h-full items-center mt-[50px]">
