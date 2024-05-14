@@ -8,7 +8,7 @@ export const metadata = {
 
 const LinkShareView = ({ params }: { params: LinkShareParams }) => {
   return (
-    <div className="w-screen h-screen bg-primary-bg mt-[50px]">
+    <div className="w-screen min-h-screen bg-primary-bg mt-[50px]">
       <UserLinksListPage params={params} />
     </div>
   );

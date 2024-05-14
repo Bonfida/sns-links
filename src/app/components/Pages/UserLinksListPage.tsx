@@ -207,11 +207,12 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
                 </>
               )}
             </div>
+            <div className="flex justify-center my-10">
+              <CreateYourOwnButton />
+            </div>
           </div>
         </div>
       )}
-      <div className="flex-grow mt-10"></div>
-      <CreateYourOwnButton />
     </div>
   );
 };
