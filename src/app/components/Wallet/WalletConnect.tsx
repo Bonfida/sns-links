@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import ProfilePic from "../ProfilePic/ProfilePic";
 import { twMerge } from "tailwind-merge";
 import { usePrevious } from "ahooks";
-import { Popover } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useState, useEffect } from "react";
 import { useModalContext } from "../../../hooks/useModalContext";
@@ -71,10 +71,11 @@ export const WalletConnect = ({
 
   if (connected && publicKey) {
     return (
-      <Popover>
-        <Popover.Button
+      <Menu as="div">
+        <Menu.Button
           // @ts-ignore
           ref={setReferenceElement}
+          as="div"
         >
           <div
             className={twMerge(
@@ -122,15 +123,15 @@ export const WalletConnect = ({
               </span>
             )}
           </div>
-        </Popover.Button>
+        </Menu.Button>
 
         {/* Dropdown */}
-        <Popover.Panel
+        <Menu.Items
           // @ts-ignore
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}
-          className="absolute w-full sm:w-[253px] z-60"
+          className="absolute w-full sm:w-[253px] z-20"
         >
           <div
             className={twMerge(
@@ -198,8 +199,8 @@ export const WalletConnect = ({
               </div>
             </div>
           </div>
-        </Popover.Panel>
-      </Popover>
+        </Menu.Items>
+      </Menu>
     );
   }
 
