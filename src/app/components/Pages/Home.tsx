@@ -44,7 +44,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[10px] 2xl:bottom-[140px] xl:bottom-[60px] md:bottom-[25px]">
+      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[10px] 2xl:bottom-[100px] xl:bottom-[40px] md:bottom-[25px]">
         <HomePageCarousel />
       </div>
     </div>
