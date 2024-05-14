@@ -4,14 +4,16 @@ import { WalletConnect } from "../Wallet/WalletConnect";
 import { HomePageCarousel } from "../Carousel/HomePageCarousel";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { GoToProfileButton } from "../Buttons/GoToProfileButton";
+import Spline from "@splinetool/react-spline";
 
 export const Home = () => {
   const { connected } = useWallet();
+
   return (
-    <div className="flex-col flex gap-3 w-[1224px] overflow-hidden px-3 sm:px-0 mt-36 sm:mt-[50px]">
+    <div className="flex-col flex gap-3  w-[1224px] overflow-hidden px-3 sm:px-0 sm:mt-[50px] relative">
       <div className="flex w-[1224px]">
-        <div className="sm:w-1/2 space-y-8 z-10 w-full">
-          <div className="sm:w-[600px] w-[351px]">
+        <div className="w-1/2 space-y-8 z-10">
+          <div className="sm:w-full w-[351px] mt-32 sm:mt-0">
             <span className="font-azeret font-semibold md:text-[104px] text-[64px] text-primary-text leading-none hidden lg:inline-block">
               Your Brand On Chain
             </span>
@@ -32,17 +34,17 @@ export const Home = () => {
             <WalletConnect green={true} width={258} />
           )}
         </div>
-        <div className="absolute flex justify-center items-center w-[190px] h-[135px] sm:w-[220px] lg:w-[365px] lg:h-[260px] ml-40 lg:ml-[600px] lg:mt-[247px] sm:ml-96 sm:mt-32 md:ml-[525px] xl:ml-[700px] md:mt-40 md:w-[240px] xl:w-[370px] xl:mt-[250px]">
-          <Image
-            src="/preview/phone-preview.png"
-            width={1440}
-            height={1024}
-            alt="preview"
-            className=""
-          />
+        <div className="absolute md:w-1/2 sm:w-full -right-32 lg:top-0 md:-top-16 sm:-top-14 bottom-12 sm:-right-36 md:-right-0">
+          <div className=" transform scale-50 sm:scale-75  2xl:scale-100 lg:scale-90 h-[800px]">
+            <Spline
+              scene="https://prod.spline.design/aH4Q8Ih59onnSDwf/scene.splinecode"
+              className=""
+              onLoad={(e) => e.setZoom(0.75)}
+            />
+          </div>
         </div>
       </div>
-      <div className="w-screen mt-32 md:mt-20 xl:mt-[78px] lg:mt-[72px] z-50 hidden sm:inline-block">
+      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[10px] 2xl:bottom-[140px] xl:bottom-[60px] md:bottom-[25px]">
         <HomePageCarousel />
       </div>
     </div>
