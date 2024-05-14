@@ -12,7 +12,7 @@ export const Home = () => {
   return (
     <div className="flex-col flex gap-3  w-[1224px] overflow-hidden px-3 sm:px-0 sm:mt-[50px] relative">
       <div className="flex w-[1224px]">
-        <div className="w-1/2 space-y-8 z-10">
+        <div className="w-1/2 space-y-8 z-10 relative">
           <div className="sm:w-full w-[351px] mt-32 sm:mt-0">
             <span className="font-azeret font-semibold md:text-[104px] text-[64px] text-primary-text leading-none hidden lg:inline-block">
               Your Brand On Chain
@@ -22,6 +22,7 @@ export const Home = () => {
               <span>Brand</span>
               <span>On Chain</span>
             </div>
+            <div className="blur-overlay sm:hidden" />
             <p className="font-medium text-base font-azeret text-primary-text lg:w-[505px] md:w-[435px] sm:w-[350px] w-full">
               Upload all of your platform links using SNS and share them easily
               with friends. Use your .sol domain to build brands and connections
