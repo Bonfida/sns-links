@@ -9,6 +9,10 @@ import Spline from "@splinetool/react-spline";
 export const Home = () => {
   const { connected } = useWallet();
 
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="flex-col flex gap-3  w-[1224px] overflow-hidden px-3 sm:px-0 sm:mt-[50px] relative">
       <div className="flex w-[1224px]">
@@ -37,6 +41,11 @@ export const Home = () => {
         </div>
         <div className="absolute md:w-1/2 sm:w-full -right-32 lg:top-0 md:-top-16 sm:-top-14 bottom-12 sm:-right-36 md:-right-0 -top-44">
           <div className="transform scale-50 sm:scale-75  xl:scale-100 lg:scale-90 h-[800px]">
+            <div
+              className="absolute inset-0"
+              style={{ zIndex: 1 }}
+              onWheel={handleWheel}
+            ></div>
             <Spline
               scene="https://prod.spline.design/aH4Q8Ih59onnSDwf/scene.splinecode"
               className=""
