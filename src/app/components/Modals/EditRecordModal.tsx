@@ -6,7 +6,8 @@ import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
-import { useQueryClient } from "react-query";
+import { useRecordsV2 } from "@/hooks/useRecordsV2";
+import { sleep } from "@/utils";
 
 const recordPlaceholderTextMap = new Map<Record, string>([
   [Record.ARWV, "0x..."],
@@ -50,7 +51,7 @@ const EditRecordModal = ({
   const { theme } = useTheme();
   const updateRecord = useUpdateRecord();
 
-  const queryClient = useQueryClient();
+  const { refresh } = useRecordsV2(domain);
 
   const handleUpdateClick = async (
     recordName: Record,
@@ -66,7 +67,8 @@ const EditRecordModal = ({
         isRoaSupported,
         sendRoaRequest,
       });
-      await queryClient.invalidateQueries(["records", domain]);
+      refresh();
+      await sleep(800);
       close();
     } catch (error) {
       if (error instanceof Error) {

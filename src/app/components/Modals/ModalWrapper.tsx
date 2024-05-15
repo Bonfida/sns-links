@@ -52,7 +52,7 @@ export const ModalWrapper = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 backdrop-blur-md bg-white/10" />
+          <div className="fixed inset-0 backdrop-blur-sm bg-[#0006]" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-x-hidden overflow-y-auto">
@@ -68,7 +68,7 @@ export const ModalWrapper = ({
             >
               <Dialog.Panel
                 className={twMerge(
-                  "bg-bds-dark-blues-DB900 w-full md:w-auto max-w-[99vw] py-8 px-6 sm:py-[64px] sm:px-[48px] rounded-3xl border border-bds-dark-blues-DB600",
+                  "bg-primary-bg w-full md:w-auto max-w-[99vw] py-8 px-6 sm:py-[64px] sm:px-[48px] rounded-2xl border border-primary-border",
                   modalWrapperClassName
                 )}
               >

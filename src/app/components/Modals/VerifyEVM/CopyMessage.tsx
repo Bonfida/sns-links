@@ -7,6 +7,7 @@ import { Step } from "./VerifyEVMRecord";
 import { Divider } from "../../Divider";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { twMerge } from "tailwind-merge";
 
 const RECORD_SUFFIX = "\nFor record: ";
 const STALENESS_SUFFIX = "\nStaleness ID: ";
@@ -61,7 +62,7 @@ export const CopyMessage = ({
       </p>
       <Divider className="w-full h-[1px] my-5" />
       <div className="flex flex-col items-start space-x-4 md:flex-row">
-        <div className="max-w-[350px] h-[150px] p-4 border-[1px] border-primary-border rounded-md">
+        <div className="max-w-[350px] h-[150px] p-4 border-[1px] border-primary-border rounded-md bg-input-bg text-primary-text">
           <pre
             style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
             className="text-xs font-semibold"
@@ -73,10 +74,14 @@ export const CopyMessage = ({
           <p className="font-azeret font-medium text-primary-text text-[20px]">
             Copy the message
           </p>
-          <p className="font-azeret text-primary-text/80 text-[16px] mt-3">
+          <p className="font-azeret text-primary-text text-[16px] mt-3">
             Copy the message in Etherscan and sign it
           </p>
-          <button className="btn w-[150px] mt-5" type="button" onClick={handle}>
+          <button
+            className="btn w-[150px] mt-5 bg-[#13122B]/90 text-white"
+            type="button"
+            onClick={handle}
+          >
             {success ? (
               <div className="flex items-center space-x-2">
                 <p>Copied</p>
@@ -100,20 +105,24 @@ export const CopyMessage = ({
         </div>
       </div>
       <div className="flex w-full mt-10 space-x-4">
-        <Button
+        <button
           onClick={() => setStep(Step.HowDoesItWork)}
-          className="w-1/2 h-[64px] rounded-[24px]  border-primary-border border-[1px] text-primary-text font-azeret normal-case"
-          buttonType="secondary"
+          className={twMerge(
+            "w-1/2 h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-white font-azeret normal-case font-bold text-base",
+            theme === "dark"
+              ? "bg-gradient-to-b from-glass-bg to-bg-primary-bg"
+              : "bg-edit-button-bg"
+          )}
         >
           Back
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setStep(Step.EnterSignature)}
-          className="w-1/2 h-[64px] rounded-[24px]  border-primary-border border-[1px] text-primary-text font-azeret normal-case"
-          buttonType="primary"
+          style={{ backgroundImage: "var(--action-button-bg)" }}
+          className="w-1/2 h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-action-button-text font-azeret normal-case font-bold text-base"
         >
           Next
-        </Button>
+        </button>
       </div>
     </div>
   );

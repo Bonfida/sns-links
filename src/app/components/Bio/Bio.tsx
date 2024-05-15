@@ -8,8 +8,8 @@ import { useFetchBio } from "@/hooks/useFetchBio";
 import { useQueryClient } from "react-query";
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
-import { useIsTokenized } from "@/hooks/useIsTokenized";
 import { useTheme } from "next-themes";
+import { sleep } from "@/utils";
 
 const Bio = memo(function Bio({
   domain,
@@ -29,7 +29,7 @@ const Bio = memo(function Bio({
 
   //Bio
   const [bioEditMode, setBioEditMode] = useState(false);
-  const { data: bio, isLoading: bioLoading } = useFetchBio(domain);
+  const { data: bio, isLoading: bioLoading, refetch } = useFetchBio(domain);
   const [bioText, setBioText] = useState("");
 
   useEffect(() => {
@@ -69,7 +69,9 @@ const Bio = memo(function Bio({
         toast
       );
     }
-    queryClient.invalidateQueries(["bio", domain]);
+    await queryClient.invalidateQueries(["bio", domain]);
+    refetch();
+    await sleep(800);
     setBioEditMode(false);
   };
 
@@ -160,7 +162,7 @@ const Bio = memo(function Bio({
           </>
         ) : (
           <div className="mb-8 h-[28px]">
-            <span className="bg-inherit text-bio-text">{bioText}</span>
+            <span className="bg-inherit text-bio-text">{bio}</span>
           </div>
         )}
       </form>

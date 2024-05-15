@@ -9,6 +9,8 @@ import { TransactionInstruction } from "@solana/web3.js";
 import { Step } from "./VerifyEVMRecord";
 import { Divider } from "../../Divider";
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
+import { useTheme } from "next-themes";
 
 export const BridgeSuccess = ({
   domain,
@@ -69,6 +71,7 @@ export const EnterSignature = ({
   const { publicKey, signAllTransactions } = useWallet();
   const { toast } = useToastContext();
   const { connection } = useConnection();
+  const { theme } = useTheme();
 
   const handle = async () => {
     if (!publicKey || !signAllTransactions) return;
@@ -120,7 +123,9 @@ export const EnterSignature = ({
 
   return (
     <div className="font-azeret w-screen max-w-[800px]">
-      <p className="font-azeret text-[16px] text-[#CECED8]">Enter Signature</p>
+      <p className="font-azeret text-[16px] text-primary-text">
+        Enter Signature
+      </p>
       <p className="text-primary-text font-azeret text-[24px] font-medium">
         Step 3 of 3 - Enter Signature Hash
       </p>
@@ -129,30 +134,34 @@ export const EnterSignature = ({
         <input
           type="text"
           value={signature}
-          className="text-primary-text bg-transparent font-azeret border-[2px]  border-primary-border rounded-[16px] h-[64px] w-full pl-5"
+          className="text-primary-text bg-input-bg font-azeret border  border-primary-border rounded-[16px] h-[64px] w-full pl-5"
           placeholder={`Enter Signature Hash`}
           onChange={(e) => setSignature(e.target.value)}
         />
       </div>
       <div className="flex w-full mt-10 space-x-4">
-        <Button
+        <button
           onClick={() => setStep(Step.CopyMessage)}
-          className="w-1/2 h-[64px] rounded-[24px] border-opacity-20  border-primary-border border-[1px] text-primary-text font-azeret normal-case"
-          buttonType="secondary"
+          className={twMerge(
+            "w-1/2 h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-white font-azeret normal-case font-bold text-base",
+            theme === "dark"
+              ? "bg-gradient-to-b from-glass-bg to-bg-primary-bg"
+              : "bg-edit-button-bg"
+          )}
         >
           Back
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={handle}
-          className="w-1/2 h-[64px] rounded-[24px] border-opacity-20  border-primary-border border-[1px] text-primary-text font-azeret normal-case"
-          buttonType="primary"
+          style={{ backgroundImage: "var(--action-button-bg)" }}
+          className="w-1/2 h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-action-button-text font-azeret normal-case font-bold text-base"
         >
           {loading ? (
             <SpinnerFida className="h-[20px]" variant="white" />
           ) : (
             "Next"
           )}
-        </Button>
+        </button>
       </div>
     </div>
   );

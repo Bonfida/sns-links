@@ -79,7 +79,7 @@ export const EditPicModal = ({
           <div className="flex flex-col gap-y-3 sm:flex-row items-center justify-between w-full mt-6 space-x-1.5">
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
-              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[15px] border-t text-action-button-text border-t-top-border-highlight active:border-t-0 font-bold"
+              className="sm:w-[268px] w-[329px]  h-[47px] rounded-[15px] border-t text-action-button-text border-t-top-border-highlight active:border-t-0 font-bold text-base"
               onClick={() => {
                 handleUpdateClick(
                   recordName as Record,
@@ -92,7 +92,7 @@ export const EditPicModal = ({
             </button>
             <button
               className={twMerge(
-                "sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-white active:border-t-0 font-bold",
+                "sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-white active:border-t-0 font-bold text-base",
                 theme === "dark"
                   ? "bg-gradient-to-b from-glass-bg to-bg-primary-bg"
                   : "bg-edit-button-bg"

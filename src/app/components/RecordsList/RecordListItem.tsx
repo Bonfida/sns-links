@@ -10,13 +10,12 @@ import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { Record } from "@bonfida/spl-name-service";
 import { EVM_RECORDS } from "@/utils/update-roa";
 import { useUpdateROA } from "@/hooks/useUpdateROA";
-import { SpinnerFida } from "@bonfida/components";
+import { SpinnerFida, useToastContext } from "@bonfida/components";
 import { ModalWrapper } from "../Modals/ModalWrapper";
 import { VerifyEvmRecordsV2 } from "../Modals/VerifyEVM/VerifyEVMRecord";
-import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Badge from "../Tooltip/Tooltip";
-import { Result } from "@/hooks/useRecordsV2";
+import { Result, useRecordsV2 } from "@/hooks/useRecordsV2";
 import { getRecordValue } from "@/utils/get-record-value";
 
 const verifiableRecords = [
@@ -57,6 +56,7 @@ export const RecordListItem = memo(function RecordListItem({
     isVerified,
   } = record;
   const recordContent = getRecordValue(record);
+  const { refresh } = useRecordsV2(domain);
 
   // Visibility
   const [isModalVisible, setModalVisible] = useState(false);
@@ -68,6 +68,7 @@ export const RecordListItem = memo(function RecordListItem({
   // Misc.
   const queryClient = useQueryClient();
   const { theme } = useTheme();
+  const { toast } = useToastContext();
 
   // Is NFT
   const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
@@ -83,9 +84,10 @@ export const RecordListItem = memo(function RecordListItem({
         currentValue: recordContent,
       });
     } catch (err) {
+      toast.error("Error deleting record. Please try again.");
       console.log("Error: ", err);
     } finally {
-      await queryClient.invalidateQueries(["records", domain]);
+      refresh();
     }
   };
 
@@ -102,9 +104,10 @@ export const RecordListItem = memo(function RecordListItem({
     try {
       await updateROA({ domain, record: record.record });
     } catch (err) {
+      toast.error("Error verifying record. Please try again.");
       console.log("Error: ", err);
     } finally {
-      await queryClient.invalidateQueries(["records", domain]);
+      refresh();
     }
   };
 
