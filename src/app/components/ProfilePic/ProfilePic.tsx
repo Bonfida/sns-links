@@ -10,6 +10,8 @@ import { EditPicModal } from "../Modals/EditPicModal";
 import { GenericLoading } from "@bonfida/components";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { useRecordsV2 } from "@/hooks/useRecordsV2";
+import { getRecordValue } from "@/utils/get-record-value";
 
 const ProfilePic = ({
   domain,
@@ -25,10 +27,11 @@ const ProfilePic = ({
   const { publicKey, connected } = useWallet();
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
-    connection,
-    domain!
-  );
+  const {
+    data: recordsData,
+    loading: recordsLoading,
+    refresh,
+  } = useRecordsV2(domain);
 
   const { data: owner, isLoading: ownerLoading } = useFetchOwner(
     connection,
@@ -39,12 +42,14 @@ const ProfilePic = ({
     return record.record === Record.Pic;
   });
 
+  let picContent = picRecord ? getRecordValue(picRecord) : undefined;
+
   return (
     <div className="relative overflow-hidden rounded-full">
       <Image
         width={120}
         height={120}
-        src={picRecord?.content || "/user/default-profile.svg"}
+        src={picContent || "/user/default-profile.svg"}
         className={twMerge(
           "object-fit rounded-full",
           customSize ? customSize : "sm:h-[120px] sm:w-[120px]"
@@ -76,9 +81,9 @@ const ProfilePic = ({
             modalClass=""
           >
             <EditPicModal
-              recordName="pic"
-              currentValue={picRecord?.content}
+              currentValue={picContent}
               domain={domain}
+              refresh={refresh}
               close={() => setModalVisible(false)}
             />
           </ButtonModal>

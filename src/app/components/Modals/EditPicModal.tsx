@@ -6,39 +6,39 @@ import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { useRecordsV2 } from "@/hooks/useRecordsV2";
+import { sleep } from "@/utils";
 
 export const EditPicModal = ({
-  recordName,
   currentValue,
   domain,
+  refresh,
   close,
 }: {
-  recordName: Record;
   currentValue: string | undefined;
   domain: string;
+  refresh: () => void;
   close: () => void;
 }) => {
   const [recordValue, setRecordValue] = useState("");
   const { selectedDomain } = useContext(SelectedDomainContext);
   const { toast } = useToastContext();
   const { theme } = useTheme();
-  const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(recordName);
+  const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(Record.Pic);
   const updateRecord = useUpdateRecord();
 
-  const handleUpdateClick = async (
-    recordName: Record,
-    selectedDomain: string,
-    recordValue: string
-  ) => {
+  const handleUpdateClick = async () => {
     try {
       await updateRecord({
         domain: domain || selectedDomain,
-        recordName,
+        recordName: Record.Pic,
         recordValue,
         currentValue,
         isRoaSupported,
         sendRoaRequest,
       });
+      refresh();
+      await sleep(1_000);
       close();
     } catch (error) {
       if (error instanceof Error) {
@@ -80,13 +80,7 @@ export const EditPicModal = ({
             <button
               style={{ backgroundImage: "var(--action-button-bg)" }}
               className="sm:w-[268px] w-[329px]  h-[47px] rounded-[15px] border-t text-action-button-text border-t-top-border-highlight active:border-t-0 font-bold text-base"
-              onClick={() => {
-                handleUpdateClick(
-                  recordName as Record,
-                  selectedDomain,
-                  recordValue
-                );
-              }}
+              onClick={handleUpdateClick}
             >
               Update
             </button>
