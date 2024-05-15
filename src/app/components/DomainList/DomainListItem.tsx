@@ -136,7 +136,7 @@ export const DomainListItem = memo(function DomainListItem({
       >
         <div className="space-x-2 flex justify-center items-center">
           <button
-            className="ml-2 z-100"
+            className="ml-2 z-10"
             onClick={(e) => {
               e.stopPropagation();
               handleFavoriteUpdate();

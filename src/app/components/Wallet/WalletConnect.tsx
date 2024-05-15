@@ -88,7 +88,7 @@ export const WalletConnect = ({
             {loading ? (
               <GenericLoading
                 className={twMerge(
-                  "rounded-full h-6 w-6",
+                  "rounded-full h-6 w-6 hidden sm:flex",
                   theme === "light" ? "bg-list-item-bg" : ""
                 )}
               />
@@ -113,7 +113,7 @@ export const WalletConnect = ({
             {loading ? (
               <GenericLoading
                 className={twMerge(
-                  "w-1/2 h-6 flex items-center justify-center rounded-[15px]",
+                  "hidden  w-1/2 h-6 sm:flex items-center justify-center rounded-[15px]",
                   theme === "light" ? "bg-list-item-bg" : ""
                 )}
               />
