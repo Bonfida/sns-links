@@ -118,7 +118,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                 </a>
               </div>
             </div>
-            <Bio domain={currentDomain} />
+            <Bio domain={currentDomain} isToken={isToken || false} />
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-8 w-full justify- items-center mb-10">
                 {loading ? (

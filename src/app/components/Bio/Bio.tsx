@@ -11,11 +11,16 @@ import { ButtonModal } from "../ButtonModal";
 import { useIsTokenized } from "@/hooks/useIsTokenized";
 import { useTheme } from "next-themes";
 
-const Bio = memo(function Bio({ domain }: { domain: string }) {
+const Bio = memo(function Bio({
+  domain,
+  isToken,
+}: {
+  domain: string;
+  isToken: boolean;
+}) {
   // Wallet and conection
   const { connection } = useConnection();
-  const { publicKey, signAllTransactions, signMessage, connected } =
-    useWallet();
+  const { publicKey, signAllTransactions, connected } = useWallet();
 
   // Misc.
   const { toast } = useToastContext();
@@ -45,7 +50,6 @@ const Bio = memo(function Bio({ domain }: { domain: string }) {
   const isOwner = owner === publicKey?.toBase58();
 
   // Is NFT
-  const { data: isToken } = useIsTokenized(domain);
   const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
 
   //Handlers

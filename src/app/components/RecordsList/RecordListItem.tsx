@@ -108,8 +108,6 @@ export const RecordListItem = memo(function RecordListItem({
     }
   };
 
-  console.log("isOwner", isOwner);
-
   return (
     <div className="w-full flex flex-col bg-list-item-bg border-t-[1px] border-white/[24%] rounded-3xl ">
       <div className="flex justify-between w-full pt-2 pb-2 pl-5 pr-2 h-[65px]">
