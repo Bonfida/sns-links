@@ -98,7 +98,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full">
+    <div className="flex flex-col items-center justify-start w-full h-screen">
       <div className="flex flex-col items-center gap-3 w-full">
         <div className="flex flex-col">
           {recordsLoading ? (
@@ -206,9 +206,6 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
                   })}
                 </>
               )}
-            </div>
-            <div className="flex justify-center my-10">
-              <CreateYourOwnButton />
             </div>
           </div>
         </div>
