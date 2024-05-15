@@ -1,6 +1,7 @@
 import {
   Dispatch,
   SetStateAction,
+  memo,
   useContext,
   useEffect,
   useState,
@@ -21,7 +22,7 @@ import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
 
-export const DomainListItem = ({
+export const DomainListItem = memo(function DomainListItem({
   domain,
   removePreviousFav,
   setRemovePreviousFav,
@@ -29,7 +30,7 @@ export const DomainListItem = ({
   domain: string;
   removePreviousFav: boolean;
   setRemovePreviousFav: Dispatch<SetStateAction<boolean>>;
-}) => {
+}) {
   // Wallet and connection
   const { publicKey, signAllTransactions } = useWallet();
   const { connection } = useConnection();
@@ -174,7 +175,7 @@ export const DomainListItem = ({
       </div>
     </div>
   );
-};
+});
 
 export const PrimaryTag = () => {
   return (

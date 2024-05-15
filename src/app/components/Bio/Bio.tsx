@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { GenericLoading, useToastContext } from "@bonfida/components";
+import { useToastContext } from "@bonfida/components";
 import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { updateBio } from "../../../utils/update-record/update-bio";
 import UnwrapModal from "../Modals/UnwrapModal";
@@ -11,7 +11,7 @@ import { ButtonModal } from "../ButtonModal";
 import { useIsTokenized } from "@/hooks/useIsTokenized";
 import { useTheme } from "next-themes";
 
-const Bio = ({ domain }: { domain: string }) => {
+const Bio = memo(function Bio({ domain }: { domain: string }) {
   // Wallet and conection
   const { connection } = useConnection();
   const { publicKey, signAllTransactions, signMessage, connected } =
@@ -162,6 +162,6 @@ const Bio = ({ domain }: { domain: string }) => {
       </form>
     </div>
   );
-};
+});
 
 export default Bio;
