@@ -4,6 +4,8 @@ import SelectedDomainContext from "@/context/selectedDomain";
 import { Record } from "@bonfida/spl-name-service";
 import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
+import { twMerge } from "tailwind-merge";
+import { useTheme } from "next-themes";
 
 export const EditPicModal = ({
   recordName,
@@ -11,7 +13,7 @@ export const EditPicModal = ({
   domain,
   close,
 }: {
-  recordName: string;
+  recordName: Record;
   currentValue: string | undefined;
   domain: string;
   close: () => void;
@@ -19,9 +21,8 @@ export const EditPicModal = ({
   const [recordValue, setRecordValue] = useState("");
   const { selectedDomain } = useContext(SelectedDomainContext);
   const { toast } = useToastContext();
-  const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(
-    recordName as Record
-  );
+  const { theme } = useTheme();
+  const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(recordName);
   const updateRecord = useUpdateRecord();
 
   const handleUpdateClick = async (
@@ -90,7 +91,12 @@ export const EditPicModal = ({
               Update
             </button>
             <button
-              className="sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-primary-text bg-gradient-to-b from-glass-bg to-bg-primary-bg border-t-priamry-border active:border-t-0 font-bold"
+              className={twMerge(
+                "sm:w-[268px] w-[329px] h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-white active:border-t-0 font-bold",
+                theme === "dark"
+                  ? "bg-gradient-to-b from-glass-bg to-bg-primary-bg"
+                  : "bg-edit-button-bg"
+              )}
               onClick={() => {
                 close();
               }}
