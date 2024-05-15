@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
-import { useState } from "react";
+import { memo, useState } from "react";
 import EditRecordModal from "../Modals/EditRecordModal";
-import { useIsTokenized } from "@/hooks/useIsTokenized";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
@@ -15,7 +14,7 @@ import { SpinnerFida } from "@bonfida/components";
 import { ModalWrapper } from "../Modals/ModalWrapper";
 import { VerifyEvmRecordsV2 } from "../Modals/VerifyEVM/VerifyEVMRecord";
 import { useFetchVerifyROA } from "@/hooks/useVerifyROA";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import Badge from "../Tooltip/Tooltip";
 import { Result } from "@/hooks/useRecordsV2";
 import { getRecordValue } from "@/utils/get-record-value";
@@ -35,15 +34,17 @@ type EvmVerifyState = {
   content?: string;
 };
 
-export const RecordListItem = ({
+export const RecordListItem = memo(function RecordListItem({
   record,
   domain,
   isOwner,
+  isToken,
 }: {
   record: Result;
   domain: string;
   isOwner: boolean;
-}) => {
+  isToken: boolean;
+}) {
   // Wallet
   const { publicKey } = useWallet();
 
@@ -69,7 +70,6 @@ export const RecordListItem = ({
   const { theme } = useTheme();
 
   // Is NFT
-  const { data: isToken } = useIsTokenized(domain);
   const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
 
   //Handlers
@@ -107,6 +107,8 @@ export const RecordListItem = ({
       await queryClient.invalidateQueries(["records", domain]);
     }
   };
+
+  console.log("isOwner", isOwner);
 
   return (
     <div className="w-full flex flex-col bg-list-item-bg border-t-[1px] border-white/[24%] rounded-3xl ">
@@ -221,4 +223,4 @@ export const RecordListItem = ({
       )}
     </div>
   );
-};
+});

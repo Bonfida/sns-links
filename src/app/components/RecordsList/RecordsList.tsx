@@ -14,6 +14,8 @@ import { SpinnerFida } from "@bonfida/components";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
 import { useRecordsV2 } from "@/hooks/useRecordsV2";
+import { useIsTokenized } from "@/hooks/useIsTokenized";
+import { isTokenized } from "@bonfida/name-tokenizer";
 
 const contactRecords = [Record.Email, Record.Telegram];
 
@@ -55,6 +57,9 @@ const RecordsTable = ({ domain }: { domain: string }) => {
   const isOwner = owner === publicKey?.toBase58();
   const { theme } = useTheme();
   const { data: recordData, loading: recordsLoading } = useRecordsV2(domain);
+  const { data: isToken } = useIsTokenized(domain);
+
+  const loading = recordsLoading || ownerLoading;
 
   const navigateBack = () => {
     router.push(`/profile/${publicKey}`);
@@ -116,7 +121,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
             <Bio domain={currentDomain} />
             <div className="flex justify-center items-center flex-col">
               <div className="flex flex-col gap-8 w-full justify- items-center mb-10">
-                {recordsLoading ? (
+                {loading ? (
                   <SpinnerFida variant={theme === "dark" ? "white" : "color"} />
                 ) : (
                   <>
@@ -134,6 +139,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                             record={record}
                             domain={currentDomain}
                             isOwner={isOwner}
+                            isToken={isToken || false}
                           />
                         ))}
                     </div>
@@ -152,6 +158,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               record={record}
                               domain={currentDomain}
                               isOwner={isOwner}
+                              isToken={isToken || false}
                             />
                           ))}
                     </div>
@@ -170,6 +177,7 @@ const RecordsTable = ({ domain }: { domain: string }) => {
                               record={record}
                               domain={currentDomain}
                               isOwner={isOwner}
+                              isToken={isToken || false}
                             />
                           ))}
                     </div>
