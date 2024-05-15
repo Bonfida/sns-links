@@ -96,7 +96,7 @@ const UserLinksListItem = ({
               alt="copy"
             />
             {showCopyConfirmation && (
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-primary-bg text-white rounded-md whitespace-nowrap text-xs z-100">
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-list-item-bg text-primary-text rounded-md whitespace-nowrap text-xs z-100">
                 Link copied!
               </div>
             )}
