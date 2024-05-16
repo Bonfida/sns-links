@@ -24,10 +24,10 @@ export const Home = () => {
   };
 
   return (
-    <div className="flex-col flex gap-3  w-[1224px] overflow-hidden px-3 sm:px-0 sm:mt-[50px] relative">
+    <div className="flex-col flex gap-3  w-[1224px] overflow-hidden px-3 sm:px-0 sm:mt-[50px] relative mb-10 sm:mb-0">
       <div className="flex w-[1224px]">
         <div className="w-1/2 space-y-8 z-10 relative">
-          <div className="sm:w-full w-[351px] mt-52 sm:mt-0">
+          <div className="sm:w-full w-[330px] mt-44 sm:mt-0">
             <span className="font-azeret font-semibold md:text-[104px] text-[64px] text-primary-text leading-none hidden lg:inline-block">
               Your Brand On Chain
             </span>
@@ -49,26 +49,18 @@ export const Home = () => {
             <WalletConnect green={true} width={258} />
           )}
         </div>
-        <div className="absolute md:w-1/2 sm:w-full -right-32 lg:top-0 md:-top-16 sm:-top-14 bottom-12 sm:-right-36 md:-right-0 -top-44">
-          <div className="transform scale-50 sm:scale-75  xl:scale-100 lg:scale-90 h-[800px]">
-            <div
-              className="absolute inset-0 cursor-pointer"
-              style={{ zIndex: 1 }}
-              onWheel={handleWheel}
-              onClick={() => splineRef.current?.emitEvent("mouseDown")}
-            ></div>
-            <Spline
-              scene="https://prod.spline.design/aH4Q8Ih59onnSDwf/scene.splinecode"
-              className=""
-              onLoad={(spline) => {
-                spline.setZoom(0.75);
-                handleLoad(spline);
-              }}
+        <div className="absolute md:w-1/2 sm:w-full -right-[110px] lg:-top-5 xl:-top-0 md:-top-18 sm:-top-[105px] bottom-12 sm:-right-64 lg:-right-28 md:-right-20 -top-44">
+          <div className="transform scale-50 sm:scale-75 2xl:scale-100 xl:scale-95 lg:scale-90 h-[800px]">
+            <Image
+              width={406}
+              height={289}
+              src="/preview/phone-preview.png"
+              alt="preview"
             />
           </div>
         </div>
       </div>
-      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[100px] xl:bottom-[135px] md:bottom-[25px]">
+      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[143px] xl:bottom-[140px] 2xl:bottom-[135px]  md:bottom-[25px]">
         <HomePageCarousel />
       </div>
     </div>
