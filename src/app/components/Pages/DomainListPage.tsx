@@ -12,10 +12,6 @@ import { NoDomainsFound } from "../Notices/NoDomainsFound";
 import { useTheme } from "next-themes";
 import { useToastContext } from "@bonfida/components";
 
-export const metadata = {
-  title: "Profile Page",
-};
-
 export const DomainListPage = () => {
   const router = useRouter();
   const { publicKey } = useWallet();

@@ -4,24 +4,9 @@ import { WalletConnect } from "../Wallet/WalletConnect";
 import { HomePageCarousel } from "../Carousel/HomePageCarousel";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { GoToProfileButton } from "../Buttons/GoToProfileButton";
-import Spline from "@splinetool/react-spline";
-import { useRef } from "react";
-import { Application, SPEObject } from "@splinetool/runtime";
-
-const splineId = "41df4a9b-65d8-48f3-9159-c0e10fc9c595";
 
 export const Home = () => {
   const { connected } = useWallet();
-  const splineRef = useRef<SPEObject | undefined>();
-
-  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
-
-  const handleLoad = (spline: Application) => {
-    const obj = spline.findObjectById(splineId);
-    splineRef.current = obj;
-  };
 
   return (
     <div className="flex-col flex gap-3  w-[1224px] overflow-hidden px-3 sm:px-0 sm:mt-[50px] relative mb-10 sm:mb-0">
