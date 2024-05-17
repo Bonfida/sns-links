@@ -49,7 +49,7 @@ export const Home = () => {
             <WalletConnect green={true} width={258} />
           )}
         </div>
-        <div className="absolute md:w-1/2 sm:w-full -right-[110px] lg:-top-5 xl:-top-0 md:-top-18 sm:-top-[105px] bottom-12 sm:-right-64 lg:-right-28 md:-right-20 -top-44">
+        <div className="absolute md:w-1/2 sm:w-full -right-[110px] lg:-top-5  md:-top-18 sm:-top-[105px] bottom-12 sm:-right-64 lg:-right-28 md:-right-20 -top-44">
           <div className="transform scale-50 sm:scale-75 2xl:scale-100 xl:scale-95 lg:scale-90 h-[800px]">
             <Image
               width={406}
@@ -60,7 +60,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[143px] xl:bottom-[140px] 2xl:bottom-[135px]  md:bottom-[25px]">
+      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[30px] xl:bottom-[50px] 2xl:bottom-[135px]  md:bottom-0">
         <HomePageCarousel />
       </div>
     </div>
