@@ -7,7 +7,7 @@ export const metadata = {
 
 const DomainListView = () => {
   return (
-    <div className="bg-primary-bg w-screen h-screen">
+    <div className="bg-primary-bg w-screen min-h-screen">
       <DomainListPage />
     </div>
   );

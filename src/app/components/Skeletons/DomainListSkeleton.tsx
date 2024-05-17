@@ -1,10 +1,16 @@
 import { GenericLoading } from "@bonfida/components";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
+import { useSmallScreen } from "@bonfida/hooks";
 
 const DomainTableSkeleton = () => {
-  const loadingItems = Array.from({ length: 8 }, (_, index) => index);
+  const mobile = useSmallScreen("xs");
+  const loadingItems = Array.from(
+    { length: mobile ? 6 : 8 },
+    (_, index) => index
+  );
   const { theme } = useTheme();
+
   return (
     <div className="flex flex-col items-center w-full h-full">
       <div className="md:w-[800px] sm:w-[450px] w-screen items-center justify-center flex">
