@@ -60,7 +60,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[30px] xl:bottom-[50px] 2xl:bottom-[135px]  md:bottom-0">
+      <div className="absolute w-screen z-50 hidden sm:inline-block sm:bottom-[30px] lg:bottom-[30px] xl:bottom-[50px] md:bottom-0">
         <HomePageCarousel />
       </div>
     </div>
