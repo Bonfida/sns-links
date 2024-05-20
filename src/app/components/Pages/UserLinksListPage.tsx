@@ -4,10 +4,10 @@ import { useFetchRecords } from "../../../hooks/useFetchRecords";
 import UserLinksListItem from "@/app/components/Buttons/UserLinksListItem";
 import Image from "next/image";
 import { GenericLoading, SpinnerFida } from "@bonfida/components";
-import { useDomainsInfo } from "@/hooks/useDomainsInfo";
 import { Record } from "@bonfida/spl-name-service";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
+import { useFetchBio } from "@/hooks/useFetchBio";
 
 type LinkShareParams = {
   domain: string;
@@ -68,8 +68,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
     connection,
     domain
   );
-  const { data: domainInfo, keys } = useDomainsInfo([domain]);
-  const domainKey = keys?.find((e) => e.domain === domain)?.pubkey;
+  const { data: bio } = useFetchBio(domain);
   const userSocialRecords = recordsData?.filter(
     (record) =>
       socialRecords.some((social) => social.record === record.record) &&
@@ -85,14 +84,6 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
       walletRecords.some((wallet) => wallet.record === record.record) &&
       record.content !== undefined
   );
-
-  const content =
-    domainKey &&
-    domainInfo
-      ?.get(domainKey.toBase58())
-      ?.data?.toString()
-      .trimStart()
-      .trimEnd();
 
   const picRecord = recordsData?.find((record) => {
     return record.record === Record.Pic;
@@ -126,7 +117,7 @@ export const UserLinksListPage = ({ params }: { params: LinkShareParams }) => {
         <div className="flex flex-col items-center justify-center w-full">
           <span className="text-sm sm:text-base text-bio-text">Bio</span>
           <span className="text-base sm:text-lg text-primary-text w-3/4 flex justify-center flex-wrap px-4 py-2 text-center">
-            {content}
+            {bio}
           </span>
         </div>
       </div>

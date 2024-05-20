@@ -24,8 +24,7 @@ export const updateBio = async (
   signAllTransactions: (transaction: Transaction[]) => Promise<Transaction[]>,
   toast: Toast
 ) => {
-  if (!signAllTransactions) return;
-  if (!publicKey) return;
+  if (!signAllTransactions || !publicKey) return;
 
   toast.processing();
 
@@ -93,10 +92,11 @@ export const updateBio = async (
     }
 
     toast.success("all");
-    await sleep(800);
   } catch (err) {
-    console.log(err);
-    toast.error("Transaction failed \n Refresh the page before trying agin");
-    await sleep(800);
+    toast.error("Transaction failed. \n Refresh the page before trying agin");
+    throw new Error();
+  } finally {
+    await sleep(2000);
+    toast.close();
   }
 };

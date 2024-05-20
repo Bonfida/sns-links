@@ -11,6 +11,7 @@ import { Divider } from "../../Divider";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { sleep } from "@/utils";
 
 export const BridgeSuccess = ({
   domain,
@@ -75,9 +76,8 @@ export const EnterSignature = ({
     if (!publicKey || !signAllTransactions) return;
     try {
       setLoading(true);
-      // toast.processing();
+      toast.processing();
       const ixs: TransactionInstruction[] = [];
-      let chainId: ChainId | undefined = undefined;
 
       const ix = ethValidateRecordV2Content(
         domain,
@@ -104,8 +104,11 @@ export const EnterSignature = ({
       }
     } catch (err) {
       console.log("Error: ", err);
+      toast.error();
     } finally {
       setLoading(false);
+      await sleep(2000);
+      toast.close();
     }
   };
 
@@ -145,7 +148,9 @@ export const EnterSignature = ({
           className="w-1/2 h-[47px] rounded-[15px] border-t border-t-top-border-highlight text-action-button-text font-azeret normal-case font-bold text-base"
         >
           {loading ? (
-            <SpinnerFida className="h-[20px]" variant="white" />
+            <div className="w-full flex justify-center">
+              <SpinnerFida className="h-[20px]" variant="white" />
+            </div>
           ) : (
             "Next"
           )}

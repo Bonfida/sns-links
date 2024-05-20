@@ -42,10 +42,10 @@ export const useUpdateRecord = () => {
 
       toast.success("all");
     } catch (err) {
-      console.log("error", err);
       toast.error();
+      console.log("error", err);
     } finally {
-      await sleep(1_000);
+      await sleep(2_000);
       toast.close();
     }
   };

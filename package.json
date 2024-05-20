@@ -16,7 +16,7 @@
     "@bonfida/sns-emitter": "^0.2.1",
     "@bonfida/sns-react": "^2.0.1",
     "@bonfida/sns-records": "^0.0.1-alpha.8",
-    "@bonfida/sns-widget": "^0.0.5",
+    "@bonfida/sns-widget": "^0.2.0",
     "@bonfida/spl-name-service": "2.4.0",
     "@bonfida/utils": "^0.0.7",
     "@radix-ui/react-hover-card": "^1.0.7",

@@ -1,53 +1,27 @@
 import { useQuery } from "react-query";
-import { derive } from "../utils/derive";
-import { NameRegistryState } from "@bonfida/spl-name-service";
-import { AccountInfo, PublicKey } from "@solana/web3.js";
-import { useMultipleAccountInfoWs } from "./useMultipleAccountInfoWs";
+import { getDomainKeySync } from "@bonfida/spl-name-service";
+import { AccountInfo } from "@solana/web3.js";
+import { useConnection } from "@solana/wallet-adapter-react";
 
-interface DeriveResult {
-  isSub: boolean;
-  parent?: PublicKey;
-  pubkey: PublicKey;
-  hashed: Buffer;
-  isSubRecord?: boolean;
-}
+export const useDomainsInfoV2 = (domains: string[] | undefined | null) => {
+  const { connection } = useConnection();
+  const fn = async () => {
+    if (!domains) return null;
+    const keys = domains?.map((e) => getDomainKeySync(e).pubkey);
+    const batchSize = 100;
+    const batchedResults: (AccountInfo<Buffer> | null)[] = [];
 
-const callBack = (info: AccountInfo<Buffer>) => {
-  return NameRegistryState.deserialize(info.data);
-};
-
-const fetchDomainKeys = async (
-  domains: string[] | undefined | null
-): Promise<{ pubkey: PublicKey; domain: string }[]> => {
-  if (!domains || domains.length === 0) return [];
-  const derivedResults: DeriveResult[] = await Promise.all(
-    domains.map((domain) => derive(domain))
-  );
-  return derivedResults.map((result, idx) => ({
-    pubkey: result.pubkey,
-    domain: domains[idx],
-  }));
-};
-
-export const useDomainsInfo = (domains: string[] | undefined | null) => {
-  const queryKey = ["domainsInfo", { domains }];
-
-  const {
-    data: keys,
-    isLoading,
-    error,
-  } = useQuery<{ pubkey: PublicKey; domain: string }[]>(
-    queryKey,
-    () => fetchDomainKeys(domains),
-    {
-      enabled: !!domains && domains.length > 0,
+    for (let i = 0; i < keys.length; i += batchSize) {
+      const batchKeys = keys.slice(i, i + batchSize);
+      const batchResult = await connection.getMultipleAccountsInfo(batchKeys);
+      batchedResults.push(...batchResult);
     }
-  );
 
-  const accountInfo = useMultipleAccountInfoWs(
-    keys?.map((k) => k.pubkey) || [],
-    callBack
-  );
+    return batchedResults;
+  };
 
-  return { data: accountInfo, keys, isLoading, error };
+  return useQuery({
+    queryKey: ["useDomainsInfoV2", domains],
+    queryFn: fn,
+  });
 };

@@ -55,24 +55,29 @@ const Bio = memo(function Bio({
   //Handlers
   const handleSubmit = async () => {
     if (!publicKey || !signAllTransactions) return;
-    if (bioText == bio || bioText?.length === 0) {
-      toast.error("Nothing to update");
-    } else if (bioText.length > 250) {
-      toast.error("Over the character limit");
-    } else {
-      await updateBio(
-        connection,
-        publicKey,
-        domain,
-        bioText,
-        signAllTransactions,
-        toast
-      );
+
+    try {
+      if (bioText === bio || bioText?.length === 0) {
+        toast.error("Nothing to update");
+      } else if (bioText.length > 250) {
+        toast.error("Over the character limit");
+      } else {
+        await updateBio(
+          connection,
+          publicKey,
+          domain,
+          bioText,
+          signAllTransactions,
+          toast
+        );
+      }
+      await queryClient.invalidateQueries(["bio", domain]);
+      refetch();
+      await sleep(800);
+      setBioEditMode(false);
+    } catch (err) {
+      setBioText(bio || "");
     }
-    await queryClient.invalidateQueries(["bio", domain]);
-    refetch();
-    await sleep(800);
-    setBioEditMode(false);
   };
 
   return (

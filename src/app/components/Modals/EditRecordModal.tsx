@@ -21,7 +21,7 @@ const recordPlaceholderTextMap = new Map<Record, string>([
   [Record.Discord, "username..."],
   [Record.Github, "https://github.com/..."],
   [Record.Reddit, "https://reddit.com/user/..."],
-  [Record.Twitter, "https://x.com/..."],
+  [Record.Twitter, "username..."],
   [Record.Telegram, "username..."],
   [Record.Pic, "https://..."],
   [Record.SHDW, "SHDW..."],
