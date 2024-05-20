@@ -1,6 +1,5 @@
 import { Record, getRecordV2Key } from "@bonfida/spl-name-service";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Button } from "@bonfida/components";
 import { useEffect, useState } from "react";
 import { stripPrefix } from "./EnterSignature";
 import { Step } from "./VerifyEVMRecord";

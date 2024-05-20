@@ -1,10 +1,13 @@
 import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
 import { UserLinksListPage } from "@/app/components/Pages/UserLinksListPage";
-import { LinkShareParams } from "@/app/types/LinkShareParams";
 
 export const metadata = {
   title: "Links",
   description: "Check out my links!",
+};
+
+export type LinkShareParams = {
+  domain: string;
 };
 
 const LinkShareView = ({ params }: { params: LinkShareParams }) => {

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { Record } from "@bonfida/spl-name-service";
 import Image from "next/image";
 import { useFetchOwner } from "@/hooks/useFetchOwner";

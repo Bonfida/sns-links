@@ -1,6 +1,7 @@
 import { GenericLoading } from "@bonfida/components";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
+
 const ProfileOverviewSkeleton = () => {
   const { theme } = useTheme();
   return (

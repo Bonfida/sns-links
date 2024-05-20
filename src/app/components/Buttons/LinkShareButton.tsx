@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import Image from "next/image";
 

@@ -123,6 +123,7 @@ export const DomainListItem = memo(function DomainListItem({
       setShouldStarIconBeFilled(false);
     }
   }, [isFavorite, shouldStarIconBeFilled, removePreviousFav, selectedFavorite]);
+
   return (
     <div
       style={{

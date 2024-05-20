@@ -4,7 +4,7 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { ethValidateRecordV2Content, Record } from "@bonfida/spl-name-service";
 import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { useToastContext } from "@/hooks/useToastContext";
-import { ChainId, Network, postV2 } from "@bonfida/sns-emitter";
+import { ChainId } from "@bonfida/sns-emitter";
 import { TransactionInstruction } from "@solana/web3.js";
 import { Step } from "./VerifyEVMRecord";
 import { Divider } from "../../Divider";
@@ -56,7 +56,6 @@ export const EnterSignature = ({
   record,
   domain,
   close,
-  bridge,
 }: {
   signature: string;
   setSignature: (x: string) => void;
@@ -65,7 +64,6 @@ export const EnterSignature = ({
   record: Record;
   domain: string;
   close: () => void;
-  bridge?: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
   const { publicKey, signAllTransactions } = useWallet();
@@ -77,7 +75,7 @@ export const EnterSignature = ({
     if (!publicKey || !signAllTransactions) return;
     try {
       setLoading(true);
-      toast.processing();
+      // toast.processing();
       const ixs: TransactionInstruction[] = [];
       let chainId: ChainId | undefined = undefined;
 
@@ -100,16 +98,6 @@ export const EnterSignature = ({
       });
       console.log(results);
 
-      // if (chainId !== undefined && bridge && sig) {
-      //   toast.close();
-      //   toast.processing();
-      //   const res = await crank(sig);
-      //   console.log(res);
-      // }
-
-      // toast.custom(
-      //   <BridgeSuccess setState={setState} record={record} domain={domain} />
-      // );
       if (results.length > 0) {
         toast.success("all");
         close();

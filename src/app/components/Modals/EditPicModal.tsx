@@ -6,7 +6,6 @@ import { useRecordsV2Guardians } from "@/hooks/useRecordsV2Guardian";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
-import { useRecordsV2 } from "@/hooks/useRecordsV2";
 import { sleep } from "@/utils";
 
 export const EditPicModal = ({

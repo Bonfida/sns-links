@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ReactNode } from "react";
+
 const Badge = ({
   tooltipContent,
   imgSrc,

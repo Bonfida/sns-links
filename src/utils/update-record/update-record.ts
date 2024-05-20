@@ -8,13 +8,7 @@ import {
   GUARDIANS,
   writRoaRecordV2,
 } from "@bonfida/spl-name-service";
-import {
-  PublicKey,
-  Transaction,
-  Connection,
-  TransactionInstruction,
-  VersionedTransaction,
-} from "@solana/web3.js";
+import { PublicKey, Connection, TransactionInstruction } from "@solana/web3.js";
 import { formatRecordValue } from "@/utils/update-record/format-record-value";
 import { TransactionType, makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { checkAccountExists } from "@bonfida/hooks";

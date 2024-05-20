@@ -13,9 +13,11 @@ import { SelectedDomainProvider } from "./context/selectedDomain";
 import { ToastContextProvider } from "@bonfida/components";
 import { ModalContextProvider } from "./context/modalContext";
 import { ThemeProvider } from "next-themes";
+
 type Props = {
   children?: React.ReactNode;
 };
+
 const queryClient = new QueryClient();
 
 export const Providers: FC<Props> = ({ children }) => {

@@ -15,7 +15,7 @@ const ProfileOverview = () => {
   );
   const { theme } = useTheme();
 
-  const { data: recordsData, isLoading: recordsLoading } = useFetchRecords(
+  const { data: recordsData } = useFetchRecords(
     connection,
     favoriteDomain || undefined
   );

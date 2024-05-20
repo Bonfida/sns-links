@@ -4,13 +4,14 @@ import { useFetchRecords } from "../../../hooks/useFetchRecords";
 import UserLinksListItem from "@/app/components/Buttons/UserLinksListItem";
 import Image from "next/image";
 import { GenericLoading, SpinnerFida } from "@bonfida/components";
-import { NoLinksFoundNotice } from "../Notices/NoLinksFoundModal";
 import { useDomainsInfo } from "@/hooks/useDomainsInfo";
-import CreateYourOwnButton from "@/app/components/Buttons/CreateYourOwn";
-import { LinkShareParams } from "@/app/types/LinkShareParams";
 import { Record } from "@bonfida/spl-name-service";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
+
+type LinkShareParams = {
+  domain: string;
+};
 
 const contactRecords = [
   {

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import SelectedDomainContext from "@/context/selectedDomain";
 import { useConnection } from "@solana/wallet-adapter-react";
 import ProfilePic from "../ProfilePic/ProfilePic";
@@ -8,14 +8,11 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import Bio from "../Bio/Bio";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useFetchRecords } from "@/hooks/useFetchRecords";
 import { RecordListItem } from "./RecordListItem";
 import { SpinnerFida } from "@bonfida/components";
 import { useTheme } from "next-themes";
-import { useQueryClient } from "react-query";
 import { useRecordsV2 } from "@/hooks/useRecordsV2";
 import { useIsTokenized } from "@/hooks/useIsTokenized";
-import { isTokenized } from "@bonfida/name-tokenizer";
 
 const contactRecords = [Record.Email, Record.Telegram];
 

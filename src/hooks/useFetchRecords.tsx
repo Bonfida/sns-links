@@ -1,6 +1,6 @@
 import { Record, getMultipleRecordsV2 } from "@bonfida/spl-name-service";
 import { useQuery } from "react-query";
-import { recordsToFetch } from "@/app/constants/records-to-fetch";
+import { RECORDS_TO_FETCH } from "@/app/constants/records-to-fetch";
 import { Connection } from "@solana/web3.js";
 
 export const useFetchRecords = (
@@ -17,12 +17,12 @@ export const useFetchRecords = (
     const fetchedV2Records = await getMultipleRecordsV2(
       connection,
       domain,
-      recordsToFetch,
+      RECORDS_TO_FETCH,
       { deserialize: true }
     );
 
     const v2RecordsArray: { record: Record; content?: string }[] =
-      recordsToFetch.reduce((arr, record) => {
+      RECORDS_TO_FETCH.reduce((arr, record) => {
         const fetchedRecord = fetchedV2Records.find(
           (f) => f?.record === record
         );
