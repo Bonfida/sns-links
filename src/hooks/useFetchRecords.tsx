@@ -1,5 +1,5 @@
 import { Record, getMultipleRecordsV2 } from "@bonfida/spl-name-service";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { RECORDS_TO_FETCH } from "@/app/constants/records-to-fetch";
 import { Connection } from "@solana/web3.js";
 

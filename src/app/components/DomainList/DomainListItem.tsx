@@ -20,7 +20,7 @@ import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const DomainListItem = memo(function DomainListItem({
   domain,
@@ -106,7 +106,7 @@ export const DomainListItem = memo(function DomainListItem({
       setRemovePreviousFav(false);
       await sleep(1_000);
       toast.close();
-      await queryClient.invalidateQueries(["Domains", publicKey]);
+      await queryClient.invalidateQueries({ queryKey: ["Domains", publicKey] });
     }
   };
 
