@@ -1,6 +1,6 @@
 import { NameRegistryState } from "@bonfida/spl-name-service";
 import { useDomainsInfoV2 } from "./useDomainsInfo";
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 export const useFetchBio = (
   domain: string

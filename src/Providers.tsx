@@ -8,7 +8,7 @@ import {
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SelectedDomainProvider } from "./context/selectedDomain";
 import { ToastContextProvider } from "@bonfida/components";
 import { ModalContextProvider } from "./context/modalContext";

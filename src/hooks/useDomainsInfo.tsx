@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getDomainKeySync } from "@bonfida/spl-name-service";
 import { AccountInfo } from "@solana/web3.js";
 import { useConnection } from "@solana/wallet-adapter-react";

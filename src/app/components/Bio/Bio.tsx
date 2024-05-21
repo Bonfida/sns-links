@@ -5,7 +5,7 @@ import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { updateBio } from "../../../utils/update-record/update-bio";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { useFetchBio } from "@/hooks/useFetchBio";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
 import { useTheme } from "next-themes";
@@ -50,7 +50,9 @@ const Bio = memo(function Bio({
   const isOwner = owner === publicKey?.toBase58();
 
   // Is NFT
-  const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
+  const refreshIsToken = queryClient.invalidateQueries({
+    queryKey: ["isTokenized", domain],
+  });
 
   //Handlers
   const handleSubmit = async () => {
@@ -71,7 +73,7 @@ const Bio = memo(function Bio({
           toast
         );
       }
-      await queryClient.invalidateQueries(["bio", domain]);
+      await queryClient.invalidateQueries({ queryKey: ["bio", domain] });
       refetch();
       await sleep(800);
       setBioEditMode(false);

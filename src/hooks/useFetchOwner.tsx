@@ -1,5 +1,5 @@
 import { Connection } from "@solana/web3.js";
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { NameRegistryState, getDomainKeySync } from "@bonfida/spl-name-service";
 
 export const useFetchOwner = (

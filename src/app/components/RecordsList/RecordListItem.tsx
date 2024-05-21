@@ -5,7 +5,7 @@ import EditRecordModal from "../Modals/EditRecordModal";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { Record } from "@bonfida/spl-name-service";
 import { EVM_RECORDS } from "@/utils/update-roa";
@@ -71,7 +71,9 @@ export const RecordListItem = memo(function RecordListItem({
   const { toast } = useToastContext();
 
   // Is NFT
-  const refreshIsToken = queryClient.invalidateQueries(["isTokenized", domain]);
+  const refreshIsToken = queryClient.invalidateQueries({
+    queryKey: ["isTokenized", domain],
+  });
 
   //Handlers
   const deleteRecord = useUpdateRecord();

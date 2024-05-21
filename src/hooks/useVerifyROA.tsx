@@ -4,7 +4,7 @@ import {
   getRecordV2,
 } from "@bonfida/spl-name-service";
 import { Connection } from "@solana/web3.js";
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 export const useFetchVerifyROA = (
   connection: Connection,

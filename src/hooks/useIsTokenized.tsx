@@ -1,5 +1,5 @@
 import { getDomainKeySync, NameRegistryState } from "@bonfida/spl-name-service";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useConnection } from "@solana/wallet-adapter-react";
 
