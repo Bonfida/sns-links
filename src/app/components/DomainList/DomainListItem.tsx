@@ -46,10 +46,8 @@ export const DomainListItem = memo(function DomainListItem({
   const { setSelectedDomain } = useContext(SelectedDomainContext);
   const [selectedFavorite, setSelectedFavorite] = useState(false);
 
-  const { data: favoriteDomain, mutate: mutateFavoriteDomain } =
-    useFavouriteDomain(publicKey?.toBase58(), {
-      manual: true,
-    });
+  const { data: favoriteDomain, refetch: refetchFavoriteDomain } =
+    useFavouriteDomain(publicKey?.toBase58());
 
   const isFavorite = domain === favoriteDomain;
   const queryClient = useQueryClient();
@@ -94,7 +92,7 @@ export const DomainListItem = memo(function DomainListItem({
       });
 
       if (results.length > 0) {
-        mutateFavoriteDomain(domain);
+        await refetchFavoriteDomain();
         toast.success("all");
       }
     } catch (err) {

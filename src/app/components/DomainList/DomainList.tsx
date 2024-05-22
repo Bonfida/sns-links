@@ -17,10 +17,7 @@ const DomainList = () => {
     publicKey
   );
 
-  const { data: favoriteDomain } = useFavouriteDomain(publicKey?.toBase58(), {
-    manual: true,
-  });
-
+  const { data: favoriteDomain } = useFavouriteDomain(publicKey?.toBase58());
   const [removePreviousFav, setRemovePreviousFav] = useState(false);
   const sortedDomains = useMemo(() => {
     if (!domainsOwned) return [];
@@ -32,7 +29,7 @@ const DomainList = () => {
       : domainsOwned;
   }, [domainsOwned, favoriteDomain]);
 
-  //Search
+  // Search
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredDomains, setFilteredDomains] = useState<string[] | undefined>(
     []

@@ -1,5 +1,3 @@
-import useRequest from "ahooks/es/useRequest";
-import type { Options } from "ahooks/es/useRequest/src/types";
 import { FavouriteDomain, NAME_OFFERS_ID } from "@bonfida/name-offers";
 import { PublicKey, Connection } from "@solana/web3.js";
 import { useConnection } from "@solana/wallet-adapter-react";
@@ -8,6 +6,7 @@ import {
   getAllDomains,
   reverseLookup,
 } from "@bonfida/spl-name-service";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 const getFav = async (connection: Connection, publicKey: string) => {
   try {
@@ -45,27 +44,22 @@ const getFav = async (connection: Connection, publicKey: string) => {
 };
 
 export const useFavouriteDomain = (
-  publicKey: string | null | undefined,
-  options: Omit<
-    Options<string | undefined, []>,
-    "refreshDeps" | "cacheKey"
-  > = {}
-) => {
+  publicKey: string | null | undefined
+): UseQueryResult<string, undefined> => {
   const { connection } = useConnection();
   const fn = async () => {
     if (!publicKey) return;
     return await getFav(connection, publicKey);
   };
-  return useRequest(fn, {
-    refreshDeps: [publicKey],
-    cacheKey: `useFavouriteDomain-${publicKey}`,
-    ...options,
+  return useQuery({
+    queryKey: ["useFavouriteDomain", publicKey],
+    queryFn: fn,
   });
 };
 
 export const useFavouriteDomainOrFirst = (
   publicKey: string | null | undefined
-) => {
+): UseQueryResult<string, undefined> => {
   const { connection } = useConnection();
   const fn = async () => {
     if (!publicKey) return;
@@ -77,8 +71,8 @@ export const useFavouriteDomainOrFirst = (
     const reverse = await reverseLookup(connection, domains[0]);
     return reverse;
   };
-  return useRequest(fn, {
-    refreshDeps: [publicKey],
-    cacheKey: `useFavouriteDomainOrFirst-${publicKey}`,
+  return useQuery({
+    queryKey: ["useFavouriteDomainOrFirst", publicKey],
+    queryFn: fn,
   });
 };

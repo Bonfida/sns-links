@@ -20,7 +20,7 @@ export const DomainListPage = () => {
     connection,
     publicKey
   );
-  const { loading: favoriteLoading } = useFavouriteDomain(
+  const { isLoading: favoriteLoading } = useFavouriteDomain(
     publicKey?.toBase58()!
   );
 

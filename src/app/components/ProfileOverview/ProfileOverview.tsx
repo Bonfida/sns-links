@@ -10,9 +10,8 @@ const ProfileOverview = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
   const abbreviatedPubkey = abbreviatePubkey(publicKey, 5);
-  const { data: favoriteDomain, loading: favoriteLoading } = useFavouriteDomain(
-    publicKey?.toBase58()
-  );
+  const { data: favoriteDomain, isLoading: favoriteLoading } =
+    useFavouriteDomain(publicKey?.toBase58());
   const { theme } = useTheme();
 
   const { data: recordsData } = useFetchRecords(

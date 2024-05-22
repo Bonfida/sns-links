@@ -6,20 +6,20 @@ import { makeTxV2 } from "@/utils/make-tx-v2/makeTx";
 import { sleep } from "@/utils/sleep";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UnwrapModal = ({
   domain,
   close,
-  refresh,
 }: {
   domain: string;
   close: () => void;
-  refresh: () => Promise<void>;
 }) => {
   const { connection } = useConnection();
   const { publicKey, signAllTransactions } = useWallet();
   const { toast } = useToastContext();
   const { theme } = useTheme();
+  const queryClient = useQueryClient();
 
   const handleUnwrap = async () => {
     if (!publicKey || !signAllTransactions) return;
@@ -41,8 +41,10 @@ const UnwrapModal = ({
       console.log("error", error);
       toast.error();
     } finally {
+      await queryClient.invalidateQueries({
+        queryKey: ["isTokenized", domain],
+      });
       await sleep(1_000);
-      refresh();
       toast.close();
       close();
     }

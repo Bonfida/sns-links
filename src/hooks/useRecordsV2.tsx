@@ -1,23 +1,21 @@
-import { useRequest } from "ahooks";
-import type { Options } from "ahooks/es/useRequest/src/types";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import {
   Record,
   getDomainKeySync,
   NameRegistryState,
   getRecordV2Key,
-  serializeRecordV2Content,
   GUARDIANS,
 } from "@bonfida/spl-name-service";
 import { PublicKey } from "@solana/web3.js";
-import {
-  Record as SnsRecord,
-  Validation,
-  RecordHeader,
-} from "@bonfida/sns-records";
-import { useQueryClient } from "@tanstack/react-query";
-import { ORDERED_RECORDS } from "@/app/constants/ordered-records";
+import { Record as SnsRecord, Validation } from "@bonfida/sns-records";
+import { QueryKey, UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { SUPPORTED_GUARDIANS } from "./useRecordsV2Guardian";
+import { ORDERED_RECORDS } from "@/app/constants/ordered-records";
+
+export type OptionalQueryOptions<
+  T = unknown,
+  U extends keyof UseQueryOptions<T, unknown, T, QueryKey> = never
+> = Omit<UseQueryOptions<T, unknown, T, QueryKey>, U | "queryKey" | "queryFn">;
 
 export interface Result {
   record: Record;
@@ -42,10 +40,10 @@ export const EVM_RECORDS = [Record.ETH, Record.BSC, Record.Injective];
 
 export const useRecordsV2 = (
   domain: string,
-  options: Omit<Options<Result[], []>, "refreshDeps" | "cacheKey"> = {}
+  options: OptionalQueryOptions<Result[]> = {}
 ) => {
   const { connection } = useConnection();
-  const { publicKey, connected } = useWallet();
+  const { publicKey } = useWallet();
 
   const fn = async () => {
     const result: Result[] = [];
@@ -129,117 +127,10 @@ export const useRecordsV2 = (
 
     return result;
   };
-
-  return useRequest(fn, {
-    refreshDeps: [domain, connected],
-    cacheKey: `useRecordsV2-${domain}`,
-    cacheTime: 30_000,
+  return useQuery({
+    queryKey: ["useRecordsV2", domain],
+    queryFn: fn,
+    staleTime: 30_000,
     ...options,
   });
-};
-
-/**
- * You can use this hook to easily mutate the "useRecords" cache by omitting
- * a lot of preparatory steps.
- * Under the hood it will also mutate other hooks that rely on the value of records.
- */
-export const useMutateRecordsV2 = ({
-  domain,
-  publicKey,
-}: {
-  domain: string;
-  publicKey?: PublicKey | null;
-}) => {
-  const queryClient = useQueryClient();
-  const recordsHook = useRecordsV2(domain, { manual: true });
-
-  /**
-   * Raw mutation. Directly applies patches to the cache.
-   * Might be used to add/update/delete operations
-   */
-  const mutate = ({
-    patches,
-  }: {
-    patches: Parameters<typeof mutateRecords>["0"]["patches"];
-  }) => {
-    mutateRecords({
-      mutate: recordsHook.mutate,
-      currentList: recordsHook.data,
-      patches,
-    });
-
-    if (publicKey) {
-      const pic = patches.find((item) => item.record === Record.Pic);
-      if (pic) {
-        queryClient.setQueryData(["useProfilePic", domain], pic.data);
-      }
-    }
-  };
-
-  /**
-   * Mutation that simply deletes all the data for the provided list of records
-   */
-  const mutateDeletion = (records: Record[]) => {
-    // Calls exactly "mutate", but not raw utility "mutateRecords",
-    // because "mutate" also handles other mutations based on provided records
-    mutate({
-      patches: records.map((r) => ({
-        record: r,
-        isSigned: false,
-        data: undefined,
-      })),
-    });
-  };
-
-  return { mutate, mutateDeletion };
-};
-
-export const mutateRecords = ({
-  mutate,
-  currentList,
-  patches,
-}: {
-  mutate: ReturnType<typeof useRecordsV2>["mutate"];
-  currentList: ReturnType<typeof useRecordsV2>["data"];
-  patches: ({
-    record: Record;
-    data: string | undefined;
-    userKey?: PublicKey;
-  } & Partial<Omit<Result, "data" | "record">>)[];
-}) => {
-  mutate(
-    currentList?.map((item) => {
-      const patchRecord = patches.find((patch) => patch.record === item.record);
-
-      if (patchRecord) {
-        const { record, data, userKey, ...rest } = patchRecord;
-        let patchedData: SnsRecord | undefined = undefined;
-
-        if (data && userKey) {
-          const serializedContent = serializeRecordV2Content(data, record);
-          const recordData = Buffer.concat([
-            userKey.toBuffer(),
-            serializedContent,
-          ]);
-
-          patchedData = new SnsRecord(
-            new RecordHeader({
-              contentLength: serializedContent.length,
-              stalenessValidation: 1,
-              rightOfAssociationValidation: 0,
-            }),
-            recordData
-          );
-        }
-
-        return {
-          ...item,
-          ...rest,
-          data: patchedData,
-          isSigned: !!patchedData,
-        } as Result;
-      }
-      return item;
-    })
-  );
 };

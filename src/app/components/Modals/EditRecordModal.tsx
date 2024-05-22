@@ -51,7 +51,7 @@ const EditRecordModal = ({
   const { theme } = useTheme();
   const updateRecord = useUpdateRecord();
 
-  const { refresh } = useRecordsV2(domain);
+  const { refetch } = useRecordsV2(domain);
 
   const handleUpdateClick = async (
     recordName: Record,
@@ -67,7 +67,7 @@ const EditRecordModal = ({
         isRoaSupported,
         sendRoaRequest,
       });
-      refresh();
+      await refetch();
       await sleep(800);
       close();
     } catch (error) {

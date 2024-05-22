@@ -5,7 +5,6 @@ import { useFetchOwner } from "@/hooks/useFetchOwner";
 import { updateBio } from "../../../utils/update-record/update-bio";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { useFetchBio } from "@/hooks/useFetchBio";
-import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { ButtonModal } from "../ButtonModal";
 import { useTheme } from "next-themes";
@@ -24,7 +23,6 @@ const Bio = memo(function Bio({
 
   // Misc.
   const { toast } = useToastContext();
-  const queryClient = useQueryClient();
   const { theme } = useTheme();
 
   //Bio
@@ -49,11 +47,6 @@ const Bio = memo(function Bio({
   const { data: owner } = useFetchOwner(connection, domain);
   const isOwner = owner === publicKey?.toBase58();
 
-  // Is NFT
-  const refreshIsToken = queryClient.invalidateQueries({
-    queryKey: ["isTokenized", domain],
-  });
-
   //Handlers
   const handleSubmit = async () => {
     if (!publicKey || !signAllTransactions) return;
@@ -73,8 +66,7 @@ const Bio = memo(function Bio({
           toast
         );
       }
-      await queryClient.invalidateQueries({ queryKey: ["bio", domain] });
-      refetch();
+      await refetch();
       await sleep(800);
       setBioEditMode(false);
     } catch (err) {
@@ -135,7 +127,6 @@ const Bio = memo(function Bio({
               >
                 <UnwrapModal
                   domain={domain}
-                  refresh={() => refreshIsToken}
                   close={() => setModalVisible(false)}
                 />
               </ButtonModal>

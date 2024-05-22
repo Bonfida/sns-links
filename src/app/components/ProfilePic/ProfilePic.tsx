@@ -26,16 +26,9 @@ const ProfilePic = ({
   const { publicKey, connected } = useWallet();
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const {
-    data: recordsData,
-    loading: recordsLoading,
-    refresh,
-  } = useRecordsV2(domain);
+  const { data: recordsData, isLoading: recordsLoading } = useRecordsV2(domain);
 
-  const { data: owner, isLoading: ownerLoading } = useFetchOwner(
-    connection,
-    domain!
-  );
+  const { data: owner } = useFetchOwner(connection, domain!);
 
   const picRecord = recordsData?.find((record) => {
     return record.record === Record.Pic;
@@ -82,7 +75,6 @@ const ProfilePic = ({
             <EditPicModal
               currentValue={picContent}
               domain={domain}
-              refresh={refresh}
               close={() => setModalVisible(false)}
             />
           </ButtonModal>

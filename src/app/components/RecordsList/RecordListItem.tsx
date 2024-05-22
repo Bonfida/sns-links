@@ -5,7 +5,6 @@ import EditRecordModal from "../Modals/EditRecordModal";
 import UnwrapModal from "../Modals/UnwrapModal";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
-import { useQueryClient } from "@tanstack/react-query";
 import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { Record } from "@bonfida/spl-name-service";
 import { EVM_RECORDS } from "@/utils/update-roa";
@@ -56,7 +55,8 @@ export const RecordListItem = memo(function RecordListItem({
     isVerified,
   } = record;
   const recordContent = getRecordValue(record);
-  const { refresh } = useRecordsV2(domain);
+
+  const { refetch: refetchRecords } = useRecordsV2(domain);
 
   // Visibility
   const [isModalVisible, setModalVisible] = useState(false);
@@ -66,14 +66,8 @@ export const RecordListItem = memo(function RecordListItem({
   const [isVerificationLoading, setIsVerificationLoading] = useState(false);
 
   // Misc.
-  const queryClient = useQueryClient();
   const { theme } = useTheme();
   const { toast } = useToastContext();
-
-  // Is NFT
-  const refreshIsToken = queryClient.invalidateQueries({
-    queryKey: ["isTokenized", domain],
-  });
 
   //Handlers
   const deleteRecord = useUpdateRecord();
@@ -89,12 +83,13 @@ export const RecordListItem = memo(function RecordListItem({
       toast.error("Error deleting record. Please try again.");
       console.log("Error: ", err);
     } finally {
-      refresh();
+      await refetchRecords();
     }
   };
 
   const updateROA = useUpdateROA();
   const handleRoa = async () => {
+    setIsVerificationLoading(true);
     if (EVM_RECORDS.includes(recordName)) {
       return setEvmVerify((prev) => ({
         visible: true,
@@ -109,7 +104,8 @@ export const RecordListItem = memo(function RecordListItem({
       toast.error("Error verifying record. Please try again.");
       console.log("Error: ", err);
     } finally {
-      refresh();
+      setIsVerificationLoading(false);
+      await refetchRecords();
     }
   };
 
@@ -172,7 +168,6 @@ export const RecordListItem = memo(function RecordListItem({
               {isToken ? (
                 <UnwrapModal
                   domain={domain}
-                  refresh={() => refreshIsToken}
                   close={() => setModalVisible(false)}
                 />
               ) : (

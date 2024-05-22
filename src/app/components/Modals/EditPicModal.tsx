@@ -7,16 +7,15 @@ import { useUpdateRecord } from "@/hooks/useUpdateRecord";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "next-themes";
 import { sleep } from "@/utils";
+import { useRecordsV2 } from "@/hooks/useRecordsV2";
 
 export const EditPicModal = ({
   currentValue,
   domain,
-  refresh,
   close,
 }: {
   currentValue: string | undefined;
   domain: string;
-  refresh: () => void;
   close: () => void;
 }) => {
   const [recordValue, setRecordValue] = useState("");
@@ -25,6 +24,8 @@ export const EditPicModal = ({
   const { theme } = useTheme();
   const { isRoaSupported, sendRoaRequest } = useRecordsV2Guardians(Record.Pic);
   const updateRecord = useUpdateRecord();
+
+  const { refetch } = useRecordsV2(domain);
 
   const handleUpdateClick = async () => {
     try {
@@ -36,7 +37,7 @@ export const EditPicModal = ({
         isRoaSupported,
         sendRoaRequest,
       });
-      refresh();
+      await refetch();
       await sleep(1_000);
       close();
     } catch (error) {
