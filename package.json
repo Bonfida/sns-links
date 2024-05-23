@@ -48,5 +48,8 @@
     "tailwindcss": "^3.3.3",
     "typescript": "^5.4.5"
   },
-  "prettier": "@bonfida/prettier-config"
+  "prettier": "@bonfida/prettier-config",
+  "volta": {
+    "node": "20.10.0"
+  }
 }
