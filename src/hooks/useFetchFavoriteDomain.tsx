@@ -48,7 +48,7 @@ export const useFavouriteDomain = (
 ): UseQueryResult<string, undefined> => {
   const { connection } = useConnection();
   const fn = async () => {
-    if (!publicKey) return;
+    if (!publicKey) return null;
     return await getFav(connection, publicKey);
   };
   return useQuery({
