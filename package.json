@@ -9,6 +9,9 @@
     "lint": "next lint",
     "knip": "knip"
   },
+  "engines": {
+    "node": ">=22.18.0 <23"
+  },
   "dependencies": {
     "@bonfida/components": "1.2.0",
     "@bonfida/hooks": "0.3.1",
@@ -36,7 +39,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@bonfida/prettier-config": "^1.0.0",
-    "@types/node": "^20.12.12",
+    "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.16",
@@ -50,6 +53,6 @@
   },
   "prettier": "@bonfida/prettier-config",
   "volta": {
-    "node": "20.10.0"
+    "node": "22.18.0"
   }
 }
